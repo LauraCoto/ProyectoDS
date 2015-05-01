@@ -34,7 +34,6 @@ C:\ProyectoDS\LaPotra\LaPotra\bin\System.Web.Razor.xml
 C:\ProyectoDS\LaPotra\LaPotra\bin\System.Web.WebPages.xml
 C:\ProyectoDS\LaPotra\LaPotra\bin\System.Web.WebPages.Deployment.xml
 C:\ProyectoDS\LaPotra\LaPotra\bin\System.Web.WebPages.Razor.xml
-C:\ProyectoDS\LaPotra\LaPotra\bin\Antlr3.Runtime.pdb
 C:\ProyectoDS\LaPotra\LaPotra\bin\Newtonsoft.Json.xml
 C:\ProyectoDS\LaPotra\LaPotra\bin\EntityFramework.xml
 C:\ProyectoDS\LaPotra\LaPotra\bin\EntityFramework.SqlServer.xml
