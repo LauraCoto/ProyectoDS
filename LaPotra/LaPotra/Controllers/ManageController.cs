@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using LaPotra.Models;
+using Juega.Models;
 
-namespace LaPotra.Controllers
+namespace Juega.Controllers
 {
     [Authorize]
     public class ManageController : Controller

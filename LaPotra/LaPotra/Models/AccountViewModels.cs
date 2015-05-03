@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LaPotra.Models
+namespace Juega.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

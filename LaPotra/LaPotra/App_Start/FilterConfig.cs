@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace LaPotra
+namespace Juega
 {
     public class FilterConfig
     {

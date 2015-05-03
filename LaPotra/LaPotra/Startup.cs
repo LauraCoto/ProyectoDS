@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(LaPotra.Startup))]
-namespace LaPotra
+[assembly: OwinStartupAttribute(typeof(Juega.Startup))]
+namespace Juega
 {
     public partial class Startup
     {
