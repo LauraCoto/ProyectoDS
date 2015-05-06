@@ -72,4 +72,3 @@ C:\ProyectoDS\Juega-V2\Angle\bin\Microsoft.Owin.Security.Twitter.xml
 C:\ProyectoDS\Juega-V2\Angle\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\ProyectoDS\Juega-V2\Angle\obj\Release\Angle.dll
 C:\ProyectoDS\Juega-V2\Angle\obj\Release\Angle.pdb
-C:\ProyectoDS\Juega-V2\Angle\obj\Release\Angle.csprojResolveAssemblyReference.cache

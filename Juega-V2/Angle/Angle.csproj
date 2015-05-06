@@ -381,7 +381,6 @@
     <Content Include="Vendor\jquery\src\var\support.js" />
     <Content Include="Vendor\jquery\src\var\toString.js" />
     <Content Include="Vendor\jquery\src\wrap.js" />
-    <Content Include="Vendor\modernizr\.gitignore" />
     <Content Include="Vendor\modernizr\feature-detects\a-download.js" />
     <Content Include="Vendor\modernizr\feature-detects\audio-audiodata-api.js" />
     <Content Include="Vendor\modernizr\feature-detects\audio-webaudio-api.js" />
@@ -530,8 +529,7 @@
     <Content Include="Vendor\modernizr\test\js\unit.js" />
     <Content Include="Vendor\modernizr\test\qunit\qunit.css" />
     <Content Include="Vendor\modernizr\test\qunit\qunit.js" />
-    <Content Include="Vendor\modernizr\test\qunit\run-qunit.js" />
-    <Content Include="Vendor\ngstorage\.gitignore" />
+    <Content Include="Vendor\modernizr\test\qunit\run-qunit.js" /> 
     <Content Include="Vendor\ngstorage\Gruntfile.js" />
     <Content Include="Vendor\ngstorage\ngStorage.js" />
     <Content Include="Vendor\ngstorage\ngStorage.min.js" />
