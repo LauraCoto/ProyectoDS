@@ -292,7 +292,6 @@
     <Content Include="Vendor\angular\angular-csp.css" />
     <Content Include="Vendor\angular\angular.js" />
     <Content Include="Vendor\angular\angular.min.js" />
-    <Content Include="Vendor\fontawesome\.gitignore" />
     <Content Include="Vendor\fontawesome\css\font-awesome.css" />
     <Content Include="Vendor\fontawesome\css\font-awesome.min.css" />
     <Content Include="Vendor\fontawesome\fonts\fontawesome-webfont.svg" />
