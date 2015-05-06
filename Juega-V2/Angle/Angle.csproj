@@ -721,13 +721,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DLL\" />
+    <Folder Include="Vendor\angular-ui-router\api\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Vendor\angular-ui-router\api\angular-ui-router.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
