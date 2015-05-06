@@ -70,5 +70,5 @@ C:\ProyectoDS\Juega-V2\Angle\bin\Microsoft.Owin.Security.OAuth.xml
 C:\ProyectoDS\Juega-V2\Angle\bin\Microsoft.Owin.Security.Google.xml
 C:\ProyectoDS\Juega-V2\Angle\bin\Microsoft.Owin.Security.Twitter.xml
 C:\ProyectoDS\Juega-V2\Angle\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\ProyectoDS\Juega-V2\Angle\obj\Debug\Angle.dll
-C:\ProyectoDS\Juega-V2\Angle\obj\Debug\Angle.pdb
+C:\ProyectoDS\Juega-V2\Angle\obj\Release\Angle.dll
+C:\ProyectoDS\Juega-V2\Angle\obj\Release\Angle.pdb
