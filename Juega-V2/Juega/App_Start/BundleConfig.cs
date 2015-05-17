@@ -391,6 +391,9 @@ namespace Juega
                 "~/Vendor/loaders.css/loaders.css"
             ));
 
+
+            bundles.Add(new ScriptBundle("~/bundles/Juega").IncludeDirectory("~/app", "*.js", true));
+
         }
     }
 }

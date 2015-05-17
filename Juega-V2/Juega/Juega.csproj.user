@@ -9,7 +9,7 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <WebStackScaffolding_DbContextTypeFullName>Angle.Models.MovieDBContext</WebStackScaffolding_DbContextTypeFullName>
+    <WebStackScaffolding_DbContextTypeFullName>Juega.BDD.JuegaEntities</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
     <NameOfLastUsedPublishProfile>Angle-jq-Pub</NameOfLastUsedPublishProfile>
     <ProjectView>ShowAllFiles</ProjectView>
