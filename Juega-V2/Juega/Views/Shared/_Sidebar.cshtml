@@ -386,61 +386,74 @@
                     </li>
                 </ul>
             </li>
-            <li class="@Html.isActive(controller: "Multilevels")">
-                <a href="#multilevel" title="Multilevel" data-toggle="collapse">
-                    <em class="fa fa-folder-open-o"></em>
-                    <span>Multilevel</span>
-                </a>
-                <ul id="multilevel" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Multilevel</li>
-                    <li class="@Html.isActive("Multilevels", "Multilevel_1")">
-                        <a href="#level1" title="Level 1" data-toggle="collapse">
-                            <span>Level 1</span>
-                        </a>
-                        <ul id="level1" class="nav sidebar-subnav collapse">
-                            <li class="sidebar-subnav-header">Level 1</li>
-                            <li class="@Html.isActive("Multilevels", "Multilevel_1")">
-                                <a href="@Url.Action("Multilevel_1", "Multilevels")" title="Level1 Item">
-                                    <span>Level1 Item</span>
-                                </a>
-                            </li>
-                            <li class="@Html.isActive("Multilevels", "Multilevel_3")">
-                                <a href="#level2" title="Level 2" data-toggle="collapse">
-                                    <span>Level 2</span>
-                                </a>
-                                <ul id="level2" class="nav sidebar-subnav collapse">
-                                    <li class="sidebar-subnav-header">Level 2</li>
-                                    <li class="@Html.isActive("Multilevels", "Multilevel_3")">
-                                        <a href="#level3" title="Level 3" data-toggle="collapse">
-                                            <span>Level 3</span>
-                                        </a>
-                                        <ul id="level3" class="nav sidebar-subnav collapse">
-                                            <li class="sidebar-subnav-header">Level 3</li>
-                                            <li class="@Html.isActive("Multilevels", "Multilevel_3")">
-                                                <a href="@Url.Action("Multilevel_3", "Multilevels")" title="Level3 Item">
-                                                    <span>Level3 Item</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="@Html.isActive(controller: "Documentation")">
-                <a href="@Url.Action("Index", "Documentation")" title="Documentation">
-                    <em class="icon-graduation"></em>
-                    <span data-localize="sidebar.nav.DOCUMENTATION">Documentation</span>
-                </a>
-            </li>
-            <li class="@Html.isActive(controller: "Movies")">
-                <a href="@Url.Action("Index", "Movies")" title="Movie App">
+        <li class="@Html.isActive(controller: "Multilevels")">
+            <a href="#multilevel" title="Multilevel" data-toggle="collapse">
+                <em class="fa fa-folder-open-o"></em>
+                <span>Multilevel</span>
+            </a>
+            <ul id="multilevel" class="nav sidebar-subnav collapse">
+                <li class="sidebar-subnav-header">Multilevel</li>
+                <li class="@Html.isActive("Multilevels", "Multilevel_1")">
+                    <a href="#level1" title="Level 1" data-toggle="collapse">
+                        <span>Level 1</span>
+                    </a>
+                    <ul id="level1" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header">Level 1</li>
+                        <li class="@Html.isActive("Multilevels", "Multilevel_1")">
+                            <a href="@Url.Action("Multilevel_1", "Multilevels")" title="Level1 Item">
+                                <span>Level1 Item</span>
+                            </a>
+                        </li>
+                        <li class="@Html.isActive("Multilevels", "Multilevel_3")">
+                            <a href="#level2" title="Level 2" data-toggle="collapse">
+                                <span>Level 2</span>
+                            </a>
+                            <ul id="level2" class="nav sidebar-subnav collapse">
+                                <li class="sidebar-subnav-header">Level 2</li>
+                                <li class="@Html.isActive("Multilevels", "Multilevel_3")">
+                                    <a href="#level3" title="Level 3" data-toggle="collapse">
+                                        <span>Level 3</span>
+                                    </a>
+                                    <ul id="level3" class="nav sidebar-subnav collapse">
+                                        <li class="sidebar-subnav-header">Level 3</li>
+                                        <li class="@Html.isActive("Multilevels", "Multilevel_3")">
+                                            <a href="@Url.Action("Multilevel_3", "Multilevels")" title="Level3 Item">
+                                                <span>Level3 Item</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li class="@Html.isActive(controller: "Documentation")">
+            <a href="@Url.Action("Index", "Documentation")" title="Documentation">
+                <em class="icon-graduation"></em>
+                <span data-localize="sidebar.nav.DOCUMENTATION">Documentation</span>
+            </a>
+        </li>
+
+            <li class="@Html.isActive(controller: "ComplejoDeportivo")">
+                <a href="@Url.Action("Index", "ComplejoDeportivo")" title="Complejos deportivos">
                     <em class="icon-trophy"></em>
-                    <span>Movie App</span>
+                    <span>Complejos Deportivos</span>
                 </a>
             </li>
+
+
+        <li class="@Html.isActive(controller: "Canchas")">
+            <a href="@Url.Action("Index", "Canchas")" title="Canchas">
+                <em class="icon-trophy"></em>
+                <span>Canchas</span>
+            </a>
+        </li>
+
+       
+
         </ul>
         <!-- END sidebar nav-->
     </nav>
