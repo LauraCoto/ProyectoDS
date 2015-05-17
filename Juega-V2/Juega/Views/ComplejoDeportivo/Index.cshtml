@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <script src="~/app/controller/complejoDeportivoCtrl.js"></script>
+</head>
+
+
+<div class="container" ng-app="appComplejo" ng-controller="complejoDeportivoCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-striped">
+                <tr>
+                    <th>IdComplejoDeportivo</th>
+                    <th>Nombre</th>
+                    <th>Telefonos</th>
+                    <th>Coodernadas</th>
+                </tr>
+
+                <tr ng-repeat="item in ListaRegistros">
+                    <td> {{item.IdComplejoDeportivo}}  </td>
+                    <td> {{item.Nombre}} </td>
+                    <td> {{item.Telefonos}} </td>
+                    <td> {{item.Coodernadas}} </td>
+                    <td>
+                        <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
+                        <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                    </td>
+                </tr>
+
+                <form name="form" class="css-form" novalidate>
+                    <tr ng-if="MostrarControles">
+                        
+                        <td>
+                            <input type="text" disabled="disabled" class="form-control" placeholder="Id Registro" ng-model="Registro.IdComplejoDeportivo" />
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtNombre" ng-model="Registro.Nombre"/>
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control" placeholder="Telefonos" ng-model="Registro.Telefonos"/>
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control" placeholder="Coodernadas" ng-model="Registro.Coodernadas"/>
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                            <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                        </td>
+                    </tr>
+                </form>
+
+
+            </table>
+            <a ng-click="NuevoRegistro()" class="btn btn-primary">Agregar</a>
+            <a ng-click="cargar()" class="btn btn-primary">Cargar</a>
+
+        </div>
+    </div>
+</div>

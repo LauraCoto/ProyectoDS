@@ -15,7 +15,7 @@ namespace Juega.Models
         public decimal Price { get; set; }
     }
 
-    public class MovieDBContext : DbContext
+    public class MovieDBContext : System.Data.Entity.DbContext
     {
         public DbSet<Movie> Movies { get; set; }
     } 

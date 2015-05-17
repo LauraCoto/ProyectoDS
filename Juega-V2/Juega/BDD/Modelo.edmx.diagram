@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3d2abfd91437408fb11621ac44476705" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="JuegaModel.Cancha" Width="1.5" PointX="6.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Foto" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia" Width="1.5" PointX="12" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia_Hora" Width="1.5" PointX="17.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Reservacion" Width="1.5" PointX="19.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Valoracion" Width="1.5" PointX="12" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.ComplejoDeportivo" Width="1.5" PointX="4.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Denuncia" Width="1.5" PointX="15" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo" Width="1.5" PointX="4.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Foto" Width="1.5" PointX="9.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Jugador" Width="1.5" PointX="15" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Tecnico" Width="1.5" PointX="6.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Valoracion" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Reto" Width="1.5" PointX="21.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Token" Width="1.5" PointX="4.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario" Width="1.5" PointX="0.75" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Foto" Width="1.5" PointX="4.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Registro_Acceso" Width="1.5" PointX="4.5" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Solicitud_AdminCancha" Width="1.5" PointX="4.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Solicitud_Equipo" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Valoracion" Width="1.5" PointX="4.5" PointY="22.125" IsExpanded="true" />
+        <AssociationConnector Association="JuegaModel.FK1E2394DDF771FF35" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3BBAF225F771FF35" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3FBA4BEBF771FF35" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7033D3AF771FF35" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK76644D7F1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK76644D7FE55E9EAC" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7033D3A1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK1E2394DD1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK9137113AC7910A3A" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK9137113A1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK9CC16DB559FCD51" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK903403348204A257" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK9CC16DB1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3FBA4BEB1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK5F4FA4051862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3BBAF2251862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3BBAF225A62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK312DCDEDA62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK323934421862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK39930699A62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3F406CE3A62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7932B010A62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7DE04BD4A62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK90340334A62E925C" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7932B0101862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7DE04BD41862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7DE04BD44586AA08" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK399306991862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK3F406CE31862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK903403341862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK7786F1A31862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK312DCDED1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK550739B71862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK66723AB21862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK817CBD8E1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK9E8FB9FD1862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FKA981D5251862B0F6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

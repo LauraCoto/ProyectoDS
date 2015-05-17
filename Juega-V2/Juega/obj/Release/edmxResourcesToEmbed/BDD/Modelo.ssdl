@@ -1,0 +1,902 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JuegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cancha">
+    <Key>
+      <PropertyRef Name="IdCancha" />
+    </Key>
+    <Property Name="IdCancha" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="NumEspectadores" Type="int" />
+    <Property Name="Largo" Type="int" />
+    <Property Name="Ancho" Type="int" />
+    <Property Name="Valoracion" Type="int" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdComplejoDeportivo" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Cancha_Foto">
+    <Key>
+      <PropertyRef Name="IdCancha_Foto" />
+    </Key>
+    <Property Name="IdCancha_Foto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdCancha" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Cancha_Horario_Dia">
+    <Key>
+      <PropertyRef Name="IdCancha_Horario_Dia" />
+    </Key>
+    <Property Name="IdCancha_Horario_Dia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdCancha" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Cancha_Horario_Dia_Hora">
+    <Key>
+      <PropertyRef Name="IdCancha_Horario_Dia_Hora" />
+    </Key>
+    <Property Name="IdCancha_Horario_Dia_Hora" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoraDesde" Type="datetime" />
+    <Property Name="HoraHasta" Type="datetime" />
+    <Property Name="Precio" Type="decimal" Precision="19" Scale="5" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdCancha_Horario_Dia" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Cancha_Reservacion">
+    <Key>
+      <PropertyRef Name="IdCancha_Reservacion" />
+    </Key>
+    <Property Name="IdCancha_Reservacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaReservacion" Type="datetime" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdCancha_Horario_Dia_Hora" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Cancha_Valoracion">
+    <Key>
+      <PropertyRef Name="IdCancha_Valoracion" />
+    </Key>
+    <Property Name="IdCancha_Valoracion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valoracion" Type="int" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdCancha" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="ComplejoDeportivo">
+    <Key>
+      <PropertyRef Name="IdComplejoDeportivo" />
+    </Key>
+    <Property Name="IdComplejoDeportivo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Telefonos" Type="nvarchar" MaxLength="100" />
+    <Property Name="Coodernadas" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Denuncia">
+    <Key>
+      <PropertyRef Name="IdDenuncia" />
+    </Key>
+    <Property Name="IdDenuncia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+    <Property Name="IdCancha" Type="bigint" />
+    <Property Name="IdEquipo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Equipo">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+    </Key>
+    <Property Name="IdEquipo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="Valoracion" Type="int" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Equipo_Foto">
+    <Key>
+      <PropertyRef Name="IdEquipo_Foto" />
+    </Key>
+    <Property Name="IdEquipo_Foto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdEquipo" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Equipo_Jugador">
+    <Key>
+      <PropertyRef Name="IdEquipo_Jugador" />
+    </Key>
+    <Property Name="IdEquipo_Jugador" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaDesde" Type="datetime" />
+    <Property Name="FechaHasta" Type="datetime" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+    <Property Name="IdEquipo" Type="bigint" />
+    <Property Name="IdUsuario_Solicitud_Equipo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Equipo_Tecnico">
+    <Key>
+      <PropertyRef Name="IdEquipo_Tecnico" />
+    </Key>
+    <Property Name="IdEquipo_Tecnico" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaDesde" Type="datetime" />
+    <Property Name="FechaHasta" Type="datetime" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+    <Property Name="IdEquipo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Equipo_Valoracion">
+    <Key>
+      <PropertyRef Name="IdEquipo_Valoracion" />
+    </Key>
+    <Property Name="IdEquipo_Valoracion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valoracion" Type="int" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdEquipo" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Reto">
+    <Key>
+      <PropertyRef Name="IdReto" />
+    </Key>
+    <Property Name="IdReto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaReto" Type="datetime" />
+    <Property Name="ResultadoEquipoRetador" Type="int" />
+    <Property Name="ResultadoEquipoRetada" Type="int" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdEquipo" Type="bigint" />
+    <Property Name="IdCancha_Reservacion" Type="bigint" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Token">
+    <Key>
+      <PropertyRef Name="IdToken" />
+    </Key>
+    <Property Name="IdToken" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TokenConfirmacion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="100" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="100" />
+    <Property Name="Correo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Telefonos" Type="nvarchar" MaxLength="100" />
+    <Property Name="Confirmado" Type="bit" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="Valoracion" Type="int" />
+    <Property Name="EsEspectador" Type="bit" />
+    <Property Name="EsAdminCancha" Type="bit" />
+    <Property Name="EsAdminEquipo" Type="bit" />
+    <Property Name="EsJugador" Type="bit" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Usuario_Foto">
+    <Key>
+      <PropertyRef Name="IdUsuario_Foto" />
+    </Key>
+    <Property Name="IdUsuario_Foto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Usuario_Registro_Acceso">
+    <Key>
+      <PropertyRef Name="IdUsuario_Registro_Acceso" />
+    </Key>
+    <Property Name="IdUsuario_Registro_Acceso" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Usuario_Solicitud_AdminCancha">
+    <Key>
+      <PropertyRef Name="IdUsuario_Solicitud_AdminCancha" />
+    </Key>
+    <Property Name="IdUsuario_Solicitud_AdminCancha" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Usuario_Solicitud_Equipo">
+    <Key>
+      <PropertyRef Name="IdUsuario_Solicitud_Equipo" />
+    </Key>
+    <Property Name="IdUsuario_Solicitud_Equipo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+    <Property Name="IdEquipo" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Usuario_Valoracion">
+    <Key>
+      <PropertyRef Name="IdUsuario_Valoracion" />
+    </Key>
+    <Property Name="IdUsuario_Valoracion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valoracion" Type="int" />
+    <Property Name="TipoValoracion" Type="int" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="bigint" />
+  </EntityType>
+  <Association Name="FK1E2394DD1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cancha_Horario_Dia" Type="Self.Cancha_Horario_Dia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Cancha_Horario_Dia">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK1E2394DDF771FF35">
+    <End Role="Cancha" Type="Self.Cancha" Multiplicity="0..1" />
+    <End Role="Cancha_Horario_Dia" Type="Self.Cancha_Horario_Dia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha">
+        <PropertyRef Name="IdCancha" />
+      </Principal>
+      <Dependent Role="Cancha_Horario_Dia">
+        <PropertyRef Name="IdCancha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK312DCDED1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Solicitud_Equipo" Type="Self.Usuario_Solicitud_Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Solicitud_Equipo">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK312DCDEDA62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Usuario_Solicitud_Equipo" Type="Self.Usuario_Solicitud_Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Usuario_Solicitud_Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK323934421862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK399306991862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Equipo_Tecnico" Type="Self.Equipo_Tecnico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Equipo_Tecnico">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK39930699A62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Equipo_Tecnico" Type="Self.Equipo_Tecnico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Equipo_Tecnico">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3BBAF2251862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Denuncia">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3BBAF225A62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Denuncia">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3BBAF225F771FF35">
+    <End Role="Cancha" Type="Self.Cancha" Multiplicity="0..1" />
+    <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha">
+        <PropertyRef Name="IdCancha" />
+      </Principal>
+      <Dependent Role="Denuncia">
+        <PropertyRef Name="IdCancha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3F406CE31862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Equipo_Valoracion" Type="Self.Equipo_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Equipo_Valoracion">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3F406CE3A62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Equipo_Valoracion" Type="Self.Equipo_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Equipo_Valoracion">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3FBA4BEB1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cancha_Valoracion" Type="Self.Cancha_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Cancha_Valoracion">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK3FBA4BEBF771FF35">
+    <End Role="Cancha" Type="Self.Cancha" Multiplicity="0..1" />
+    <End Role="Cancha_Valoracion" Type="Self.Cancha_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha">
+        <PropertyRef Name="IdCancha" />
+      </Principal>
+      <Dependent Role="Cancha_Valoracion">
+        <PropertyRef Name="IdCancha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK550739B71862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Solicitud_AdminCancha" Type="Self.Usuario_Solicitud_AdminCancha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Solicitud_AdminCancha">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK5F4FA4051862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="ComplejoDeportivo" Type="Self.ComplejoDeportivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="ComplejoDeportivo">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK66723AB21862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Valoracion" Type="Self.Usuario_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Valoracion">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7033D3A1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cancha_Foto" Type="Self.Cancha_Foto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Cancha_Foto">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7033D3AF771FF35">
+    <End Role="Cancha" Type="Self.Cancha" Multiplicity="0..1" />
+    <End Role="Cancha_Foto" Type="Self.Cancha_Foto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha">
+        <PropertyRef Name="IdCancha" />
+      </Principal>
+      <Dependent Role="Cancha_Foto">
+        <PropertyRef Name="IdCancha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK76644D7F1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cancha" Type="Self.Cancha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Cancha">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK76644D7FE55E9EAC">
+    <End Role="ComplejoDeportivo" Type="Self.ComplejoDeportivo" Multiplicity="0..1" />
+    <End Role="Cancha" Type="Self.Cancha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ComplejoDeportivo">
+        <PropertyRef Name="IdComplejoDeportivo" />
+      </Principal>
+      <Dependent Role="Cancha">
+        <PropertyRef Name="IdComplejoDeportivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7786F1A31862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Token" Type="Self.Token" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Token">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7932B0101862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Equipo_Foto" Type="Self.Equipo_Foto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Equipo_Foto">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7932B010A62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Equipo_Foto" Type="Self.Equipo_Foto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Equipo_Foto">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7DE04BD41862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Equipo_Jugador" Type="Self.Equipo_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Equipo_Jugador">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7DE04BD44586AA08">
+    <End Role="Usuario_Solicitud_Equipo" Type="Self.Usuario_Solicitud_Equipo" Multiplicity="0..1" />
+    <End Role="Equipo_Jugador" Type="Self.Equipo_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario_Solicitud_Equipo">
+        <PropertyRef Name="IdUsuario_Solicitud_Equipo" />
+      </Principal>
+      <Dependent Role="Equipo_Jugador">
+        <PropertyRef Name="IdUsuario_Solicitud_Equipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK7DE04BD4A62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Equipo_Jugador" Type="Self.Equipo_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Equipo_Jugador">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK817CBD8E1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Foto" Type="Self.Usuario_Foto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Foto">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK903403341862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Reto" Type="Self.Reto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Reto">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK903403348204A257">
+    <End Role="Cancha_Reservacion" Type="Self.Cancha_Reservacion" Multiplicity="0..1" />
+    <End Role="Reto" Type="Self.Reto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha_Reservacion">
+        <PropertyRef Name="IdCancha_Reservacion" />
+      </Principal>
+      <Dependent Role="Reto">
+        <PropertyRef Name="IdCancha_Reservacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK90340334A62E925C">
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="0..1" />
+    <End Role="Reto" Type="Self.Reto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipo">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="Reto">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK9137113A1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cancha_Horario_Dia_Hora" Type="Self.Cancha_Horario_Dia_Hora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Cancha_Horario_Dia_Hora">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK9137113AC7910A3A">
+    <End Role="Cancha_Horario_Dia" Type="Self.Cancha_Horario_Dia" Multiplicity="0..1" />
+    <End Role="Cancha_Horario_Dia_Hora" Type="Self.Cancha_Horario_Dia_Hora" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha_Horario_Dia">
+        <PropertyRef Name="IdCancha_Horario_Dia" />
+      </Principal>
+      <Dependent Role="Cancha_Horario_Dia_Hora">
+        <PropertyRef Name="IdCancha_Horario_Dia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK9CC16DB1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Cancha_Reservacion" Type="Self.Cancha_Reservacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Cancha_Reservacion">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK9CC16DB559FCD51">
+    <End Role="Cancha_Horario_Dia_Hora" Type="Self.Cancha_Horario_Dia_Hora" Multiplicity="0..1" />
+    <End Role="Cancha_Reservacion" Type="Self.Cancha_Reservacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cancha_Horario_Dia_Hora">
+        <PropertyRef Name="IdCancha_Horario_Dia_Hora" />
+      </Principal>
+      <Dependent Role="Cancha_Reservacion">
+        <PropertyRef Name="IdCancha_Horario_Dia_Hora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK9E8FB9FD1862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Usuario1" Type="Self.Usuario" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario1">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FKA981D5251862B0F6">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Registro_Acceso" Type="Self.Usuario_Registro_Acceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Registro_Acceso">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JuegaModelStoreContainer">
+    <EntitySet Name="Cancha" EntityType="Self.Cancha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cancha_Foto" EntityType="Self.Cancha_Foto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cancha_Horario_Dia" EntityType="Self.Cancha_Horario_Dia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cancha_Horario_Dia_Hora" EntityType="Self.Cancha_Horario_Dia_Hora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cancha_Reservacion" EntityType="Self.Cancha_Reservacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cancha_Valoracion" EntityType="Self.Cancha_Valoracion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ComplejoDeportivo" EntityType="Self.ComplejoDeportivo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Denuncia" EntityType="Self.Denuncia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo_Foto" EntityType="Self.Equipo_Foto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo_Jugador" EntityType="Self.Equipo_Jugador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo_Tecnico" EntityType="Self.Equipo_Tecnico" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo_Valoracion" EntityType="Self.Equipo_Valoracion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reto" EntityType="Self.Reto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Token" EntityType="Self.Token" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario_Foto" EntityType="Self.Usuario_Foto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario_Registro_Acceso" EntityType="Self.Usuario_Registro_Acceso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario_Solicitud_AdminCancha" EntityType="Self.Usuario_Solicitud_AdminCancha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario_Solicitud_Equipo" EntityType="Self.Usuario_Solicitud_Equipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario_Valoracion" EntityType="Self.Usuario_Valoracion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK1E2394DD1862B0F6" Association="Self.FK1E2394DD1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancha_Horario_Dia" EntitySet="Cancha_Horario_Dia" />
+    </AssociationSet>
+    <AssociationSet Name="FK1E2394DDF771FF35" Association="Self.FK1E2394DDF771FF35">
+      <End Role="Cancha" EntitySet="Cancha" />
+      <End Role="Cancha_Horario_Dia" EntitySet="Cancha_Horario_Dia" />
+    </AssociationSet>
+    <AssociationSet Name="FK312DCDED1862B0F6" Association="Self.FK312DCDED1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Solicitud_Equipo" EntitySet="Usuario_Solicitud_Equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK312DCDEDA62E925C" Association="Self.FK312DCDEDA62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Usuario_Solicitud_Equipo" EntitySet="Usuario_Solicitud_Equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK323934421862B0F6" Association="Self.FK323934421862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK399306991862B0F6" Association="Self.FK399306991862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Equipo_Tecnico" EntitySet="Equipo_Tecnico" />
+    </AssociationSet>
+    <AssociationSet Name="FK39930699A62E925C" Association="Self.FK39930699A62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Equipo_Tecnico" EntitySet="Equipo_Tecnico" />
+    </AssociationSet>
+    <AssociationSet Name="FK3BBAF2251862B0F6" Association="Self.FK3BBAF2251862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Denuncia" EntitySet="Denuncia" />
+    </AssociationSet>
+    <AssociationSet Name="FK3BBAF225A62E925C" Association="Self.FK3BBAF225A62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Denuncia" EntitySet="Denuncia" />
+    </AssociationSet>
+    <AssociationSet Name="FK3BBAF225F771FF35" Association="Self.FK3BBAF225F771FF35">
+      <End Role="Cancha" EntitySet="Cancha" />
+      <End Role="Denuncia" EntitySet="Denuncia" />
+    </AssociationSet>
+    <AssociationSet Name="FK3F406CE31862B0F6" Association="Self.FK3F406CE31862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Equipo_Valoracion" EntitySet="Equipo_Valoracion" />
+    </AssociationSet>
+    <AssociationSet Name="FK3F406CE3A62E925C" Association="Self.FK3F406CE3A62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Equipo_Valoracion" EntitySet="Equipo_Valoracion" />
+    </AssociationSet>
+    <AssociationSet Name="FK3FBA4BEB1862B0F6" Association="Self.FK3FBA4BEB1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancha_Valoracion" EntitySet="Cancha_Valoracion" />
+    </AssociationSet>
+    <AssociationSet Name="FK3FBA4BEBF771FF35" Association="Self.FK3FBA4BEBF771FF35">
+      <End Role="Cancha" EntitySet="Cancha" />
+      <End Role="Cancha_Valoracion" EntitySet="Cancha_Valoracion" />
+    </AssociationSet>
+    <AssociationSet Name="FK550739B71862B0F6" Association="Self.FK550739B71862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Solicitud_AdminCancha" EntitySet="Usuario_Solicitud_AdminCancha" />
+    </AssociationSet>
+    <AssociationSet Name="FK5F4FA4051862B0F6" Association="Self.FK5F4FA4051862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="ComplejoDeportivo" EntitySet="ComplejoDeportivo" />
+    </AssociationSet>
+    <AssociationSet Name="FK66723AB21862B0F6" Association="Self.FK66723AB21862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Valoracion" EntitySet="Usuario_Valoracion" />
+    </AssociationSet>
+    <AssociationSet Name="FK7033D3A1862B0F6" Association="Self.FK7033D3A1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancha_Foto" EntitySet="Cancha_Foto" />
+    </AssociationSet>
+    <AssociationSet Name="FK7033D3AF771FF35" Association="Self.FK7033D3AF771FF35">
+      <End Role="Cancha" EntitySet="Cancha" />
+      <End Role="Cancha_Foto" EntitySet="Cancha_Foto" />
+    </AssociationSet>
+    <AssociationSet Name="FK76644D7F1862B0F6" Association="Self.FK76644D7F1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancha" EntitySet="Cancha" />
+    </AssociationSet>
+    <AssociationSet Name="FK76644D7FE55E9EAC" Association="Self.FK76644D7FE55E9EAC">
+      <End Role="ComplejoDeportivo" EntitySet="ComplejoDeportivo" />
+      <End Role="Cancha" EntitySet="Cancha" />
+    </AssociationSet>
+    <AssociationSet Name="FK7786F1A31862B0F6" Association="Self.FK7786F1A31862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Token" EntitySet="Token" />
+    </AssociationSet>
+    <AssociationSet Name="FK7932B0101862B0F6" Association="Self.FK7932B0101862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Equipo_Foto" EntitySet="Equipo_Foto" />
+    </AssociationSet>
+    <AssociationSet Name="FK7932B010A62E925C" Association="Self.FK7932B010A62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Equipo_Foto" EntitySet="Equipo_Foto" />
+    </AssociationSet>
+    <AssociationSet Name="FK7DE04BD41862B0F6" Association="Self.FK7DE04BD41862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Equipo_Jugador" EntitySet="Equipo_Jugador" />
+    </AssociationSet>
+    <AssociationSet Name="FK7DE04BD44586AA08" Association="Self.FK7DE04BD44586AA08">
+      <End Role="Usuario_Solicitud_Equipo" EntitySet="Usuario_Solicitud_Equipo" />
+      <End Role="Equipo_Jugador" EntitySet="Equipo_Jugador" />
+    </AssociationSet>
+    <AssociationSet Name="FK7DE04BD4A62E925C" Association="Self.FK7DE04BD4A62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Equipo_Jugador" EntitySet="Equipo_Jugador" />
+    </AssociationSet>
+    <AssociationSet Name="FK817CBD8E1862B0F6" Association="Self.FK817CBD8E1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Foto" EntitySet="Usuario_Foto" />
+    </AssociationSet>
+    <AssociationSet Name="FK903403341862B0F6" Association="Self.FK903403341862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Reto" EntitySet="Reto" />
+    </AssociationSet>
+    <AssociationSet Name="FK903403348204A257" Association="Self.FK903403348204A257">
+      <End Role="Cancha_Reservacion" EntitySet="Cancha_Reservacion" />
+      <End Role="Reto" EntitySet="Reto" />
+    </AssociationSet>
+    <AssociationSet Name="FK90340334A62E925C" Association="Self.FK90340334A62E925C">
+      <End Role="Equipo" EntitySet="Equipo" />
+      <End Role="Reto" EntitySet="Reto" />
+    </AssociationSet>
+    <AssociationSet Name="FK9137113A1862B0F6" Association="Self.FK9137113A1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancha_Horario_Dia_Hora" EntitySet="Cancha_Horario_Dia_Hora" />
+    </AssociationSet>
+    <AssociationSet Name="FK9137113AC7910A3A" Association="Self.FK9137113AC7910A3A">
+      <End Role="Cancha_Horario_Dia" EntitySet="Cancha_Horario_Dia" />
+      <End Role="Cancha_Horario_Dia_Hora" EntitySet="Cancha_Horario_Dia_Hora" />
+    </AssociationSet>
+    <AssociationSet Name="FK9CC16DB1862B0F6" Association="Self.FK9CC16DB1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Cancha_Reservacion" EntitySet="Cancha_Reservacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK9CC16DB559FCD51" Association="Self.FK9CC16DB559FCD51">
+      <End Role="Cancha_Horario_Dia_Hora" EntitySet="Cancha_Horario_Dia_Hora" />
+      <End Role="Cancha_Reservacion" EntitySet="Cancha_Reservacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK9E8FB9FD1862B0F6" Association="Self.FK9E8FB9FD1862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario1" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FKA981D5251862B0F6" Association="Self.FKA981D5251862B0F6">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Registro_Acceso" EntitySet="Usuario_Registro_Acceso" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

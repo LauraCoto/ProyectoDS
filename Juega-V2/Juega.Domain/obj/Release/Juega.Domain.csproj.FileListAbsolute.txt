@@ -1,0 +1,5 @@
+C:\ProyectoDS\Juega-V2\Juega.Domain\bin\Release\Juega.Domain.dll
+C:\ProyectoDS\Juega-V2\Juega.Domain\bin\Release\Juega.Domain.pdb
+C:\ProyectoDS\Juega-V2\Juega.Domain\obj\Release\Juega.Domain.dll
+C:\ProyectoDS\Juega-V2\Juega.Domain\obj\Release\Juega.Domain.pdb
+C:\ProyectoDS\Juega-V2\Juega.Domain\obj\Release\Juega.Domain.csprojResolveAssemblyReference.cache
