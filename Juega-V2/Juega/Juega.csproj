@@ -286,6 +286,7 @@
     <Compile Include="Controllers\ExtrasController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
+    <Compile Include="Controllers\Juega\TestController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MultilevelsController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
@@ -1433,6 +1434,7 @@
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Juega\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
