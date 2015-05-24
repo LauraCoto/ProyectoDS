@@ -17,8 +17,10 @@ namespace Juega
             Database.SetInitializer<JuegaEntities>(null);
             //Database.SetInitializer<JuegaEntities>(null);
 
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
