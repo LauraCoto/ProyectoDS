@@ -19,8 +19,13 @@ namespace Juega.Controllers.Juega
 
 
         
-        public JsonResult GetAll()
+        public ActionResult GetAll()
         {
+            if (!Request.IsAuthenticated)
+            {
+               return Json(Mensajes.L600, JsonRequestBehavior.AllowGet);
+            }
+
             _db.Configuration.ProxyCreationEnabled = false;
             var lista = _db.Cancha.ToList();
 

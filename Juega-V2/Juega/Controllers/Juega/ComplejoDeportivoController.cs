@@ -6,9 +6,9 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
-    public class ComplejoDeportivoController : Controller
+    public class ComplejoDeportivoController : BaseController
     {
-        private JuegaEntities _db = new JuegaEntities();
+
 
 
         public ActionResult Index()
@@ -20,13 +20,16 @@ namespace Juega.Controllers.Juega
         {
             try
             {
+
+                //var usuario = ObtenerUsuario_MemberShip();
+
+                if (!TieneAcceso())
+                    return Json(status, JsonRequestBehavior.AllowGet);
+
+
                 _db.Configuration.ProxyCreationEnabled = false;
 
-                var lista = _db.ComplejoDeportivo.ToList();
-
-                //    .Select(x => new PInfo(x.Coodernadas, x.Activo, x.Direccion, x.FechaCreo, x.Nombre, x.Telefonos));
-                            
-                                
+                var lista = _db.ComplejoDeportivo.ToList(); 
 
                 return Json(lista, JsonRequestBehavior.AllowGet);
             }
@@ -45,6 +48,7 @@ namespace Juega.Controllers.Juega
                 _db.SaveChanges();
                 return Json(complejoDeportivo, JsonRequestBehavior.AllowGet);
             }
+            
 
             return Json(complejoDeportivo, JsonRequestBehavior.AllowGet);
         }

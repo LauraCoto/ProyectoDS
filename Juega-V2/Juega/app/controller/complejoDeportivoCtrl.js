@@ -4,7 +4,7 @@
     $scope.Registro = {};
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
-
+    $scope.IniciarSesion = {};
 
 
     $scope.Limpiar = function () {
@@ -32,7 +32,14 @@
     }
 
     $http.get('/ComplejoDeportivo/GetAll').success(function (data) {
-        $scope.ListaRegistros = data;
+        if (data == "-1") {
+            $scope.IniciarSesion = 'S';
+            return;
+        }
+        else {
+            $scope.ListaCanchas = data;
+            $scope.IniciarSesion = 'N';
+        }
     });
 
 

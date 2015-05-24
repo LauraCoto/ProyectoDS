@@ -5,6 +5,7 @@
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
 
+    $scope.IniciarSesion = {};
 
     $scope.Limpiar = function () {
         $scope.Registro = {};
@@ -25,7 +26,17 @@
     }
 
     $http.get('/Canchas/GetAll').success(function (data) {
-        $scope.ListaCanchas = data;
+           
+
+        if (data == "-1") { 
+            $scope.IniciarSesion = 'S';
+            return;
+        }
+        else
+        {
+            $scope.ListaCanchas = data;
+            $scope.IniciarSesion = 'N';
+        }
     });
 
 

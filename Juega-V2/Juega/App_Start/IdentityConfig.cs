@@ -21,16 +21,7 @@ namespace Juega
             // Plug in your email service here to send an email.
             return Task.FromResult(0);
         }
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
-        }
-    }
+    } 
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -106,4 +97,26 @@ namespace Juega
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
+    public class SmsService : IIdentityMessageService
+    {
+        public Task SendAsync(IdentityMessage message)
+        {
+
+            var TwilioSid = System.Configuration.ConfigurationManager.AppSettings["TwilioSid"];
+            var TwilioToken = System.Configuration.ConfigurationManager.AppSettings["TwilioToken"];
+            var TwilioFromPhone = System.Configuration.ConfigurationManager.AppSettings["TwilioFromPhone"];
+
+            var Twilio = new Twilio.TwilioRestClient(TwilioSid, TwilioToken);
+
+            var result = Twilio.SendMessage(TwilioFromPhone, message.Destination, message.Body);
+
+            // Status is one of Queued, Sending, Sent, Failed or null if the number is not valid
+            System.Diagnostics.Trace.TraceInformation(result.Status);
+
+            // Twilio doesn't currently have an async API, so return success.
+            return Task.FromResult(0);
+        }
+    }
+
 }

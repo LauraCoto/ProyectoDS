@@ -6,6 +6,13 @@ using System.Web.Mvc;
 
 namespace Juega
 {
+    public enum Mensajes
+    {
+        L600=-1,
+        L700=-2,
+
+    }
+
     public static class HTMLHelperExtensions
     {
         public static string isActive(this HtmlHelper html, string controller = null, string action = null)

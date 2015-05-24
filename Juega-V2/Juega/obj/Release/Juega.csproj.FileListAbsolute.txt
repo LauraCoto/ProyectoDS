@@ -73,3 +73,8 @@ C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\ProyectoDS\Juega-V2\Juega\obj\Release\Juega.dll
 C:\ProyectoDS\Juega-V2\Juega\obj\Release\Juega.pdb
 C:\ProyectoDS\Juega-V2\Juega\obj\Release\Juega.csprojResolveAssemblyReference.cache
+C:\ProyectoDS\Juega-V2\Juega\bin\RestSharp.dll
+C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.dll
+C:\ProyectoDS\Juega-V2\Juega\bin\RestSharp.xml
+C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.pdb
+C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.xml
