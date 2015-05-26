@@ -42,6 +42,9 @@ namespace Juega.Controllers.Juega
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
+                if (ExisteRegistro(cancha.Nombre, -1))
+                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
+
                 _db.Cancha.Add(cancha);
                 _db.SaveChanges();
 
@@ -60,6 +63,9 @@ namespace Juega.Controllers.Juega
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
+
+                if (ExisteRegistro(cancha.Nombre, -1))
+                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
                 _db.Entry(cancha).State = EntityState.Modified;
                 _db.SaveChanges();
@@ -97,5 +103,18 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
+
+        private bool ExisteRegistro(string nombre, long IdExcluir)
+        {
+            if (nombre.Trim() == "")
+                return false;
+
+            var registro = _db.Cancha.FirstOrDefault(x => x.Nombre == nombre &&
+                                                                x.IdCancha != IdExcluir
+                                                                );
+
+            return registro != null;
+        }
+
     }
 }

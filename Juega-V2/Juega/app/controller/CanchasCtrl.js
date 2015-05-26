@@ -28,6 +28,7 @@
         $scope.MostrarControles = true;
     }
 
+
     $http.get('/Canchas/GetAll').success(function (data) {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
@@ -39,6 +40,12 @@
             $scope.ListaRegistros = {};
         else
             $scope.ListaRegistros = data.Info;
+
+    });
+
+    $http.get('/ComplejoDeportivo/GetAll').success(function (data) {
+        $scope.Mensaje = data.Mensaje;
+        $scope.ListaComplejosDeportivos = data.Info;
 
     });
 
