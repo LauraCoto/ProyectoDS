@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3d2abfd91437408fb11621ac44476705" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="3d2abfd91437408fb11621ac44476705" Name="Diagram1" ZoomLevel="108">
         <EntityTypeShape EntityType="JuegaModel.Cancha" Width="1.5" PointX="6.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="JuegaModel.Cancha_Foto" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia" Width="1.5" PointX="12" PointY="2" IsExpanded="true" />

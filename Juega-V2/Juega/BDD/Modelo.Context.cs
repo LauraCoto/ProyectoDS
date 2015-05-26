@@ -12,66 +12,19 @@ namespace Juega.BDD
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class JuegaEntities : DbContext
     {
-        private enum ConexionUsar
+        public JuegaEntities()
+            : base("name=JuegaEntities")
         {
-            AppHarbor = 1,
-            Dramos = 2,
-            DBustillo = 3,
-            Rudy = 4,
-            Laura = 5,
-            Javier = 6,
-            Cris = 7,
-            Maynor = 8,
-            Jesus = 9,
-
         }
-        private static string ObtenerCadenaConexion()
-        {
-            var cnn = ConexionUsar.Dramos;
-
-            switch (cnn)
-            {
-                case ConexionUsar.AppHarbor:
-                    return "Juega.AppHarbor";
-
-                case ConexionUsar.Dramos:
-                    return "Juega.Local.dramos";
-
-                case ConexionUsar.DBustillo:
-                    return "Juega.Local.dbustillo";
-
-                case ConexionUsar.Rudy:
-                    return "Juega.Local.Rudy";
-
-                case ConexionUsar.Laura:
-                    return "Juega.Local.Laura";
-
-                case ConexionUsar.Javier:
-                    return "Juega.Local.Javier";
-
-                case ConexionUsar.Cris:
-                    return "Juega.Local.Cris";
-
-                case ConexionUsar.Maynor:
-                    return "Juega.Local.Maynor";
-
-                case ConexionUsar.Jesus:
-                    return "Juega.Local.Jesus"; 
-            }
-
-            return "Juega.Remoto"; 
-        }
-
-        public JuegaEntities() : base("name=" + ObtenerCadenaConexion()) { }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Cancha> Cancha { get; set; }
         public virtual DbSet<Cancha_Foto> Cancha_Foto { get; set; }
         public virtual DbSet<Cancha_Horario_Dia> Cancha_Horario_Dia { get; set; }
