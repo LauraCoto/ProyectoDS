@@ -97,8 +97,8 @@ namespace Juega.Controllers.Juega
 
                 var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
 
-                if (canchas != null && canchas.Count() > 0)
-                    return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
+              //  if (canchas != null && canchas.Count() > 0)
+              //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
 
 
                 _db.ComplejoDeportivo.Remove(complejo);
