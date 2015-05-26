@@ -53,22 +53,16 @@ namespace Juega.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
+         
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
-       
+        [ValidateAntiForgeryToken] 
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -94,8 +88,6 @@ namespace Juega.Controllers
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -107,8 +99,7 @@ namespace Juega.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/VerifyCode
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -136,21 +127,16 @@ namespace Juega.Controllers
                     return View(model);
             }
         }
-
-        //
-        // GET: /Account/Register
+         
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-
-        //
-        // POST: /Account/Register
+         
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken] 
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -172,14 +158,10 @@ namespace Juega.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
+            } 
             return View(model);
         }
-
-        //
-        // GET: /Account/ConfirmEmail
+         
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -190,17 +172,13 @@ namespace Juega.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-
-        //
-        // GET: /Account/ForgotPassword
+         
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
-
-        //
-        // POST: /Account/ForgotPassword
+         
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -226,25 +204,19 @@ namespace Juega.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+         
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-
-        //
-        // GET: /Account/ResetPassword
+         
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
-
-        //
-        // POST: /Account/ResetPassword
+         
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -268,17 +240,13 @@ namespace Juega.Controllers
             AddErrors(result);
             return View();
         }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
+         
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
-
-        //
-        // POST: /Account/ExternalLogin
+         
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -287,9 +255,7 @@ namespace Juega.Controllers
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-
-        //
-        // GET: /Account/SendCode
+         
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -302,9 +268,7 @@ namespace Juega.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
-        // POST: /Account/SendCode
+         
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -322,9 +286,7 @@ namespace Juega.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-
-        //
-        // GET: /Account/ExternalLoginCallback
+         
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -352,9 +314,7 @@ namespace Juega.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
+         
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -391,8 +351,7 @@ namespace Juega.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -400,9 +359,7 @@ namespace Juega.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
-        //
-        // GET: /Account/ExternalLoginFailure
+         
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {

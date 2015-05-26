@@ -30,7 +30,7 @@ namespace Juega.BDD
         }
         private static string ObtenerCadenaConexion()
         {
-            var cnn = ConexionUsar.Dramos;
+            var cnn = ConexionUsar.AppHarbor;
 
             switch (cnn)
             {

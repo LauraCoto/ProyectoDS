@@ -10,6 +10,7 @@ using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
+    [Authorize(Roles = "adm_rol")]
     public class RolesController : JuegaController
     {
         public ActionResult Index()
