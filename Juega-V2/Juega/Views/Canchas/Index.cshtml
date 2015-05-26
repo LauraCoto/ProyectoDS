@@ -2,65 +2,73 @@
     ViewBag.Title = "Index";
 }
 
-<head>
-    <script src="~/app/controller/CanchasCtrl.js"></script>
-</head>
+
+<script src="~/app/controller/CanchasCtrl.js"></script>
 
 
 <div class="container" ng-app="appCanchas" ng-controller="CanchasCtrl">
     <div class="row">
         <div class="col-md-12">
 
-            <table class="table table-striped">
-                <tr>
-                    <th>IdCancha</th>
-                    <th>Nombre</th>
-                    <th>NumEspectadores</th>
-                    <th>Largo</th>
-                    <th>Ancho</th>
-                    <th>Valoracion</th>
-                    <th>TipoEstado</th>
-                    <th>IdComplejoDeportivo</th>
-                </tr>
+            <div ng-if="MostrarError=='S'">
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+             
+            <div ng-if="MostrarError=='N'">
 
-                <tr ng-repeat="item in ListaCanchas">
-                    <td> {{item.IdCancha}}  </td>
-                    <td> {{item.Nombre}} </td>
-                    <td> {{item.NumEspectadores}} </td>
-                    <td> {{item.Largo}} </td>
-                    <td> {{item.Ancho}} </td>
-                    <td> {{item.Valoracion}} </td>
-                    <td> {{item.TipoEstado}} </td>
-                    <td> {{item.IdComplejoDeportivo}} </td>
-                    <td>
-                        <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
-                        <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
-                    </td>
-                </tr>
+                <table class="table table-striped">
+                    <tr>
+                        <th>IdCancha</th>
+                        <th>Nombre</th>
+                        <th>NumEspectadores</th>
+                        <th>Largo</th>
+                        <th>Ancho</th>
+                        <th>Valoracion</th>
+                        <th>TipoEstado</th>
+                        <th>IdComplejoDeportivo</th>
+                    </tr>
 
-                <tr ng-if="MostrarControles">
+                    <tr ng-repeat="item in ListaRegistros">
+                        <td> {{item.IdCancha}}  </td>
+                        <td> {{item.Nombre}} </td>
+                        <td> {{item.NumEspectadores}} </td>
+                        <td> {{item.Largo}} </td>
+                        <td> {{item.Ancho}} </td>
+                        <td> {{item.Valoracion}} </td>
+                        <td> {{item.TipoEstado}} </td>
+                        <td> {{item.IdComplejoDeportivo}} </td>
+                        <td>
+                            <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
+                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                        </td>
+                    </tr>
 
-                    <td><input type="text" disabled="disabled" class="form-control" placeholder="Id Registro" ng-model="Registro.IdCancha" /> </td>
-                    <td><input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtNombre" ng-model="Registro.Nombre" /></td>
-                    <td><input type="number" class="form-control" placeholder="Num. Espectadores" ng-model="Registro.NumEspectadores" /></td>
-                    <td><input type="number" class="form-control" placeholder="M. Largo" ng-model="Registro.Largo" /></td>
-                    <td><input type="number" class="form-control" placeholder="M. Ancho" ng-model="Registro.Ancho" /></td>
-                    <td><input type="number" class="form-control" placeholder="Valoracion" ng-model="Registro.Valoracion" /></td>
-                    <td><input type="text" class="form-control" placeholder="TipoEstado" ng-model="Registro.TipoEstado" /></td>
-                    <td><input type="text" class="form-control" placeholder="IdComplejoDeportivo" ng-model="Registro.IdComplejoDeportivo" /></td>
+                    <tr ng-if="MostrarControles">
 
-                    <td>
-                        <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
-                        <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
-                    </td>
-                </tr>
+                        <td><input type="text" disabled="disabled" class="form-control" placeholder="Id Registro" ng-model="Registro.IdCancha" /> </td>
+                        <td><input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtNombre" ng-model="Registro.Nombre" /></td>
+                        <td><input type="number" class="form-control" placeholder="Num. Espectadores" ng-model="Registro.NumEspectadores" /></td>
+                        <td><input type="number" class="form-control" placeholder="M. Largo" ng-model="Registro.Largo" /></td>
+                        <td><input type="number" class="form-control" placeholder="M. Ancho" ng-model="Registro.Ancho" /></td>
+                        <td><input type="number" class="form-control" placeholder="Valoracion" ng-model="Registro.Valoracion" /></td>
+                        <td><input type="text" class="form-control" placeholder="TipoEstado" ng-model="Registro.TipoEstado" /></td>
+                        <td><input type="text" class="form-control" placeholder="IdComplejoDeportivo" ng-model="Registro.IdComplejoDeportivo" /></td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                            <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Agregar</a>
+
+            </div>
 
 
-
-
-            </table>
-            <a ng-click="NuevoRegistro()" class="btn btn-primary">Agregar</a>
 
         </div>
     </div>
-</div>

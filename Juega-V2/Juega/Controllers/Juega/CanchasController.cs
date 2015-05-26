@@ -8,50 +8,94 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
-    public class CanchasController : Controller
+    public class CanchasController : JuegaController
     {
-        private JuegaEntities _db=new JuegaEntities();
-
         public ActionResult Index()
         {
             return View();
         }
 
-
-        
-        public JsonResult GetAll()
+        public JuegaJson GetAll()
         {
-            _db.Configuration.ProxyCreationEnabled = false;
-            var lista = _db.Cancha.ToList();
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
 
-            return Json(lista, JsonRequestBehavior.AllowGet);
+                _db.Configuration.ProxyCreationEnabled = false;
+                var lista = _db.Cancha.ToList();
+
+                return Resultado_Correcto(lista);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
         }
 
         [HttpPost]
         public JsonResult Create(Cancha cancha)
         {
-            _db.Cancha.Add(cancha);
-            _db.SaveChanges();
-            return Json(cancha, JsonRequestBehavior.AllowGet);
+
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                _db.Cancha.Add(cancha);
+                _db.SaveChanges();
+
+                return Resultado_Correcto(cancha, "El registro ha sido creado.");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
         }
 
         [HttpPost]
         public JsonResult Update(Cancha cancha)
         {
-            _db.Entry(cancha).State=EntityState.Modified;
-            _db.SaveChanges();
-            return Json(cancha, JsonRequestBehavior.AllowGet);
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                _db.Entry(cancha).State = EntityState.Modified;
+                _db.SaveChanges();
+
+                return Resultado_Correcto(cancha, "El registro ha sido actualizado.");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
         }
 
         [HttpPost]
         public JsonResult Delete(string id)
         {
-            var nId = int.Parse(id);
-            var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == nId);
-            _db.Cancha.Remove(cancha);
-            _db.SaveChanges();
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
 
-            return Json(cancha, JsonRequestBehavior.AllowGet);
+                var nId = int.Parse(id);
+                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == nId);
+
+                if (cancha == null)
+                    return Resultado_Error("No se encontro ningun registro.");
+
+                _db.Cancha.Remove(cancha);
+                _db.SaveChanges();
+
+                return Resultado_Correcto(id, "El registro ha sido eliminado.");
+
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿angular.module('CanchasController', []).controller('CanchasCtrl', ['$scope', '$http', function ($scope, $http) {
 
-    $scope.ListaCanchas = {};
+    $scope.ListaRegistros = {};
     $scope.Registro = {};
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
 
+    $scope.MostrarError = {};
 
     $scope.Limpiar = function () {
         $scope.Registro = {};
@@ -25,14 +26,27 @@
     }
 
     $http.get('/Canchas/GetAll').success(function (data) {
-        $scope.ListaCanchas = data;
+         
+        $scope.Mensaje = data.Mensaje;
+
+        //alert("Error:" + data.Error + " Data:" + data.Info + " Mensaje:" + data.Mensaje);
+
+        if (data.Error == true) {
+            $scope.ListaRegistros = {};
+            $scope.MostrarError = 'S';
+            return;
+        }
+        else {
+            $scope.ListaRegistros = data.Info;
+            $scope.MostrarError = 'N';
+        }
     });
 
 
     $scope.Guardar = function () {
         if ($scope.Accion == 'nuevo') {
             $http.post('/Canchas/Create', $scope.Registro).success(function (data) {
-                $scope.ListaCanchas.push(data);
+                $scope.ListaRegistros.push(data);
             });
         }
 
@@ -53,9 +67,9 @@
             params: { id: JSON.stringify(registroEliminar.IdCancha) }
         });
 
-        var indice = $scope.ListaCanchas.indexOf(registroEliminar);
+        var indice = $scope.ListaRegistros.indexOf(registroEliminar);
 
-        $scope.ListaCanchas.splice(indice, 1);
+        $scope.ListaRegistros.splice(indice, 1);
 
     }
 

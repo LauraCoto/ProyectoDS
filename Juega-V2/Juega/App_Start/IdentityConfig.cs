@@ -21,16 +21,7 @@ namespace Juega
             // Plug in your email service here to send an email.
             return Task.FromResult(0);
         }
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
-        }
-    }
+    } 
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -106,4 +97,63 @@ namespace Juega
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
+    public class SmsService : IIdentityMessageService
+    {
+        public Task SendAsync(IdentityMessage message)
+        {
+
+            var TwilioSid = System.Configuration.ConfigurationManager.AppSettings["TwilioSid"];
+            var TwilioToken = System.Configuration.ConfigurationManager.AppSettings["TwilioToken"];
+            var TwilioFromPhone = System.Configuration.ConfigurationManager.AppSettings["TwilioFromPhone"];
+
+            var Twilio = new Twilio.TwilioRestClient(TwilioSid, TwilioToken);
+
+            var result = Twilio.SendMessage(TwilioFromPhone, message.Destination, message.Body);
+
+            // Status is one of Queued, Sending, Sent, Failed or null if the number is not valid
+            System.Diagnostics.Trace.TraceInformation(result.Status);
+
+            // Twilio doesn't currently have an async API, so return success.
+            return Task.FromResult(0);
+        }
+    }
+
+    //public class EmailService : IIdentityMessageService
+    //{
+    //    public async Task SendAsync(IdentityMessage message)
+    //    {
+    //        await configSendGridasync(message);
+    //    }
+
+    //    // Use NuGet to install SendGrid (Basic C# client lib) 
+    //    private async Task configSendGridasync(IdentityMessage message)
+    //    {
+    //        //var myMessage = new SendGridMessage();
+    //        //myMessage.AddTo(message.Destination);
+    //        //myMessage.From = new System.Net.Mail.MailAddress( "davidramos015@gmail.com", "David R.");
+    //        //myMessage.Subject = message.Subject;
+    //        //myMessage.Text = message.Body;
+    //        //myMessage.Html = message.Body;
+
+    //        //var credentials = new NetworkCredential(
+    //        //           ConfigurationManager.AppSettings["mailAccount"],
+    //        //           ConfigurationManager.AppSettings["mailPassword"]
+    //        //           );
+
+    //        //// Create a Web transport for sending email.
+    //        //var transportWeb = new Web(credentials);
+
+    //        //// Send the email.
+    //        //if (transportWeb != null)
+    //        //{
+    //        //    await transportWeb.DeliverAsync(myMessage);
+    //        //}
+    //        //else
+    //        //{
+    //        //    Trace.TraceError("Failed to create Web transport.");
+    //        //    await Task.FromResult(0);
+    //        //}
+    //    }
+    //}
 }

@@ -4,25 +4,22 @@
     $scope.Registro = {};
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
-
-
+    $scope.MostrarError = {};
+    $scope.MostrarAlerta = {};
+    $scope.Mensaje = {};
 
     $scope.Limpiar = function () {
         $scope.Registro = {};
         $scope.Accion = 'nuevo';
         $scope.MostrarControles = false;
+        $scope.MostrarAlerta = 'N';
     };
 
-    $scope.cargar = function () {
-      var info =  $http.get('/ComplejoDeportivo/GetAll');
-        alert(info);
-    };
-
-    $scope.NuevoRegistro = function ()
-    {
+    $scope.NuevoRegistro = function () {
         $scope.Registro = {};
         $scope.Accion = 'nuevo';
         $scope.MostrarControles = true;
+        $scope.MostrarAlerta = 'N';
     };
 
     $scope.EditarRegistro = function (registroEditar) {
@@ -32,42 +29,74 @@
     }
 
     $http.get('/ComplejoDeportivo/GetAll').success(function (data) {
-        $scope.ListaRegistros = data;
+        $scope.Mensaje = data.Mensaje;
+        $scope.MostrarAlerta = data.Alerta;
+        $scope.MostrarError = data.Error;
+
+        //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.Info);
+
+        if (data.Error == 'S')
+            $scope.ListaRegistros = {};
+        else
+            $scope.ListaRegistros = data.Info;
+
     });
 
 
-    $scope.Guardar = function ()
-    {
-        if ($scope.Accion == 'nuevo') {
-            $http.post('/ComplejoDeportivo/Create', $scope.Registro).success(function (data) {
-                $scope.ListaRegistros.push(data);
-            });
-        }
+    $scope.Guardar = function () {
+        var url = $scope.Accion == 'nuevo' ? '/ComplejoDeportivo/Create' : '/ComplejoDeportivo/update';
 
-        if ($scope.Accion == 'editar') {
-            $http.post('/ComplejoDeportivo/Update', $scope.Registro).success(function (data) {
-                // $scope.ListaCarreras.push(data);
+        $http.post(url, $scope.Registro)
+            .success(function (data) {
+                $scope.MostrarError = data.Error;
+                $scope.MostrarAlerta = data.Alerta;
+                $scope.Mensaje = data.Mensaje;
+
+               // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.Info);
+
+                if (data.Error == 'N' && data.Alerta == 'N')
+                {
+                   // alert("Entro Aqui");
+
+                    if ($scope.Accion == 'nuevo')
+                        $scope.ListaRegistros.push(data.Info);
+
+                    $scope.Limpiar();
+                    return;
+                }
+            })
+            .error(function (data) {
+                $scope.Mensaje = data;
+                $scope.MostrarError = 'S';
+                $scope.MostrarAlerta = 'N'
             });
-        }
-         
-        $scope.Limpiar();
     }
 
 
     $scope.EliminarRegistro = function (registroEliminar) {
-        var response = $http({
-            method: "post",
-            url: "/ComplejoDeportivo/Delete",
-            params: { id: JSON.stringify(registroEliminar.IdComplejoDeportivo) }
+        $http.post('/ComplejoDeportivo/Delete', registroEliminar)
+        .success(function (data) {
+            $scope.MostrarError = data.Error;
+            $scope.MostrarAlerta = data.Alerta;
+            $scope.Mensaje = data.Mensaje;
+
+            if (data.Error == 'N' && data.Alerta == 'N') {
+                var indice = $scope.ListaRegistros.indexOf(registroEliminar);
+                $scope.ListaRegistros.splice(indice, 1);
+                $scope.Limpiar();
+                return;
+            }
+        })
+        .error(function (data) {
+            $scope.Mensaje = data;
+            $scope.MostrarError = 'S';
+            $scope.MostrarAlerta = 'N'
         });
-
-        var indice = $scope.ListaRegistros.indexOf(registroEliminar);
-
-        $scope.ListaRegistros.splice(indice, 1);
 
     }
 
-
 }
+
+
 
 ]);

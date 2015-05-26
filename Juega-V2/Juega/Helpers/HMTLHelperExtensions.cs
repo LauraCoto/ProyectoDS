@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Juega
 {
+
     public static class HTMLHelperExtensions
     {
         public static string isActive(this HtmlHelper html, string controller = null, string action = null)

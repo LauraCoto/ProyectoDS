@@ -18,12 +18,71 @@ namespace Juega.Models
         }
     }
 
+    //public class ApplicationRole : IdentityRole
+    //{
+    //    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(RoleManager<ApplicationRole> manager)
+    //    {
+    //        var roleIdentity = await manager.CreateAsync(this);
+
+    //        //var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+    //        return roleIdentity;
+    //    }
+    //}
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        private enum ConexionUsar
         {
+            AppHarbor = 1,
+            Dramos = 2,
+            DBustillo = 3,
+            Rudy = 4,
+            Laura = 5,
+            Javier = 6,
+            Cris = 7,
+            Maynor = 8,
+            Jesus = 9,
+
         }
+
+        private static string ObtenerCadenaConexion()
+        {
+            var cnn = ConexionUsar.Dramos;
+
+            switch (cnn)
+            {
+                case ConexionUsar.AppHarbor:
+                    return "Seguridad.AppHarbor";
+
+                case ConexionUsar.Dramos:
+                    return "Seguridad.Local.dramos";
+
+                case ConexionUsar.DBustillo:
+                    return "Seguridad.Local.dbustillo";
+
+                case ConexionUsar.Rudy:
+                    return "Seguridad.Local.Rudy";
+
+                case ConexionUsar.Laura:
+                    return "Seguridad.Local.Laura";
+
+                case ConexionUsar.Javier:
+                    return "Seguridad.Local.Javier";
+
+                case ConexionUsar.Cris:
+                    return "Seguridad.Local.Cris";
+
+                case ConexionUsar.Maynor:
+                    return "Seguridad.Local.Maynor";
+
+                case ConexionUsar.Jesus:
+                    return "Seguridad.Local.Jesus";
+            }
+
+            return "Seguridad.Remoto";
+        }
+
+        public ApplicationDbContext() : base(ObtenerCadenaConexion(), throwIfV1Schema: false) { }
 
         public static ApplicationDbContext Create()
         {

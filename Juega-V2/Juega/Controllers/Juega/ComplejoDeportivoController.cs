@@ -6,96 +6,122 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
-    public class ComplejoDeportivoController : Controller
+    public class ComplejoDeportivoController : JuegaController
     {
-        private JuegaEntities _db = new JuegaEntities();
-
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult GetAll()
+        public JuegaJson GetAll()
         {
             try
             {
-                _db.Configuration.ProxyCreationEnabled = false;
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
 
+                _db.Configuration.ProxyCreationEnabled = false;
                 var lista = _db.ComplejoDeportivo.ToList();
 
-                //    .Select(x => new PInfo(x.Coodernadas, x.Activo, x.Direccion, x.FechaCreo, x.Nombre, x.Telefonos));
-                            
-                                
-
-                return Json(lista, JsonRequestBehavior.AllowGet);
+                return Resultado_Correcto(lista);
             }
             catch (Exception e)
             {
-                return Json(e.Message,JsonRequestBehavior.AllowGet);
+                return Resultado_Exception(e);
             }
         }
 
         [HttpPost]
-        public JsonResult Create(ComplejoDeportivo complejoDeportivo)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.ComplejoDeportivo.Add(complejoDeportivo);
-                _db.SaveChanges();
-                return Json(complejoDeportivo, JsonRequestBehavior.AllowGet);
-            }
-
-            return Json(complejoDeportivo, JsonRequestBehavior.AllowGet);
-        }
-
-
-        [HttpPost]
-        public JsonResult Update(ComplejoDeportivo complejoDeportivo)
-        {
-            if (!ModelState.IsValid)
-                return Json("Actualizado correctarmente", JsonRequestBehavior.AllowGet);
-
-            _db.Entry(complejoDeportivo).State = EntityState.Modified;
-
-            _db.SaveChanges();
-
-            return Json(complejoDeportivo, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult Delete(string id)
+        public JuegaJson Create(ComplejoDeportivo complejoDeportivo)
         {
             try
             {
-                if (id == null)
-                    return Json("El registro no es valido.", JsonRequestBehavior.AllowGet);
 
-                var nId = int.Parse(id);
-                var carrera = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == nId);
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
 
-                if (carrera == null)
-                    return Json("No se encontro ningun registro.", JsonRequestBehavior.AllowGet);
+                if (ExisteRegistro(complejoDeportivo.Nombre, -1))
+                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
-                _db.ComplejoDeportivo.Remove(carrera);
+                _db.ComplejoDeportivo.Add(complejoDeportivo);
                 _db.SaveChanges();
 
-                return Json("Eliminado correctarmente", JsonRequestBehavior.AllowGet);
+                return Resultado_Correcto(complejoDeportivo, "El registro ha sido creado.");
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return Json("Error:" + ex.Message, JsonRequestBehavior.AllowGet);
+                return Resultado_Exception(e);
             }
-
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        _db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+
+        [HttpPost]
+        public JuegaJson Update(ComplejoDeportivo complejoDeportivo)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+
+                if (ExisteRegistro(complejoDeportivo.Nombre, complejoDeportivo.IdComplejoDeportivo))
+                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
+
+                _db.Entry(complejoDeportivo).State = EntityState.Modified;
+                _db.SaveChanges();
+
+                return Resultado_Correcto(complejoDeportivo, "El registro ha sido actualizado.");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+        [HttpPost]
+        public JuegaJson Delete(ComplejoDeportivo complejoDeportivo)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                if (complejoDeportivo == null)
+                    return Resultado_Advertencia("El registro no es valido.");
+
+                var complejo = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == complejoDeportivo.IdComplejoDeportivo);
+
+                if (complejo == null)
+                    return Resultado_Advertencia("No se encontro ningun registro.");
+
+                var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
+
+                if (canchas != null && canchas.Count() > 0)
+                    return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
+
+
+                _db.ComplejoDeportivo.Remove(complejo);
+                _db.SaveChanges();
+
+                return Resultado_Correcto(complejoDeportivo, "El registro ha sido eliminado.");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+        private bool ExisteRegistro(string nombre, long IdExcluir)
+        {
+            if (nombre.Trim() == "")
+                return false;
+
+            var complejo = _db.ComplejoDeportivo.FirstOrDefault(x => x.Nombre == nombre &&
+                                                                x.IdComplejoDeportivo != IdExcluir
+                                                                );
+
+            return complejo != null;
+        }
     }
 }
