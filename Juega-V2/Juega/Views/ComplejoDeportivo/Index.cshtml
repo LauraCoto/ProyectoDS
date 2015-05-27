@@ -9,11 +9,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div ng-if="MostrarError=='S'">
-                <div class="alert alert-danger" role="alert">
-                    {{Mensaje}}
-                </div>
-            </div>
+
 
             <div ng-if="MostrarError=='N'">
                 <table class="table table-striped">
@@ -67,10 +63,26 @@
             </div>
 
 
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
             <div ng-if="MostrarAlerta=='S'">
                 <br />
                 <br />
                 <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
                     {{Mensaje}}
                 </div>
             </div>

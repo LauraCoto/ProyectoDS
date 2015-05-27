@@ -313,6 +313,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilidades\Conexiones.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
@@ -343,6 +346,7 @@
     <Content Include="Content\Images\bg8.jpg" />
     <Content Include="Content\Images\bg9.jpg" />
     <Content Include="Content\Images\dummy.png" />
+    <Content Include="Content\Images\futbol.png" />
     <Content Include="Content\Images\lock-bg.jpg" />
     <Content Include="Content\Images\logo-single.png" />
     <Content Include="Content\Images\logo.png" />
