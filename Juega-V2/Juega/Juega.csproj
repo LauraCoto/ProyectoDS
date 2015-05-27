@@ -296,6 +296,7 @@
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
+    <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MultilevelsController.cs" />
@@ -322,6 +323,7 @@
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
+    <Content Include="app\controller\Solicitud_JugadorCtrl.js" />
     <Content Include="Content\app\css\app-rtl.css" />
     <Content Include="Content\app\css\app.css" />
     <Content Include="Content\app\css\bootstrap-rtl.css" />
@@ -1497,6 +1499,8 @@
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Juega\" />
+    <Folder Include="Views\Solicitud_Jugadores\" />
+    <Folder Include="Views\Solicitud_Jugador\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
