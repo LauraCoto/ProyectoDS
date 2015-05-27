@@ -11,7 +11,7 @@ using Microsoft.Owin.Security;
 using Juega.Models;
 
 
-namespace Juega.Controllers
+namespace Juega
 {
     [Authorize]
     public class AccountController : Controller
@@ -153,8 +153,25 @@ namespace Juega.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    //Juega.BDD.JuegaEntities _db = new Juega.BDD.JuegaEntities();
+                    var _db = new Juega.BDD.JuegaEntities();
+                    var usuario = new BDD.Usuario();
+                    usuario.Activo = true;
+                    usuario.Apellido = "";
+                    usuario.Nombre = "";
+                    usuario.Confirmado = false;
+                    usuario.Correo = model.Email;
+                    usuario.EsAdminCancha = false;
+                    usuario.EsAdminEquipo = false;
+                    usuario.EsEspectador = true;
+                    usuario.EsJugador = false;
+                    usuario.FechaCreo = DateTime.Now;
+                    usuario.Telefonos = "";
+                    usuario.TipoEstado = "Pend";
+                    usuario.Valoracion = 0;
+                    _db.Usuario.Add(usuario);
+                    _db.SaveChanges();
 
+                    UserManager.AddToRole(user.Id, "adm_cancha"); 
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

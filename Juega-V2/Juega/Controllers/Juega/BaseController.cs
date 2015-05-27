@@ -21,7 +21,7 @@ namespace Juega.Controllers.Juega
         public object Mensaje;
         public string Error;
         public string Alerta;
-        public string Infos;
+        public string Info;
     }
 
     public class JuegaJson : JsonResult
@@ -97,6 +97,7 @@ namespace Juega.Controllers.Juega
             r.data = data;
             r.Error = "N";
             r.Alerta = "N";
+            r.Info = "S"; 
             r.Mensaje = mensaje;
 
             var json = new JuegaJson(r);
@@ -120,6 +121,8 @@ namespace Juega.Controllers.Juega
         internal bool UsuarioAutenticado()
         {
             var autenticado = Request.IsAuthenticated;
+
+           // var usu = ObtenerUsuario_MemberShip();
 
             status = autenticado ? StatusAcceso.Logeado : StatusAcceso.IniciarSesion;
 
