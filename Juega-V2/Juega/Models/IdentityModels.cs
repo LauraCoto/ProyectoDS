@@ -3,8 +3,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Juega.Utilidades;
 
-namespace Juega.Models
+namespace Juega
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -18,71 +19,61 @@ namespace Juega.Models
         }
     }
 
-    //public class ApplicationRole : IdentityRole
-    //{
-    //    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(RoleManager<ApplicationRole> manager)
-    //    {
-    //        var roleIdentity = await manager.CreateAsync(this);
-
-    //        //var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-    //        return roleIdentity;
-    //    }
-    //}
-
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        private enum ConexionUsar
-        {
-            AppHarbor = 1,
-            Dramos = 2,
-            DBustillo = 3,
-            Rudy = 4,
-            Laura = 5,
-            Javier = 6,
-            Cris = 7,
-            Maynor = 8,
-            Jesus = 9,
+        //private enum ConexionUsar
+        //{
+        //    AppHarbor = 1,
+        //    Dramos = 2,
+        //    DBustillo = 3,
+        //    Rudy = 4,
+        //    Laura = 5,
+        //    Javier = 6,
+        //    Cris = 7,
+        //    Maynor = 8,
+        //    Jesus = 9,
+        //}
 
-        }
+        //public static string ObtenerCadenaConexion_Seguridad()
+        //{
+        //    var cnn = ConexionUsar.Dramos;
 
-        private static string ObtenerCadenaConexion()
-        {
-            var cnn = ConexionUsar.Dramos;
+        //    switch (cnn)
+        //    {
+        //        case ConexionUsar.AppHarbor:
+        //            return "Seguridad.AppHarbor";
 
-            switch (cnn)
-            {
-                case ConexionUsar.AppHarbor:
-                    return "Seguridad.AppHarbor";
+        //        case ConexionUsar.Dramos:
+        //            return "Seguridad.dramos";
 
-                case ConexionUsar.Dramos:
-                    return "Seguridad.Local.dramos";
+        //        case ConexionUsar.DBustillo:
+        //            return "Seguridad.dbustillo";
 
-                case ConexionUsar.DBustillo:
-                    return "Seguridad.Local.dbustillo";
+        //        case ConexionUsar.Rudy:
+        //            return "Seguridad.Rudy";
 
-                case ConexionUsar.Rudy:
-                    return "Seguridad.Local.Rudy";
+        //        case ConexionUsar.Laura:
+        //            return "Seguridad.Laura";
 
-                case ConexionUsar.Laura:
-                    return "Seguridad.Local.Laura";
+        //        case ConexionUsar.Javier:
+        //            return "Seguridad.Javier";
 
-                case ConexionUsar.Javier:
-                    return "Seguridad.Local.Javier";
+        //        case ConexionUsar.Cris:
+        //            return "Seguridad.Cris";
 
-                case ConexionUsar.Cris:
-                    return "Seguridad.Local.Cris";
+        //        case ConexionUsar.Maynor:
+        //            return "Seguridad.Maynor";
 
-                case ConexionUsar.Maynor:
-                    return "Seguridad.Local.Maynor";
+        //        case ConexionUsar.Jesus:
+        //            return "Seguridad.Jesus";
+        //    }
 
-                case ConexionUsar.Jesus:
-                    return "Seguridad.Local.Jesus";
-            }
+        //    return "Seguridad.AppHarbor";
+        //}
 
-            return "Seguridad.Remoto";
-        }
 
-        public ApplicationDbContext() : base(ObtenerCadenaConexion(), throwIfV1Schema: false) { }
+
+        public ApplicationDbContext() : base(Juega.Utilidades.Conexiones.ObtenerCadenaConexion_Seguridad(), throwIfV1Schema: false) { }
 
         public static ApplicationDbContext Create()
         {

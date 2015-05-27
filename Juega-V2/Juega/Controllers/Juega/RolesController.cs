@@ -10,6 +10,7 @@ using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
+    //[Authorize(Roles = "adm_rol")]
     public class RolesController : JuegaController
     {
         public ActionResult Index()
@@ -26,8 +27,6 @@ namespace Juega.Controllers.Juega
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-                //roleManager.Create(new IdentityRole("Prueba"));
-
                 var lista = roleManager.Roles.ToList();
 
                 var roles = new List<Rol>();
@@ -36,6 +35,7 @@ namespace Juega.Controllers.Juega
                     var r = new Rol();
                     r.Id = i.Id;
                     r.Nombre = i.Name;
+                    r.Nombre_Ant = i.Name;
                     roles.Add(r);
 
                 }
@@ -58,10 +58,11 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
 
+
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
                 if (roleManager.RoleExists(rol.Nombre))
-                    return Resultado_Error("Ya existe un rol con el mismo nombre.");
+                    return Resultado_Advertencia("Ya existe un rol con el mismo nombre.");
 
                 roleManager.Create(new IdentityRole(rol.Nombre));
 
@@ -74,7 +75,8 @@ namespace Juega.Controllers.Juega
         }
 
         [HttpPost]
-        public JuegaJson Delete(string rol)
+        [Authorize]
+        public JuegaJson Update(Rol rol)
         {
             try
             {
@@ -82,17 +84,60 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
 
-                var usuarios = System.Web.Security.Roles.GetUsersInRole(rol);
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
-                if (usuarios != null && usuarios.Count() > 0)
-                    return Resultado_Error("No se puede eliminar este rol porque esta asignado a los usuarios:" + usuarios);
+                if (roleManager.RoleExists(rol.Nombre))
+                    return Resultado_Advertencia("Ya existe un rol con el mismo nombre.");
 
-                var eliminado = System.Web.Security.Roles.DeleteRole(rol);
+                var rolActualizar = roleManager.FindByName(rol.Nombre_Ant);
 
-                if (eliminado)
+                if (rolActualizar == null)
+                    return Resultado_Advertencia("No se encontro ningun registro.");
+
+                rolActualizar.Name = rol.Nombre;
+                roleManager.Update(rolActualizar);
+
+                return Resultado_Correcto(rol);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+        [HttpPost]
+        public JuegaJson Delete(Rol rolEliminar)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                if (rolEliminar == null)
+                    return Resultado_Advertencia("El registro no es valido.");
+
+
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+                if (!roleManager.RoleExists(rolEliminar.Nombre))
+                    return Resultado_Advertencia("El rol que intenta eliminar no existe.");
+
+
+                var rol = roleManager.FindByName(rolEliminar.Nombre);
+
+                if (rol == null)
+                    return Resultado_Advertencia("No se encontro ningun registro.");
+
+                // var userManager =new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext())); 
+                if ( rol.Users.Count() > 0)
+                    return Resultado_Advertencia("No se puede eliminar este rol tiene usuarios asignados.");
+
+                var resultado = roleManager.Delete(rol);
+
+                if (resultado.Succeeded)
                     return Resultado_Correcto("El rol ha sido eliminado");
                 else
-                    return Resultado_Error("Ocurrio un error al eliminar el rol.");
+                    return Resultado_Advertencia("Ocurrio un error al eliminar el rol.");
 
             }
             catch (Exception e)

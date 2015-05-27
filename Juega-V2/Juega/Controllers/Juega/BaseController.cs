@@ -17,10 +17,11 @@ namespace Juega.Controllers.Juega
 
     public class Resultado
     {
-        public object Info;
+        public object data;
         public object Mensaje;
         public string Error;
         public string Alerta;
+        public string Info;
     }
 
     public class JuegaJson : JsonResult
@@ -52,7 +53,7 @@ namespace Juega.Controllers.Juega
         internal JuegaJson Resultado_Devolver(object data, string mensaje = "", string error = "N",string alerta="N")
         {
             var r = new Resultado();
-            r.Info = data;
+            r.data = data;
             r.Error = error;
             r.Alerta = alerta;
             r.Mensaje = mensaje;
@@ -65,7 +66,7 @@ namespace Juega.Controllers.Juega
         {
             var r = new Resultado();
 
-            r.Info = null;
+            r.data = null;
             r.Error = "S";
             r.Alerta = "N";
             r.Mensaje = e.Message;
@@ -79,7 +80,7 @@ namespace Juega.Controllers.Juega
         {
             var r = new Resultado();
 
-            r.Info = "";
+            r.data = "";
             r.Error = "S";
             r.Alerta = "N";
             r.Mensaje = mensaje;
@@ -93,9 +94,10 @@ namespace Juega.Controllers.Juega
         {
             var r = new Resultado();
 
-            r.Info = data;
+            r.data = data;
             r.Error = "N";
             r.Alerta = "N";
+            r.Info = "S"; 
             r.Mensaje = mensaje;
 
             var json = new JuegaJson(r);
@@ -106,7 +108,7 @@ namespace Juega.Controllers.Juega
         {
             var r = new Resultado();
 
-            r.Info = null;
+            r.data = null;
             r.Error = "N";
             r.Alerta = "S";
             r.Mensaje = mensaje;
@@ -119,6 +121,8 @@ namespace Juega.Controllers.Juega
         internal bool UsuarioAutenticado()
         {
             var autenticado = Request.IsAuthenticated;
+
+           // var usu = ObtenerUsuario_MemberShip();
 
             status = autenticado ? StatusAcceso.Logeado : StatusAcceso.IniciarSesion;
 
@@ -138,7 +142,7 @@ namespace Juega.Controllers.Juega
         {
             var r = new Resultado();
 
-            r.Info = status;
+            r.data = status;
             r.Error = "S";
             r.Alerta = "N";
 

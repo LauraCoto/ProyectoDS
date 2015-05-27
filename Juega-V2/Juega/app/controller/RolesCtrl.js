@@ -5,19 +5,24 @@
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
     $scope.MostrarError = {};
+    $scope.MostrarAlerta = {};
+    $scope.MostrarInfo = {};
     $scope.Mensaje = {};
 
     $scope.Limpiar = function () {
         $scope.Registro = {};
         $scope.Accion = 'nuevo';
         $scope.MostrarControles = false;
+        $scope.MostrarAlerta = 'N';
+        $scope.MostrarInfo = 'N';
     };
-     
 
     $scope.NuevoRegistro = function () {
         $scope.Registro = {};
         $scope.Accion = 'nuevo';
         $scope.MostrarControles = true;
+        $scope.MostrarAlerta = 'N';
+        $scope.MostrarInfo = 'N';
     };
 
     $scope.EditarRegistro = function (registroEditar) {
@@ -26,51 +31,74 @@
         $scope.MostrarControles = true;
     }
 
+
     $http.get('/Roles/GetAll').success(function (data) {
-
         $scope.Mensaje = data.Mensaje;
+        $scope.MostrarAlerta = data.Alerta;
+        $scope.MostrarInfo = data.Info;
+        $scope.MostrarError = data.Error;
 
-        //alert("Error:" + data.Error + " Data:" + data.Info + " Mensaje:" + data.Mensaje);
+        //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
 
-        if (data.Error == true) {
+        if (data.Error == 'S')
             $scope.ListaRegistros = {};
-            $scope.MostrarError = 'S';
-            return;
-        }
-        else {
-            $scope.ListaRegistros = data.Info;
-            $scope.MostrarError = 'N';
-        }
-    });
+        else
+            $scope.ListaRegistros = data.data;
 
+    });
+     
 
     $scope.Guardar = function () {
-        if ($scope.Accion == 'nuevo') {
-            $http.post('/Roles/Create', $scope.Registro).success(function (data) {
-                $scope.ListaRegistros.push(data);
-            });
-        }
+        var url = $scope.Accion == 'nuevo' ? '/Roles/Create' : '/Roles/update';
 
-        if ($scope.Accion == 'editar') {
-            $http.post('/Roles/Update', $scope.Registro).success(function (data) {
-                // $scope.ListaCarreras.push(data);
-            });
-        }
+        $http.post(url, $scope.Registro)
+            .success(function (data) {
+                $scope.MostrarError = data.Error;
+                $scope.MostrarAlerta = data.Alerta;
+                $scope.MostrarInfo = data.Info;
+                $scope.Mensaje = data.Mensaje;
 
-        $scope.Limpiar();
+                // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
+
+                if (data.Error == 'N' && data.Alerta == 'N') { 
+
+                    if ($scope.Accion == 'nuevo')
+                        $scope.ListaRegistros.push(data.data);
+
+                    $scope.Limpiar();
+                    return;
+                }
+            })
+            .error(function (data) {
+                $scope.Mensaje = data;
+                $scope.MostrarError = 'S';
+                $scope.MostrarAlerta = 'N'
+                $scope.MostrarInfo = 'N'
+            });
     }
 
 
     $scope.EliminarRegistro = function (registroEliminar) {
-        var response = $http({
-            method: "post",
-            url: "/Roles/Delete",
-            params: { id: JSON.stringify(registroEliminar.Id) }
+        $http.post('/Roles/Delete', registroEliminar)
+        .success(function (data) {
+            $scope.MostrarError = data.Error;
+            $scope.MostrarAlerta = data.Alerta;
+            $scope.MostrarInfo = data.Info;
+            $scope.Mensaje = data.Mensaje;
+
+            if (data.Error == 'N' && data.Alerta == 'N') {
+                var indice = $scope.ListaRegistros.indexOf(registroEliminar);
+                $scope.ListaRegistros.splice(indice, 1);
+                $scope.Limpiar();
+                return;
+            }
+        })
+        .error(function (data) {
+            $scope.Mensaje = data;
+            $scope.MostrarError = 'S';
+            $scope.MostrarAlerta = 'N'
+            $scope.MostrarInfo = 'N'
         });
-
-        var indice = $scope.ListaRegistros.indexOf(registroEliminar);
-
-        $scope.ListaRegistros.splice(indice, 1);
 
     }
 

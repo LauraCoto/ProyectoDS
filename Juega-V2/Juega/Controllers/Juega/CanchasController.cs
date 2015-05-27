@@ -8,6 +8,7 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
+    [Authorize(Roles = "adm_cancha")]
     public class CanchasController : JuegaController
     {
         public ActionResult Index()
@@ -79,23 +80,25 @@ namespace Juega.Controllers.Juega
         }
 
         [HttpPost]
-        public JsonResult Delete(string id)
+        public JsonResult Delete(Cancha canchaEliminar)
         {
             try
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                var nId = int.Parse(id);
-                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == nId);
+                if (canchaEliminar == null)
+                    return Resultado_Advertencia("El registro no es valido.");
+
+                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == canchaEliminar.IdCancha);
 
                 if (cancha == null)
-                    return Resultado_Error("No se encontro ningun registro.");
+                    return Resultado_Advertencia("No se encontro ningun registro.");
 
                 _db.Cancha.Remove(cancha);
                 _db.SaveChanges();
 
-                return Resultado_Correcto(id, "El registro ha sido eliminado.");
+                return Resultado_Correcto(cancha, "El registro ha sido eliminado.");
 
             }
             catch (Exception e)

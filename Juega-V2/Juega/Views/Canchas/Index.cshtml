@@ -10,11 +10,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div ng-if="MostrarError=='S'">
-                <div class="alert alert-danger" role="alert">
-                    {{Mensaje}}
-                </div>
-            </div>
+ 
              
             <div ng-if="MostrarError=='N'">
 
@@ -25,9 +21,7 @@
                         <th>NumEspectadores</th>
                         <th>Largo</th>
                         <th>Ancho</th>
-                        <th>Valoracion</th>
-                        <th>TipoEstado</th>
-                        <th>IdComplejoDeportivo</th>
+                        <th>Complejo Deportivo</th>
                     </tr>
 
                     <tr ng-repeat="item in ListaRegistros">
@@ -36,8 +30,6 @@
                         <td> {{item.NumEspectadores}} </td>
                         <td> {{item.Largo}} </td>
                         <td> {{item.Ancho}} </td>
-                        <td> {{item.Valoracion}} </td>
-                        <td> {{item.TipoEstado}} </td>
                         <td> {{item.IdComplejoDeportivo}} </td>
 
                         <td>
@@ -52,9 +44,7 @@
                         <td><input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtNombre" ng-model="Registro.Nombre" /></td>
                         <td><input type="number" class="form-control" placeholder="Num. Espectadores" ng-model="Registro.NumEspectadores" /></td>
                         <td><input type="number" class="form-control" placeholder="M. Largo" ng-model="Registro.Largo" /></td>
-                        <td><input type="number" class="form-control" placeholder="M. Ancho" ng-model="Registro.Ancho" /></td>
-                        <td><input type="number" class="form-control" placeholder="Valoracion" ng-model="Registro.Valoracion" /></td>
-                        <td><input type="text" class="form-control" placeholder="TipoEstado" ng-model="Registro.TipoEstado" /></td>
+                        <td><input type="number" class="form-control" placeholder="M. Ancho" ng-model="Registro.Ancho" /></td> 
                         <td><input type="text" class="form-control" placeholder="IdComplejoDeportivo" ng-model="Registro.IdComplejoDeportivo" /></td>
                         <td>
                             <select ng-model="Registro.IdComplejoDeportivo" ng-options="i.IdComplejoDeportivo as i.Nombre for i in ListaComplejosDeportivos">
@@ -70,11 +60,33 @@
 
                 </table>
 
-                <a ng-click="NuevoRegistro()" class="btn btn-primary">Agregar</a>
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
 
             </div>
 
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
 
+            <div ng-if="MostrarAlerta=='S'">
+                <br />
+                <br />
+                <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
 
         </div>
     </div>

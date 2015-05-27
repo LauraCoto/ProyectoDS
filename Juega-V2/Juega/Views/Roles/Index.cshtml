@@ -9,21 +9,15 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div ng-if="MostrarError=='S'">
-                <div class="alert alert-danger" role="alert">
-                    {{Mensaje}}
-                </div>
-            </div>
-
+  
             <div ng-if="MostrarError=='N'">
                 <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th> 
+                    <tr> 
+                        <th>Nombre del rol</th> 
+                        <th>Accion</th> 
                     </tr>
 
-                    <tr ng-repeat="item in ListaRegistros">
-                        <td> {{item.Id}}  </td>
+                    <tr ng-repeat="item in ListaRegistros"> 
                         <td> {{item.Nombre}} </td> 
                         <td>
                             <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
@@ -33,11 +27,7 @@
 
                     <form name="form" class="css-form" novalidate>
                         <tr ng-if="MostrarControles">
-
-                            <td>
-                                <input type="text" disabled="disabled" class="form-control" placeholder="Id Registro" ng-model="Registro.Id" />
-                            </td>
-
+                             
                             <td>
                                 <input type="text" class="form-control" placeholder="Nombre" maxlength="100" name="txtNombre" ng-model="Registro.Nombre" />
                             </td>
@@ -51,7 +41,32 @@
 
 
                 </table>
-                <a ng-click="NuevoRegistro()" class="btn btn-primary">Agregar</a> 
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a> 
+            </div>
+
+
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarAlerta=='S'">
+                <br />
+                <br />
+                <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
+                    {{Mensaje}}
+                </div>
             </div>
 
         </div>

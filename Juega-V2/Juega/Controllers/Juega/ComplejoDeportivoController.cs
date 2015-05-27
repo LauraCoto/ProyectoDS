@@ -6,6 +6,8 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
+
+     [Authorize(Roles = "adm_complejo")]
     public class ComplejoDeportivoController : JuegaController
     {
 
