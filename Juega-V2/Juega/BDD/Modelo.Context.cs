@@ -15,57 +15,59 @@ namespace Juega.BDD
 
     public partial class JuegaEntities : DbContext
     {
-        private enum ConexionUsar
-        {
-            AppHarbor = 1,
-            Dramos = 2,
-            DBustillo = 3,
-            Rudy = 4,
-            Laura = 5,
-            Javier = 6,
-            Cris = 7,
-            Maynor = 8,
-            Jesus = 9,
 
-        }
-        private static string ObtenerCadenaConexion()
-        {
-            var cnn = ConexionUsar.AppHarbor;
+        //private enum ConexionUsar
+        //{
+        //    AppHarbor = 1,
+        //    Dramos = 2,
+        //    DBustillo = 3,
+        //    Rudy = 4,
+        //    Laura = 5,
+        //    Javier = 6,
+        //    Cris = 7,
+        //    Maynor = 8,
+        //    Jesus = 9,
 
-            switch (cnn)
-            {
-                case ConexionUsar.AppHarbor:
-                    return "Juega.AppHarbor";
+        //}
 
-                case ConexionUsar.Dramos:
-                    return "Juega.Local.dramos";
+        //public static string ObtenerCadenaConexion_Sistema()
+        //{
+        //    var cnn = ConexionUsar.Dramos;
 
-                case ConexionUsar.DBustillo:
-                    return "Juega.Local.dbustillo";
+        //    switch (cnn)
+        //    {
+        //        case ConexionUsar.AppHarbor:
+        //            return "Juega.AppHarbor";
 
-                case ConexionUsar.Rudy:
-                    return "Juega.Local.Rudy";
+        //        case ConexionUsar.Dramos:
+        //            return "Juega.dramos";
 
-                case ConexionUsar.Laura:
-                    return "Juega.Local.Laura";
+        //        case ConexionUsar.DBustillo:
+        //            return "Juega.dbustillo";
 
-                case ConexionUsar.Javier:
-                    return "Juega.Local.Javier";
+        //        case ConexionUsar.Rudy:
+        //            return "Juega.Rudy";
 
-                case ConexionUsar.Cris:
-                    return "Juega.Local.Cris";
+        //        case ConexionUsar.Laura:
+        //            return "Juega.Laura";
 
-                case ConexionUsar.Maynor:
-                    return "Juega.Local.Maynor";
+        //        case ConexionUsar.Javier:
+        //            return "Juega.Javier";
 
-                case ConexionUsar.Jesus:
-                    return "Juega.Local.Jesus"; 
-            }
+        //        case ConexionUsar.Cris:
+        //            return "Juega.Cris";
 
-            return "Juega.Remoto"; 
-        }
+        //        case ConexionUsar.Maynor:
+        //            return "Juega.Maynor";
 
-        public JuegaEntities() : base("name=" + ObtenerCadenaConexion()) { }
+        //        case ConexionUsar.Jesus:
+        //            return "Juega.Jesus";
+        //    }
+
+        //    return "Juega.AppHarbor";
+        //}
+
+        public JuegaEntities() : base("name=" + Juega.Utilidades.Conexiones. ObtenerCadenaConexion_Sistema()) { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

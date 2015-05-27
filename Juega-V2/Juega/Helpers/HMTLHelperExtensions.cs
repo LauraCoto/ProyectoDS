@@ -13,8 +13,8 @@ namespace Juega
         {
             string activeClass = "active"; // change here if you another name to activate sidebar items
             // detect current app state
-            string actualAction = (string) html.ViewContext.RouteData.Values["action"];
-            string actualController = (string) html.ViewContext.RouteData.Values["controller"];
+            string actualAction = (string)html.ViewContext.RouteData.Values["action"];
+            string actualController = (string)html.ViewContext.RouteData.Values["controller"];
 
             if (String.IsNullOrEmpty(controller))
                 controller = actualController;
