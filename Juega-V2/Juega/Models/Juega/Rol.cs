@@ -9,5 +9,6 @@ namespace Juega.Models.Juega
     {
         public virtual string Id { get; set; }
         public virtual string Nombre { get; set; }
+        public virtual string Nombre_Ant { get; set; }
     }
 }

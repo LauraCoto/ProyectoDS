@@ -343,6 +343,7 @@
     <Content Include="Content\Images\bg8.jpg" />
     <Content Include="Content\Images\bg9.jpg" />
     <Content Include="Content\Images\dummy.png" />
+    <Content Include="Content\Images\futbol.png" />
     <Content Include="Content\Images\lock-bg.jpg" />
     <Content Include="Content\Images\logo-single.png" />
     <Content Include="Content\Images\logo.png" />

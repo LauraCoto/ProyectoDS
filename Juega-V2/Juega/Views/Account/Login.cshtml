@@ -19,7 +19,8 @@
 
             <section class="login-form">
                 <form method="post" action="#" role="login">
-                    <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+
+                    <img src="~/Content/Images/futbol.png" class="img-responsive" alt="" />
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
