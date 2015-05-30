@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<script src="~/app/controller/Solicitud_JugadorCtrl.js"></script>
+
+
+<div class="container" ng-app="appCanchas" ng-controller="Solicitud_JugadorCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+            <div ng-if="MostrarError=='N'">
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>IdCancha</th>
+                        <th>Tipo Estado</th>
+                        <th>Fecha Creo</th>
+                        <th>Fecha Elimino</th>
+                        <th>Activo</th>
+                        <th>IdUsuario</th>
+                        <th>IdEquipo</th>
+                    </tr>
+
+                    <tr ng-repeat="item in ListaRegistros">
+                        <td> {{item.IdUsuario_Solicitud_Equipo}}  </td>
+                        <td> {{item.Tipo_Estado}} </td>
+                        <td> {{item.FechaCreo}} </td>
+                        <td> {{item.FechaElimino}} </td>
+                        <td> {{item.Activo}} </td>
+                        @*<td> {{item.IdUsuario}} </td>*@
+                        <td> {{item.IdEquipo}} </td>
+                        <td>
+                            <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
+                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="MostrarControles">
+
+                        <td><input type="text" disabled="disabled" class="form-control" placeholder="Id Solicitud" ng-model="Registro.IdUsuario_Solicitud_Equipo" /> </td>
+                        <td><input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtTipo_Estado" ng-model="Registro.Tipo_Estado" /></td>
+                        <td><input type="number" class="form-control" placeholder="Fecha Creo" ng-model="Registro.FechaCreo" /></td>
+                        <td><input type="number" class="form-control" placeholder="Fecha Elimino" ng-model="Registro.FechaElimino" /></td>
+                        <td><input type="number" class="form-control" placeholder="Activo" ng-model="Registro.Activo" /></td>
+                        @*<td><input type="text" class="form-control" placeholder="IdUsuario" ng-model="Registro.IdUsuario" /></td>*@
+                        <td>
+                            <select ng-model="Registro.IdEquipo" ng-options="i.IdEquipo as i.Nombre for i in ListaEquipo">
+                                <option value="">Seleccionar un Equipo</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                            <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
+
+            </div>
+
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarAlerta=='S'">
+                <br />
+                <br />
+                <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+        </div>
+    </div>
