@@ -818,7 +818,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="JuegaEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="JuegaEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cancha" EntityType="Self.Cancha" />
     <EntitySet Name="Cancha_Foto" EntityType="Self.Cancha_Foto" />
     <EntitySet Name="Cancha_Horario_Dia" EntityType="Self.Cancha_Horario_Dia" />
