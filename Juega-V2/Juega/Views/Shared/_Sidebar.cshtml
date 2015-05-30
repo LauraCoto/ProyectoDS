@@ -91,24 +91,29 @@
                     </a>
                     <ul id="admin" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">Roles</li>
+
                         <li class="@Html.isActive("Roles", "Index")">
                             <a href="@Url.Action("Index", "Roles")" title="Roles">
                                 <em></em>
                                 <span>Roles</span>
                             </a>
-                        </li>
-                        <li class="@Html.isActive("Dashboard", "Dashboard_v2")">
-                            <a href="@Url.Action("Dashboard_v2", "Dashboard")" title="Usuarios">
-                                <em></em>
-                                <span>Usuarios</span>
-                            </a>
-                        </li>
-                        <li class="@Html.isActive("Dashboard", "Dashboard_v3")">
-                            <a href="@Url.Action("Dashboard_v3", "Dashboard")" title="Administrar permisos">
+                        </li> 
+                        
+                        <li class="@Html.isActive("Roles", "ManageRole")">
+                            <a href="@Url.Action("ManageRole", "Roles")" title="Administrar permisos">
                                 <em></em>
                                 <span>Administrar permiso</span>
                             </a>
                         </li>
+
+
+                        <li class="@Html.isActive("Menu", "Index")">
+                            <a href="@Url.Action("Index", "Menu")" title="Menu">
+                                <em></em>
+                                <span>Menu</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

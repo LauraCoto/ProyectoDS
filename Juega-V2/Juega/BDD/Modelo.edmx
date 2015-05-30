@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JuegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JuegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cancha">
           <Key>
             <PropertyRef Name="IdCancha" />
@@ -183,6 +183,22 @@
           <Property Name="IdEquipo" Type="bigint" />
           <Property Name="IdUsuario" Type="bigint" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRolSeguridad" Type="nvarchar" MaxLength="128" />
+          <Property Name="Orden" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="UrlIcon" Type="varchar" MaxLength="500" />
+          <Property Name="Controller" Type="varchar" MaxLength="50" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="IdMenuPadre" Type="int" />
+          <Property Name="FechaCreo" Type="datetime" />
+          <Property Name="FechaElimino" Type="datetime" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
         <EntityType Name="Reto">
           <Key>
             <PropertyRef Name="IdReto" />
@@ -217,11 +233,11 @@
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuarioSeguridad" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
           <Property Name="Apellido" Type="nvarchar" MaxLength="100" />
-          <Property Name="Correo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
           <Property Name="Telefonos" Type="nvarchar" MaxLength="100" />
-          <Property Name="Confirmado" Type="bit" />
           <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
           <Property Name="Valoracion" Type="int" />
           <Property Name="EsEspectador" Type="bit" />
@@ -747,6 +763,7 @@
           <EntitySet Name="Equipo_Jugador" EntityType="Self.Equipo_Jugador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipo_Tecnico" EntityType="Self.Equipo_Tecnico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Equipo_Valoracion" EntityType="Self.Equipo_Valoracion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reto" EntityType="Self.Reto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Token" EntityType="Self.Token" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
@@ -1128,6 +1145,22 @@
           <NavigationProperty Name="Equipo" Relationship="Self.FK3F406CE3A62E925C" FromRole="Equipo_Valoracion" ToRole="Equipo" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK3F406CE31862B0F6" FromRole="Equipo_Valoracion" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IdMenu" />
+          </Key>
+          <Property Name="IdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRolSeguridad" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Orden" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UrlIcon" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdMenuPadre" Type="Int32" />
+          <Property Name="FechaCreo" Type="DateTime" Precision="3" />
+          <Property Name="FechaElimino" Type="DateTime" Precision="3" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
         <EntityType Name="Reto">
           <Key>
             <PropertyRef Name="IdReto" />
@@ -1166,11 +1199,11 @@
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuarioSeguridad" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Confirmado" Type="Boolean" />
           <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Valoracion" Type="Int32" />
           <Property Name="EsEspectador" Type="Boolean" />
@@ -1725,6 +1758,7 @@
           <EntitySet Name="Equipo_Jugador" EntityType="Self.Equipo_Jugador" />
           <EntitySet Name="Equipo_Tecnico" EntityType="Self.Equipo_Tecnico" />
           <EntitySet Name="Equipo_Valoracion" EntityType="Self.Equipo_Valoracion" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
           <EntitySet Name="Reto" EntityType="Self.Reto" />
           <EntitySet Name="Token" EntityType="Self.Token" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
@@ -2079,6 +2113,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="JuegaModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="IdRolSeguridad" ColumnName="IdRolSeguridad" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UrlIcon" ColumnName="UrlIcon" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="IdMenuPadre" ColumnName="IdMenuPadre" />
+                <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
+                <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Reto">
             <EntityTypeMapping TypeName="JuegaModel.Reto">
               <MappingFragment StoreEntitySet="Reto">
@@ -2114,11 +2165,11 @@
             <EntityTypeMapping TypeName="JuegaModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdUsuarioSeguridad" ColumnName="IdUsuarioSeguridad" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
-                <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
                 <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
                 <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
                 <ScalarProperty Name="EsEspectador" ColumnName="EsEspectador" />

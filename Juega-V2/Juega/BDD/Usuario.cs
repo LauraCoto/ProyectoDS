@@ -39,11 +39,11 @@ namespace Juega.BDD
         }
     
         public long IdUsuario { get; set; }
+        public string IdUsuarioSeguridad { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
         public string Telefonos { get; set; }
-        public Nullable<bool> Confirmado { get; set; }
         public string TipoEstado { get; set; }
         public Nullable<int> Valoracion { get; set; }
         public Nullable<bool> EsEspectador { get; set; }
