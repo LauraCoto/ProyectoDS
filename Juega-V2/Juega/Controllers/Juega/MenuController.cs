@@ -1,30 +1,31 @@
-﻿using System;
+﻿using Juega.BDD;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
-    [Authorize(Roles = Utilidades.Roles.Tecnico)]
-    public class CanchasController : JuegaController
+    public class MenuController : JuegaController
     {
         public ActionResult Index()
         {
             return View();
         }
 
+
         public JuegaJson GetAll()
         {
             try
-            {
+            { 
+
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
                 _db.Configuration.ProxyCreationEnabled = false;
-                var lista = _db.Cancha.ToList();
+                var lista = _db.Menu.ToList();
 
                 return Resultado_Correcto(lista);
             }
@@ -35,21 +36,45 @@ namespace Juega.Controllers.Juega
         }
 
         [HttpPost]
-        public JsonResult Create(Cancha cancha)
+        public JuegaJson Create(Menu menu)
         {
+            try
+            {
 
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                if (ExisteRegistro(menu.Descripcion, -1))
+                    return Resultado_Advertencia("Ya existe un elemento del menu con el mismo nombre.");
+
+                _db.Menu.Add(menu);
+                _db.SaveChanges();
+
+                return Resultado_Correcto(menu, "El registro ha sido creado.");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+
+        [HttpPost]
+        public JuegaJson Update(Menu menu)
+        {
             try
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                if (ExisteRegistro(cancha.Nombre, -1))
+
+                if (ExisteRegistro(menu.Descripcion, menu.IdMenu))
                     return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
-                _db.Cancha.Add(cancha);
+                _db.Entry(menu).State = EntityState.Modified;
                 _db.SaveChanges();
 
-                return Resultado_Correcto(cancha, "El registro ha sido creado.");
+                return Resultado_Correcto(menu, "El registro ha sido actualizado.");
             }
             catch (Exception e)
             {
@@ -58,48 +83,31 @@ namespace Juega.Controllers.Juega
         }
 
         [HttpPost]
-        public JsonResult Update(Cancha cancha)
+        public JuegaJson Delete(Menu menu)
         {
             try
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                if (ExisteRegistro(cancha.Nombre, -1))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
-
-                _db.Entry(cancha).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                return Resultado_Correcto(cancha, "El registro ha sido actualizado.");
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-        }
-
-        [HttpPost]
-        public JsonResult Delete(Cancha canchaEliminar)
-        {
-            try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                if (canchaEliminar == null)
+                if (menu == null)
                     return Resultado_Advertencia("El registro no es valido.");
 
-                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == canchaEliminar.IdCancha);
+                var item = _db.Menu.FirstOrDefault(x => x.IdMenu == menu.IdMenu);
 
-                if (cancha == null)
+                if (item == null)
                     return Resultado_Advertencia("No se encontro ningun registro.");
 
-                _db.Cancha.Remove(cancha);
+                var menus = _db.Menu.Select(x => x.IdMenuPadre == item.IdMenu && x.Activo == true).ToList();
+
+                if (item.Menu1.Count() > 0)
+                    return Resultado_Advertencia("Este elemento del menu contiene registros hijos, debe eliminarlos.");
+
+
+                _db.Menu.Remove(item);
                 _db.SaveChanges();
 
-                return Resultado_Correcto(cancha, "El registro ha sido eliminado.");
-
+                return Resultado_Correcto(menu, "El registro ha sido eliminado.");
             }
             catch (Exception e)
             {
@@ -112,12 +120,11 @@ namespace Juega.Controllers.Juega
             if (nombre.Trim() == "")
                 return false;
 
-            var registro = _db.Cancha.FirstOrDefault(x => x.Nombre == nombre &&
-                                                                x.IdCancha != IdExcluir
+            var item = _db.Menu.FirstOrDefault(x => x.Descripcion == nombre &&
+                                                                x.IdMenu != IdExcluir
                                                                 );
 
-            return registro != null;
+            return item != null;
         }
-
     }
 }

@@ -1,6 +1,8 @@
-﻿angular.module('RolesController', []).controller('RolesCtrl', ['$scope', '$http', function ($scope, $http) {
+﻿angular.module('MenuController', []).controller('MenuCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.ListaRegistros = {};
+    $scope.ListaMenu = {};
+    $scope.ListaRoles = {};
     $scope.Registro = {};
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
@@ -32,24 +34,40 @@
     }
 
 
+    $http.get('/Menu/GetAll').success(function (data) {
+        $scope.Mensaje = data.Mensaje;
+        $scope.MostrarAlerta = data.Alerta;
+        $scope.MostrarInfo = data.Info;
+        $scope.MostrarError = data.Error;
+         
+        if (data.Error == 'S') {
+            $scope.ListaRegistros = {};
+            $scope.ListaMenu = {};
+        }
+        else {
+            $scope.ListaRegistros = data.data;
+            $scope.ListaMenu = data.data;
+        }
+
+    });
+     
     $http.get('/Roles/GetAllRoles').success(function (data) {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
         $scope.MostrarInfo = data.Info;
         $scope.MostrarError = data.Error;
 
-        //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
-
-        if (data.Error == 'S')
-            $scope.ListaRegistros = {};
+        if (data.Error == 'S')  
+            $scope.ListaRoles = {}; 
         else
-            $scope.ListaRegistros = data.data;
+            $scope.ListaRoles = data.data;
 
     });
-     
+
+
 
     $scope.Guardar = function () {
-        var url = $scope.Accion == 'nuevo' ? '/Roles/Create' : '/Roles/update';
+        var url = $scope.Accion == 'nuevo' ? '/Menu/Create' : '/Menu/update';
 
         $http.post(url, $scope.Registro)
             .success(function (data) {
@@ -60,8 +78,7 @@
 
                 // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
 
-                if (data.Error == 'N' && data.Alerta == 'N') { 
-
+                if (data.Error == 'N' && data.Alerta == 'N') {
                     if ($scope.Accion == 'nuevo')
                         $scope.ListaRegistros.push(data.data);
 
@@ -79,7 +96,7 @@
 
 
     $scope.EliminarRegistro = function (registroEliminar) {
-        $http.post('/Roles/Delete', registroEliminar)
+        $http.post('/Menu/Delete', registroEliminar)
         .success(function (data) {
             $scope.MostrarError = data.Error;
             $scope.MostrarAlerta = data.Alerta;
@@ -102,7 +119,8 @@
 
     }
 
-
 }
+
+
 
 ]);

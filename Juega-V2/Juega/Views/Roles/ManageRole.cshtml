@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/app/controller/UsuariosXRolCtrl.js"></script>
+<link href="~/Content/app/css/bootstrap.min.css" rel="stylesheet" />
+
+<link href="~/Content/app/css/bootstrap.css" rel="stylesheet" />
+
+<script src="~/Scripts/ui-bootstrap-tpls-0.13.0.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<div class="container" ng-app="appManageRoles" ng-controller="UsuariosXRolCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div ng-if="MostrarError=='N'">
+                <table class="table table-striped">
+                    <tr> 
+                        <th>Nombre Rol</th> 
+                        <th>Usuario</th>
+                        <th>Accion</th>
+                    </tr>
+
+                    <tr ng-repeat="item in ListaRegistros">
+                        <td> {{item.Rol}} </td>
+                        <td> {{item.Usuario}} </td>
+
+                        <td>
+                            <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
+                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+
+                    <form name="form" class="css-form" novalidate>
+                        <tr ng-if="MostrarControles">
+
+                            <td>
+                                <select ng-model="Registro.IdRol" ng-options="i.Id as i.Nombre for i in ListaRoles">
+                                    <option value="">Seleccionar un rol</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select ng-model="Registro.IdUsuario" ng-options="i.Id as i.Nombre for i in ListaUsuarios">
+                                    <option value="">Seleccionar un usuario</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                                <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                            </td>
+                        </tr>
+                    </form>
+
+
+                </table>
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
+            </div>
+
+
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarAlerta=='S'">
+                <br />
+                <br />
+                <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div>
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Modal header</h3>
+        </div>
+        <div class="modal-body">
+            <p>One fine body…</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+
+
+</div>

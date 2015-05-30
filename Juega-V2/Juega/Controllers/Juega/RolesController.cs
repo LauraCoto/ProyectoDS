@@ -10,7 +10,7 @@ using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
-    //[Authorize(Roles = "adm_rol")]
+   // [Authorize(Roles = Utilidades.Roles.AdminSistema)]
     public class RolesController : JuegaController
     {
         public ActionResult Index()
@@ -18,12 +18,73 @@ namespace Juega.Controllers.Juega
             return View();
         }
 
-        public JuegaJson GetAll()
+
+        public ActionResult ManageRole()
+        {
+            return View();
+        }
+
+        public JuegaJson GetAllUsersInRol()
+        {
+            try
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+
+               // var rolInstance = roleManager.FindByName(rol);
+
+                var lista = new List<Usuario_Rol>();
+                foreach (var r in roleManager.Roles.ToList ())
+                {
+                    foreach (var u in r.Users)
+                    {
+                        var user = userManager.FindById(u.UserId);
+                        if (user == null)
+                            continue;
+
+                        var model = new Usuario_Rol(r.Id, r.Name, user.Id, user.UserName);
+                        lista.Add(model);
+                    }
+                }
+
+                return Resultado_Correcto(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return Resultado_Exception(ex);
+            }
+        }
+
+        public JuegaJson GetAllUsers()
+        {
+            try
+            {
+
+                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+
+                var lista = new List<Usuario>();
+                foreach (var u in userManager.Users.ToList())
+                {
+                    var usuario = new Usuario(u.Id, u.UserName);
+                    lista.Add(usuario);
+                }
+
+                return Resultado_Correcto(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return Resultado_Exception(ex);
+            }
+        }
+
+        public JuegaJson GetAllRoles()
         {
             try
             {
                 if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+                    return Resultado_No_Acceso(); 
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
@@ -32,10 +93,7 @@ namespace Juega.Controllers.Juega
                 var roles = new List<Rol>();
                 foreach (var i in lista)
                 {
-                    var r = new Rol();
-                    r.Id = i.Id;
-                    r.Nombre = i.Name;
-                    r.Nombre_Ant = i.Name;
+                    var r = new Rol(i.Id, i.Name);
                     roles.Add(r);
 
                 }
@@ -129,7 +187,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_Advertencia("No se encontro ningun registro.");
 
                 // var userManager =new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext())); 
-                if ( rol.Users.Count() > 0)
+                if (rol.Users.Count() > 0)
                     return Resultado_Advertencia("No se puede eliminar este rol tiene usuarios asignados.");
 
                 var resultado = roleManager.Delete(rol);
@@ -145,5 +203,79 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public JuegaJson AddUserToRol(Usuario_Rol model)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                var rol = roleManager.FindById(model.IdRol);
+
+                if (rol == null)
+                    return Resultado_Advertencia("El rol al que intenta agregar no existe.");
+
+                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+                var usuario = userManager.FindById(model.IdUsuario);
+
+
+                if (usuario == null)
+                    return Resultado_Advertencia("El usuario al que intenta agregar no existe.");
+
+                var identityRol = new IdentityUserRole();
+                identityRol.RoleId = model.IdRol;
+                identityRol.UserId = model.Usuario;
+
+                usuario.Roles.Add(identityRol);
+
+                return Resultado_Correcto(rol);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public JuegaJson DeleteUserFromRol(Usuario_Rol model)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                var rol = roleManager.FindById(model.IdRol);
+
+                if (rol == null)
+                    return Resultado_Advertencia("El rol al que intenta actualizar no existe.");
+
+                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+                var usuario = userManager.FindById(model.IdUsuario);
+
+
+                if (usuario == null)
+                    return Resultado_Advertencia("El usuario al que intenta eliminar no existe.");
+
+                var identityRol = new IdentityUserRole();
+                identityRol.RoleId = model.IdRol;
+                identityRol.UserId = model.Usuario;
+
+                usuario.Roles.Add(identityRol);
+                usuario.Roles.Remove(identityRol);
+
+                return Resultado_Correcto(rol);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
     }
 }
