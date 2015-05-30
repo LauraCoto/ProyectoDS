@@ -234,8 +234,6 @@
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
-    <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
-    <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
   </EntityType>
   <EntityType Name="Reto">
     <Key>
@@ -724,18 +722,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Menu_Menu">
-    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
-    <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Menu">
-        <PropertyRef Name="IdMenu" />
-      </Principal>
-      <Dependent Role="Menu1">
-        <PropertyRef Name="IdMenuPadre" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK903403341862B0F6">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Reto" Type="Self.Reto" Multiplicity="*" />
@@ -832,7 +818,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="JuegaEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="JuegaEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cancha" EntityType="Self.Cancha" />
     <EntitySet Name="Cancha_Foto" EntityType="Self.Cancha_Foto" />
     <EntitySet Name="Cancha_Horario_Dia" EntityType="Self.Cancha_Horario_Dia" />
@@ -970,10 +956,6 @@
     <AssociationSet Name="FK3F406CE31862B0F6" Association="Self.FK3F406CE31862B0F6">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Equipo_Valoracion" EntitySet="Equipo_Valoracion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
-      <End Role="Menu" EntitySet="Menu" />
-      <End Role="Menu1" EntitySet="Menu" />
     </AssociationSet>
     <AssociationSet Name="FK903403341862B0F6" Association="Self.FK903403341862B0F6">
       <End Role="Usuario" EntitySet="Usuario" />

@@ -14,11 +14,6 @@ namespace Juega.BDD
     
     public partial class Menu
     {
-        public Menu()
-        {
-            this.Menu1 = new HashSet<Menu>();
-        }
-    
         public int IdMenu { get; set; }
         public string IdRolSeguridad { get; set; }
         public Nullable<int> Orden { get; set; }
@@ -30,8 +25,5 @@ namespace Juega.BDD
         public Nullable<System.DateTime> FechaCreo { get; set; }
         public Nullable<System.DateTime> FechaElimino { get; set; }
         public Nullable<bool> Activo { get; set; }
-    
-        public virtual ICollection<Menu> Menu1 { get; set; }
-        public virtual Menu Menu2 { get; set; }
     }
 }

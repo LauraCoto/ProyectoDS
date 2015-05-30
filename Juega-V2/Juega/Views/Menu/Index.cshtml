@@ -37,10 +37,15 @@
                 <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
             </div>
 
+
+
             <div ng-if="MostrarControles">
                 <br />
                 <br />
-                <br />
+                <div>
+                    <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                    <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                </div> 
                 <div class="panel panel-default">
                     <div class="panel-info">Agregar nuevo elemento al menu</div>
                     <div class="panel-body">
@@ -76,7 +81,7 @@
 
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Select</label>
+                                <label class="col-sm-2 control-label">Menu Padre</label>
                                 <div class="col-sm-10">
                                     <select ng-model="Registro.IdMenuPadre" ng-options="i.IdMenu as i.Descripcion for i in ListaMenu">
                                         <option value="">Seleccionar menu padre</option>
@@ -85,19 +90,13 @@
                             </div>
                             <br />
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Select</label>
+                                <label class="col-sm-2 control-label">Rol de Acceso</label>
                                 <div class="col-sm-10">
                                     <select ng-model="Registro.IdRolSeguridad" ng-options="i.Id as i.Nombre for i in ListaRoles">
                                         <option value="">Seleccionar rol</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            <div>
-                                <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
-                                <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
-                            </div>
-
+                            </div> 
                         </form>
                     </div>
                 </div>

@@ -219,6 +219,22 @@
     <NavigationProperty Name="Equipo" Relationship="Self.FK3F406CE3A62E925C" FromRole="Equipo_Valoracion" ToRole="Equipo" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK3F406CE31862B0F6" FromRole="Equipo_Valoracion" ToRole="Usuario" />
   </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdRolSeguridad" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Orden" Type="Int32" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UrlIcon" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdMenuPadre" Type="Int32" />
+    <Property Name="FechaCreo" Type="DateTime" Precision="3" />
+    <Property Name="FechaElimino" Type="DateTime" Precision="3" />
+    <Property Name="Activo" Type="Boolean" />
+  </EntityType>
   <EntityType Name="Reto">
     <Key>
       <PropertyRef Name="IdReto" />
@@ -257,11 +273,11 @@
       <PropertyRef Name="IdUsuario" />
     </Key>
     <Property Name="IdUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUsuarioSeguridad" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Confirmado" Type="Boolean" />
     <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Valoracion" Type="Int32" />
     <Property Name="EsEspectador" Type="Boolean" />
@@ -816,6 +832,7 @@
     <EntitySet Name="Equipo_Jugador" EntityType="Self.Equipo_Jugador" />
     <EntitySet Name="Equipo_Tecnico" EntityType="Self.Equipo_Tecnico" />
     <EntitySet Name="Equipo_Valoracion" EntityType="Self.Equipo_Valoracion" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" />
     <EntitySet Name="Reto" EntityType="Self.Reto" />
     <EntitySet Name="Token" EntityType="Self.Token" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />

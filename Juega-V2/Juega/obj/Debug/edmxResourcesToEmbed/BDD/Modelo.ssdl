@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="JuegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="JuegaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Cancha">
     <Key>
       <PropertyRef Name="IdCancha" />
@@ -178,6 +178,22 @@
     <Property Name="IdEquipo" Type="bigint" />
     <Property Name="IdUsuario" Type="bigint" />
   </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdRolSeguridad" Type="nvarchar" MaxLength="128" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="UrlIcon" Type="varchar" MaxLength="500" />
+    <Property Name="Controller" Type="varchar" MaxLength="50" />
+    <Property Name="Action" Type="varchar" MaxLength="50" />
+    <Property Name="IdMenuPadre" Type="int" />
+    <Property Name="FechaCreo" Type="datetime" />
+    <Property Name="FechaElimino" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
   <EntityType Name="Reto">
     <Key>
       <PropertyRef Name="IdReto" />
@@ -212,11 +228,11 @@
       <PropertyRef Name="IdUsuario" />
     </Key>
     <Property Name="IdUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuarioSeguridad" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
     <Property Name="Apellido" Type="nvarchar" MaxLength="100" />
-    <Property Name="Correo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Correo" Type="varchar" MaxLength="100" />
     <Property Name="Telefonos" Type="nvarchar" MaxLength="100" />
-    <Property Name="Confirmado" Type="bit" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
     <Property Name="Valoracion" Type="int" />
     <Property Name="EsEspectador" Type="bit" />
@@ -742,6 +758,7 @@
     <EntitySet Name="Equipo_Jugador" EntityType="Self.Equipo_Jugador" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Equipo_Tecnico" EntityType="Self.Equipo_Tecnico" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Equipo_Valoracion" EntityType="Self.Equipo_Valoracion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reto" EntityType="Self.Reto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Token" EntityType="Self.Token" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />

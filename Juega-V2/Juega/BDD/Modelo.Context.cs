@@ -12,19 +12,19 @@ namespace Juega.BDD
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class JuegaEntities : DbContext
     {
         public JuegaEntities()
-            : base("name=JuegaEntities")
+            : base("name=" + Juega.Utilidades.Conexiones.ObtenerCadenaConexion_Sistema())
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Cancha> Cancha { get; set; }
         public virtual DbSet<Cancha_Foto> Cancha_Foto { get; set; }
         public virtual DbSet<Cancha_Horario_Dia> Cancha_Horario_Dia { get; set; }

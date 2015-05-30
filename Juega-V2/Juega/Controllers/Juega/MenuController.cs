@@ -25,6 +25,8 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
                 _db.Configuration.ProxyCreationEnabled = false;
+                _db.Configuration.LazyLoadingEnabled = false;
+
                 var lista = _db.Menu.ToList();
 
                 return Resultado_Correcto(lista);
@@ -100,8 +102,8 @@ namespace Juega.Controllers.Juega
 
                 var menus = _db.Menu.Select(x => x.IdMenuPadre == item.IdMenu && x.Activo == true).ToList();
 
-                if (item.Menu1.Count() > 0)
-                    return Resultado_Advertencia("Este elemento del menu contiene registros hijos, debe eliminarlos.");
+                //if (item..Count() > 0)
+                //    return Resultado_Advertencia("Este elemento del menu contiene registros hijos, debe eliminarlos.");
 
 
                 _db.Menu.Remove(item);
