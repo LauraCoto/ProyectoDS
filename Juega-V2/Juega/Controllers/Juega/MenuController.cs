@@ -1,4 +1,5 @@
 ﻿using Juega.BDD;
+using Juega.Models.Juega;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Juega.Controllers.Juega
 {
+    // [Authorize(Roles = Utilidades.Roles.AdminSistema)]
     public class MenuController : JuegaController
     {
         public ActionResult Index()
@@ -19,7 +21,7 @@ namespace Juega.Controllers.Juega
         public JuegaJson GetAll()
         {
             try
-            { 
+            {
 
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
@@ -28,6 +30,36 @@ namespace Juega.Controllers.Juega
                 _db.Configuration.LazyLoadingEnabled = false;
 
                 var lista = _db.Menu.ToList();
+
+                return Resultado_Correcto(lista);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+
+
+        public JuegaJson GetControllers()
+        {
+            try
+            {
+
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                var controladores = System.Reflection.Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(Controller).IsAssignableFrom(type));
+
+                var lista = new List<Controladores>();
+
+                lista.Add(new Controladores());
+                foreach (var c in controladores)
+                {
+                    var cc = new Controladores();
+                    cc.Nombre = c.Name.Replace("Controller", "");
+                    lista.Add(cc);
+                }
 
                 return Resultado_Correcto(lista);
             }

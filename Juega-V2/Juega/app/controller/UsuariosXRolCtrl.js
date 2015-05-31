@@ -76,9 +76,8 @@
 
 
     $scope.Guardar = function () {
-        var url = $scope.Accion == '/Roles/AddUserToRol';
-
-        $http.post(url, $scope.Registro)
+        
+        $http.post('/Roles/AddUserToRol', $scope.Registro)
             .success(function (data) {
                 $scope.MostrarError = data.Error;
                 $scope.MostrarAlerta = data.Alerta;
