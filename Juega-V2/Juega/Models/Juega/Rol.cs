@@ -21,6 +21,22 @@ namespace Juega.Models.Juega
         public virtual string Nombre_Ant { get; set; }
     }
 
+    public class MenuPrincipal
+    {
+        public MenuPrincipal()
+        {
+            Descripcion = "";
+            Controller = "";
+            Action = "";
+            UrlIcono = "";
+        }
+
+        public virtual string Descripcion { get; set; }
+        public virtual string Controller { get; set; }
+        public virtual string Action { get; set; }
+        public virtual string UrlIcono { get; set; }
+    }
+
     public class Controladores
     {
         public Controladores()

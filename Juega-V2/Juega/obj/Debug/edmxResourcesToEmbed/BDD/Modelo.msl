@@ -111,12 +111,14 @@
           <ScalarProperty Name="IdDenuncia" ColumnName="IdDenuncia" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+          <ScalarProperty Name="IdUsuarioDenuncia" ColumnName="IdUsuarioDenuncia" />
+          <ScalarProperty Name="IdUsuarioDenunciado" ColumnName="IdUsuarioDenunciado" />
+          <ScalarProperty Name="IdCanchaDenunciada" ColumnName="IdCanchaDenunciada" />
+          <ScalarProperty Name="IdEquipoDenunciado" ColumnName="IdEquipoDenunciado" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="IdCancha" ColumnName="IdCancha" />
-          <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -259,6 +261,7 @@
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
