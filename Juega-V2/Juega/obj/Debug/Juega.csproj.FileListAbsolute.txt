@@ -141,6 +141,7 @@ C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.Razor.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.WebPages.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.WebPages.Deployment.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.WebPages.Razor.xml
+C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.pdb
 C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.AspNet.Identity.Core.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.AspNet.Identity.Owin.xml
@@ -157,4 +158,3 @@ C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.dll
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.pdb
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.csprojResolveAssemblyReference.cache
-C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.pdb

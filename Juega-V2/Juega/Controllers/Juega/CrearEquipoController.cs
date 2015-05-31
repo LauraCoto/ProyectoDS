@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
-    //[Authorize(Roles = Utilidades.Roles.Tecnico)]
-    [Authorize()]
-    public class CanchasController : JuegaController
+    public class CrearEquipoController : JuegaController
     {
+        private JuegaEntities db = new JuegaEntities();
+
+        // GET: CrearEquipo
         public ActionResult Index()
         {
-            return View();
+            var equipo = db.Equipo.Include(e => e.Usuario);
+            return View(equipo.ToList());
         }
 
         public JuegaJson GetAll()
@@ -25,7 +29,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
                 _db.Configuration.ProxyCreationEnabled = false;
-                var lista = _db.Cancha.ToList();
+                var lista = _db.Equipo.ToList();
 
                 return Resultado_Correcto(lista);
             }
@@ -36,21 +40,45 @@ namespace Juega.Controllers.Juega
         }
 
         [HttpPost]
-        public JsonResult Create(Cancha cancha)
+        public JuegaJson Create(Equipo equipo)
         {
+            try
+            {
 
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                if (ExisteRegistro(equipo.Nombre, -1))
+                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
+
+                _db.Equipo.Add(equipo);
+                _db.SaveChanges();
+
+                return Resultado_Correcto(equipo, "El registro ha sido creado.");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
+
+        [HttpPost]
+        public JuegaJson Update(Equipo equipo)
+        {
             try
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                if (ExisteRegistro(cancha.Nombre, -1))
+
+                if (ExisteRegistro(equipo.Nombre, equipo.IdEquipo))
                     return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
-                _db.Cancha.Add(cancha);
+                _db.Entry(equipo).State = EntityState.Modified;
                 _db.SaveChanges();
 
-                return Resultado_Correcto(cancha, "El registro ha sido creado.");
+                return Resultado_Correcto(equipo, "El registro ha sido actualizado.");
             }
             catch (Exception e)
             {
@@ -59,48 +87,31 @@ namespace Juega.Controllers.Juega
         }
 
         [HttpPost]
-        public JsonResult Update(Cancha cancha)
+        public JuegaJson Delete(Equipo equipo)
         {
             try
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                if (ExisteRegistro(cancha.Nombre, -1))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
-
-                _db.Entry(cancha).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                return Resultado_Correcto(cancha, "El registro ha sido actualizado.");
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-        }
-
-        [HttpPost]
-        public JsonResult Delete(Cancha canchaEliminar)
-        {
-            try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                if (canchaEliminar == null)
+                if (equipo == null)
                     return Resultado_Advertencia("El registro no es valido.");
 
-                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == canchaEliminar.IdCancha);
+                var complejo = _db.Equipo.FirstOrDefault(x => x.IdEquipo == equipo.IdEquipo);
 
-                if (cancha == null)
+                if (complejo == null)
                     return Resultado_Advertencia("No se encontro ningun registro.");
 
-                _db.Cancha.Remove(cancha);
+                //var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
+
+                //  if (canchas != null && canchas.Count() > 0)
+                //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
+
+
+                _db.Equipo.Remove(complejo);
                 _db.SaveChanges();
 
-                return Resultado_Correcto(cancha, "El registro ha sido eliminado.");
-
+                return Resultado_Correcto(equipo, "El registro ha sido eliminado.");
             }
             catch (Exception e)
             {
@@ -113,12 +124,11 @@ namespace Juega.Controllers.Juega
             if (nombre.Trim() == "")
                 return false;
 
-            var registro = _db.Cancha.FirstOrDefault(x => x.Nombre == nombre &&
-                                                                x.IdCancha != IdExcluir
+            var complejo = _db.Equipo.FirstOrDefault(x => x.Nombre == nombre &&
+                                                                x.IdEquipo != IdExcluir
                                                                 );
 
-            return registro != null;
+            return complejo != null;
         }
-
     }
 }
