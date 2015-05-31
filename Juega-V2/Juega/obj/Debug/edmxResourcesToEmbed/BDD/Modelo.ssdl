@@ -104,12 +104,14 @@
     <Property Name="IdDenuncia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="IdUsuarioDenuncia" Type="bigint" />
+    <Property Name="IdUsuarioDenunciado" Type="bigint" />
+    <Property Name="IdCanchaDenunciada" Type="bigint" />
+    <Property Name="IdEquipoDenunciado" Type="bigint" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="bigint" />
-    <Property Name="IdCancha" Type="bigint" />
-    <Property Name="IdEquipo" Type="bigint" />
   </EntityType>
   <EntityType Name="Equipo">
     <Key>
@@ -243,6 +245,7 @@
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Usuario_Foto">
     <Key>
@@ -300,6 +303,30 @@
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="bigint" />
   </EntityType>
+  <Association Name="FK_Denuncia_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Denuncia">
+        <PropertyRef Name="IdUsuarioDenuncia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Denuncia_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Denuncia">
+        <PropertyRef Name="IdUsuarioDenunciado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK1E2394DD1862B0F6">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Cancha_Horario_Dia" Type="Self.Cancha_Horario_Dia" Multiplicity="*" />
@@ -404,7 +431,7 @@
         <PropertyRef Name="IdEquipo" />
       </Principal>
       <Dependent Role="Denuncia">
-        <PropertyRef Name="IdEquipo" />
+        <PropertyRef Name="IdEquipoDenunciado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -416,7 +443,7 @@
         <PropertyRef Name="IdCancha" />
       </Principal>
       <Dependent Role="Denuncia">
-        <PropertyRef Name="IdCancha" />
+        <PropertyRef Name="IdCanchaDenunciada" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -767,6 +794,14 @@
     <EntitySet Name="Usuario_Solicitud_AdminCancha" EntityType="Self.Usuario_Solicitud_AdminCancha" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario_Solicitud_Equipo" EntityType="Self.Usuario_Solicitud_Equipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario_Valoracion" EntityType="Self.Usuario_Valoracion" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Denuncia_Usuario" Association="Self.FK_Denuncia_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Denuncia" EntitySet="Denuncia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Denuncia_Usuario1" Association="Self.FK_Denuncia_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Denuncia" EntitySet="Denuncia" />
+    </AssociationSet>
     <AssociationSet Name="FK1E2394DD1862B0F6" Association="Self.FK1E2394DD1862B0F6">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Cancha_Horario_Dia" EntitySet="Cancha_Horario_Dia" />

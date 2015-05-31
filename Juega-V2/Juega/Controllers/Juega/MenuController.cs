@@ -39,7 +39,41 @@ namespace Juega.Controllers.Juega
             }
         }
 
+        public JuegaJson GetMenu()
+        {
+            try
+            {
 
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                _db.Configuration.ProxyCreationEnabled = false;
+                _db.Configuration.LazyLoadingEnabled = false;
+
+                var menu = _db.Menu.ToList();
+
+                if (menu == null)
+                    return Resultado_Error("Error al cargar el menu.");
+
+                var lista = new List<MenuPrincipal>();
+
+                foreach (var item in menu)
+                {
+                    var mp = new MenuPrincipal();
+                    mp.Action = item.Action;
+                    mp.Controller = item.Controller;
+                    mp.UrlIcono = item.UrlIcon;
+                    
+                    lista.Add(mp);
+                }
+
+                return Resultado_Correcto(lista);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
 
         public JuegaJson GetControllers()
         {

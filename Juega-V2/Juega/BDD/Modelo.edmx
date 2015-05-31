@@ -109,12 +109,14 @@
           <Property Name="IdDenuncia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdUsuarioDenuncia" Type="bigint" />
+          <Property Name="IdUsuarioDenunciado" Type="bigint" />
+          <Property Name="IdCanchaDenunciada" Type="bigint" />
+          <Property Name="IdEquipoDenunciado" Type="bigint" />
           <Property Name="FechaCreo" Type="datetime" />
           <Property Name="FechaElimino" Type="datetime" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="bigint" />
-          <Property Name="IdCancha" Type="bigint" />
-          <Property Name="IdEquipo" Type="bigint" />
         </EntityType>
         <EntityType Name="Equipo">
           <Key>
@@ -248,6 +250,7 @@
           <Property Name="FechaCreo" Type="datetime" />
           <Property Name="FechaElimino" Type="datetime" />
           <Property Name="Activo" Type="bit" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Usuario_Foto">
           <Key>
@@ -305,6 +308,30 @@
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="bigint" />
         </EntityType>
+        <Association Name="FK_Denuncia_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Denuncia">
+              <PropertyRef Name="IdUsuarioDenuncia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Denuncia_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Denuncia">
+              <PropertyRef Name="IdUsuarioDenunciado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK1E2394DD1862B0F6">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Cancha_Horario_Dia" Type="Self.Cancha_Horario_Dia" Multiplicity="*" />
@@ -409,7 +436,7 @@
               <PropertyRef Name="IdEquipo" />
             </Principal>
             <Dependent Role="Denuncia">
-              <PropertyRef Name="IdEquipo" />
+              <PropertyRef Name="IdEquipoDenunciado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -421,7 +448,7 @@
               <PropertyRef Name="IdCancha" />
             </Principal>
             <Dependent Role="Denuncia">
-              <PropertyRef Name="IdCancha" />
+              <PropertyRef Name="IdCanchaDenunciada" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -772,6 +799,14 @@
           <EntitySet Name="Usuario_Solicitud_AdminCancha" EntityType="Self.Usuario_Solicitud_AdminCancha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario_Solicitud_Equipo" EntityType="Self.Usuario_Solicitud_Equipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario_Valoracion" EntityType="Self.Usuario_Valoracion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Denuncia_Usuario" Association="Self.FK_Denuncia_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Denuncia" EntitySet="Denuncia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Denuncia_Usuario1" Association="Self.FK_Denuncia_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Denuncia" EntitySet="Denuncia" />
+          </AssociationSet>
           <AssociationSet Name="FK1E2394DD1862B0F6" Association="Self.FK1E2394DD1862B0F6">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cancha_Horario_Dia" EntitySet="Cancha_Horario_Dia" />
@@ -1051,14 +1086,18 @@
           <Property Name="IdDenuncia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdUsuarioDenuncia" Type="Int64" />
+          <Property Name="IdUsuarioDenunciado" Type="Int64" />
+          <Property Name="IdCanchaDenunciada" Type="Int64" />
+          <Property Name="IdEquipoDenunciado" Type="Int64" />
           <Property Name="FechaCreo" Type="DateTime" Precision="3" />
           <Property Name="FechaElimino" Type="DateTime" Precision="3" />
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int64" />
-          <Property Name="IdCancha" Type="Int64" />
-          <Property Name="IdEquipo" Type="Int64" />
           <NavigationProperty Name="Cancha" Relationship="Self.FK3BBAF225F771FF35" FromRole="Denuncia" ToRole="Cancha" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK3BBAF2251862B0F6" FromRole="Denuncia" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Denuncia_Usuario" FromRole="Denuncia" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Denuncia_Usuario1" FromRole="Denuncia" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.FK3BBAF2251862B0F6" FromRole="Denuncia" ToRole="Usuario" />
           <NavigationProperty Name="Equipo" Relationship="Self.FK3BBAF225A62E925C" FromRole="Denuncia" ToRole="Equipo" />
         </EntityType>
         <EntityType Name="Equipo">
@@ -1214,6 +1253,7 @@
           <Property Name="FechaCreo" Type="DateTime" Precision="3" />
           <Property Name="FechaElimino" Type="DateTime" Precision="3" />
           <Property Name="Activo" Type="Boolean" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cancha" Relationship="Self.FK76644D7F1862B0F6" FromRole="Usuario" ToRole="Cancha" />
           <NavigationProperty Name="Cancha_Foto" Relationship="Self.FK7033D3A1862B0F6" FromRole="Usuario" ToRole="Cancha_Foto" />
           <NavigationProperty Name="Cancha_Horario_Dia" Relationship="Self.FK1E2394DD1862B0F6" FromRole="Usuario" ToRole="Cancha_Horario_Dia" />
@@ -1221,7 +1261,9 @@
           <NavigationProperty Name="Cancha_Reservacion" Relationship="Self.FK9CC16DB1862B0F6" FromRole="Usuario" ToRole="Cancha_Reservacion" />
           <NavigationProperty Name="Cancha_Valoracion" Relationship="Self.FK3FBA4BEB1862B0F6" FromRole="Usuario" ToRole="Cancha_Valoracion" />
           <NavigationProperty Name="ComplejoDeportivo" Relationship="Self.FK5F4FA4051862B0F6" FromRole="Usuario" ToRole="ComplejoDeportivo" />
-          <NavigationProperty Name="Denuncia" Relationship="Self.FK3BBAF2251862B0F6" FromRole="Usuario" ToRole="Denuncia" />
+          <NavigationProperty Name="Denuncia" Relationship="Self.FK_Denuncia_Usuario" FromRole="Usuario" ToRole="Denuncia" />
+          <NavigationProperty Name="Denuncia1" Relationship="Self.FK_Denuncia_Usuario1" FromRole="Usuario" ToRole="Denuncia" />
+          <NavigationProperty Name="Denuncia2" Relationship="Self.FK3BBAF2251862B0F6" FromRole="Usuario" ToRole="Denuncia" />
           <NavigationProperty Name="Equipo" Relationship="Self.FK323934421862B0F6" FromRole="Usuario" ToRole="Equipo" />
           <NavigationProperty Name="Equipo_Foto" Relationship="Self.FK7932B0101862B0F6" FromRole="Usuario" ToRole="Equipo_Foto" />
           <NavigationProperty Name="Equipo_Jugador" Relationship="Self.FK7DE04BD41862B0F6" FromRole="Usuario" ToRole="Equipo_Jugador" />
@@ -1320,7 +1362,7 @@
               <PropertyRef Name="IdCancha" />
             </Principal>
             <Dependent Role="Denuncia">
-              <PropertyRef Name="IdCancha" />
+              <PropertyRef Name="IdCanchaDenunciada" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1480,6 +1522,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Denuncia_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Denuncia">
+              <PropertyRef Name="IdUsuarioDenuncia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Denuncia_Usuario1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Denuncia">
+              <PropertyRef Name="IdUsuarioDenunciado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK3BBAF2251862B0F6">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Denuncia" Type="Self.Denuncia" Multiplicity="*" />
@@ -1500,7 +1566,7 @@
               <PropertyRef Name="IdEquipo" />
             </Principal>
             <Dependent Role="Denuncia">
-              <PropertyRef Name="IdEquipo" />
+              <PropertyRef Name="IdEquipoDenunciado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1827,6 +1893,14 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="ComplejoDeportivo" EntitySet="ComplejoDeportivo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Denuncia_Usuario" Association="Self.FK_Denuncia_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Denuncia" EntitySet="Denuncia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Denuncia_Usuario1" Association="Self.FK_Denuncia_Usuario1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Denuncia" EntitySet="Denuncia" />
+          </AssociationSet>
           <AssociationSet Name="FK3BBAF2251862B0F6" Association="Self.FK3BBAF2251862B0F6">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Denuncia" EntitySet="Denuncia" />
@@ -2032,12 +2106,14 @@
                 <ScalarProperty Name="IdDenuncia" ColumnName="IdDenuncia" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+                <ScalarProperty Name="IdUsuarioDenuncia" ColumnName="IdUsuarioDenuncia" />
+                <ScalarProperty Name="IdUsuarioDenunciado" ColumnName="IdUsuarioDenunciado" />
+                <ScalarProperty Name="IdCanchaDenunciada" ColumnName="IdCanchaDenunciada" />
+                <ScalarProperty Name="IdEquipoDenunciado" ColumnName="IdEquipoDenunciado" />
                 <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
                 <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdCancha" ColumnName="IdCancha" />
-                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2180,6 +2256,7 @@
                 <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
                 <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
