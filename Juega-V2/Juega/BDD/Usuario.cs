@@ -52,11 +52,12 @@ namespace Juega.BDD
         public Nullable<bool> EsAdminCancha { get; set; }
         public Nullable<bool> EsAdminEquipo { get; set; }
         public Nullable<bool> EsJugador { get; set; }
+        public string Descripcion { get; set; }
+        public string FotoPrincipal { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }
         public Nullable<System.DateTime> FechaElimino { get; set; }
         public Nullable<bool> Activo { get; set; }
-        public string Descripcion { get; set; }
     
         public virtual ICollection<Cancha> Cancha { get; set; }
         public virtual ICollection<Cancha_Foto> Cancha_Foto { get; set; }
