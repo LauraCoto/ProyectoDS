@@ -10,6 +10,7 @@
 
                 <table class="table table-striped">
                     <tr>
+                        <th>Id. Menu</th>
                         <th>Orden</th>
                         <th>Descripcion</th>
                         <th>Icono</th>
@@ -21,6 +22,7 @@
                     </tr>
 
                     <tr ng-repeat="item in ListaRegistros">
+                        <td> {{item.IdMenu}} </td>
                         <td> {{item.Orden}} </td>
                         <td> {{item.Descripcion}} </td>
                         <td> {{item.UrlIcon}} </td>
@@ -61,17 +63,26 @@
                                 <input type="text" placeholder="" class="form-control" ng-model="Registro.Descripcion" />
                             </div>
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label>Icono</label>
                                 <span class="btn btn-success fileinput-button">
                                     <i class="fa fa-fw fa-plus"></i>
                                     <span>Agregar Icono...</span>
                                 </span>
-                            </div>
+                            </div>*@
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label>Nombre del controlador</label>
                                 <input type="text" placeholder="" class="form-control" ng-model="Registro.Controller" />
+                            </div>*@
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Controlador</label>
+                                <div class="col-sm-10">
+                                    <select ng-model="Registro.Controller" ng-options="i.Nombre as i.Nombre for i in ListaControladores">
+                                        <option value="">Seleccionar controlador</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -79,6 +90,7 @@
                                 <input type="text" placeholder="" class="form-control" ng-model="Registro.Action" />
                             </div>
 
+                            
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Menu Padre</label>

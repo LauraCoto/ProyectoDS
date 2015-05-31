@@ -3,6 +3,7 @@
     $scope.ListaRegistros = {};
     $scope.ListaMenu = {};
     $scope.ListaRoles = {};
+    $scope.ListaControladores = {};
     $scope.Registro = {};
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
@@ -51,7 +52,8 @@
 
     });
      
-    $http.get('/Roles/GetAllRoles').success(function (data) {
+    $http.get('/Roles/GetAllRoles').success(function (data)
+    {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
         $scope.MostrarInfo = data.Info;
@@ -64,6 +66,19 @@
 
     });
 
+    $http.get('/Menu/GetControllers').success(function (data)
+    {
+        $scope.Mensaje = data.Mensaje;
+        $scope.MostrarAlerta = data.Alerta;
+        $scope.MostrarInfo = data.Info;
+        $scope.MostrarError = data.Error;
+
+        if (data.Error == 'S')
+            $scope.ListaControladores = {};
+        else
+            $scope.ListaControladores = data.data;
+
+    });
 
 
     $scope.Guardar = function () {

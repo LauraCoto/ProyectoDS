@@ -331,6 +331,7 @@
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
+    <Content Include="app\controller\PageMenuCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
     <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
