@@ -2,7 +2,7 @@
     ViewBag.Title = "Index";
 }
 
-<script src="~/app/controller/UsuariosXRolCtrl.js"></script> 
+<script src="~/app/controller/UsuariosXRolCtrl.js"></script>
 
 <div class="container" ng-app="appManageRoles" ng-controller="UsuariosXRolCtrl">
     <div class="row">
@@ -11,30 +11,23 @@
 
             <div ng-if="MostrarError=='N'">
                 <table class="table table-striped">
-                    <tr> 
-                        <th>Nombre Rol</th> 
+                    <tr>
+                        <th>Nombre Rol</th>
                         <th>Usuario</th>
                         <th>Accion</th>
                     </tr>
 
                     <tr ng-repeat="item in ListaRegistros">
-                        <td> {{item.Rol}} </td>
-                        <td> {{item.Usuario}} </td>
 
+                        <td> {{item.Usuario}} </td>
+                        <td> {{item.Rol}} </td>
                         <td>
                             <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
                             <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
                         </td>
                     </tr>
-
-                    <form name="form" class="css-form" novalidate>
+                     
                         <tr ng-if="MostrarControles">
-
-                            <td>
-                                <select ng-model="Registro.IdRol" ng-options="i.Id as i.Nombre for i in ListaRoles">
-                                    <option value="">Seleccionar un rol</option>
-                                </select>
-                            </td>
 
                             <td>
                                 <select ng-model="Registro.IdUsuario" ng-options="i.Id as i.Nombre for i in ListaUsuarios">
@@ -43,11 +36,17 @@
                             </td>
 
                             <td>
+                                <select ng-model="Registro.IdRol" ng-options="i.Id as i.Nombre for i in ListaRoles">
+                                    <option value="">Seleccionar un rol</option>
+                                </select>
+                            </td>
+
+
+                            <td>
                                 <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
                                 <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
                             </td>
-                        </tr>
-                    </form>
+                        </tr> 
 
 
                 </table>

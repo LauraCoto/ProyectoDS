@@ -7,6 +7,8 @@ namespace Juega.Models.Juega
 {
     public class Rol
     {
+        public Rol() { }
+
         public Rol(string _id, string _nombre)
         {
             Id = _id;
@@ -19,8 +21,41 @@ namespace Juega.Models.Juega
         public virtual string Nombre_Ant { get; set; }
     }
 
+    public class MenuPrincipal
+    {
+        public MenuPrincipal()
+        {
+            Descripcion = "";
+            Controller = "";
+            Action = "";
+            UrlIcono = "";
+        }
+
+        public virtual string Descripcion { get; set; }
+        public virtual string Controller { get; set; }
+        public virtual string Action { get; set; }
+        public virtual string UrlIcono { get; set; }
+    }
+
+    public class Controladores
+    {
+        public Controladores()
+        {
+            Nombre = "";
+        }
+
+        public virtual string Nombre { get; set; }
+    }
+
+    public class Acciones
+    {
+        public virtual string Nombre { get; set; }
+    }
+
     public class Usuario
     {
+        public Usuario() { }
+
         public Usuario(string _id, string _nombre)
         {
             Id = _id;
@@ -33,6 +68,8 @@ namespace Juega.Models.Juega
 
     public class Usuario_Rol
     {
+        public Usuario_Rol() { }
+
         public Usuario_Rol(string _idRol, string _rol, string _idUsuario, string _usuario)
         {
             IdRol = _idRol;

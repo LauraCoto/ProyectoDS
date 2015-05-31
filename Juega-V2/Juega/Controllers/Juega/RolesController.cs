@@ -10,7 +10,7 @@ using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
-   // [Authorize(Roles = Utilidades.Roles.AdminSistema)]
+    // [Authorize(Roles = Utilidades.Roles.AdminSistema)]
     public class RolesController : JuegaController
     {
         public ActionResult Index()
@@ -28,17 +28,16 @@ namespace Juega.Controllers.Juega
         {
             try
             {
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
-
-               // var rolInstance = roleManager.FindByName(rol);
+                var UsersContext = new ApplicationDbContext();
+                var users = UsersContext.Users.ToList();
 
                 var lista = new List<Usuario_Rol>();
-                foreach (var r in roleManager.Roles.ToList ())
+                foreach (var r in UsersContext.Roles.ToList())
                 {
                     foreach (var u in r.Users)
                     {
-                        var user = userManager.FindById(u.UserId);
+                        var user = users.Find(x => x.Id == u.UserId);
+
                         if (user == null)
                             continue;
 
@@ -60,11 +59,11 @@ namespace Juega.Controllers.Juega
         {
             try
             {
-
-                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+                var UsersContext = new ApplicationDbContext();
+                var users = UsersContext.Users.ToList();
 
                 var lista = new List<Usuario>();
-                foreach (var u in userManager.Users.ToList())
+                foreach (var u in users)
                 {
                     var usuario = new Usuario(u.Id, u.UserName);
                     lista.Add(usuario);
@@ -84,7 +83,7 @@ namespace Juega.Controllers.Juega
             try
             {
                 if (!TieneAcceso())
-                    return Resultado_No_Acceso(); 
+                    return Resultado_No_Acceso();
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
@@ -114,8 +113,6 @@ namespace Juega.Controllers.Juega
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
-
-
 
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
 
@@ -186,7 +183,6 @@ namespace Juega.Controllers.Juega
                 if (rol == null)
                     return Resultado_Advertencia("No se encontro ningun registro.");
 
-                // var userManager =new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext())); 
                 if (rol.Users.Count() > 0)
                     return Resultado_Advertencia("No se puede eliminar este rol tiene usuarios asignados.");
 
@@ -213,26 +209,27 @@ namespace Juega.Controllers.Juega
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-                var rol = roleManager.FindById(model.IdRol);
-
-                if (rol == null)
-                    return Resultado_Advertencia("El rol al que intenta agregar no existe.");
-
-                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
-                var usuario = userManager.FindById(model.IdUsuario);
-
+                var context = new ApplicationDbContext();
+                var usuario = context.Users.FirstOrDefault(x => x.Id == model.IdUsuario);
+                var rol = context.Roles.FirstOrDefault(x => x.Id == model.IdRol);
 
                 if (usuario == null)
-                    return Resultado_Advertencia("El usuario al que intenta agregar no existe.");
+                    return Resultado_Advertencia("El usuario al que intenta configurar no existe.");
+
+                if (rol == null)
+                    return Resultado_Advertencia("El rol al que intenta configurar no existe.");
 
                 var identityRol = new IdentityUserRole();
                 identityRol.RoleId = model.IdRol;
-                identityRol.UserId = model.Usuario;
+                identityRol.UserId = model.IdUsuario;
+
+                model.Rol = rol.Name;
+                model.Usuario = usuario.UserName;
 
                 usuario.Roles.Add(identityRol);
+                context.SaveChanges();
 
-                return Resultado_Correcto(rol);
+                return Resultado_Correcto(model);
             }
             catch (Exception e)
             {
