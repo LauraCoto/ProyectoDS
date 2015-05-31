@@ -298,6 +298,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
+    <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -313,6 +314,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
+    <Compile Include="Models\Juega\DenunciasModelo.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -325,6 +327,7 @@
     <Content Include="app\app.js" />
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
+    <Content Include="app\controller\DenunciasCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
@@ -1499,6 +1502,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Denuncias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

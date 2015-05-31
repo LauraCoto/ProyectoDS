@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/app/controller/DenunciasCtrl.js"></script>
+
+
+<div class="container" ng-app="appDenuncias" ng-controller="DenunciasCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+            <div ng-if="MostrarError=='N'">
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>UsuarioDenunciado</th>
+                        <th>CanchaDenunciada</th>
+                        <th>EquipoDenunciado</th>
+                      
+                    </tr>
+
+                    <tr ng-repeat="item in ListaRegistros">
+                        <td> {{item.Usuario}}  </td>
+                        <td> {{item.Cancha}} </td>
+                        <td> {{item.Equipo}} </td>
+
+
+                        <td>
+                           <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
+                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="MostrarControles">
+
+                        <td><input type="text" disabled="disabled" class="form-control" placeholder="Id Denuncia" ng-model="Registro.IdDenuncia" /> </td>
+                        <td><input type="text" class="form-control" placeholder="UsuarioDenunciado" maxlength="10" name="txtNombre" ng-model="Registro.IdUsuario" /></td>
+                        <td><input type="text" class="form-control" placeholder="CanchaDenuncia" ng-model="Registro.IdCancha" /></td>
+                        <td><input type="text" class="form-control" placeholder="EquipoDenunciado" ng-model="Registro.IdEquipo" /></td>
+                       
+                        <td>
+                            
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                            <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
+
+            </div>
+
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarAlerta=='S'">
+                <br />
+                <br />
+                <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+        </div>
+    </div>
