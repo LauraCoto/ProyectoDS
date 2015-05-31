@@ -16,6 +16,8 @@
 
                 <table class="table table-striped">
                     <tr>
+                        <th>Descripcion</th>
+                        <th>UsuarioDenuncia</th>
                         <th>UsuarioDenunciado</th>
                         <th>CanchaDenunciada</th>
                         <th>EquipoDenunciado</th>
@@ -23,39 +25,53 @@
                     </tr>
 
                     <tr ng-repeat="item in ListaRegistros">
-                        <td> {{item.Usuario}}  </td>
+                        <td> {{item.Descripcion}}  </td>
+                        <td> {{item.UsuarioDenuncia}}  </td>
+                        <td> {{item.UsuarioDenunciado}}</td>
                         <td> {{item.Cancha}} </td>
                         <td> {{item.Equipo}} </td>
 
-
                         <td>
-                           <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
-                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                           <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Revisar</button>
+                          
                         </td>
                     </tr>
 
-                    <tr ng-if="MostrarControles">
-
-                        <td><input type="text" disabled="disabled" class="form-control" placeholder="Id Denuncia" ng-model="Registro.IdDenuncia" /> </td>
-                        <td><input type="text" class="form-control" placeholder="UsuarioDenunciado" maxlength="10" name="txtNombre" ng-model="Registro.IdUsuario" /></td>
-                        <td><input type="text" class="form-control" placeholder="CanchaDenuncia" ng-model="Registro.IdCancha" /></td>
-                        <td><input type="text" class="form-control" placeholder="EquipoDenunciado" ng-model="Registro.IdEquipo" /></td>
-                       
-                        <td>
-                            
-                        </td>
-
-                        <td>
-                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
-                            <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
-                        </td>
-                    </tr>
-
+                    
                 </table>
 
-                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
+               
 
             </div>
+            <div ng-if="MostrarControles">
+                <br />
+                <section>
+                    <div class="container">
+
+
+
+                        <div><input type="text" class="form-control" placeholder="Descripcion" readonly="readonly" maxlength="10" name="txtNombre" ng-model="Registro.Descripcion" /></div>
+                        <div><input type="text" class="form-control" placeholder="CanchaDenuncia" readonly="readonly" ng-model="Registro.UsuarioDenuncia" /></div>
+                        <div><input type="text" class="form-control" placeholder="EquipoDenunciado" readonly="readonly" ng-model="Registro.UsuarioDenunciado" /></div>
+                        <div><input type="text" class="form-control" placeholder="CanchaDenuncia" readonly="readonly" ng-model="Registro.Cancha" /></div>
+                        <div><input type="text" class="form-control" placeholder="EquipoDenunciado" readonly="readonly" ng-model="Registro.Equipo" /></div>
+                        
+
+                        <div>
+                            <button type="button" class="btn btn-primary" ng-click="BloquearUsuario()">Bloquear Usuario</button>
+                            <button type="button" class="btn btn-primary" ng-click="BloquearCancha()">Bloquear Cancha</button>
+                            <button type="button" class="btn btn-primary" ng-click="BloquearEquipo()">Bloquear Equipo</button>
+                            <button type="button" class="btn btn-default" ng-click="Ignorar()">Ignorar</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+
+
+
+
 
             <div ng-if="MostrarError=='S'">
                 <br />
