@@ -15,7 +15,7 @@ namespace Juega.Controllers.Juega
         {
             return View();
         }
-
+        
         public JuegaJson GetAll()
         {
             try

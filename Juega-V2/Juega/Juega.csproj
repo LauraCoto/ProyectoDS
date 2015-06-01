@@ -303,8 +303,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
+    <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
+    <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
+    <Compile Include="Controllers\Juega\SubscripcionController.cs" />
+    <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MultilevelsController.cs" />
@@ -329,11 +333,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\appCanchas.js" />
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
+    <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\PageMenuCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
+    <Content Include="app\controller\Solicitud_JugadorCtrl.js" />
+    <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
     <Content Include="Content\app\css\app-rtl.css" />
     <Content Include="Content\app\css\app.css" />
@@ -1403,6 +1411,7 @@
     <Content Include="Vendor\x-editable\dist\bootstrap3-editable\img\loading.gif" />
     <Content Include="Vendor\x-editable\dist\bootstrap3-editable\js\bootstrap-editable.js" />
     <Content Include="Vendor\x-editable\dist\bootstrap3-editable\js\bootstrap-editable.min.js" />
+    <Content Include="Views\Subscripcion\button-checkbox.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1514,6 +1523,14 @@
     <Content Include="Views\Complejo\Edit.cshtml" />
     <Content Include="Views\Complejo\Index.cshtml" />
     <Content Include="Views\ComplejoDeportivo\Create.cshtml" />
+    <Content Include="Views\CrearEquipo\Create.cshtml" />
+    <Content Include="Views\CrearEquipo\Delete.cshtml" />
+    <Content Include="Views\CrearEquipo\Details.cshtml" />
+    <Content Include="Views\CrearEquipo\Edit.cshtml" />
+    <Content Include="Views\CrearEquipo\Index.cshtml" />
+    <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
+    <Content Include="Views\Subscripcion\Index.cshtml" />
+    <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
