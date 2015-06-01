@@ -31,7 +31,7 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Sistema()
         {
-            var cnn = ConexionUsar.Javier;
+            var cnn = ConexionUsar.Cris;
 
             switch (cnn)
             {
@@ -68,7 +68,7 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Seguridad()
         {
-            var cnn = ConexionUsar.Javier;
+            var cnn = ConexionUsar.Cris;
 
             switch (cnn)
             {

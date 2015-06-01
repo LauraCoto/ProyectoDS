@@ -11,6 +11,7 @@
           <ScalarProperty Name="Ancho" ColumnName="Ancho" />
           <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -98,6 +99,7 @@
           <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
           <ScalarProperty Name="Coodernadas" ColumnName="Coodernadas" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -129,6 +131,7 @@
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -257,11 +260,12 @@
           <ScalarProperty Name="EsAdminCancha" ColumnName="EsAdminCancha" />
           <ScalarProperty Name="EsAdminEquipo" ColumnName="EsAdminEquipo" />
           <ScalarProperty Name="EsJugador" ColumnName="EsJugador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

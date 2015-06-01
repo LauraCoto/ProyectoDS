@@ -11,6 +11,7 @@
     <Property Name="Ancho" Type="Int32" />
     <Property Name="Valoracion" Type="Int32" />
     <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FotoPrincipal" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
@@ -111,6 +112,7 @@
     <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Coodernadas" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FotoPrincipal" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
@@ -147,6 +149,7 @@
     <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Valoracion" Type="Int32" />
     <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FotoPrincipal" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
@@ -288,11 +291,12 @@
     <Property Name="EsAdminCancha" Type="Boolean" />
     <Property Name="EsAdminEquipo" Type="Boolean" />
     <Property Name="EsJugador" Type="Boolean" />
+    <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FotoPrincipal" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" />
     <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
-    <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Cancha" Relationship="Self.FK76644D7F1862B0F6" FromRole="Usuario" ToRole="Cancha" />
     <NavigationProperty Name="Cancha_Foto" Relationship="Self.FK7033D3A1862B0F6" FromRole="Usuario" ToRole="Cancha_Foto" />
     <NavigationProperty Name="Cancha_Horario_Dia" Relationship="Self.FK1E2394DD1862B0F6" FromRole="Usuario" ToRole="Cancha_Horario_Dia" />

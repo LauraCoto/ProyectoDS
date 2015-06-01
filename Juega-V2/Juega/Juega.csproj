@@ -316,7 +316,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
-    <Compile Include="Models\Juega\FotoEquipo.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
