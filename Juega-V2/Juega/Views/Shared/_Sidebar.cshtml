@@ -152,6 +152,13 @@
                                 </a>
                             </li>
 
+                            <li class="@Html.isActive("Usuarios", "Index")">
+                                <a href="@Url.Action("Index", "Usuarios")" title="">
+                                    <em></em>
+                                    <span>Ver Usuarios</span>
+                                </a>
+                            </li>
+
                             <li class="@Html.isActive("Inicio", "VerCanchas")">
                                 <a href="@Url.Action("VerCanchas", "Inicio")" title="">
                                     <em></em>

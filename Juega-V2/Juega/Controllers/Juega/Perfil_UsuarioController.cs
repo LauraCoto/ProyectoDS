@@ -8,8 +8,7 @@ using System.Web.Mvc;
 namespace Juega.Controllers.Juega
 {
     public class Perfil_UsuarioController : JuegaController
-    {
-        // GET: Perfil_Usuario
+    { 
         public ActionResult Index(string id)
         {
             try
@@ -17,7 +16,7 @@ namespace Juega.Controllers.Juega
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                if (id == null || id == "")
+                if (string.IsNullOrEmpty(id))
                 {
                     return Resultado_Advertencia("Usuario no existe");
                 }
@@ -26,17 +25,18 @@ namespace Juega.Controllers.Juega
                 var nid = int.Parse(id);
                 var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == nid);
 
-                var UsuarioModel = new UsuarioModel();
+                var usuarioModel = new UsuarioModel();
 
-                UsuarioModel.Apellido = usuario.Apellido;
-                UsuarioModel.Nombre = usuario.Nombre;
-                UsuarioModel.Correo = usuario.Correo;
-                UsuarioModel.Telefono = usuario.Telefonos;
+                usuarioModel.Apellido = usuario.Apellido;
+                usuarioModel.Nombre = usuario.Nombre;
+                usuarioModel.Correo = usuario.Correo;
+                usuarioModel.Telefono = usuario.Telefonos;
                 if (usuario.FechaNacimiento != null)
-                    UsuarioModel.Fecha_Nac = usuario.FechaNacimiento.Value.ToShortDateString();
+                    usuarioModel.Fecha_Nac = usuario.FechaNacimiento.Value.ToShortDateString();
 
-                return Resultado_Correcto(UsuarioModel);
-
+              //  return Resultado_Correcto(UsuarioModel);
+                ViewBag.Usuario = usuarioModel;
+                return View(usuarioModel);
 
             }
 

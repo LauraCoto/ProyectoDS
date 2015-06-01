@@ -5,7 +5,5 @@ angular.module('appManageRoles', ['RolesController']);
 angular.module('appMenu', ['MenuController']);
 angular.module('appMenuPrincipal', ['MenuController']);
 angular.module('appPerfil_Usuario', ['Perfil_UsuarioController']);
-
-
-
+angular.module('appDenuncias', ['DenunciasController']);
  

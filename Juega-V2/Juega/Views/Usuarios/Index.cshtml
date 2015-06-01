@@ -6,9 +6,9 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         
@@ -34,10 +34,7 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdUsuarioSeguridad)
-        </td>
+    <tr> 
         <td>
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
@@ -58,9 +55,10 @@
         </td>
         
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario })
+            @Html.ActionLink("Ver Perfil", "Index/" + item.IdUsuario, "Perfil_Usuario", routeValues: null, htmlAttributes: new { id = item.IdUsuario })
+             @*@Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |*@
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario })*@
         </td>
     </tr>
 }

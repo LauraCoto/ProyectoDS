@@ -10,6 +10,7 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
+    [Authorize(Roles = Utilidades.Roles.Espectador)]
     public class UsuariosController : Controller
     {
         private JuegaEntities db = new JuegaEntities();
@@ -17,7 +18,7 @@ namespace Juega.Controllers.Juega
         // GET: Usuarios
         public ActionResult Index()
         {
-           
+
             var usuario = db.Usuario;
 
             return View(usuario.ToList());
@@ -38,93 +39,93 @@ namespace Juega.Controllers.Juega
             return View(usuario);
         }
 
-        // GET: Usuarios/Create
-        public ActionResult Create()
-        {
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
-            return View();
-        }
+        //// GET: Usuarios/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
+        //    return View();
+        //}
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdUsuario,IdUsuarioSeguridad,Nombre,Apellido,Correo,Telefonos,TipoEstado,Valoracion,EsEspectador,EsAdminCancha,EsAdminEquipo,EsJugador,FechaNacimiento,FechaCreo,FechaElimino,Activo,Descripcion")] Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Usuario.Add(usuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Usuarios/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "IdUsuario,IdUsuarioSeguridad,Nombre,Apellido,Correo,Telefonos,TipoEstado,Valoracion,EsEspectador,EsAdminCancha,EsAdminEquipo,EsJugador,FechaNacimiento,FechaCreo,FechaElimino,Activo,Descripcion")] Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Usuario.Add(usuario);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
-            return View(usuario);
-        }
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
+        //    return View(usuario);
+        //}
 
-        // GET: Usuarios/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
-            return View(usuario);
-        }
+        //// GET: Usuarios/Edit/5
+        //public ActionResult Edit(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Usuario usuario = db.Usuario.Find(id);
+        //    if (usuario == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
+        //    return View(usuario);
+        //}
 
         // POST: Usuarios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdUsuario,IdUsuarioSeguridad,Nombre,Apellido,Correo,Telefonos,TipoEstado,Valoracion,EsEspectador,EsAdminCancha,EsAdminEquipo,EsJugador,FechaNacimiento,FechaCreo,FechaElimino,Activo,Descripcion")] Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
-            return View(usuario);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "IdUsuario,IdUsuarioSeguridad,Nombre,Apellido,Correo,Telefonos,TipoEstado,Valoracion,EsEspectador,EsAdminCancha,EsAdminEquipo,EsJugador,FechaNacimiento,FechaCreo,FechaElimino,Activo,Descripcion")] Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(usuario).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
+        //    ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario.IdUsuario);
+        //    return View(usuario);
+        //}
 
-        // GET: Usuarios/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
+        //// GET: Usuarios/Delete/5
+        //public ActionResult Delete(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Usuario usuario = db.Usuario.Find(id);
+        //    if (usuario == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(usuario);
+        //}
 
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Usuarios/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(long id)
+        //{
+        //    Usuario usuario = db.Usuario.Find(id);
+        //    db.Usuario.Remove(usuario);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
