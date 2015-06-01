@@ -39,7 +39,7 @@
                                 }
                             }
                             else
-                            { 
+                            {
 
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>@Html.ActionLink("DashBoard", "Dashboard", "Inicio")</li>
@@ -90,8 +90,8 @@
                 if (@User.IsInRole(@Juega.Utilidades.Roles.AdminSistema))
                 {
                     <li class="@Html.isActive(controller: "Roles")">
-                        <a href='#admin' title='Admin' data-toggle='collapse'> 
-                                <em class='icon-settings'></em> 
+                        <a href='#admin' title='Admin' data-toggle='collapse'>
+                            <em class='icon-settings'></em>
                             <span> Administracion </span>
                         </a>
                         <ul id="admin" class="nav sidebar-subnav collapse">
@@ -206,7 +206,7 @@
                             </li>
 
                             <li class="@Html.isActive("Solicitud_Jugador", "Index")">
-                                <a href="@Url.Action("Solicitudes", "Index")" title="">
+                                <a href="@Url.Action("Index", "Solicitud_Jugador")" title="">
                                     <em></em>
                                     <span>Aprobar Solicitudes</span>
                                 </a>
@@ -272,7 +272,7 @@
                         </ul>
                     </li>
 
-                } 
+                }
 
             }
 

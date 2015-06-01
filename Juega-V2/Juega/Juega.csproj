@@ -305,9 +305,11 @@
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
+    <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
     <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
+    <Compile Include="Controllers\Juega\UsuariosController.cs" />
     <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
@@ -323,6 +325,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
+    <Compile Include="Models\Juega\UsuarioModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -339,6 +342,7 @@
     <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\PageMenuCtrl.js" />
+    <Content Include="app\controller\Perfil_UsuarioCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
     <Content Include="app\controller\Solicitud_JugadorCtrl.js" />
     <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
@@ -357,6 +361,7 @@
     <Content Include="Content\app\css\theme-f.css" />
     <Content Include="Content\app\css\theme-g.css" />
     <Content Include="Content\app\css\theme-h.css" />
+    <Content Include="Content\Images\Administrador.png" />
     <Content Include="Content\Images\bg1.jpg" />
     <Content Include="Content\Images\bg10.jpg" />
     <Content Include="Content\Images\bg2.jpg" />
@@ -369,12 +374,14 @@
     <Content Include="Content\Images\bg9.jpg" />
     <Content Include="Content\Images\dummy.png" />
     <Content Include="Content\Images\futbol.png" />
+    <Content Include="Content\Images\Jugador.jpg" />
     <Content Include="Content\Images\lock-bg.jpg" />
     <Content Include="Content\Images\logo-single.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\mb-sample.jpg" />
     <Content Include="Content\Images\mockup.png" />
     <Content Include="Content\Images\profile-bg.jpg" />
+    <Content Include="Content\Images\Tecnico.jpg" />
     <Content Include="Content\Images\user\01.jpg" />
     <Content Include="Content\Images\user\02.jpg" />
     <Content Include="Content\Images\user\03.jpg" />
@@ -388,6 +395,7 @@
     <Content Include="Content\Images\user\11.jpg" />
     <Content Include="Content\Images\user\12.jpg" />
     <Content Include="Content\Images\user\13.jpg" />
+    <Content Include="Content\Images\user\player.png" />
     <Content Include="dll\com.mosso.cloudfiles.dll" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -1531,6 +1539,12 @@
     <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
     <Content Include="Views\Subscripcion\Index.cshtml" />
     <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
+    <Content Include="Views\Perfil_Usuario\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

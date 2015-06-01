@@ -18,6 +18,7 @@ namespace Juega.Utilidades
     {
         private enum ConexionUsar
         {
+            Aws = 0,
             AppHarbor = 1,
             Dramos = 2,
             DBustillo = 3,
@@ -31,10 +32,13 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Sistema()
         {
-            var cnn = ConexionUsar.AppHarbor;
+            var cnn = ConexionUsar.Aws; 
 
             switch (cnn)
             {
+                case ConexionUsar.Aws:
+                    return "Juega.A_W_S";
+
                 case ConexionUsar.AppHarbor:
                     return "Juega.AppHarbor";
 
@@ -68,10 +72,13 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Seguridad()
         {
-            var cnn = ConexionUsar.AppHarbor;
+            var cnn = ConexionUsar.Aws; 
 
             switch (cnn)
             {
+                case ConexionUsar.Aws:
+                    return "Seguridad.A_W_S";
+
                 case ConexionUsar.AppHarbor:
                     return "Seguridad.AppHarbor";
 

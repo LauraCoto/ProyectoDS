@@ -171,7 +171,7 @@ namespace Juega
                     _db.Usuario.Add(usuario);
                     _db.SaveChanges();
 
-                    UserManager.AddToRole(user.Id, Utilidades.Roles.AdminCancha);
+                    UserManager.AddToRole(user.Id, Utilidades.Roles.AdminSistema);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.AdminSistema);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.Espectador);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.Jugador);
