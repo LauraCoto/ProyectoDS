@@ -298,10 +298,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
+    <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
-    <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
-    <Compile Include="Controllers\Juega\UsuariosController.cs" />
+    <Compile Include="Controllers\Juega\SubscripcionController.cs" />
+    <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MultilevelsController.cs" />
@@ -315,8 +316,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
+    <Compile Include="Models\Juega\FotoEquipo.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
-    <Compile Include="Models\Juega\UsuarioModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -328,10 +329,11 @@
     <Content Include="app\app.js" />
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
+    <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\PageMenuCtrl.js" />
-    <Content Include="app\controller\Perfil_UsuarioCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
+    <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
     <Content Include="Content\app\css\app-rtl.css" />
     <Content Include="Content\app\css\app.css" />
@@ -378,7 +380,6 @@
     <Content Include="Content\Images\user\11.jpg" />
     <Content Include="Content\Images\user\12.jpg" />
     <Content Include="Content\Images\user\13.jpg" />
-    <Content Include="Content\Images\user\player.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\documentation\readme.md" />
@@ -1400,6 +1401,7 @@
     <Content Include="Vendor\x-editable\dist\bootstrap3-editable\img\loading.gif" />
     <Content Include="Vendor\x-editable\dist\bootstrap3-editable\js\bootstrap-editable.js" />
     <Content Include="Vendor\x-editable\dist\bootstrap3-editable\js\bootstrap-editable.min.js" />
+    <Content Include="Views\Subscripcion\button-checkbox.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1505,12 +1507,13 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
-    <Content Include="Views\Perfil_Usuario\Index.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Subscripcion\Index.cshtml" />
+    <Content Include="Views\CrearEquipo\Create.cshtml" />
+    <Content Include="Views\CrearEquipo\Delete.cshtml" />
+    <Content Include="Views\CrearEquipo\Details.cshtml" />
+    <Content Include="Views\CrearEquipo\Edit.cshtml" />
+    <Content Include="Views\CrearEquipo\Index.cshtml" />
+    <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

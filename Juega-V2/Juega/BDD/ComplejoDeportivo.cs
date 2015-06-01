@@ -24,6 +24,7 @@ namespace Juega.BDD
         public string Direccion { get; set; }
         public string Telefonos { get; set; }
         public string Coodernadas { get; set; }
+        public string FotoPrincipal { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }
         public Nullable<System.DateTime> FechaElimino { get; set; }
         public Nullable<bool> Activo { get; set; }
