@@ -5,8 +5,25 @@
 <script src="~/app/controller/Perfil_UsuarioCtrl.js"></script>
 
 <style type="Text/CSS">
-    .btn {
+    .btn 
+    {
         font-family: 'Times New Roman';
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .panel-title
+    {
+        font-family: 'Times New Roman';
+        font-size: 20px;
+        text-align: center;
+    }
+
+
+    .control-label 
+    {
+        font-family: 'Times New Roman';
+        color= 'black';
         font-size: 16px;
         text-align: center;
     }
@@ -16,10 +33,10 @@
     <center>
         <div class="container">
             <div class="row clearfix" id="content-row">
-                <div class="col-xs-12 column">
+                <div class="col-xs-11 column">
                     <div class="well" id="volume-fees-well">
                         <br />
-                        <div class="panel panel-primary">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Perfil Usuario</h3>
                             </div>
@@ -28,45 +45,45 @@
                                     <fieldset>
                                         <div class="col-md-4">
                                             <br />
-                                            <img src="~/Images/user.png" class="img-responsive img-rounded" />
+                                            <img src="~/Content/Images/user/player.png" class="img-responsive img-rounded" />
                                             <br />
                                             <div class="form-group form">
-                                                <button class="btn btn-danger btn-md" ng-click="report() ">Report</button>
+                                                <button class="btn btn-danger btn-xs" ng-click="report()">Report</button>
                                             </div>
                                         </div>
                                         <br />
                                         <br />
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" disabled="disabled">
                                             <div class="form-group">
                                                 <label class="control-label" for="Firstname">Nombre</label>
                                                 <div class="controls">
-                                                    <input type="text" data-ng-model="Firstname" class="form-control">
+                                                    <input type="text" disabled="disabled" ng-model="Usuario.Nombre" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label" for="Surname">Apellido</label>
                                                 <div class="controls">
-                                                    <input type="text" data-ng-model="Surname" class="form-control">
+                                                    <input type="text" disabled="disabled" ng-model="Usuario.Apellido" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="Age">Edad</label>
+                                                <label class="control-label" for="Fecha_Nac">Fecha Nacimiento</label>
                                                 <div class="controls">
-                                                    <input type="text" data-ng-model="Age" class="form-control">
+                                                    <input type="text" disabled="disabled" ng-model="Usuario.FechaNacimiento" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="control-label" for="Fecha_nac">Fecha Cumpleanos</label>
+                                                <label class="control-label" for="Email">Email</label>
                                                 <div class="controls">
-                                                    <input type="text" data-ng-model="Fecha_nac" class="form-control">
+                                                    <input type="text" disabled="disabled" ng-model="Usuario.Correo" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="Email">Email</label>
+                                                <label class="control-label" for="Phone">Telefono</label>
                                                 <div class="controls">
-                                                    <input type="text" data-ng-model="Email" id="Email" class="form-control">
+                                                    <input type="text" disabled="disabled" ng-model="Usuario.Telefono" id="Phone" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -107,11 +124,7 @@
 
                                 </form>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-success btn-lg" ng-click="ProfileCtrl.create();ok()" ng-disabled="Index.$invalid">Save</button>
-                            <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
-                        </div>
+                        </div>                       
                     </div>
                 </div>
             </div>

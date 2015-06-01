@@ -2,13 +2,19 @@
 
     $scope.Usuario = {};
   
-    $http.get('/Perfil_Usuario/Obtener_Perfil').success(function (data)
-    {
+    //$http.get('/Perfil_Usuario/Obtener_Perfil').success(function (data)
+    //{
+    //    $scope.Usuario = data.data;
+
+    //});
+
+
+    $http.get('/Perfil_Usuario/Index').success(function (data) {
         $scope.Usuario = data.data;
 
     });
 
-
+   
 
 
 
