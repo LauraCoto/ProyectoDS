@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="com.mosso.cloudfiles, Version=1.4.2.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\com.mosso.cloudfiles.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -290,6 +294,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\ComplejoController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\ElementsController.cs" />
@@ -299,9 +304,13 @@
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
+    <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
+    <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
+    <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
+    <Compile Include="Controllers\Juega\UsuariosController.cs" />
     <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
@@ -316,23 +325,29 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
-    <Compile Include="Models\Juega\FotoEquipo.cs" />
+    <Compile Include="Models\Juega\DenunciasModelo.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
+    <Compile Include="Models\Juega\UsuarioModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilidades\Conexiones.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilidades\SubirImagen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\appCanchas.js" />
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
+    <Content Include="app\controller\DenunciasCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\PageMenuCtrl.js" />
+    <Content Include="app\controller\Perfil_UsuarioCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
+    <Content Include="app\controller\Solicitud_JugadorCtrl.js" />
     <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
     <Content Include="Content\app\css\app-rtl.css" />
@@ -349,6 +364,7 @@
     <Content Include="Content\app\css\theme-f.css" />
     <Content Include="Content\app\css\theme-g.css" />
     <Content Include="Content\app\css\theme-h.css" />
+    <Content Include="Content\Images\Administrador.png" />
     <Content Include="Content\Images\bg1.jpg" />
     <Content Include="Content\Images\bg10.jpg" />
     <Content Include="Content\Images\bg2.jpg" />
@@ -361,12 +377,14 @@
     <Content Include="Content\Images\bg9.jpg" />
     <Content Include="Content\Images\dummy.png" />
     <Content Include="Content\Images\futbol.png" />
+    <Content Include="Content\Images\Jugador.jpg" />
     <Content Include="Content\Images\lock-bg.jpg" />
     <Content Include="Content\Images\logo-single.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\mb-sample.jpg" />
     <Content Include="Content\Images\mockup.png" />
     <Content Include="Content\Images\profile-bg.jpg" />
+    <Content Include="Content\Images\Tecnico.jpg" />
     <Content Include="Content\Images\user\01.jpg" />
     <Content Include="Content\Images\user\02.jpg" />
     <Content Include="Content\Images\user\03.jpg" />
@@ -380,6 +398,8 @@
     <Content Include="Content\Images\user\11.jpg" />
     <Content Include="Content\Images\user\12.jpg" />
     <Content Include="Content\Images\user\13.jpg" />
+    <Content Include="Content\Images\user\player.png" />
+    <Content Include="dll\com.mosso.cloudfiles.dll" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\documentation\readme.md" />
@@ -398,6 +418,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\googleMapsApi.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <EntityDeploy Include="BDD\Modelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -1507,17 +1528,30 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
-    <Content Include="Views\Subscripcion\Index.cshtml" />
+    <Content Include="Views\Complejo\Create.cshtml" />
+    <Content Include="Views\Complejo\Delete.cshtml" />
+    <Content Include="Views\Complejo\Details.cshtml" />
+    <Content Include="Views\Complejo\Edit.cshtml" />
+    <Content Include="Views\Complejo\Index.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\Create.cshtml" />
     <Content Include="Views\CrearEquipo\Create.cshtml" />
     <Content Include="Views\CrearEquipo\Delete.cshtml" />
     <Content Include="Views\CrearEquipo\Details.cshtml" />
     <Content Include="Views\CrearEquipo\Edit.cshtml" />
     <Content Include="Views\CrearEquipo\Index.cshtml" />
+    <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
+    <Content Include="Views\Subscripcion\Index.cshtml" />
     <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
+    <Content Include="Views\Perfil_Usuario\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Denuncias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="dll\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />

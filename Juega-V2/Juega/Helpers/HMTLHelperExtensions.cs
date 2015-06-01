@@ -22,7 +22,9 @@ namespace Juega
             if (String.IsNullOrEmpty(action))
                 action = actualAction;
 
-            return (controller == actualController && action == actualAction) ? activeClass : String.Empty;
+            var resultado = (controller == actualController && action == actualAction) ? activeClass : String.Empty;
+
+            return resultado;
         }
     }
 }

@@ -10,6 +10,7 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
+    [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
     public class CrearEquipoController : JuegaController
     {
         private JuegaEntities db = new JuegaEntities();

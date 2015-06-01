@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Juega.BDD.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefonos)
+        </th>       
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr> 
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Correo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefonos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Ver Perfil", "Index/" + item.IdUsuario, "Perfil_Usuario", routeValues: null, htmlAttributes: new { id = item.IdUsuario })
+             @*@Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |*@
+            @*@Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |*@
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario })*@
+        </td>
+    </tr>
+}
+
+</table>
