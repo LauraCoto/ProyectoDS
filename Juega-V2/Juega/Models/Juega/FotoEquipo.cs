@@ -7,7 +7,7 @@ namespace Juega.Models.Juega
 {
     public class FotoEquipo
     {
-        public virtual string Nombre;
-        public virtual string Foto;
+        //public virtual string Nombre;
+        //public virtual string Foto;
     }
 }

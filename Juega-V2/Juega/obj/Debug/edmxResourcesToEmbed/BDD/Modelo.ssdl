@@ -11,6 +11,7 @@
     <Property Name="Ancho" Type="int" />
     <Property Name="Valoracion" Type="int" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FotoPrincipal" Type="varchar" MaxLength="1200" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
@@ -92,6 +93,7 @@
     <Property Name="Direccion" Type="nvarchar" MaxLength="100" />
     <Property Name="Telefonos" Type="nvarchar" MaxLength="100" />
     <Property Name="Coodernadas" Type="nvarchar" MaxLength="100" />
+    <Property Name="FotoPrincipal" Type="varchar" MaxLength="1200" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
@@ -121,6 +123,7 @@
     <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
     <Property Name="Valoracion" Type="int" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
+    <Property Name="FotoPrincipal" Type="varchar" MaxLength="1200" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
@@ -241,11 +244,12 @@
     <Property Name="EsAdminCancha" Type="bit" />
     <Property Name="EsAdminEquipo" Type="bit" />
     <Property Name="EsJugador" Type="bit" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+    <Property Name="FotoPrincipal" Type="varchar" MaxLength="1200" />
     <Property Name="FechaNacimiento" Type="datetime" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Usuario_Foto">
     <Key>
