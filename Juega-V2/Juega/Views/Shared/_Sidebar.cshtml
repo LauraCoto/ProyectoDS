@@ -2,18 +2,13 @@
 @using Microsoft.AspNet.Identity
 
 
-<script src="~/app/controller/PageMenuCtrl.js"></script>
-<script src="~/Scripts/angular.js"></script>
-<script src="~/Scripts/angular.min.js"></script>
-
-
 
 
 <div class="aside-inner">
     <nav class="sidebar" data-sidebar-anyclick-close="">
-        <ul class="nav">
+        <ul class="nav sidebar-subnav collapse in">
             <li class="has-user-block">
-                <div id="user-block" class="collapse">
+                <div id="user-block" class="nav sidebar-subnav collapse">
                     <div class="item user-block">
 
                         <div class="user-block-picture">
@@ -35,16 +30,19 @@
                                     <ul class="nav navbar-nav navbar-right">
                                         <li>
 
-                                            <span class="user-block-name">Hola, @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" }) </span>
+                                            <span class="user-block-name">Hola @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" }) </span>
 
                                         </li>
-                                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesion</a></li>
+
                                     </ul>
                                 }
                             }
                             else
-                            {
+                            { 
+
                                 <ul class="nav navbar-nav navbar-right">
+                                    <li>@Html.ActionLink("DashBoard", "Dashboard", "Inicio")</li>
                                     <li>@Html.ActionLink("Registrarme", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                                     <li>@Html.ActionLink("Iniciar sesion", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                                     <li>@Html.ActionLink("Olvide mi clave", "ForgotPassword", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
@@ -57,84 +55,224 @@
                 </div>
             </li>
 
+
             @if (Request.IsAuthenticated)
             {
 
-                <li class="nav-heading">
-                    <span>Main Navigation</span>
-                </li>
-
                 @*<li class="container" ng-app="appMenuPrincipal" ng-controller="PageMenuCtrl">
+                        <dvi ng-repeat="item in ListaMenu">
+                            <br />
 
-                    <li ng-repeat="item in ListaMenu">
-                        <span> {{item.Descripcion}} </>
+                            <a href='#{{item.IdMenu}}' titl title={{item.Descripcion}} data-toggle='collapse'>
+                                <em class='{{item.UrlIcono}}'></em>
+                                <span> {{item.Descripcion}} </span>
+                            </a>
+
+                            <ul id="{{item.IdMenu}}" class="nav sidebar-subnav collapse">
+
+                                <dvi ng-repeat="hijo in item.ListaHijos">
+
+                                    <a href="@Url.Action("Index", "Roles")" title="{{hijo.Descripcion}}">
+                                        <em></em>
+                                        <span>{{hijo.Descripcion}}</span>
+                                    </a>
+
+                                </dvi>
+                            </ul>
+                        </dvi>
+                    </li>*@
+
+                @*<li class="nav-heading">
+                        <span>Menu</span>
+                    </li>*@
+
+
+                if (@User.IsInRole(@Juega.Utilidades.Roles.AdminSistema))
+                {
+                    <li class="@Html.isActive(controller: "Roles")">
+                        <a href='#admin' title='Admin' data-toggle='collapse'> 
+                                <em class='icon-settings'></em> 
+                            <span> Administracion </span>
+                        </a>
+                        <ul id="admin" class="nav sidebar-subnav collapse">
+
+                            <li class="@Html.isActive("Denuncias", "Index")">
+                                <a href="@Url.Action("Index", "Denuncias")" title="  ">
+                                    <em></em>
+                                    <span>Denuncias Pendientes</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Roles", "Index")">
+                                <a href="@Url.Action("Index", "Roles")" title="  ">
+                                    <em></em>
+                                    <span>Roles</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Roles", "ManageRole")">
+                                <a href="@Url.Action("ManageRole", "Roles")" title="  ">
+                                    <em></em>
+                                    <span>Administrar permiso</span>
+                                </a>
+                            </li>
+
+
+                            <li class="@Html.isActive("Menu", "Index")">
+                                <a href="@Url.Action("Index", "Menu")" title="">
+                                    <em></em>
+                                    <span>Menu</span>
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
-                </li>*@
-               
+                }
+
+                if (@User.IsInRole(@Juega.Utilidades.Roles.Espectador))
+                {
+                    <li class="@Html.isActive(controller: "Roles")">
+                        <a href='#guess' title='' data-toggle='collapse'>
+                            <em class='icon-user'></em>
+                            <span> Espectador </span>
+                        </a>
+                        <ul id="guess" class="nav sidebar-subnav collapse">
+
+                            <li class="@Html.isActive("Inicio", "VerCalendario")">
+                                <a href="@Url.Action("VerCalendario", "Inicio")" title="">
+                                    <em></em>
+                                    <span>Calendario</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Inicio", "VerEquipos")">
+                                <a href="@Url.Action("VerEquipos", "Inicio")" title="">
+                                    <em></em>
+                                    <span>Ver Equipos</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Inicio", "VerCanchas")">
+                                <a href="@Url.Action("VerCanchas", "Inicio")" title="">
+                                    <em></em>
+                                    <span>Ver Canchas</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Inicio", "Suscripcion")">
+                                <a href="@Url.Action("Suscripcion", "Inicio")" title="">
+                                    <em></em>
+                                    <span>Suscripcion</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                }
+
+                if (@User.IsInRole(@Juega.Utilidades.Roles.Jugador))
+                {
+                    <li class="@Html.isActive(controller: "Roles")">
+                        <a href='#jugador' title='' data-toggle='collapse'>
+                            <em class='icon-control-play'></em>
+                            <span> Jugador </span>
+                        </a>
+                        <ul id="jugador" class="nav sidebar-subnav collapse">
+
+                            <li class="@Html.isActive("Jugador", "Index")">
+                                <a href="@Url.Action("Index", "Jugador")" title="">
+                                    <em></em>
+                                    <span>Solicitar Ingreso Equipo</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+                if (@User.IsInRole(@Juega.Utilidades.Roles.AdminEquipo))
+                {
+                    <li class="@Html.isActive(controller: "Roles")">
+                        <a href='#tecnico' title='' data-toggle='collapse'>
+                            <em class='icon-basket'></em>
+                            <span> Tecnico </span>
+                        </a>
+                        <ul id="tecnico" class="nav sidebar-subnav collapse">
+
+                            <li class="@Html.isActive("Equipos", "Inicio")">
+                                <a href="@Url.Action("Inicio", "Equipos")" title="">
+                                    <em></em>
+                                    <span>Mis Equipos</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Equipos", "Solicitudes")">
+                                <a href="@Url.Action("Solicitudes", "Equipos")" title="">
+                                    <em></em>
+                                    <span>Aprobar Solicitudes</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Retos", "Inicio")">
+                                <a href="@Url.Action("Inicio", "Retos")" title="">
+                                    <em></em>
+                                    <span>Retos</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                }
 
 
-                <li class="@Html.isActive(controller: "Roles")">
-                    <a href="#admin" title="Administracion" data-toggle="collapse">
-                        <em class="icon-settings"></em>
-                        <span> Administracion </span>
-                    </a>
-                    <ul id="admin" class="nav sidebar-subnav collapse">
-                        <li class="sidebar-subnav-header">Roles</li>
+                if (@User.IsInRole(@Juega.Utilidades.Roles.AdminCancha))
+                {
+                    <li class="@Html.isActive(controller: "Roles")">
+                        <a href='#adminCanchas' title='' data-toggle='collapse'>
+                            <em class='icon-diamond'></em>
+                            <span> Admin. Canchas </span>
+                        </a>
+                        <ul id="adminCanchas" class="nav sidebar-subnav collapse">
 
-                        <li class="@Html.isActive("Roles", "Index")">
-                            <a href="@Url.Action("Index", "Roles")" title="Roles">
-                                <em></em>
-                                <span>Roles</span>
-                            </a>
-                        </li>
-
-                        <li class="@Html.isActive("Roles", "ManageRole")">
-                            <a href="@Url.Action("ManageRole", "Roles")" title="Administrar permisos">
-                                <em></em>
-                                <span>Administrar permiso</span>
-                            </a>
-                        </li>
+                            <li class="@Html.isActive("ComplejoDeportivo", "Index")">
+                                <a href="@Url.Action("Index", "ComplejoDeportivo")" title="">
+                                    <em></em>
+                                    <span>Complejos Deportivos</span>
+                                </a>
+                            </li>
 
 
-                        <li class="@Html.isActive("Menu", "Index")">
-                            <a href="@Url.Action("Index", "Menu")" title="Menu">
-                                <em></em>
-                                <span>Menu</span>
-                            </a>
-                        </li>
+                            <li class="@Html.isActive("Complejo", "Index")">
+                                <a href="@Url.Action("Index", "Complejo")" title="">
+                                    <em></em>
+                                    <span>Complejos</span>
+                                </a>
+                            </li>
 
-                    </ul>
-                </li>
-                 
+                            <li class="@Html.isActive("Canchas", "Index")">
+                                <a href="@Url.Action("Index", "Canchas")" title="">
+                                    <em></em>
+                                    <span>Mis Canchas</span>
+                                </a>
+                            </li>
 
+                            <li class="@Html.isActive("Canchas", "Reservacion")">
+                                <a href="@Url.Action("Reservacion", "Canchas")" title="">
+                                    <em></em>
+                                    <span>Reservaciones</span>
+                                </a>
+                            </li>
 
+                            <li class="@Html.isActive("Canchas", "Resultados")">
+                                <a href="@Url.Action("Resultados", "Canchas")" title="">
+                                    <em></em>
+                                    <span>Ingresar Resultados</span>
+                                </a>
+                            </li>
 
-                <li class="nav-heading">
-                    <span>Components</span>
-                </li>
+                        </ul>
+                    </li>
 
-
-                 
-
-                <li class="nav-heading">
-                    <span>More</span>
-                </li>
-
-
-                <li class="@Html.isActive(controller: "ComplejoDeportivo")">
-                    <a href="@Url.Action("Index", "ComplejoDeportivo")" title="Complejos deportivos">
-                        <em class="icon-trophy"></em>
-                        <span>Complejos Deportivos</span>
-                    </a>
-                </li>
-
-
-                <li class="@Html.isActive(controller: "Canchas")">
-                    <a href="@Url.Action("Index", "Canchas")" title="Canchas">
-                        <em class="icon-trophy"></em>
-                        <span>Canchas</span>
-                    </a>
-                </li>
+                } 
 
             }
 

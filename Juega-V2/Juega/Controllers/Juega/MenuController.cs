@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Juega.Controllers.Juega
 {
-    // [Authorize(Roles = Utilidades.Roles.AdminSistema)]
+     [Authorize(Roles = Utilidades.Roles.AdminSistema)]
     public class MenuController : JuegaController
     {
         public ActionResult Index()
@@ -50,7 +50,7 @@ namespace Juega.Controllers.Juega
                 _db.Configuration.ProxyCreationEnabled = false;
                 _db.Configuration.LazyLoadingEnabled = false;
 
-                var menu = _db.Menu.ToList();
+                var menu = _db.Menu.Where(x => x.IdMenuPadre == null).OrderBy(y => y.Orden).ToList();
 
                 if (menu == null)
                     return Resultado_Error("Error al cargar el menu.");
@@ -60,12 +60,40 @@ namespace Juega.Controllers.Juega
                 foreach (var item in menu)
                 {
                     var mp = new MenuPrincipal();
+
+                    var qNodosHijos = _db.Menu.Where(x => x.IdMenuPadre == item.IdMenu);
+                    if (qNodosHijos == null)
+                        continue;
+
+                    var listaNodosHijos = qNodosHijos.ToList();
+                    if (listaNodosHijos.Count() <= 0)
+                        continue;
+
+
+                    mp.IdMenu = item.IdMenu.ToString();
+                    mp.Descripcion = item.Descripcion;
                     mp.Action = item.Action;
                     mp.Controller = item.Controller;
                     mp.UrlIcono = item.UrlIcon;
-                    
+                    mp.ListaHijos = new List<MenuPrincipal>();
+
+                    foreach (var itemHijo in listaNodosHijos)
+                    {
+                        var hijo = new MenuPrincipal();
+                        hijo.IdMenu = item.IdMenu.ToString();
+                        hijo.Action = itemHijo.Action;
+                        hijo.Controller = itemHijo.Controller;
+                        hijo.Descripcion = itemHijo.Descripcion;
+                        hijo.UrlIcono = itemHijo.UrlIcon;
+
+
+                        mp.ListaHijos.Add(hijo);
+
+                    }
+
                     lista.Add(mp);
                 }
+
 
                 return Resultado_Correcto(lista);
             }
