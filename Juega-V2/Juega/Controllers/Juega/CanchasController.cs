@@ -8,7 +8,7 @@ using Juega.BDD;
 
 namespace Juega.Controllers.Juega
 {
-    [Authorize(Roles = "adm_cancha")]
+    [Authorize(Roles = Utilidades.Roles.AdminCancha)]
     public class CanchasController : JuegaController
     {
         public ActionResult Index()

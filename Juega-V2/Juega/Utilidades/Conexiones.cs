@@ -5,10 +5,20 @@ using System.Web;
 
 namespace Juega.Utilidades
 {
+    public static class Roles
+    {
+        public const string Espectador = "adm_espectador";
+        public const string Jugador = "adm_jugador";
+        public const string AdminEquipo = "adm_equipo";
+        public const string AdminCancha = "adm_cancha";
+        public const string AdminSistema = "adm_sistema";
+        public const string Valorar = "adm_valorar";
+    }
     public static class Conexiones
     {
         private enum ConexionUsar
         {
+            Aws = 0,
             AppHarbor = 1,
             Dramos = 2,
             DBustillo = 3,
@@ -22,10 +32,13 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Sistema()
         {
-            var cnn = ConexionUsar.AppHarbor;
+            var cnn = ConexionUsar.Aws; 
 
             switch (cnn)
             {
+                case ConexionUsar.Aws:
+                    return "Juega.A_W_S";
+
                 case ConexionUsar.AppHarbor:
                     return "Juega.AppHarbor";
 
@@ -59,10 +72,13 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Seguridad()
         {
-            var cnn = ConexionUsar.AppHarbor;
+            var cnn = ConexionUsar.Aws; 
 
             switch (cnn)
             {
+                case ConexionUsar.Aws:
+                    return "Seguridad.A_W_S";
+
                 case ConexionUsar.AppHarbor:
                     return "Seguridad.AppHarbor";
 

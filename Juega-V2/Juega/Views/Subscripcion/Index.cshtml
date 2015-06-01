@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- START widget-->
+<div class="panel widget">
+    <div class="panel-body">
+        <div class="row row-table">
+            <div class="col-xs-3 text-center">
+                <img src="~/Content/Images/Jugador.jpg" alt="Image" class="img-thumbnail img-circle img-responsive thumb64" />
+            </div>
+            <div class="col-xs-5 text-center">
+                <h3 class="m0">Jugador</h3>
+            </div>
+            <div class="col-xs-4">
+                <a href="#" class="btn btn-purple">
+                    <em class="fa fa-hand-o-right"></em>
+                    <span>Solicitar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END widget-->
+
+<!-- START widget-->
+<div class="panel widget">
+    <div class="panel-body">
+        <div class="row row-table">
+            <div class="col-xs-3 text-center">
+                <img src="~/Content/Images/Tecnico.jpg" alt="Image" class="img-thumbnail img-circle img-responsive thumb64" />
+            </div>
+            <div class="col-xs-5 text-center">
+                <h3 class="m0">Tecnico</h3>
+            </div>
+            <div class="col-xs-4">
+                <a href="@Url.Action("Create", "CrearEquipo")" class="btn btn-purple">
+                    <em class="fa fa-hand-o-right"></em>
+                    <span>Solicitar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END widget-->
+
+<!-- START widget-->
+<div class="panel widget">
+    <div class="panel-body">
+        <div class="row row-table">
+            <div class="col-xs-3 text-center">
+                <img src="~/Content/Images/Administrador.png" alt="Image" class="img-thumbnail img-circle img-responsive thumb64" />
+            </div>
+            <div class="col-xs-5 text-center">
+                <h3 class="m0">Administrador de Cancha</h3>
+            </div>
+            <div class="col-xs-4">
+                <a href="@Url.Action("Index", "ComplejoDeportivo")" class="btn btn-purple">
+                    <em class="fa fa-hand-o-right"></em>
+                    <span>Solicitar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END widget-->

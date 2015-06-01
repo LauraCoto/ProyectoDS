@@ -17,15 +17,19 @@ namespace Juega.BDD
         public long IdDenuncia { get; set; }
         public string Descripcion { get; set; }
         public string TipoEstado { get; set; }
+        public Nullable<long> IdUsuarioDenuncia { get; set; }
+        public Nullable<long> IdUsuarioDenunciado { get; set; }
+        public Nullable<long> IdCanchaDenunciada { get; set; }
+        public Nullable<long> IdEquipoDenunciado { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }
         public Nullable<System.DateTime> FechaElimino { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<long> IdUsuario { get; set; }
-        public Nullable<long> IdCancha { get; set; }
-        public Nullable<long> IdEquipo { get; set; }
     
         public virtual Cancha Cancha { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
+        public virtual Usuario Usuario2 { get; set; }
         public virtual Equipo Equipo { get; set; }
     }
 }

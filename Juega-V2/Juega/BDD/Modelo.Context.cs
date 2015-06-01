@@ -15,59 +15,10 @@ namespace Juega.BDD
 
     public partial class JuegaEntities : DbContext
     {
-
-        //private enum ConexionUsar
-        //{
-        //    AppHarbor = 1,
-        //    Dramos = 2,
-        //    DBustillo = 3,
-        //    Rudy = 4,
-        //    Laura = 5,
-        //    Javier = 6,
-        //    Cris = 7,
-        //    Maynor = 8,
-        //    Jesus = 9,
-
-        //}
-
-        //public static string ObtenerCadenaConexion_Sistema()
-        //{
-        //    var cnn = ConexionUsar.Dramos;
-
-        //    switch (cnn)
-        //    {
-        //        case ConexionUsar.AppHarbor:
-        //            return "Juega.AppHarbor";
-
-        //        case ConexionUsar.Dramos:
-        //            return "Juega.dramos";
-
-        //        case ConexionUsar.DBustillo:
-        //            return "Juega.dbustillo";
-
-        //        case ConexionUsar.Rudy:
-        //            return "Juega.Rudy";
-
-        //        case ConexionUsar.Laura:
-        //            return "Juega.Laura";
-
-        //        case ConexionUsar.Javier:
-        //            return "Juega.Javier";
-
-        //        case ConexionUsar.Cris:
-        //            return "Juega.Cris";
-
-        //        case ConexionUsar.Maynor:
-        //            return "Juega.Maynor";
-
-        //        case ConexionUsar.Jesus:
-        //            return "Juega.Jesus";
-        //    }
-
-        //    return "Juega.AppHarbor";
-        //}
-
-        public JuegaEntities() : base("name=" + Juega.Utilidades.Conexiones. ObtenerCadenaConexion_Sistema()) { }
+        public JuegaEntities()
+            : base("name=" + Juega.Utilidades.Conexiones.ObtenerCadenaConexion_Sistema())
+        {
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -87,6 +38,7 @@ namespace Juega.BDD
         public virtual DbSet<Equipo_Jugador> Equipo_Jugador { get; set; }
         public virtual DbSet<Equipo_Tecnico> Equipo_Tecnico { get; set; }
         public virtual DbSet<Equipo_Valoracion> Equipo_Valoracion { get; set; }
+        public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Reto> Reto { get; set; }
         public virtual DbSet<Token> Token { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
