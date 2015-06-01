@@ -10,7 +10,7 @@ using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
-    // [Authorize(Roles = Utilidades.Roles.AdminSistema)]
+    [Authorize(Roles = Utilidades.Roles.AdminSistema)]
     public class RolesController : JuegaController
     {
         public ActionResult Index()
@@ -246,27 +246,22 @@ namespace Juega.Controllers.Juega
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-                var rol = roleManager.FindById(model.IdRol);
-
-                if (rol == null)
-                    return Resultado_Advertencia("El rol al que intenta actualizar no existe.");
-
-                var userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
-                var usuario = userManager.FindById(model.IdUsuario);
-
-
+              
+                var context = new ApplicationDbContext();
+                var usuario = context.Users.FirstOrDefault(x => x.Id == model.IdUsuario); 
+                 
                 if (usuario == null)
                     return Resultado_Advertencia("El usuario al que intenta eliminar no existe.");
 
-                var identityRol = new IdentityUserRole();
-                identityRol.RoleId = model.IdRol;
-                identityRol.UserId = model.Usuario;
+               var identityRol = usuario.Roles.FirstOrDefault(x => x.RoleId == model.IdRol && x.UserId == model.IdUsuario);
 
-                usuario.Roles.Add(identityRol);
+               if (identityRol == null)
+                   return Resultado_Advertencia("El permiso al que intenta eliminar no existe.");
+
                 usuario.Roles.Remove(identityRol);
+                context.SaveChanges(); 
 
-                return Resultado_Correcto(rol);
+                return Resultado_Correcto(model);
             }
             catch (Exception e)
             {

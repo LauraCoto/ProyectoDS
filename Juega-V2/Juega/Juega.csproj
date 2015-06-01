@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="com.mosso.cloudfiles, Version=1.4.2.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\com.mosso.cloudfiles.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -290,6 +294,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChartsController.cs" />
+    <Compile Include="Controllers\ComplejoController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\ElementsController.cs" />
@@ -320,6 +325,7 @@
     <Compile Include="Utilidades\Conexiones.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilidades\SubirImagen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
@@ -374,6 +380,7 @@
     <Content Include="Content\Images\user\11.jpg" />
     <Content Include="Content\Images\user\12.jpg" />
     <Content Include="Content\Images\user\13.jpg" />
+    <Content Include="dll\com.mosso.cloudfiles.dll" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\documentation\readme.md" />
@@ -392,6 +399,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\googleMapsApi.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <EntityDeploy Include="BDD\Modelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -1500,10 +1508,15 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Complejo\Create.cshtml" />
+    <Content Include="Views\Complejo\Delete.cshtml" />
+    <Content Include="Views\Complejo\Details.cshtml" />
+    <Content Include="Views\Complejo\Edit.cshtml" />
+    <Content Include="Views\Complejo\Index.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="dll\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
