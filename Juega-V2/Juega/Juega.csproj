@@ -304,6 +304,7 @@
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
+    <Compile Include="Controllers\Juega\Crear_DenunciasController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
@@ -1549,6 +1550,12 @@
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Create.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Delete.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Details.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Edit.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Index.cshtml" />
+    <Content Include="Views\Crear_Denuncias\CrearDenuncia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

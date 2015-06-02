@@ -31,11 +31,16 @@ namespace Juega.Controllers.Juega
                 usuarioModel.Nombre = usuario.Nombre;
                 usuarioModel.Correo = usuario.Correo;
                 usuarioModel.Telefono = usuario.Telefonos;
+                usuarioModel.id_Usuario = usuario.IdUsuario.ToString();
+
                 if (usuario.FechaNacimiento != null)
                     usuarioModel.Fecha_Nac = usuario.FechaNacimiento.Value.ToShortDateString();
 
-              //  return Resultado_Correcto(UsuarioModel);
-                ViewBag.Usuario = usuarioModel;
+                //return Resultado_Correcto(UsuarioModel);
+                ViewBag.Apellido = usuario.Apellido;
+                ViewBag.Nombre = usuario.Nombre;
+                ViewBag.Descripcion = usuario.Descripcion;
+
                 return View(usuarioModel);
 
             }

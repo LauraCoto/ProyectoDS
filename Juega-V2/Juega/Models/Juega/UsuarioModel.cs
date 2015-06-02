@@ -14,6 +14,6 @@ namespace Juega.Models.Juega
         public virtual string Correo {get; set;}
         public virtual string Telefono {get; set;}
         public virtual string Fecha_Nac {get; set;}
-
+        public virtual string id_Usuario { get; set; }
     }
 }

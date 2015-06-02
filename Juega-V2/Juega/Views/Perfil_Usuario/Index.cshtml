@@ -51,7 +51,8 @@
                                             <img src="~/Content/Images/user/player.png" class="img-responsive img-rounded" />
                                             <br />
                                             <div class="form-group form">
-                                                <a href="@Url.Action("Index", "Denuncias")" class="btn btn-danger btn-md" ng-click="report">
+                                                
+                                                <a href="@Url.Action("Create/" + @Model.id_Usuario, "Crear_Denuncias")" class="btn btn-danger btn-md" ng-click="report">
                                                     <em class="fa fa-hand-o-right"></em>
                                                     <span>Reportar</span>
                                                 </a>
