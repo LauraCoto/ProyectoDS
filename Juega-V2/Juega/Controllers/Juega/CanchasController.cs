@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
+using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
@@ -16,6 +17,48 @@ namespace Juega.Controllers.Juega
             return View();
         }
 
+
+        public ActionResult Inicio()
+        {
+            return View();
+        }
+
+        public JuegaJson GetAll_Model()
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+               // _db.Configuration.ProxyCreationEnabled = false;
+                var canchas = _db.Cancha.Where(x => x.Activo == true).ToList();
+
+                var lista = new List<CanchaModel>();
+                foreach (var item in canchas)
+                {
+                    var c = new CanchaModel();
+                    c.Ancho = item.Ancho.ToString();
+                    c.Largo = item.Ancho.ToString();
+                    c.Espectadores = item.NumEspectadores.ToString();
+
+                    c.IdCancha = item.IdCancha.ToString();
+                    c.Nombre = item.Nombre.ToString();
+
+                    if (item.ComplejoDeportivo != null)
+                        c.Complejo = item.ComplejoDeportivo.Nombre;
+
+                    lista.Add(c);
+
+                }
+
+                return Resultado_Correcto(lista);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
         public JuegaJson GetAll()
         {
             try
@@ -24,7 +67,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
                 _db.Configuration.ProxyCreationEnabled = false;
-                var lista = _db.Cancha.ToList();
+                var lista = _db.Cancha.Where(x => x.Activo == true).ToList();
 
                 return Resultado_Correcto(lista);
             }
@@ -46,6 +89,9 @@ namespace Juega.Controllers.Juega
                 if (ExisteRegistro(cancha.Nombre, -1))
                     return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
+                cancha.Usuario = ObtenerUsuario_Juega();
+                cancha.Activo = true;
+                cancha.FechaCreo = DateTime.Now;
                 _db.Cancha.Add(cancha);
                 _db.SaveChanges();
 
@@ -65,8 +111,8 @@ namespace Juega.Controllers.Juega
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
 
-                if (ExisteRegistro(cancha.Nombre, -1))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
+                if (ExisteRegistro(cancha.Nombre, cancha.IdCancha))
+                    return Resultado_Advertencia("Ya existe una cancha con el mismo nombre.");
 
                 _db.Entry(cancha).State = EntityState.Modified;
                 _db.SaveChanges();

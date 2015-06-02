@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<script src="~/app/controller/CanchasCtrl.js"></script>
+
+
+
+<div class="content-wrapper">
+    <h3>Canchas</h3>
+</div>
+<div class="panel-body">
+    <a href="/Cancha/Crear" class="mb-sm btn btn-primary">Crear Cancha</a>
+</div>
+
+<div class="container" ng-app="appCanchas" ng-controller="CanchasCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+            <div ng-repeat="item in ListaRegistros_Model">
+
+                <div class="col-lg-4">
+                    <!-- START widget-->
+                    <div class="panel widget">
+                        <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
+                            <div class="row row-table">
+                                <div class="col-xs-12 text-white">
+                                    <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+                                    <h3 class="m0">{{item.Nombre}}</h3>
+                                    <p class="m0">
+                                        <em class="fa fa-twitter fa-fw"></em> {{item.Complejo}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body text-center bg-green">
+                            <div class="row row-table">
+                                <div class="col-xs-4">
+                                    <a href="/Cancha/Editar/{{item.IdCancha}}" class=" text-white">
+                                        <em class="fa fa-folder-open-o fa-2x"></em>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="/Cancha/Horario/{{item.IdCancha}}" class=" text-white">
+                                        <em class="fa fa-clock-o fa-2x"></em>
+                                    </a>
+                                </div>
+                                <div class="col-xs-4">
+                                    <a href="/Cancha/Borrar/{{item.IdCancha}}" class=" text-white">
+                                        <em class="fa fa-user fa-2x"></em>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="label label-primary pull-right">{{item.Espectadores}}</span>
+                                <em class="fa fa-fw fa-clock-o text-muted"></em>Capacidad Espectadores
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="label label-primary pull-right">{{item.Largo}}</span>
+                                <em class="fa fa-fw fa-user text-muted"></em>Mts. Largo
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="label label-primary pull-right">{{item.Ancho}} </span>
+                                <em class="fa fa-fw fa-folder-open-o text-muted"></em> Mts. Ancho
+                            </a>
+                        </div>
+                    </div>
+                    <!-- END widget-->
+                </div>
+
+                @*<div class="col-lg-4">
+
+                <div class="panel widget">
+                    <div class="half-float">
+
+                        <div class="panel-body text-center bg-white>
+                        </div>
+                        <div class="half-float-top">
+                            <img src="~/Content/Images/user/09.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+                        </div>
+                    </div>
+                    <div class="panel-body text-center">
+                        <h2 class="m-sm"> {{item.Nombre}} </h2>
+                        <p class="text-muted"> SportMania </p>
+                    </div>
+                    <div class="panel-body text-center bg-green-light">
+                        <div class="row row-table">
+                            <div class="col-xs-4">
+                                <h3 class="m0">{{item.Largo}}</h3>
+                                <p class="m0">M. Largo</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <h3 class="m0">{{item.Ancho}} </h3>
+                                <p class="m0">M. Ancho</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <h3 class="m0">{{item.NumEspectadores}}</h3>
+                                <p class="m0">Capacidad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            </div>
+
+        </div>
+
+    </div>
+</div>

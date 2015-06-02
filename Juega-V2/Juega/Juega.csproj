@@ -325,6 +325,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
+    <Compile Include="Models\Juega\CanchaModel.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
     <Compile Include="Models\Juega\UsuarioModel.cs" />
@@ -375,6 +376,8 @@
     <Content Include="Content\Images\bg7.jpg" />
     <Content Include="Content\Images\bg8.jpg" />
     <Content Include="Content\Images\bg9.jpg" />
+    <Content Include="Content\Images\cancha.jpg" />
+    <Content Include="Content\Images\cancha2.jpg" />
     <Content Include="Content\Images\dummy.png" />
     <Content Include="Content\Images\futbol.png" />
     <Content Include="Content\Images\Jugador.jpg" />
@@ -1549,6 +1552,7 @@
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
+    <Content Include="Views\Canchas\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
