@@ -24,6 +24,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
                 _db.Configuration.ProxyCreationEnabled = false;
+                //var lista = _db.Usuario_Solicitud_Equipo.Where(x => x.TipoEstado == "Pendiente").ToList(); 
                 var lista = _db.Usuario_Solicitud_Equipo.Where(x => x.TipoEstado == "Pendiente").ToList(); 
 
                 return Resultado_Correcto(lista);
@@ -108,50 +109,5 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
-        //[HttpPost]
-        //public JuegaJson Delete(Usuario_Solicitud_Equipo complejoDeportivo)
-        //{
-        //    try
-        //    {
-        //        if (!TieneAcceso())
-        //            return Resultado_No_Acceso();
-
-        //        if (complejoDeportivo == null)
-        //            return Resultado_Advertencia("El registro no es valido.");
-
-        //        var complejo = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == complejoDeportivo.IdComplejoDeportivo);
-
-        //        if (complejo == null)
-        //            return Resultado_Advertencia("No se encontro ningun registro.");
-
-        //        var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
-
-        //        //  if (canchas != null && canchas.Count() > 0)
-        //        //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
-
-
-        //        _db.ComplejoDeportivo.Remove(complejo);
-        //        _db.SaveChanges();
-
-        //        return Resultado_Correcto(complejoDeportivo, "El registro ha sido eliminado.");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Resultado_Exception(e);
-        //    }
-        //}
-
-        //private bool ExisteRegistro(string nombre, long IdExcluir)
-        //{
-        //    if (nombre.Trim() == "")
-        //        return false;
-
-        //    var complejo = _db.Usuario_Solicitud_Equipo.FirstOrDefault(x => x.Nombre == nombre &&
-        //                                                        x.IdComplejoDeportivo != IdExcluir
-        //                                                        );
-
-        //    return complejo != null;
-        //}
-
     }
 }

@@ -303,15 +303,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
-    <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
-    <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
     <Compile Include="Controllers\Juega\UsuariosController.cs" />
     <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
+    <Compile Include="Controllers\Juega\Usuario_Solicitud_EquipoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MultilevelsController.cs" />
@@ -1549,6 +1548,11 @@
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Create.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Delete.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
