@@ -1,5 +1,0 @@
-C:\ProyectoDS\Juega-V2\Juega.Domain\bin\Debug\Juega.Domain.dll
-C:\ProyectoDS\Juega-V2\Juega.Domain\bin\Debug\Juega.Domain.pdb
-C:\ProyectoDS\Juega-V2\Juega.Domain\obj\Debug\Juega.Domain.csprojResolveAssemblyReference.cache
-C:\ProyectoDS\Juega-V2\Juega.Domain\obj\Debug\Juega.Domain.dll
-C:\ProyectoDS\Juega-V2\Juega.Domain\obj\Debug\Juega.Domain.pdb

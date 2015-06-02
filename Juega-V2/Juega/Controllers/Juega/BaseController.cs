@@ -50,12 +50,13 @@ namespace Juega.Controllers.Juega
 
         }
 
-        internal JuegaJson Resultado_Devolver(object data, string mensaje = "", string error = "N",string alerta="N")
+        internal JuegaJson Resultado_Devolver(object data, string mensaje = "", string error = "N", string alerta = "N", string info = "N")
         {
             var r = new Resultado();
             r.data = data;
             r.Error = error;
             r.Alerta = alerta;
+            r.Info = info;
             r.Mensaje = mensaje;
 
             var json = new JuegaJson(r);
@@ -69,6 +70,7 @@ namespace Juega.Controllers.Juega
             r.data = null;
             r.Error = "S";
             r.Alerta = "N";
+            r.Info = "N";
             r.Mensaje = e.Message;
 
             var json = new JuegaJson(r);
@@ -83,6 +85,7 @@ namespace Juega.Controllers.Juega
             r.data = "";
             r.Error = "S";
             r.Alerta = "N";
+            r.Info = "N";
             r.Mensaje = mensaje;
 
             var json = new JuegaJson(r);
@@ -97,7 +100,7 @@ namespace Juega.Controllers.Juega
             r.data = data;
             r.Error = "N";
             r.Alerta = "N";
-            r.Info = "S"; 
+            r.Info = mensaje.Trim().Length <= 0 ? "N" : "S";
             r.Mensaje = mensaje;
 
             var json = new JuegaJson(r);
@@ -111,6 +114,7 @@ namespace Juega.Controllers.Juega
             r.data = null;
             r.Error = "N";
             r.Alerta = "S";
+            r.Info = "N";
             r.Mensaje = mensaje;
 
             var json = new JuegaJson(r);
@@ -122,7 +126,7 @@ namespace Juega.Controllers.Juega
         {
             var autenticado = Request.IsAuthenticated;
 
-           // var usu = ObtenerUsuario_MemberShip();
+            // var usu = ObtenerUsuario_MemberShip();
 
             status = autenticado ? StatusAcceso.Logeado : StatusAcceso.IniciarSesion;
 
@@ -145,6 +149,7 @@ namespace Juega.Controllers.Juega
             r.data = status;
             r.Error = "S";
             r.Alerta = "N";
+            r.Info = "N";
 
             if (status == StatusAcceso.AccesoDenegado)
                 r.Mensaje = "No tiene acceso para usar esta funcionalidad.";
@@ -167,12 +172,14 @@ namespace Juega.Controllers.Juega
 
         internal Usuario ObtenerUsuario_Juega()
         {
-            var memberShip = ObtenerUsuario_MemberShip();
 
-            if (memberShip != null)
-                return null;
 
-            var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == 1);
+            var UsersContext = new ApplicationDbContext();
+            var user = UsersContext.Users.ToList().Find(x => x.Email == User.Identity.Name);
+
+
+
+            var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuarioSeguridad == user.Id);
 
             return usuario;
 

@@ -1,0 +1,146 @@
+﻿
+
+<script src="~/app/controller/MenuCtrl.js"></script>
+
+<div class="container" ng-app="appMenu" ng-controller="MenuCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div ng-if="MostrarError=='N'">
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>Id. Menu</th>
+                        <th>Orden</th>
+                        <th>Descripcion</th>
+                        <th>Icono</th>
+                        <th>Controlador</th>
+                        <th>Accion</th>
+                        <th>Id. Elemento Padre</th>
+                        <th>Rol de Acceso</th>
+                        <th>Opciones</th>
+                    </tr>
+
+                    <tr ng-repeat="item in ListaRegistros">
+                        <td> {{item.IdMenu}} </td>
+                        <td> {{item.Orden}} </td>
+                        <td> {{item.Descripcion}} </td>
+                        <td> {{item.UrlIcon}} </td>
+                        <td> {{item.Controller}} </td>
+                        <td> {{item.Action}} </td>
+                        <td> {{item.IdMenuPadre}} </td>
+                        <td> {{item.IdRolSeguridad}} </td>
+                        <td>
+                            <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
+                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>
+                        </td>
+                    </tr>
+                </table>
+                <a ng-click="NuevoRegistro()" class="btn btn-primary">Nuevo</a>
+            </div>
+
+
+
+            <div ng-if="MostrarControles">
+                <br />
+                <br />
+                <div>
+                    <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                    <button type="button" class="btn btn-default" ng-click="Limpiar()">Cancelar</button>
+                </div> 
+                <div class="panel panel-default">
+                    <div class="panel-info">Agregar nuevo elemento al menu</div>
+                    <div class="panel-body">
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label>Orden de visualizacion</label>
+                                <input type="number" placeholder="" class="form-control" ng-model="Registro.Orden" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Descripcion</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Registro.Descripcion" />
+                            </div>
+
+                            @*<div class="form-group">
+                                <label>Icono</label>
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="fa fa-fw fa-plus"></i>
+                                    <span>Agregar Icono...</span>
+                                </span>
+                            </div>*@
+
+                            @*<div class="form-group">
+                                <label>Nombre del controlador</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Registro.Controller" />
+                            </div>*@
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Controlador</label>
+                                <div class="col-sm-10">
+                                    <select ng-model="Registro.Controller" ng-options="i.Nombre as i.Nombre for i in ListaControladores">
+                                        <option value="">Seleccionar controlador</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nombre de la accion del controlador</label>
+                                <input type="text" placeholder="" class="form-control" ng-model="Registro.Action" />
+                            </div>
+
+                            
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Menu Padre</label>
+                                <div class="col-sm-10">
+                                    <select ng-model="Registro.IdMenuPadre" ng-options="i.IdMenu as i.Descripcion for i in ListaMenu">
+                                        <option value="">Seleccionar menu padre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Rol de Acceso</label>
+                                <div class="col-sm-10">
+                                    <select ng-model="Registro.IdRolSeguridad" ng-options="i.Id as i.Nombre for i in ListaRoles">
+                                        <option value="">Seleccionar rol</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <div ng-if="MostrarError=='S'">
+                <br />
+                <br />
+                <div class="alert alert-danger" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+
+            <div ng-if="MostrarAlerta=='S'">
+                <br />
+                <br />
+                <div class="alert alert-warning" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+
+            <div ng-if="MostrarInfo=='S'">
+                <br />
+                <br />
+                <div class="alert alert-green" role="alert">
+                    {{Mensaje}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

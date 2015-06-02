@@ -24,6 +24,8 @@ namespace Juega.BDD
             this.Cancha_Valoracion = new HashSet<Cancha_Valoracion>();
             this.ComplejoDeportivo = new HashSet<ComplejoDeportivo>();
             this.Denuncia = new HashSet<Denuncia>();
+            this.Denuncia1 = new HashSet<Denuncia>();
+            this.Denuncia2 = new HashSet<Denuncia>();
             this.Equipo = new HashSet<Equipo>();
             this.Equipo_Foto = new HashSet<Equipo_Foto>();
             this.Equipo_Jugador = new HashSet<Equipo_Jugador>();
@@ -39,17 +41,19 @@ namespace Juega.BDD
         }
     
         public long IdUsuario { get; set; }
+        public string IdUsuarioSeguridad { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
         public string Telefonos { get; set; }
-        public Nullable<bool> Confirmado { get; set; }
         public string TipoEstado { get; set; }
         public Nullable<int> Valoracion { get; set; }
         public Nullable<bool> EsEspectador { get; set; }
         public Nullable<bool> EsAdminCancha { get; set; }
         public Nullable<bool> EsAdminEquipo { get; set; }
         public Nullable<bool> EsJugador { get; set; }
+        public string Descripcion { get; set; }
+        public string FotoPrincipal { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }
         public Nullable<System.DateTime> FechaElimino { get; set; }
@@ -63,6 +67,8 @@ namespace Juega.BDD
         public virtual ICollection<Cancha_Valoracion> Cancha_Valoracion { get; set; }
         public virtual ICollection<ComplejoDeportivo> ComplejoDeportivo { get; set; }
         public virtual ICollection<Denuncia> Denuncia { get; set; }
+        public virtual ICollection<Denuncia> Denuncia1 { get; set; }
+        public virtual ICollection<Denuncia> Denuncia2 { get; set; }
         public virtual ICollection<Equipo> Equipo { get; set; }
         public virtual ICollection<Equipo_Foto> Equipo_Foto { get; set; }
         public virtual ICollection<Equipo_Jugador> Equipo_Jugador { get; set; }

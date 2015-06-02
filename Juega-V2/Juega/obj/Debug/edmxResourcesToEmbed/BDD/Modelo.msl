@@ -11,6 +11,7 @@
           <ScalarProperty Name="Ancho" ColumnName="Ancho" />
           <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -98,6 +99,7 @@
           <ScalarProperty Name="Direccion" ColumnName="Direccion" />
           <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
           <ScalarProperty Name="Coodernadas" ColumnName="Coodernadas" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -111,12 +113,14 @@
           <ScalarProperty Name="IdDenuncia" ColumnName="IdDenuncia" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+          <ScalarProperty Name="IdUsuarioDenuncia" ColumnName="IdUsuarioDenuncia" />
+          <ScalarProperty Name="IdUsuarioDenunciado" ColumnName="IdUsuarioDenunciado" />
+          <ScalarProperty Name="IdCanchaDenunciada" ColumnName="IdCanchaDenunciada" />
+          <ScalarProperty Name="IdEquipoDenunciado" ColumnName="IdEquipoDenunciado" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="IdCancha" ColumnName="IdCancha" />
-          <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -127,6 +131,7 @@
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -192,6 +197,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="JuegaModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+          <ScalarProperty Name="IdRolSeguridad" ColumnName="IdRolSeguridad" />
+          <ScalarProperty Name="Orden" ColumnName="Orden" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="UrlIcon" ColumnName="UrlIcon" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="IdMenuPadre" ColumnName="IdMenuPadre" />
+          <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
+          <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Reto">
       <EntityTypeMapping TypeName="JuegaModel.Reto">
         <MappingFragment StoreEntitySet="Reto">
@@ -227,17 +249,19 @@
       <EntityTypeMapping TypeName="JuegaModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdUsuarioSeguridad" ColumnName="IdUsuarioSeguridad" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />
           <ScalarProperty Name="Correo" ColumnName="Correo" />
           <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
-          <ScalarProperty Name="Confirmado" ColumnName="Confirmado" />
           <ScalarProperty Name="TipoEstado" ColumnName="TipoEstado" />
           <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
           <ScalarProperty Name="EsEspectador" ColumnName="EsEspectador" />
           <ScalarProperty Name="EsAdminCancha" ColumnName="EsAdminCancha" />
           <ScalarProperty Name="EsAdminEquipo" ColumnName="EsAdminEquipo" />
           <ScalarProperty Name="EsJugador" ColumnName="EsJugador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FotoPrincipal" ColumnName="FotoPrincipal" />
           <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />

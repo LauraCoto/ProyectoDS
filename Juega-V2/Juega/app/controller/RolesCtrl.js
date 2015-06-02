@@ -32,7 +32,8 @@
     }
 
 
-    $http.get('/Roles/GetAll').success(function (data) {
+    $http.get('/Roles/GetAllRoles').success(function (data)
+    {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
         $scope.MostrarInfo = data.Info;
@@ -48,7 +49,8 @@
     });
      
 
-    $scope.Guardar = function () {
+    $scope.Guardar = function ()
+    {
         var url = $scope.Accion == 'nuevo' ? '/Roles/Create' : '/Roles/update';
 
         $http.post(url, $scope.Registro)
@@ -78,22 +80,28 @@
     }
 
 
-    $scope.EliminarRegistro = function (registroEliminar) {
+    $scope.EliminarRegistro = function (registroEliminar)
+    {
+        alert("Eliminar:" + registroEliminar);
+
         $http.post('/Roles/Delete', registroEliminar)
-        .success(function (data) {
+        .success(function (data)
+        {
             $scope.MostrarError = data.Error;
             $scope.MostrarAlerta = data.Alerta;
             $scope.MostrarInfo = data.Info;
             $scope.Mensaje = data.Mensaje;
 
-            if (data.Error == 'N' && data.Alerta == 'N') {
+            if (data.Error == 'N' && data.Alerta == 'N')
+            {
                 var indice = $scope.ListaRegistros.indexOf(registroEliminar);
                 $scope.ListaRegistros.splice(indice, 1);
                 $scope.Limpiar();
                 return;
             }
         })
-        .error(function (data) {
+        .error(function (data)
+        {
             $scope.Mensaje = data;
             $scope.MostrarError = 'S';
             $scope.MostrarAlerta = 'N'

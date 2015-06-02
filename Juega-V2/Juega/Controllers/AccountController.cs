@@ -80,7 +80,7 @@ namespace Juega
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe }); 
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -156,22 +156,28 @@ namespace Juega
                     var _db = new Juega.BDD.JuegaEntities();
                     var usuario = new BDD.Usuario();
                     usuario.Activo = true;
-                    usuario.Apellido = "";
-                    usuario.Nombre = "";
-                    usuario.Confirmado = false;
+                    usuario.Apellido = user.UserName;
+                    usuario.Nombre = user.UserName; 
                     usuario.Correo = model.Email;
                     usuario.EsAdminCancha = false;
                     usuario.EsAdminEquipo = false;
                     usuario.EsEspectador = true;
                     usuario.EsJugador = false;
                     usuario.FechaCreo = DateTime.Now;
-                    usuario.Telefonos = "";
+                    usuario.Telefonos = user.PhoneNumber;
                     usuario.TipoEstado = "Pend";
                     usuario.Valoracion = 0;
+                    usuario.IdUsuarioSeguridad = user.Id;
                     _db.Usuario.Add(usuario);
                     _db.SaveChanges();
 
-                    UserManager.AddToRole(user.Id, "adm_cancha"); 
+                    UserManager.AddToRole(user.Id, Utilidades.Roles.AdminSistema);
+                    //UserManager.AddToRole(user.Id, Utilidades.Roles.AdminSistema);
+                    //UserManager.AddToRole(user.Id, Utilidades.Roles.Espectador);
+                    //UserManager.AddToRole(user.Id, Utilidades.Roles.Jugador);
+                    //UserManager.AddToRole(user.Id, Utilidades.Roles.AdminEquipo);
+                    //UserManager.AddToRole(user.Id, Utilidades.Roles.Valorar);
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
