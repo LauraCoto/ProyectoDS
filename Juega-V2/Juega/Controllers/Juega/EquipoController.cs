@@ -11,7 +11,7 @@ using Juega.BDD;
 namespace Juega.Controllers.Juega
 {
     [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
-    public class CrearEquipoController : JuegaController
+    public class EquipoController : JuegaController
     {
         private JuegaEntities db = new JuegaEntities();
 
@@ -39,6 +39,7 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
+
 
         [HttpPost]
         public JuegaJson Create(Equipo equipo)

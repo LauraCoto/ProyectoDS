@@ -1,4 +1,4 @@
-﻿angular.module('CrearEquipoController', []).controller('EquipoCtrl', ['$scope', '$http', function ($scope, $http) {
+﻿angular.module('EquipoController', []).controller('EquipoCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.ListaRegistros = {};
     $scope.Registro = {};
@@ -31,7 +31,7 @@
         $scope.MostrarControles = true;
     }
 
-    $http.get('/CrearEquipo/GetAll').success(function (data) {
+    $http.get('/Equipo/GetAll').success(function (data) {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
         $scope.MostrarInfo = data.Info;
@@ -48,7 +48,7 @@
 
 
     $scope.Guardar = function () {
-        var url = $scope.Accion == 'nuevo' ? '/CrearEquipo/Create' : '/CrearEquipo/update';
+        var url = $scope.Accion == 'nuevo' ? '/Equipo/Create' : '/Equipo/update';
 
         $http.post(url, $scope.Registro)
             .success(function (data) {
@@ -78,7 +78,7 @@
 
 
     $scope.EliminarRegistro = function (registroEliminar) {
-        $http.post('/CrearEquipo/Delete', registroEliminar)
+        $http.post('/Equipo/Delete', registroEliminar)
         .success(function (data) {
             $scope.MostrarError = data.Error;
             $scope.MostrarAlerta = data.Alerta;
