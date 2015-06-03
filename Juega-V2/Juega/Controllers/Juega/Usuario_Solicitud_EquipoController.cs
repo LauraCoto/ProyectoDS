@@ -55,10 +55,10 @@ namespace Juega.Controllers.Juega
         {
             if (ModelState.IsValid)
             {
-                var usuarioLogin = ObtenerUsuario_Juega();
-                var usuariodb = db.Usuario.FirstOrDefault(x => x.IdUsuario == usuarioLogin.IdUsuario);
+                //var usuarioLogin = ObtenerUsuario_Juega();
+                //var usuariodb = db.Usuario.FirstOrDefault(x => x.IdUsuario == usuarioLogin.IdUsuario);
 
-                usuario_Solicitud_Equipo.IdUsuario = usuariodb.IdUsuario;
+                //usuario_Solicitud_Equipo.IdUsuario = usuariodb.IdUsuario;
                 usuario_Solicitud_Equipo.FechaCreo = DateTime.Now;
                 usuario_Solicitud_Equipo.TipoEstado = "Pendiente";
                 db.Usuario_Solicitud_Equipo.Add(usuario_Solicitud_Equipo);
@@ -141,5 +141,71 @@ namespace Juega.Controllers.Juega
             base.Dispose(disposing);
         }
 
+        //Aceptar o Rechazar Solicitud
+        // GET: Usuario_Solicitud_Equipo/Create
+        public ActionResult Decision()
+        {
+            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre");
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
+            return View();
+        }
+
+        // POST: Usuario_Solicitud_Equipo/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Decision([Bind(Include = "IdUsuario_Solicitud_Equipo,TipoEstado,FechaCreo,FechaElimino,Activo,IdUsuario,IdEquipo")] Usuario_Solicitud_Equipo usuario_Solicitud_Equipo)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuarioLogin = ObtenerUsuario_Juega();
+                var usuariodb = db.Usuario.FirstOrDefault(x => x.IdUsuario == usuarioLogin.IdUsuario);
+
+                usuario_Solicitud_Equipo.IdUsuario = usuariodb.IdUsuario;
+                usuario_Solicitud_Equipo.FechaCreo = DateTime.Now;
+                usuario_Solicitud_Equipo.TipoEstado = "Pendiente";
+                db.Usuario_Solicitud_Equipo.Add(usuario_Solicitud_Equipo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre", usuario_Solicitud_Equipo.IdEquipo);
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario_Solicitud_Equipo.IdUsuario);
+            return View(usuario_Solicitud_Equipo);
+        }
+
+        //Aca, inventando
+        public ActionResult Lista()
+        {
+            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre");
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
+            return View();
+        }
+
+        // POST: Usuario_Solicitud_Equipo/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Lista([Bind(Include = "IdUsuario_Solicitud_Equipo,TipoEstado,FechaCreo,FechaElimino,Activo,IdUsuario,IdEquipo")] Usuario_Solicitud_Equipo usuario_Solicitud_Equipo)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuarioLogin = ObtenerUsuario_Juega();
+                var usuariodb = db.Usuario.FirstOrDefault(x => x.IdUsuario == usuarioLogin.IdUsuario);
+
+                usuario_Solicitud_Equipo.IdUsuario = usuariodb.IdUsuario;
+                usuario_Solicitud_Equipo.FechaCreo = DateTime.Now;
+                usuario_Solicitud_Equipo.TipoEstado = "Pendiente";
+                db.Usuario_Solicitud_Equipo.Add(usuario_Solicitud_Equipo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre", usuario_Solicitud_Equipo.IdEquipo);
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario_Solicitud_Equipo.IdUsuario);
+            return View(usuario_Solicitud_Equipo);
+        }
     }
 }

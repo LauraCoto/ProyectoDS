@@ -10,6 +10,7 @@ namespace Juega.Controllers.Juega
 {
     public class UsuarioSolicitudJugadorController : JuegaController
     {
+        //Descripcion: El tecnico puede aceptar o rechazar las solicitudes y filtra por Pendiente.
         // GET: UsuarioSolicitudJugador
         public ActionResult Index()
         {
@@ -34,6 +35,27 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
+
+        //Recupero todos los equipo
+        public ActionResult GetAllEquipo()
+        {
+            try
+            {
+                _db.Configuration.ProxyCreationEnabled = false;
+
+                var lista = _db.Equipo.ToList();
+
+                return Json(lista, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+
 
         [HttpPost]
         public JuegaJson Create(Usuario_Solicitud_Equipo complejoDeportivo)

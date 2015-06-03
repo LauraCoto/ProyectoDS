@@ -2,6 +2,9 @@
 
     $scope.ListaRegistros = {};
     $scope.Registro = {};
+
+    $scope.ListaEquipo = {};
+
     $scope.Accion = 'nuevo';
     $scope.MostrarControles = false;
     $scope.MostrarError = {};
@@ -44,6 +47,11 @@
         else
             $scope.ListaRegistros = data.data;
 
+    });
+
+    //Obtengo la lista de equipos
+    $http.get('/UsuarioSolicitudJugador/GetAllEquipo').success(function (data) {
+        $scope.ListaEquipo = data;
     });
 
 

@@ -7,130 +7,160 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Juega.Controllers.Juega
 {
-    [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
     public class EquipoController : JuegaController
     {
         private JuegaEntities db = new JuegaEntities();
 
-        // GET: CrearEquipo
+        // GET: Equipoes
         public ActionResult Index()
         {
             var equipo = db.Equipo.Include(e => e.Usuario);
             return View(equipo.ToList());
         }
 
-        public JuegaJson GetAll()
+        // GET: Equipoes/Details/5
+        public ActionResult Details(long? id)
         {
-            try
+            if (id == null)
             {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                _db.Configuration.ProxyCreationEnabled = false;
-                var lista = _db.Equipo.ToList();
-
-                return Resultado_Correcto(lista);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception e)
+            Equipo equipo = db.Equipo.Find(id);
+            if (equipo == null)
             {
-                return Resultado_Exception(e);
+                return HttpNotFound();
             }
+            return View(equipo);
         }
 
+        // GET: Equipoes/Create
+        public ActionResult Create()
+        {
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
+            return View();
+        }
 
+        // POST: Equipoes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public JuegaJson Create(Equipo equipo)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "IdEquipo,Nombre,Valoracion,TipoEstado,FotoPrincipal,FechaCreo,FechaElimino,Activo,IdUsuario")] Equipo equipo)
         {
-            try
+            if (ModelState.IsValid)
             {
 
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+                //var usuarioLogin = ObtenerUsuario_Juega();
 
-                if (ExisteRegistro(equipo.Nombre, -1))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
-                _db.Equipo.Add(equipo);
-                _db.SaveChanges();
+                //var usuariodb = db.Usuario.FirstOrDefault(x => x.IdUsuario == usuarioLogin.IdUsuario);
 
-                return Resultado_Correcto(equipo, "El registro ha sido creado.");
+                //if (usuariodb != null)
+                //{
+                //    usuariodb.EsAdminEquipo = true;
+                //    db.Entry(usuariodb).State = EntityState.Modified;
+                //}
+                db.Equipo.Add(equipo);
+
+                //var context = new ApplicationDbContext();
+                //var usuarioSeguridad = context.Users.FirstOrDefault(x => x.Id == usuariodb.IdUsuarioSeguridad);
+                //var rolSeguridad = context.Roles.FirstOrDefault(x => x.Name == Utilidades.Roles.AdminEquipo);
+
+                //if (usuario == null)
+                //    return Resultado_Advertencia("El usuario al que intenta configurar no existe.");
+
+                //if (rol == null)
+                //    return Resultado_Advertencia("El rol al que intenta configurar no existe.");
+
+                //var identityRol = new IdentityUserRole();
+                //identityRol.RoleId = rolSeguridad.Id;
+                //identityRol.UserId = usuarioSeguridad.Id;
+
+                //model.Rol = rol.Name;
+                //model.Usuario = usuario.UserName;
+
+                //usuarioSeguridad.Roles.Add(identityRol);
+                //context.SaveChanges();
+
+                db.SaveChanges();
+                //return RedirectToAction("Index");
+                return RedirectToAction("Dashboard_v2", "Dashboard");
             }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
+
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", equipo.IdUsuario);
+            return View(equipo);
         }
 
+        // GET: Equipoes/Edit/5
+        public ActionResult Edit(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Equipo equipo = db.Equipo.Find(id);
+            if (equipo == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", equipo.IdUsuario);
+            return View(equipo);
+        }
 
+        // POST: Equipoes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public JuegaJson Update(Equipo equipo)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "IdEquipo,Nombre,Valoracion,TipoEstado,FotoPrincipal,FechaCreo,FechaElimino,Activo,IdUsuario")] Equipo equipo)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-
-                if (ExisteRegistro(equipo.Nombre, equipo.IdEquipo))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
-
-                _db.Entry(equipo).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                return Resultado_Correcto(equipo, "El registro ha sido actualizado.");
+                db.Entry(equipo).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
+            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", equipo.IdUsuario);
+            return View(equipo);
         }
 
-        [HttpPost]
-        public JuegaJson Delete(Equipo equipo)
+        // GET: Equipoes/Delete/5
+        public ActionResult Delete(long? id)
         {
-            try
+            if (id == null)
             {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                if (equipo == null)
-                    return Resultado_Advertencia("El registro no es valido.");
-
-                var complejo = _db.Equipo.FirstOrDefault(x => x.IdEquipo == equipo.IdEquipo);
-
-                if (complejo == null)
-                    return Resultado_Advertencia("No se encontro ningun registro.");
-
-                //var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
-
-                //  if (canchas != null && canchas.Count() > 0)
-                //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
-
-
-                _db.Equipo.Remove(complejo);
-                _db.SaveChanges();
-
-                return Resultado_Correcto(equipo, "El registro ha sido eliminado.");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            catch (Exception e)
+            Equipo equipo = db.Equipo.Find(id);
+            if (equipo == null)
             {
-                return Resultado_Exception(e);
+                return HttpNotFound();
             }
+            return View(equipo);
         }
 
-        private bool ExisteRegistro(string nombre, long IdExcluir)
+        // POST: Equipoes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(long id)
         {
-            if (nombre.Trim() == "")
-                return false;
+            Equipo equipo = db.Equipo.Find(id);
+            db.Equipo.Remove(equipo);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-            var complejo = _db.Equipo.FirstOrDefault(x => x.Nombre == nombre &&
-                                                                x.IdEquipo != IdExcluir
-                                                                );
-
-            return complejo != null;
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

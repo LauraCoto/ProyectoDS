@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Juega.BDD.Equipo>
+﻿@model IEnumerable<Juega.BDD.Usuario_Solicitud_Equipo>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista";
 }
 
-<h2>Index</h2>
+<h2>Lista</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,16 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Valoracion)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.TipoEstado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FotoPrincipal)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FechaCreo)
@@ -33,6 +24,9 @@
             @Html.DisplayNameFor(model => model.Activo)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Equipo.Nombre)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Usuario.IdUsuarioSeguridad)
         </th>
         <th></th>
@@ -41,16 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valoracion)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.TipoEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FotoPrincipal)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FechaCreo)
@@ -62,12 +47,15 @@
             @Html.DisplayFor(modelItem => item.Activo)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Equipo.Nombre)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Usuario.IdUsuarioSeguridad)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdEquipo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdEquipo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdEquipo })
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario_Solicitud_Equipo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario_Solicitud_Equipo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario_Solicitud_Equipo })
         </td>
     </tr>
 }
