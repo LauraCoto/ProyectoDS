@@ -11,6 +11,7 @@ namespace Juega.Controllers.Juega
         // GET: Subscripcion
         public ActionResult Index()
         {
+            
             return View();
         }
 
