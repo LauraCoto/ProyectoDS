@@ -5,12 +5,19 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Text;
 using System.Web.Mvc;
+using System.IO;
 using Juega.BDD;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+
+
 
 namespace Juega.Controllers.Juega
 {
-    public class EquipoPruebaController : Controller
+    public class EquipoPruebaController : JuegaController
     {
         private JuegaEntities db = new JuegaEntities();
 
@@ -48,16 +55,46 @@ namespace Juega.Controllers.Juega
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdEquipo,Nombre,Valoracion,TipoEstado,FotoPrincipal,FechaCreo,FechaElimino,Activo,IdUsuario")] Equipo equipo)
+        public ActionResult Create([Bind(Include = "IdEquipo,Nombre,Valoracion,TipoEstado,FotoPrincipal,FechaCreo,FechaElimino,Activo,IdUsuario")] Equipo equipo, HttpPostedFileBase image)
         {
-            if (ModelState.IsValid)
+
+            if (image != null)
             {
+                //attach the uploaded image to the object before saving to Database
+                equipo.FotoPrincipal= image.ContentLength;
+                equipo.ImageData = new byte[image.ContentLength];
+                image.InputStream.Read(equipo.ImageData, 0, image.ContentLength);
+
+                //Save image to file
+                var filename = image.FileName;
+                var filePathOriginal = Server.MapPath("/Content/Uploads/Originals");
+                var filePathThumbnail = Server.MapPath("/Content/Uploads/Thumbnails");
+                string savedFileName = Path.Combine(filePathOriginal, filename);
+                image.SaveAs(savedFileName);
+
+                //Read image back from file and create thumbnail from it
+                var imageFile = Path.Combine(Server.MapPath("~/Content/Uploads/Originals"), filename);
+                using (var srcImage = Image.FromFile(imageFile))
+                using (var newImage = new Bitmap(100, 100))
+                using (var graphics = Graphics.FromImage(newImage))
+                using (var stream = new MemoryStream())
+                {
+                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    graphics.DrawImage(srcImage, new Rectangle(0, 0, 100, 100));
+                    newImage.Save(stream, ImageFormat.Png);
+                    var thumbNew = File(stream.ToArray(), "image/png");
+                    equipo.ArtworkThumbnail = thumbNew.FileContents;
+                }
+
                 db.Equipo.Add(equipo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", equipo.IdUsuario);
+            
             return View(equipo);
         }
 
@@ -127,6 +164,19 @@ namespace Juega.Controllers.Juega
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public FileContentResult GetThumbnailImage(int artworkId)
+        {
+            Equipo art = db.Equipo.FirstOrDefault(p => p.IdEquipo == artworkId);
+            if (art != null)
+            {
+                return File(art.ArtworkThumbnail, art.ImageMimeType.ToString());
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

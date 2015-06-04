@@ -25,8 +25,8 @@ namespace Juega.Controllers.Juega
                     return Resultado_No_Acceso();
 
                 _db.Configuration.ProxyCreationEnabled = false;
-                //var lista = _db.Usuario_Solicitud_Equipo.Where(x => x.TipoEstado == "Pendiente").ToList(); 
                 var lista = _db.Usuario_Solicitud_Equipo.Where(x => x.TipoEstado == "Pendiente").ToList(); 
+                //var lista = _db.Usuario_Solicitud_Equipo.Where(x => x.TipoEstado == "Pendiente" && x.IdUsuario == User.Identity.Name).ToList(); 
 
                 return Resultado_Correcto(lista);
             }

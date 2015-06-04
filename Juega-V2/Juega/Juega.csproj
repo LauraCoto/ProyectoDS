@@ -1561,6 +1561,7 @@
     <Content Include="Views\Equipo\Edit.cshtml" />
     <Content Include="Views\Equipo\Index.cshtml" />
     <Content Include="Views\EquipoPrueba\Create.cshtml" />
+    <Content Include="Views\EquipoPrueba\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

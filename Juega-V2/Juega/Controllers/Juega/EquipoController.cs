@@ -162,5 +162,10 @@ namespace Juega.Controllers.Juega
             }
             base.Dispose(disposing);
         }
+
+        private void Open()
+        {
+
+        }
     }
 }
