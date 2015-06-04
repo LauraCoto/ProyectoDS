@@ -8,8 +8,8 @@ namespace Juega.Models.Juega
     public class CanchaModel
     {
 
-        public virtual int IdCancha { get; set; }
-        public virtual int IdComplejo { get; set; }
+        public virtual long IdCancha { get; set; }
+        public virtual long IdComplejo { get; set; }
         public virtual string Complejo { get; set; }
         public virtual string Nombre { get; set; }
         public virtual int Largo { get; set; }

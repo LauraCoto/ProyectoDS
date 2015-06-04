@@ -45,7 +45,7 @@ namespace Juega.Controllers.Juega
                     c.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
                     c.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
 
-                    c.IdCancha = item.IdCancha != null ? Convert.ToInt32(item.IdCancha) : 0;
+                    c.IdCancha = item.IdCancha;
                     c.Nombre = item.Nombre.ToString();
 
                     if (item.ComplejoDeportivo != null)
@@ -62,24 +62,7 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
-
-        public JuegaJson GetAll()
-        {
-            try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                _db.Configuration.ProxyCreationEnabled = false;
-                var lista = _db.Cancha.Where(x => x.Activo == true).OrderBy(z => z.FechaCreo).ToList();
-
-                return Resultado_Correcto(lista);
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-        }
+         
 
         [HttpPost]
         public JsonResult Create(Cancha cancha)
@@ -114,8 +97,8 @@ namespace Juega.Controllers.Juega
 
             try
             {
-                if (ExisteRegistro(model.Nombre, -1))
-                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Ya existe un complejo con el mismo nombre.");
+                if (ExisteRegistro(model.Nombre, model.IdCancha))
+                    return MostrarAdvertencia("Ya existe una cancha con el mismo nombre.");
 
                 var cancha = new Cancha();
 
@@ -127,7 +110,7 @@ namespace Juega.Controllers.Juega
                 cancha.Ancho = model.Ancho;
                 cancha.NumEspectadores = model.Espectadores;
                 cancha.Valoracion = 0;
-                cancha.TipoEstado = "1";
+                cancha.TipoEstado = Utilidades.TipoEstado.Pendiente;
                 cancha.Usuario = ObtenerUsuario_Juega();
                 cancha.Activo = true;
                 cancha.FechaCreo = DateTime.Now;
@@ -138,7 +121,7 @@ namespace Juega.Controllers.Juega
             }
             catch (Exception e)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Ocurrio un error al crear la cancha.");
+                return MostrarError(e.Message, "Ocurrio un error al crear la cancha.");
             }
         }
 

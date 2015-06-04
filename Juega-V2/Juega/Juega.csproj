@@ -326,6 +326,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
     <Compile Include="Models\Juega\CanchaModel.cs" />
+    <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
     <Compile Include="Models\Juega\UsuarioModel.cs" />
@@ -359,6 +360,28 @@
     <Content Include="Content\app\css\bootstrap.min.css" />
     <Content Include="Content\app\css\login.css" />
     <Content Include="Content\app\css\Selectable.css" />
+    <Content Include="Content\bootstrap-fileupload.css" />
+    <Content Include="Content\bootstrap-fileupload.min.css" />
+    <Content Include="Content\bootstrap-mvc-validation.css" />
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bwizard.css" />
+    <Content Include="Content\bwizard.min.css" />
+    <Content Include="Content\galleria.classic.css" />
+    <Content Include="Content\goMarketStyle.css" />
+    <Content Include="Content\ImageArea.css" />
+    <Content Include="Content\Modal.css" />
+    <Content Include="Content\rating.css" />
+    <Content Include="Content\SaleStyle.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\SiteUploader.css" />
+    <Content Include="Content\SiteUploaderImages.css" />
+    <Content Include="Scripts\bootstrap-fileupload.js" />
+    <Content Include="Scripts\bootstrap-fileupload.min.js" />
+    <Content Include="Scripts\bwizard.js" />
+    <Content Include="Scripts\bwizard.min.js" />
+    <Content Include="Scripts\GMap.js" />
     <Content Include="Scripts\Selectable.js" />
     <Content Include="Content\app\css\SimplePerfil.css" />
     <Content Include="Content\app\css\theme-a.css" />
@@ -816,6 +839,8 @@
     <Content Include="Views\Denuncias\Index.cshtml" />
     <Content Include="Views\Canchas\Inicio.cshtml" />
     <Content Include="Views\Canchas\Crear.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\Crear.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
