@@ -7,6 +7,7 @@ namespace Juega.Models.Juega
 {
     public class CanchaModel
     {
+       // private readonly List<ComplejoModel> _Complejos;
 
         public virtual long IdCancha { get; set; }
         public virtual long IdComplejo { get; set; }
@@ -15,5 +16,11 @@ namespace Juega.Models.Juega
         public virtual int Largo { get; set; }
         public virtual int Ancho { get; set; }
         public virtual int Espectadores { get; set; }
+
+        //public IEnumerable<System.Web.Mvc.SelectListItem> Complejos
+        //{
+        //    get { return new System.Web.Mvc.SelectList(_Complejos, "IdComplejoDeportivo", "Nombre"); }
+        //}
+
     }
 }

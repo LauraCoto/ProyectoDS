@@ -17,9 +17,54 @@ namespace Juega.Controllers.Juega
             return View();
         }
 
-        public ActionResult Crear()
+        public ActionResult GuardarVw(string id)
         {
-            return View();
+            var viewModel = new CanchaModel();
+
+
+            var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
+            var complejos = _db.ComplejoDeportivo.Where(x => x.Activo == true
+                                                     && x.IdUsuario == IdUsuarioLogin
+                                                    ).OrderBy(z => z.FechaCreo)
+                                                    .ToList();
+
+            ViewBag.ListaComplejos = complejos;
+
+
+            if (string.IsNullOrEmpty(id) || id == "-1")
+            {
+                ViewBag.Accion = "Crear";
+                return View(viewModel);
+            }
+            else
+            {
+              
+                var nid = long.Parse(id);
+                var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+                if (item == null)
+                    return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo");
+
+                viewModel.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
+                viewModel.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
+                viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
+                viewModel.IdCancha = item.IdCancha;
+                viewModel.Nombre = item.Nombre;  
+
+                if (item.ComplejoDeportivo != null)
+                {
+                    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
+                    viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
+                }
+
+             
+
+
+                ViewBag.Accion = "Guardar Cambios";
+
+                return View(viewModel);
+
+            }
         }
 
         public ActionResult Inicio()
@@ -62,7 +107,7 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
-         
+
 
         [HttpPost]
         public JsonResult Create(Cancha cancha)

@@ -834,10 +834,10 @@
     <Content Include="Views\Denuncias\Index.cshtml" />
     <Content Include="Views\Canchas\Inicio.cshtml" />
     <Content Include="Views\Canchas\Crear_ajax.cshtml" />
-    <Content Include="Views\ComplejoDeportivo\GuardarVW.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\GuardarVw.cshtml" />
     <Content Include="Views\ComplejoDeportivo\Inicio.cshtml" />
     <Content Include="Views\ComplejoDeportivo\EliminarVw.cshtml" />
-    <Content Include="Views\Canchas\Crear.cshtml" />
+    <Content Include="Views\Canchas\GuardarVw.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Create.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Delete.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
