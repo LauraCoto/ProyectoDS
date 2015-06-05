@@ -310,8 +310,8 @@
     <Compile Include="Controllers\Juega\RolesController.cs" />
     <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
-    <Compile Include="Controllers\Juega\UsuariosController.cs" />
     <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
+    <Compile Include="Controllers\Juega\Usuario_Solicitud_EquipoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\MultilevelsController.cs" />
@@ -831,16 +831,18 @@
     <Content Include="Views\Subscripcion\Index.cshtml" />
     <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
     <Content Include="Views\Perfil_Usuario\Index.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
     <Content Include="Views\Canchas\Inicio.cshtml" />
-    <Content Include="Views\Canchas\Crear.cshtml" />
-    <Content Include="Views\ComplejoDeportivo\Crear.cshtml" />
+    <Content Include="Views\Canchas\Crear_ajax.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\GuardarVW.cshtml" />
     <Content Include="Views\ComplejoDeportivo\Inicio.cshtml" />
+    <Content Include="Views\ComplejoDeportivo\EliminarVw.cshtml" />
+    <Content Include="Views\Canchas\Crear.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Create.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Delete.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

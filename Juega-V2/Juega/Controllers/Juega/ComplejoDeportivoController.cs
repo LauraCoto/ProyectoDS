@@ -72,8 +72,10 @@ namespace Juega.Controllers.Juega
         {
             try
             {
+                var IdUsuario = Obtener_ID_Usuario_Juega();
 
                 var complejos = from u in _db.ComplejoDeportivo
+                                where (u.Activo == true) && (u.IdUsuario == IdUsuario)
                                 select new { Description = u.Nombre, ID = u.IdComplejoDeportivo }
                             ;
 
@@ -87,7 +89,7 @@ namespace Juega.Controllers.Juega
 
 
         [Authorize(Roles = Utilidades.Roles.Espectador)]
-        public ActionResult Crear(string id)
+        public ActionResult GuardarVW(string id)
         {
 
             var viewModel = new ComplejoModel();
@@ -99,10 +101,10 @@ namespace Juega.Controllers.Juega
             }
             else
             {
-                var nid=long.Parse (id);
+                var nid = long.Parse(id);
                 var item = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == nid);
 
-                if (item == null) 
+                if (item == null)
                     return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo");
 
                 viewModel.Coodernadas = item.Coodernadas;
@@ -129,11 +131,11 @@ namespace Juega.Controllers.Juega
                 var usuarioLogin = ObtenerUsuario_Juega();
                 usuarioLogin.EsAdminEquipo = true;
 
-                 if (ExisteRegistro(model.Nombre, model.IdComplejoDeportivo))
-                        return MostrarAdvertencia("Ya tiene agregado un complejo con el mismo nombre.");
+                if (ExisteRegistro(model.Nombre, model.IdComplejoDeportivo))
+                    return MostrarAdvertencia("Ya tiene agregado un complejo con el mismo nombre.");
 
                 if (model.IdComplejoDeportivo <= 0)
-                {  
+                {
                     var complejo = new ComplejoDeportivo();
                     complejo.Activo = true;
                     complejo.Coodernadas = model.Coodernadas;
@@ -145,7 +147,7 @@ namespace Juega.Controllers.Juega
                     complejo.Telefonos = model.Telefonos;
 
                     _db.ComplejoDeportivo.Add(complejo);
-                   
+
                 }
                 else
                 {
@@ -160,7 +162,7 @@ namespace Juega.Controllers.Juega
                     complejo.Telefonos = model.Telefonos;
 
                     _db.Entry(complejo).State = EntityState.Modified;
-                } 
+                }
 
                 //Definir usuario como tecnico
                 var UsersContext = new ApplicationDbContext();
@@ -178,7 +180,7 @@ namespace Juega.Controllers.Juega
 
                 }
 
-                 _db.Entry(usuarioLogin).State = EntityState.Modified;
+                _db.Entry(usuarioLogin).State = EntityState.Modified;
                 _db.SaveChanges();
 
                 return RedirectToAction("Inicio");
@@ -188,6 +190,7 @@ namespace Juega.Controllers.Juega
                 return MostrarError(ex.Message, "Ocurrio un error guardar el complejo deportivo.");
             }
         }
+
 
         [Authorize(Roles = Utilidades.Roles.AdminCancha)]
         [HttpPost]
@@ -237,37 +240,70 @@ namespace Juega.Controllers.Juega
             }
         }
 
+
+
+        [Authorize(Roles = Utilidades.Roles.AdminCancha)]
+        public ActionResult EliminarVw(string id)
+        {
+
+            var viewModel = new ComplejoModel();
+
+            if (string.IsNullOrEmpty(id) || id == "-1")
+            {
+                return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo a eliminar.");
+            }
+            else
+            {
+                var nid = long.Parse(id);
+                var item = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == nid);
+
+                if (item == null)
+                    return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo.");
+
+                viewModel.Coodernadas = item.Coodernadas;
+                viewModel.Direccion = item.Direccion;
+                viewModel.FotoPrincipal = item.FotoPrincipal;
+                viewModel.IdComplejoDeportivo = item.IdComplejoDeportivo;
+                viewModel.Telefonos = item.Telefonos;
+                viewModel.Nombre = item.Nombre;
+
+                return View(viewModel);
+
+            }
+        }
+
         [Authorize(Roles = Utilidades.Roles.AdminCancha)]
         [HttpPost]
-        public JuegaJson Delete(ComplejoDeportivo complejoDeportivo)
+        public ActionResult Eliminar(ComplejoModel model)
         {
             try
             {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+                if (model.IdComplejoDeportivo == null || model.IdComplejoDeportivo <= 0)
+                    return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo a eliminar");
 
-                if (complejoDeportivo == null)
-                    return Resultado_Advertencia("El registro no es valido.");
 
-                var complejo = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == complejoDeportivo.IdComplejoDeportivo);
+                var complejo = _db.ComplejoDeportivo.FirstOrDefault(x => x.IdComplejoDeportivo == model.IdComplejoDeportivo);
 
                 if (complejo == null)
-                    return Resultado_Advertencia("No se encontro ningun registro.");
+                    return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo a eliminar");
 
-                var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
+                //var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
 
-                //  if (canchas != null && canchas.Count() > 0)
-                //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
+                if (complejo.Cancha.Count > 0)
+                    return MostrarAdvertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
 
+                complejo.Activo = false;
+                complejo.FechaElimino = DateTime.Now;
 
-                _db.ComplejoDeportivo.Remove(complejo);
+                _db.Entry(complejo).State = EntityState.Modified;
+
                 _db.SaveChanges();
 
-                return Resultado_Correcto(complejoDeportivo, "El registro ha sido eliminado.");
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {
-                return Resultado_Exception(e);
+                return MostrarError(e.Message, "Ocurrio un error eliminar el complejo deportivo.");
             }
         }
 

@@ -7,7 +7,7 @@
 
 
 <div class="panel-body">
-    <a href="/ComplejoDeportivo/Crear/" class="mb-sm btn btn-primary">Crear Complejo</a>
+    <a href="/ComplejoDeportivo/GuardarVW/" class="mb-sm btn btn-primary">Crear Complejo</a>
 </div>
 
 <div class="container" ng-app="appComplejo" ng-controller="complejoDeportivoCtrl">
@@ -36,9 +36,15 @@
                                     <a href="/ComplejoDeportivo/Crear/{{item.IdComplejoDeportivo}}" class=" text-white">
                                         <em class="fa fa-fw fa-clock-o text-muted"></em>Editar
                                     </a>
+
+                                    <a href="/ComplejoDeportivo/EliminarVw/{{item.IdComplejoDeportivo}}" class=" text-white">
+                                        <em class="fa fa-fw fc-agenda-view"></em>Eliminar
+                                    </a>
+
                                 </div> 
                             </div>
                         </div>
+                         
 
                         <div class="list-group">
                             <a href="#" class="list-group-item">

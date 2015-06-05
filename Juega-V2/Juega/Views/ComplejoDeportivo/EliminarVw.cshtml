@@ -1,0 +1,70 @@
+﻿@model Juega.Models.Juega.ComplejoModel
+
+<style>
+    body {
+        padding-top: 60px;
+    }
+</style>
+
+
+<h3><b>Confirmar eliminacion</b> </h3>
+
+
+@using (Html.BeginForm("Eliminar", "ComplejoDeportivo"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    
+    <fieldset>
+
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel widget">
+                        <div class="row row-table row-flush">
+
+
+                            <div class="editor-field">
+                                @Html.HiddenFor(model => model.IdComplejoDeportivo, new { @class = "form-control required", @hidden = "hidden" })
+                            </div>
+
+                            <div class="col-xs-5">
+                                <picture class="lateral-picture">
+                                    <img src="~/Content/Images/bg2.jpg" alt="" />
+                                </picture>
+                            </div>
+
+                            <div class="col-xs-7 align-middle p-lg">
+
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </div>
+
+                                <div class="pull-right">
+                                    <a href="/ComplejoDeportivo/Inicio" class="btn btn-success btn-sm">Volver</a>
+                                </div>
+
+                                <p> <span class="text-lg"> @ViewBag.CanCanchas </span> canchas </p>
+                                <p> <strong> @Model.Nombre </strong> </p>
+                                <p> @Model.Direccion </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+}
+
+@section Styles {
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/sparklines")
+}
+
+
