@@ -7,7 +7,7 @@ using Juega.BDD;
 namespace Juega.Controllers.Juega
 {
 
-    [Authorize(Roles = Utilidades.Roles.AdminCancha)]
+     [Authorize(Roles = Utilidades.Roles.AdminCancha)]
     public class ComplejoDeportivoController : JuegaController
     {
 
@@ -31,23 +31,6 @@ namespace Juega.Controllers.Juega
             catch (Exception e)
             {
                 return Resultado_Exception(e);
-            }
-        }
-        [HttpGet]
-        public JsonResult ObtenerComplejos()
-        {
-            try
-            {
-
-                var complejos = from u in _db.ComplejoDeportivo
-                                select new { Description = u.Nombre, ID = u.IdComplejoDeportivo }
-                            ;
-
-                return Json(new { complejos }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                return Json(new { Description = "", ID = "" }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -116,8 +99,8 @@ namespace Juega.Controllers.Juega
 
                 var canchas = _db.Cancha.Select(x => x.IdComplejoDeportivo == complejo.IdComplejoDeportivo && x.Activo == true).ToList();
 
-                //  if (canchas != null && canchas.Count() > 0)
-                //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
+              //  if (canchas != null && canchas.Count() > 0)
+              //      return Resultado_Advertencia("Este compejo deportivo tiene canchas registradas, debe eliminar las canchas para continuar.");
 
 
                 _db.ComplejoDeportivo.Remove(complejo);

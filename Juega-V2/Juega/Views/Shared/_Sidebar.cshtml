@@ -246,12 +246,19 @@
                                     <span>Complejos Deportivos</span>
                                 </a>
                             </li>
-                             
 
-                            <li class="@Html.isActive("Canchas", "Inicio")">
-                                <a href="@Url.Action("Inicio", "Canchas")" title="">
+
+                            <li class="@Html.isActive("Complejo", "Index")">
+                                <a href="@Url.Action("Index", "Complejo")" title="">
                                     <em></em>
-                                    <span>Canchas</span>
+                                    <span>Complejos</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("Canchas", "Index")">
+                                <a href="@Url.Action("Index", "Canchas")" title="">
+                                    <em></em>
+                                    <span>Mis Canchas</span>
                                 </a>
                             </li>
 

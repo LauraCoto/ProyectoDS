@@ -173,9 +173,12 @@ namespace Juega.Controllers.Juega
         internal Usuario ObtenerUsuario_Juega()
         {
 
+
             var UsersContext = new ApplicationDbContext();
             var user = UsersContext.Users.ToList().Find(x => x.Email == User.Identity.Name);
-            
+
+
+
             var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuarioSeguridad == user.Id);
 
             return usuario;

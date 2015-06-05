@@ -32,7 +32,7 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Sistema()
         {
-            var cnn = ConexionUsar.Aws; 
+            var cnn = ConexionUsar.Rudy; 
 
             switch (cnn)
             {
@@ -72,7 +72,7 @@ namespace Juega.Utilidades
 
         public static string ObtenerCadenaConexion_Seguridad()
         {
-            var cnn = ConexionUsar.Aws; 
+            var cnn = ConexionUsar.Rudy; 
 
             switch (cnn)
             {

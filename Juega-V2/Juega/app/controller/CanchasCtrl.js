@@ -55,11 +55,6 @@
 
     });
 
-    $http.get('/Canchas/GetAll_Model').success(function (data) {
-
-        $scope.ListaRegistros_Model = data.data;
-
-    });
 
     $scope.Guardar = function () {
         var url = $scope.Accion == 'nuevo' ? '/Canchas/Create' : '/Canchas/update';
