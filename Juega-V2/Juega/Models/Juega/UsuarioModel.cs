@@ -6,14 +6,26 @@ using System.Web;
 namespace Juega.Models.Juega
 {
     public class UsuarioModel
-
     {
 
-        public virtual string Nombre  {get; set;}
-        public virtual string Apellido {get; set;} 
-        public virtual string Correo {get; set;}
-        public virtual string Telefono {get; set;}
-        public virtual string Fecha_Nac {get; set;}
-        public virtual string id_Usuario { get; set; }
+        public virtual string Nombre { get; set; }
+        public virtual string Apellido { get; set; }
+        public virtual string Correo { get; set; }
+        public virtual string Descripcion { get; set; }
+        public virtual string Edad { get; set; }
+        public virtual int NumEquipos { get; set; }
+        public virtual int Valoracion { get; set; }
+    }
+
+    public class JugadorModel
+    {
+
+        public virtual string Nombre { get; set; }
+        public virtual string Apellido { get; set; }
+        public virtual string Correo { get; set; }
+        public virtual string Descripcion { get; set; }
+        public virtual string Edad { get; set; }
+        public virtual int NumEquipos { get; set; }
+        public virtual int Valoracion { get; set; }
     }
 }

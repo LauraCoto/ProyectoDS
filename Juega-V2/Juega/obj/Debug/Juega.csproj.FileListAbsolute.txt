@@ -78,11 +78,11 @@ C:\ProyectoDS - copia\Juega-V2\Juega\bin\Microsoft.Owin.Security.MicrosoftAccoun
 C:\ProyectoDS - copia\Juega-V2\Juega\obj\Debug\Juega.csprojResolveAssemblyReference.cache
 C:\ProyectoDS - copia\Juega-V2\Juega\obj\Debug\Juega.dll
 C:\ProyectoDS - copia\Juega-V2\Juega\obj\Debug\Juega.pdb
-C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.csprojResolveAssemblyReference.cache
 C:\ProyectoDS\Juega-V2\Juega\bin\Juega.dll.config
 C:\ProyectoDS\Juega-V2\Juega\bin\Juega.dll
 C:\ProyectoDS\Juega-V2\Juega\bin\Juega.pdb
 C:\ProyectoDS\Juega-V2\Juega\bin\Antlr3.Runtime.dll
+C:\ProyectoDS\Juega-V2\Juega\bin\com.mosso.cloudfiles.dll
 C:\ProyectoDS\Juega-V2\Juega\bin\EntityFramework.dll
 C:\ProyectoDS\Juega-V2\Juega\bin\EntityFramework.SqlServer.dll
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.AspNet.Identity.Core.dll
@@ -157,4 +157,4 @@ C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.Twitter.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.dll
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.pdb
-C:\ProyectoDS\Juega-V2\Juega\bin\com.mosso.cloudfiles.dll
+C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.csprojResolveAssemblyReference.cache

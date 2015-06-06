@@ -1,0 +1,138 @@
+﻿@model Juega.Models.Juega.UsuarioModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+<div class="unwrap">
+    <div style="background-image: url(/Content/Images/profile-bg.jpg)" class="bg-cover">
+        <div class="p-xl text-center text-white">
+            <img src="~/Content/Images/user/09.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+            <h3 class="m0"> @Model.Nombre @Model.Apellido </h3>
+            <p>@Model.Edad anios</p>
+            <p> @Model.Descripcion </p>
+        </div>
+    </div>
+    <div class="text-center bg-gray-dark p-lg mb-xl">
+        <div class="row row-table">
+            <div class="col-xs-4 br">
+                <h3 class="m0">@Model.Valoracion / 5</h3>
+                <p class="m0">
+                    <span class="hidden-xs">Valoracion</span> 
+                </p>
+            </div>
+            <div class="col-xs-4 br">
+                <h3 class="m0">@Model.NumEquipos</h3>
+                <p class="m0">Equipos</p>
+            </div>
+            <div class="col-xs-4">
+                <h3 class="m0">100</h3>
+                <p class="m0">Following</p>
+            </div>
+        </div>
+    </div>
+    <div class="p-lg">
+        <div class="row"> 
+            <div class="col-lg-3">
+                 
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="#" class="pull-right">
+                            <em class="icon-plus text-muted"></em>
+                        </a>Contacts
+                    </div>
+                    <div class="list-group">
+                        <!-- START User status-->
+                       
+                         <a href="#" class="media p mt0 list-group-item">
+                            <span class="pull-right">
+                                <span class="circle circle-success circle-lg"></span>
+                            </span>
+                            <span class="pull-left">
+                                <!-- Contact avatar-->
+                                <img src="~/Content/Images/user/05.jpg" alt="Image" class="media-object img-circle thumb32" />
+                            </span>
+                            <!-- Contact info-->
+                            <span class="media-body">
+                                <span class="media-heading">
+                                    <strong>Juan Sims</strong>
+                                    <br />
+                                    <small class="text-muted">Designeer</small>
+                                </span>
+                            </span>
+                        </a>
+                        <!-- END User status-->
+                        <!-- START User status-->
+                       
+                         <a href="#" class="media p mt0 list-group-item">
+                            <span class="pull-right">
+                                <span class="circle circle-success circle-lg"></span>
+                            </span>
+                            <span class="pull-left">
+                                <!-- Contact avatar-->
+                                <img src="~/Content/Images/user/06.jpg" alt="Image" class="media-object img-circle thumb32" />
+                            </span>
+                            <!-- Contact info-->
+                            <span class="media-body">
+                                <span class="media-heading">
+                                    <strong>Maureen Jenkins</strong>
+                                    <br />
+                                    <small class="text-muted">Designeer</small>
+                                </span>
+                            </span>
+                        </a>
+                        <!-- END User status-->
+                        <!-- START User status-->
+                       
+                         <a href="#" class="media p mt0 list-group-item">
+                            <span class="pull-right">
+                                <span class="circle circle-danger circle-lg"></span>
+                            </span>
+                            <span class="pull-left">
+                                <!-- Contact avatar-->
+                                <img src="~/Content/Images/user/07.jpg" alt="Image" class="media-object img-circle thumb32" />
+                            </span>
+                            <!-- Contact info-->
+                            <span class="media-body">
+                                <span class="media-heading">
+                                    <strong>Billie Dunn</strong>
+                                    <br />
+                                    <small class="text-muted">Designeer</small>
+                                </span>
+                            </span>
+                        </a>
+                        <!-- END User status-->
+                        <!-- START User status-->
+                       
+                         <a href="#" class="media p mt0 list-group-item">
+                            <span class="pull-right">
+                                <span class="circle circle-warning circle-lg"></span>
+                            </span>
+                            <span class="pull-left">
+                                <!-- Contact avatar-->
+                                <img src="~/Content/Images/user/08.jpg" alt="Image" class="media-object img-circle thumb32" />
+                            </span>
+                            <!-- Contact info-->
+                            <span class="media-body">
+                                <span class="media-heading">
+                                    <strong>Tomothy Roberts</strong>
+                                    <br />
+                                    <small class="text-muted">Designer</small>
+                                </span>
+                            </span>
+                        </a>
+                        <!-- END User status--> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+
+}
+@section Scripts {
+    <!-- Include this script for any page that uses Google Maps.-->
+    @Scripts.Render("//maps.google.com/maps/api/js?sensor=false")
+    @Scripts.Render("~/bundles/gmap")
+}

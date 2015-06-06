@@ -1,0 +1,100 @@
+﻿@model Juega.Models.Juega.ComplejoModel
+
+<style>
+    body {
+        padding-top: 60px;
+    }
+</style>
+
+
+<h3>Informacion del complejo</h3>
+
+
+<link href="~/Content/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="~/Content/bwizard.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Guardar", "ComplejoDeportivo"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true) 
+    
+    <fieldset>
+
+        <div class="container">
+            <div id="wizard">
+                <ol>
+                    <li>Información del complejo</li>
+                    <li>Fotografias</li>
+                    <li>Ubicación</li>
+                    <li>Finalizar</li>
+                </ol>
+
+
+                <div id="complejo">
+
+
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.IdComplejoDeportivo, new { @class = "form-control required", @hidden = "hidden" })
+                    </div>
+
+                    <label for="Nombre">* Nombre del complejo</label>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+
+                    <label for="Nombre">Telefono</label>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Telefonos, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.Telefonos)
+                    </div>
+
+                    <label for="Nombre">Direccion</label>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Direccion, new { @class = "form-control required", @rows = "5" })
+                        @Html.ValidationMessageFor(model => model.Direccion)
+                    </div>
+
+
+                    <fieldset>
+                        <br />
+                        <br />
+                        <p>(*) Obligatorio</p>
+                    </fieldset>
+                </div>
+
+                <div id="fotos">
+                    @*@Html.Partial("_uploadImages")*@
+                    <p>Esta opción estara disponible luego de crear la publicación</p>
+                </div>
+
+                <div id="mapa">
+                    <label for="Nombre">Coordenadas</label>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Coodernadas, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.Coodernadas)
+                    </div>
+                </div>
+
+                <div id="Finalizar">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">@ViewBag.Accion</button>
+                        @Html.ActionLink("Cancelar", "Inicio", "ComplejoDeportivo", new { @class = "btn " })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script src="~/Scripts/bwizard.min.js"></script>
+<script src="~/Scripts/bootstrap-fileupload.js"></script>
+
+
+<script type="text/javascript">
+    $("#wizard").bwizard();
+</script>

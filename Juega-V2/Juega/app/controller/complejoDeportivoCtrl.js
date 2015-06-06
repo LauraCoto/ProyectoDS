@@ -37,15 +37,12 @@
         $scope.MostrarInfo = data.Info;
         $scope.MostrarError = data.Error;
 
-        //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
-
         if (data.Error == 'S')
             $scope.ListaRegistros = {};
         else
             $scope.ListaRegistros = data.data;
 
-    });
-
+    }); 
 
     $scope.Guardar = function () {
         var url = $scope.Accion == 'nuevo' ? '/ComplejoDeportivo/Create' : '/ComplejoDeportivo/update';

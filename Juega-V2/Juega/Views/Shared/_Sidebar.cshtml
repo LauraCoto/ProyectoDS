@@ -138,31 +138,31 @@
                         </a>
                         <ul id="guess" class="nav sidebar-subnav collapse">
 
-                            <li class="@Html.isActive("Inicio", "VerCalendario")">
-                                <a href="@Url.Action("VerCalendario", "Inicio")" title="">
+                            <li class="@Html.isActive("Espectador", "VerCalendario")">
+                                <a href="@Url.Action("VerCalendario", "Espectador")" title="">
                                     <em></em>
                                     <span>Calendario</span>
                                 </a>
                             </li>
 
-                            <li class="@Html.isActive("Inicio", "VerEquipos")">
-                                <a href="@Url.Action("VerEquipos", "Inicio")" title="">
+                            <li class="@Html.isActive("Espectador", "Equipos")">
+                                <a href="@Url.Action("Equipos", "Espectador")" title="">
                                     <em></em>
-                                    <span>Ver Equipos</span>
+                                    <span>Equipos</span>
                                 </a>
                             </li>
 
-                            <li class="@Html.isActive("Usuarios", "Index")">
-                                <a href="@Url.Action("Index", "Usuarios")" title="">
+                            <li class="@Html.isActive("Espectador", "Jugadores")">
+                                <a href="@Url.Action("Jugadores", "Espectador")" title="">
                                     <em></em>
-                                    <span>Ver Usuarios</span>
+                                    <span>Jugadores</span>
                                 </a>
                             </li>
 
-                            <li class="@Html.isActive("Inicio", "VerCanchas")">
-                                <a href="@Url.Action("VerCanchas", "Inicio")" title="">
+                            <li class="@Html.isActive("Espectador", "Complejos")">
+                                <a href="@Url.Action("Complejos", "Espectador")" title="">
                                     <em></em>
-                                    <span>Ver Canchas</span>
+                                    <span>Complejos</span>
                                 </a>
                             </li>
 
@@ -240,25 +240,18 @@
                         </a>
                         <ul id="adminCanchas" class="nav sidebar-subnav collapse">
 
-                            <li class="@Html.isActive("ComplejoDeportivo", "Index")">
-                                <a href="@Url.Action("Index", "ComplejoDeportivo")" title="">
+                            <li class="@Html.isActive("ComplejoDeportivo", "Inicio")">
+                                <a href="@Url.Action("Inicio", "ComplejoDeportivo")" title="">
                                     <em></em>
                                     <span>Complejos Deportivos</span>
                                 </a>
                             </li>
+                             
 
-
-                            <li class="@Html.isActive("Complejo", "Index")">
-                                <a href="@Url.Action("Index", "Complejo")" title="">
+                            <li class="@Html.isActive("Canchas", "Inicio")">
+                                <a href="@Url.Action("Inicio", "Canchas")" title="">
                                     <em></em>
-                                    <span>Complejos</span>
-                                </a>
-                            </li>
-
-                            <li class="@Html.isActive("Canchas", "Index")">
-                                <a href="@Url.Action("Index", "Canchas")" title="">
-                                    <em></em>
-                                    <span>Mis Canchas</span>
+                                    <span>Canchas</span>
                                 </a>
                             </li>
 
