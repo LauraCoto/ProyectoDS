@@ -54,7 +54,7 @@ namespace Juega.Controllers.Juega
         {
             ViewBag.Titulo = titulo;
             ViewBag.Mensaje = mensaje;
-            ViewBag.Saludo = "Ha ocurrio un problema";
+            ViewBag.Saludo = "Ha ocurrio un ";
             ViewBag.TextClass = "text-warning";
             ViewBag.TextBigTitle = "Error";
             return View("Error");
@@ -64,7 +64,7 @@ namespace Juega.Controllers.Juega
         {
             ViewBag.Titulo = titulo;
             ViewBag.Mensaje = mensaje;
-            ViewBag.Saludo = "No se preocupes es solo una advertencia";
+            ViewBag.Saludo = "No se preocupes es solo una ";
             ViewBag.TextClass = "text-warning";
             ViewBag.TextBigTitle = "Alerta";
             return View("Error");

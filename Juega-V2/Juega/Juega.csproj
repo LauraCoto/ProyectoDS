@@ -843,6 +843,7 @@
     <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
+    <Content Include="Views\Canchas\EliminarVw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

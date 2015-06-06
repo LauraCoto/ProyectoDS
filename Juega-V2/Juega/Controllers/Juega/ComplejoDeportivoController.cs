@@ -52,6 +52,7 @@ namespace Juega.Controllers.Juega
                     c.IdComplejoDeportivo = item.IdComplejoDeportivo;
                     c.Nombre = item.Nombre;
                     c.Telefonos = item.Telefonos;
+                    c.CantCanchas = item.Cancha.Count;
 
                     lista.Add(c);
 
@@ -72,10 +73,10 @@ namespace Juega.Controllers.Juega
         {
             try
             {
-                var IdUsuario = Obtener_ID_Usuario_Juega();
+                var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
 
                 var complejos = from u in _db.ComplejoDeportivo
-                                where (u.Activo == true) && (u.IdUsuario == IdUsuario)
+                                where (u.Activo == true) && (u.IdUsuario == IdUsuarioLogin)
                                 select new { Description = u.Nombre, ID = u.IdComplejoDeportivo }
                             ;
 
@@ -127,6 +128,8 @@ namespace Juega.Controllers.Juega
         {
             try
             {
+                if (!ModelState.IsValid)
+                    MostrarAdvertencia("Debe completar todos los datos obligatorios");
 
                 var usuarioLogin = ObtenerUsuario_Juega();
                 usuarioLogin.EsAdminEquipo = true;
@@ -190,58 +193,7 @@ namespace Juega.Controllers.Juega
                 return MostrarError(ex.Message, "Ocurrio un error guardar el complejo deportivo.");
             }
         }
-
-
-        [Authorize(Roles = Utilidades.Roles.AdminCancha)]
-        [HttpPost]
-        public JuegaJson Create(ComplejoDeportivo complejoDeportivo)
-        {
-            try
-            {
-
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                if (ExisteRegistro(complejoDeportivo.Nombre, -1))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
-
-                _db.ComplejoDeportivo.Add(complejoDeportivo);
-                _db.SaveChanges();
-
-                return Resultado_Correcto(complejoDeportivo, "El registro ha sido creado.");
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-        }
-
-        [Authorize(Roles = Utilidades.Roles.AdminCancha)]
-        [HttpPost]
-        public JuegaJson Update(ComplejoDeportivo complejoDeportivo)
-        {
-            try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-
-                if (ExisteRegistro(complejoDeportivo.Nombre, complejoDeportivo.IdComplejoDeportivo))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
-
-                _db.Entry(complejoDeportivo).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                return Resultado_Correcto(complejoDeportivo, "El registro ha sido actualizado.");
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-        }
-
-
-
+         
         [Authorize(Roles = Utilidades.Roles.AdminCancha)]
         public ActionResult EliminarVw(string id)
         {
@@ -266,6 +218,7 @@ namespace Juega.Controllers.Juega
                 viewModel.IdComplejoDeportivo = item.IdComplejoDeportivo;
                 viewModel.Telefonos = item.Telefonos;
                 viewModel.Nombre = item.Nombre;
+                viewModel.CantCanchas = item.Cancha.Count;
 
                 return View(viewModel);
 
@@ -277,7 +230,9 @@ namespace Juega.Controllers.Juega
         public ActionResult Eliminar(ComplejoModel model)
         {
             try
-            {
+            { 
+
+
                 if (model.IdComplejoDeportivo == null || model.IdComplejoDeportivo <= 0)
                     return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo a eliminar");
 

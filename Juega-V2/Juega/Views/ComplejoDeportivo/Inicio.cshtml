@@ -33,12 +33,12 @@
                         <div class="panel-body text-center bg-green">
                             <div class="row row-table">
                                 <div class="col-xs-4"> 
-                                    <a href="/ComplejoDeportivo/Crear/{{item.IdComplejoDeportivo}}" class=" text-white">
-                                        <em class="fa fa-fw fa-clock-o text-muted"></em>Editar
+                                    <a href="/ComplejoDeportivo/GuardarVw/{{item.IdComplejoDeportivo}}" class=" text-white">
+                                        <em class="fa fa-folder-open-o fa-2x pull-left"></em>
                                     </a>
 
                                     <a href="/ComplejoDeportivo/EliminarVw/{{item.IdComplejoDeportivo}}" class=" text-white">
-                                        <em class="fa fa-fw fc-agenda-view"></em>Eliminar
+                                        <em class="fa fa-user fa-2x pull-right"></em>
                                     </a>
 
                                 </div> 
@@ -51,7 +51,13 @@
                                 <span class="label label-primary pull-right">{{item.Telefonos}}</span>
                                 <em class="fa fa-fw fa-clock-o text-muted"></em>Telefonos
                             </a>
+                        </div>
 
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="label label-primary pull-right">{{item.CantCanchas}}</span>
+                                <em class="fa fa-fw fa-clock-o text-muted"></em> Canchas
+                            </a>
                         </div>
                     </div>
                 </div>
