@@ -54,9 +54,41 @@ namespace Juega.Controllers.Juega
         }
 
 
-        public ActionResult Canchas()
+        public ActionResult Canchas(string id)
         {
-            return View();
+            try
+            {
+                if (string.IsNullOrEmpty(id) || id == "-1")
+                    return MostrarAdvertencia("El complejo deportivo seleccionado es incorrecto.");
+                 
+                var nid = long.Parse(id);
+                var canchas = _db.Cancha.Where(x => x.Activo == true && x.IdComplejoDeportivo == nid).OrderBy(z => z.FechaCreo).ToList();
+
+                var lista = new List<CanchaModel>();
+                foreach (var item in canchas)
+                {
+                    var c = new CanchaModel();
+                    c.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
+                    c.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
+                    c.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
+
+                    c.IdCancha = item.IdCancha;
+                    c.Nombre = item.Nombre.ToString();
+
+                    if (item.ComplejoDeportivo != null)
+                        c.Complejo = item.ComplejoDeportivo.Nombre;
+
+                    lista.Add(c);
+
+                    ViewBag.NombreComplejo = c.Complejo;
+                }
+
+                return View(lista);
+            }
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+            }
         }
 
         public JuegaJson GetAll_Canchas(string id)// El Id de complejo
