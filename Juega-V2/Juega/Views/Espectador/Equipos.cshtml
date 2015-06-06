@@ -1,7 +1,20 @@
-﻿
-@{
-    ViewBag.Title = "Equipos";
+﻿@{
+    ViewBag.Title = "Index";
 }
 
-<h2>Equipos</h2>
+<h3>Equipos</h3>
+<script src="~/app/controller/EspectadorCtrl.js"></script>
 
+
+
+<div class="container" ng-app="appEspectador" ng-controller="EspectadorCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div ng-repeat="item in ListaEquipos">
+
+
+            </div>
+        </div>
+    </div>
+</div>
