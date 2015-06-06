@@ -50,6 +50,27 @@ namespace Juega.Controllers.Juega
 
         }
 
+        internal ActionResult MostrarError(string mensaje, string titulo = "Error")
+        {
+            ViewBag.Titulo = titulo;
+            ViewBag.Mensaje = mensaje;
+            ViewBag.Saludo = "Ha ocurrio un problema";
+            ViewBag.TextClass = "text-warning";
+            ViewBag.TextBigTitle = "Error";
+            return View("Error");
+        }
+
+        internal ActionResult MostrarAdvertencia(string mensaje, string titulo = "Advertencia")
+        {
+            ViewBag.Titulo = titulo;
+            ViewBag.Mensaje = mensaje;
+            ViewBag.Saludo = "No se preocupes es solo una advertencia";
+            ViewBag.TextClass = "text-warning";
+            ViewBag.TextBigTitle = "Alerta";
+            return View("Error");
+        }
+
+
         internal JuegaJson Resultado_Devolver(object data, string mensaje = "", string error = "N", string alerta = "N", string info = "N")
         {
             var r = new Resultado();
@@ -173,11 +194,8 @@ namespace Juega.Controllers.Juega
         internal Usuario ObtenerUsuario_Juega()
         {
 
-
             var UsersContext = new ApplicationDbContext();
             var user = UsersContext.Users.ToList().Find(x => x.Email == User.Identity.Name);
-
-
 
             var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuarioSeguridad == user.Id);
 
@@ -185,6 +203,18 @@ namespace Juega.Controllers.Juega
 
         }
 
+
+        internal long Obtener_ID_Usuario_Juega()
+        {
+
+            var UsersContext = new ApplicationDbContext();
+            var user = UsersContext.Users.ToList().Find(x => x.Email == User.Identity.Name);
+
+            var ID = _db.Usuario.FirstOrDefault(x => x.IdUsuarioSeguridad == user.Id).IdUsuario;
+
+            return ID;
+
+        }
 
     }
 }
