@@ -132,7 +132,8 @@ namespace Juega.Controllers.Juega
                     MostrarAdvertencia("Debe completar todos los datos obligatorios");
 
                 var usuarioLogin = ObtenerUsuario_Juega();
-                usuarioLogin.EsAdminEquipo = true;
+                var usuarioAdminCancha = Convert.ToBoolean(usuarioLogin.EsAdminCancha == null ? false : usuarioLogin.EsAdminCancha);
+                usuarioLogin.EsAdminCancha = true;
 
                 if (ExisteRegistro(model.Nombre, model.IdComplejoDeportivo))
                     return MostrarAdvertencia("Ya tiene agregado un complejo con el mismo nombre.");
@@ -167,7 +168,7 @@ namespace Juega.Controllers.Juega
                     _db.Entry(complejo).State = EntityState.Modified;
                 }
 
-                //Definir usuario como tecnico
+                //Definir usuario como administrador de canchas
                 var UsersContext = new ApplicationDbContext();
                 if (!User.IsInRole(Utilidades.Roles.AdminCancha))
                 {
@@ -180,7 +181,18 @@ namespace Juega.Controllers.Juega
 
                     usuarioSeg.Roles.Add(identityRol);
                     UsersContext.SaveChanges();
+                }
 
+                //Crear la solicitud para administrador de cancha
+                if (!usuarioAdminCancha)
+                {
+                    var solicitud = new Usuario_Solicitud_AdminCancha();
+                    solicitud.Activo = true;
+                    solicitud.FechaCreo = DateTime.Now;
+                    solicitud.IdUsuario = usuarioLogin.IdUsuario;
+                    solicitud.TipoEstado = Utilidades.TipoEstado.Pendiente;
+                    solicitud.Usuario = usuarioLogin;
+                    _db.Usuario_Solicitud_AdminCancha.Add(solicitud);
                 }
 
                 _db.Entry(usuarioLogin).State = EntityState.Modified;
@@ -193,7 +205,7 @@ namespace Juega.Controllers.Juega
                 return MostrarError(ex.Message, "Ocurrio un error guardar el complejo deportivo.");
             }
         }
-         
+
         [Authorize(Roles = Utilidades.Roles.AdminCancha)]
         public ActionResult EliminarVw(string id)
         {
@@ -230,7 +242,7 @@ namespace Juega.Controllers.Juega
         public ActionResult Eliminar(ComplejoModel model)
         {
             try
-            { 
+            {
 
 
                 if (model.IdComplejoDeportivo == null || model.IdComplejoDeportivo <= 0)

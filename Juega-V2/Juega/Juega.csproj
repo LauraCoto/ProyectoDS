@@ -305,9 +305,11 @@
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
+    <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
+    <Compile Include="Controllers\Juega\SolicitudAdminCanchasController.cs" />
     <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
     <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
@@ -328,7 +330,9 @@
     <Compile Include="Models\Juega\CanchaModel.cs" />
     <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
+    <Compile Include="Models\Juega\EquiposModel.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
+    <Compile Include="Models\Juega\SolicitudAdminCanchaModel.cs" />
     <Compile Include="Models\Juega\UsuarioModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -844,6 +848,11 @@
     <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
     <Content Include="Views\Canchas\EliminarVw.cshtml" />
+    <Content Include="Views\Perfil_Usuario\Perfil.cshtml" />
+    <Content Include="Views\Espectador\Complejos.cshtml" />
+    <Content Include="Views\Espectador\Canchas.cshtml" />
+    <Content Include="Views\Espectador\Equipos.cshtml" />
+    <Content Include="Views\Espectador\Jugadores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -851,6 +860,7 @@
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Juega\" />
+    <Folder Include="Views\SolicitudAdminCanchas\" />
     <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
