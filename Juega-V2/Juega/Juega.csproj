@@ -349,6 +349,7 @@
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\DenunciasCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
+    <Content Include="app\controller\EspectadorCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\PageMenuCtrl.js" />
     <Content Include="app\controller\Perfil_UsuarioCtrl.js" />
