@@ -308,7 +308,7 @@
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
-    <Compile Include="Controllers\Juega\Perfil_UsuarioController.cs" />
+    <Compile Include="Controllers\Juega\PerfilController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
     <Compile Include="Controllers\Juega\SolicitudAdminCanchasController.cs" />
     <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
@@ -788,7 +788,6 @@
     <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
     <Content Include="Views\Subscripcion\Index.cshtml" />
     <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
-    <Content Include="Views\Perfil_Usuario\Index.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
     <Content Include="Views\Canchas\Inicio.cshtml" />
     <Content Include="Views\Canchas\Crear_ajax.cshtml" />
@@ -802,7 +801,7 @@
     <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
     <Content Include="Views\Canchas\EliminarVw.cshtml" />
-    <Content Include="Views\Perfil_Usuario\Perfil.cshtml" />
+    <Content Include="Views\Perfil\Jugador.cshtml" />
     <Content Include="Views\Espectador\Complejos.cshtml" />
     <Content Include="Views\Espectador\Canchas.cshtml" />
     <Content Include="Views\Espectador\Equipos.cshtml" />
