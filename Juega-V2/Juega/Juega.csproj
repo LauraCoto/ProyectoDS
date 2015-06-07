@@ -304,7 +304,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
+    <Compile Include="Controllers\Juega\EquiposController.cs" />
     <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
+    <Compile Include="Controllers\Juega\Crear_DenunciasController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
@@ -860,6 +862,13 @@
     <Content Include="Views\Charts\ChartMorris.cshtml" />
     <Content Include="Views\Charts\ChartRadial.cshtml" />
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
+    <Content Include="Views\Crear_Denuncias\CrearDenuncia.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Create.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Delete.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Details.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Edit.cshtml" />
+    <Content Include="Views\Crear_Denuncias\Index.cshtml" />
+    <Content Include="Views\Equipos\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
