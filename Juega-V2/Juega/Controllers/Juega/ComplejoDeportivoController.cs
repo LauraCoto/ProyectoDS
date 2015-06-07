@@ -12,57 +12,11 @@ namespace Juega.Controllers.Juega
 
     [Authorize(Roles = Utilidades.Roles.AdminCancha)]
     public class ComplejoDeportivoController : JuegaController
-    { 
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-         
+    {  
         public ActionResult Inicio()
         {
             return View();
-        }
-         
-        public JuegaJson GetAll()
-        {
-            try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
-
-                var complejos = _db.ComplejoDeportivo.Where(x => x.Activo == true
-                                                           && x.IdUsuario == IdUsuarioLogin
-                                                          ).OrderBy(z => z.FechaCreo)
-                                                          .ToList();
-
-                var lista = new List<ComplejoModel>();
-                foreach (var item in complejos)
-                {
-                    var c = new ComplejoModel();
-
-                    c.Coodernadas = item.Coodernadas;
-                    c.Direccion = item.Direccion;
-                    c.FotoPrincipal = item.FotoPrincipal;
-                    c.IdComplejoDeportivo = item.IdComplejoDeportivo;
-                    c.Nombre = item.Nombre;
-                    c.Telefonos = item.Telefonos;
-                    c.CantCanchas = item.Cancha.Count;
-
-                    lista.Add(c);
-
-                }
-
-                return Resultado_Correcto(lista);
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-        }
-
+        } 
          
         public ActionResult GuardarVW(string id)
         {
