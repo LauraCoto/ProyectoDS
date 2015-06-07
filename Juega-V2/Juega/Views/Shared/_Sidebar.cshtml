@@ -96,6 +96,13 @@
                         </a>
                         <ul id="admin" class="nav sidebar-subnav collapse">
 
+                            <li class="@Html.isActive("SolicitudAdminCanchas", "Inicio")">
+                                <a href="@Url.Action("Inicio", "SolicitudAdminCanchas")" title="  ">
+                                    <em></em>
+                                    <span>Solicitudes Pendientes</span>
+                                </a>
+                            </li>
+
                             <li class="@Html.isActive("Denuncias", "Index")">
                                 <a href="@Url.Action("Index", "Denuncias")" title="  ">
                                     <em></em>
@@ -170,6 +177,13 @@
                                 <a href="@Url.Action("Suscripcion", "Inicio")" title="">
                                     <em></em>
                                     <span>Suscripcion</span>
+                                </a>
+                            </li>
+
+                            <li class="@Html.isActive("SolicitudAdminCanchas", "CrearSolicitud")">
+                                <a href="@Url.Action("CrearSolicitud", "SolicitudAdminCanchas")" title="">
+                                    <em></em>
+                                    <span>Solicitar Admin Cancha</span>
                                 </a>
                             </li>
 

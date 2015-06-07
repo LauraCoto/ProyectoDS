@@ -17,8 +17,5 @@ namespace Juega.Models.Juega
         public virtual string Equipo { get; set; }
         public virtual string IdDenuncia { get; set; }
         public virtual string Descripcion { get; set; }
-
-
-
     }
 }

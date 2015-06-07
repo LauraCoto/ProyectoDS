@@ -65,28 +65,7 @@ namespace Juega.Controllers.Juega
                 return Resultado_Exception(e);
             }
         }
-
-
-        [Authorize(Roles = Utilidades.Roles.AdminCancha)]
-        [HttpGet]
-        public JsonResult ObtenerComplejos()
-        {
-            try
-            {
-                var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
-
-                var complejos = from u in _db.ComplejoDeportivo
-                                where (u.Activo == true) && (u.IdUsuario == IdUsuarioLogin)
-                                select new { Description = u.Nombre, ID = u.IdComplejoDeportivo }
-                            ;
-
-                return Json(new { complejos }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                return Json(new { Description = "", ID = "" }, JsonRequestBehavior.AllowGet);
-            }
-        }
+         
 
 
         [Authorize(Roles = Utilidades.Roles.Espectador)]
@@ -132,7 +111,7 @@ namespace Juega.Controllers.Juega
                     MostrarAdvertencia("Debe completar todos los datos obligatorios");
 
                 var usuarioLogin = ObtenerUsuario_Juega();
-                var usuarioAdminCancha = Convert.ToBoolean(usuarioLogin.EsAdminCancha == null ? false : usuarioLogin.EsAdminCancha);
+               
                 usuarioLogin.EsAdminCancha = true;
 
                 if (ExisteRegistro(model.Nombre, model.IdComplejoDeportivo))
@@ -167,33 +146,7 @@ namespace Juega.Controllers.Juega
 
                     _db.Entry(complejo).State = EntityState.Modified;
                 }
-
-                //Definir usuario como administrador de canchas
-                var UsersContext = new ApplicationDbContext();
-                if (!User.IsInRole(Utilidades.Roles.AdminCancha))
-                {
-                    var usuarioSeg = UsersContext.Users.FirstOrDefault(x => x.Id == usuarioLogin.IdUsuarioSeguridad);
-                    var rol = UsersContext.Roles.FirstOrDefault(x => x.Name == Utilidades.Roles.AdminCancha);
-
-                    var identityRol = new IdentityUserRole();
-                    identityRol.RoleId = rol.Id;
-                    identityRol.UserId = usuarioSeg.Id;
-
-                    usuarioSeg.Roles.Add(identityRol);
-                    UsersContext.SaveChanges();
-                }
-
-                //Crear la solicitud para administrador de cancha
-                if (!usuarioAdminCancha)
-                {
-                    var solicitud = new Usuario_Solicitud_AdminCancha();
-                    solicitud.Activo = true;
-                    solicitud.FechaCreo = DateTime.Now;
-                    solicitud.IdUsuario = usuarioLogin.IdUsuario;
-                    solicitud.TipoEstado = Utilidades.TipoEstado.Pendiente;
-                    solicitud.Usuario = usuarioLogin;
-                    _db.Usuario_Solicitud_AdminCancha.Add(solicitud);
-                }
+                 
 
                 _db.Entry(usuarioLogin).State = EntityState.Modified;
                 _db.SaveChanges();
@@ -245,7 +198,7 @@ namespace Juega.Controllers.Juega
             {
 
 
-                if (model.IdComplejoDeportivo == null || model.IdComplejoDeportivo <= 0)
+                if (model.IdComplejoDeportivo <= 0)
                     return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo a eliminar");
 
 

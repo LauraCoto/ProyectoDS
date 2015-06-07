@@ -217,7 +217,7 @@ namespace Juega.Controllers.Juega
             try
             { 
 
-                if (model.IdCancha == null || model.IdCancha <= 0)
+                if (model.IdCancha <= 0)
                     return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
 
                 var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == model.IdCancha);
@@ -240,13 +240,13 @@ namespace Juega.Controllers.Juega
             }
         }
          
-        private bool ExisteRegistro(string nombre, long IdExcluir)
+        private bool ExisteRegistro(string nombre, long idExcluir)
         {
             if (nombre.Trim() == "")
                 return false;
 
             var registro = _db.Cancha.FirstOrDefault(x => x.Nombre == nombre &&
-                                                                x.IdCancha != IdExcluir
+                                                                x.IdCancha != idExcluir
                                                                 );
 
             return registro != null;
