@@ -1,4 +1,3 @@
-C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.csprojResolveAssemblyReference.cache
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.dll
 C:\ProyectoDS\Juega-V2\Juega\bin\Juega.dll.config
 C:\ProyectoDS\Juega-V2\Juega\bin\Juega.dll
@@ -78,3 +77,4 @@ C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.Google.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.Twitter.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.pdb
+C:\ProyectoDS\Juega-V2\Juega\obj\Debug\Juega.csprojResolveAssemblyReference.cache

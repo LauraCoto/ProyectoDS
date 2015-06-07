@@ -1,63 +1,50 @@
-﻿@model IEnumerable<Juega.BDD.Usuario_Solicitud_Equipo>
-
+﻿@model IEnumerable<Juega.Models.Juega.EquipoModelSubscripcion>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3>Seleccione el Equipo al que desea subscribir</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoEstado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaElimino)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Equipo.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.IdUsuarioSeguridad)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaElimino)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Equipo.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.IdUsuarioSeguridad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario_Solicitud_Equipo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario_Solicitud_Equipo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario_Solicitud_Equipo })
-        </td>
-    </tr>
+
+@foreach (var item in Model)
+{
+
+    <div class="col-lg-4">
+        <div class="panel widget">
+            <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
+                <div class="row row-table">
+                    <div class="col-xs-12 text-white">
+                        <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+                        <h3 class="m0">@item.Nombre</h3>
+                        <p class="m0">
+                            <em class="glyphicon glyphicon-thumbs-up"></em>@item.Valoracion
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body text-center bg-gray-dark">
+                <div class="row row-table">
+                    <div class="col-xs-4">
+
+                        @if (item.Estado == "")
+                          { 
+                            <a href="/Usuario_Solicitud_Equipo/CrearSolicitud/@item.IdEquipo" class="text-white">
+                              <span>Seleccionar</span>
+                            </a>
+                        }
+
+                        @if (item.Estado != "")
+                        {
+                            <span>@item.Estado</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 }
-
-</table>

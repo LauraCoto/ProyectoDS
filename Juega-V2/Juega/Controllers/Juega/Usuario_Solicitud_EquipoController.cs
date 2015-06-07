@@ -7,130 +7,229 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
+using Juega.Models.Juega;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Juega.Controllers.Juega
 {
-    public class Usuario_Solicitud_EquipoController : Controller
+    [Authorize(Roles=Utilidades.Roles.Espectador)]
+    public class Usuario_Solicitud_EquipoController : JuegaController
     {
-        private JuegaEntities db = new JuegaEntities();
-
-        // GET: Usuario_Solicitud_Equipo
         public ActionResult Index()
         {
-            var usuario_Solicitud_Equipo = db.Usuario_Solicitud_Equipo.Include(u => u.Equipo).Include(u => u.Usuario);
-            return View(usuario_Solicitud_Equipo.ToList());
+            try
+            {
+                var usuario = ObtenerUsuario_Juega();
+                var equipos = _db.Equipo.Where(x => x.Activo == true ).OrderBy(z => z.FechaCreo).ToList();
+
+                //var lista = new List<EquiposModel>();
+                var lista = new List<EquipoModelSubscripcion>();
+                foreach (var item in equipos)
+                {
+                    var c = new EquipoModelSubscripcion();
+                    c.FotoPrincipal = item.FotoPrincipal;
+                    c.IdEquipo = item.IdEquipo;
+                    c.Nombre = item.Nombre;
+
+                    var solicitud = item.Usuario_Solicitud_Equipo.FirstOrDefault(x => x.IdUsuario == usuario.IdUsuario);
+
+                    if (solicitud == null)
+                        c.Estado = "";
+                    else
+                    {
+                        if (solicitud.TipoEstado == Utilidades.TipoEstado.Pendiente)
+                            c.Estado = "Pendiente";
+
+                        if (solicitud.TipoEstado == Utilidades.TipoEstado.Rechazado)
+                            c.Estado = "Rechazado";
+
+                        if (solicitud.TipoEstado == Utilidades.TipoEstado.Aprobado)
+                            c.Estado = "Aprobado";
+                    }
+                    c.Valoracion = Convert.ToInt32(item.Valoracion.HasValue ? item.Valoracion : 0);
+
+                    lista.Add(c);
+                }
+
+                return View(lista);
+            }
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+            }
         }
 
-        // GET: Usuario_Solicitud_Equipo/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult CrearSolicitud(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if(string.IsNullOrEmpty(id))
+                {
+                    return MostrarAdvertencia("Seleccione un equipo Correcto.");
+                }
+
+                var nid = long.Parse(id);
+                var usuarioLogin = ObtenerUsuario_Juega();
+                var solicitud = _db.Usuario_Solicitud_Equipo.FirstOrDefault(x => x.Activo == true && 
+                                                                            x.IdUsuario == usuarioLogin.IdUsuario &&
+                                                                            x.IdEquipo == nid
+                                                                            );
+
+
+                ViewBag.Usuario = usuarioLogin.Nombre + " " + usuarioLogin.Apellido;
+                ViewBag.Mensaje = "Se ha creado una solicitud para el equipo seleccionado.";
+
+                if (solicitud != null)
+                {
+                    if (solicitud.TipoEstado == Utilidades.TipoEstado.Pendiente)
+                        ViewBag.Mensaje = "Ya tiene una solicitud pendiente para este equipo.";
+                    else if (solicitud.TipoEstado == Utilidades.TipoEstado.Rechazado)
+                        ViewBag.Mensaje = "Su solicitud para este equipo ha sido rechazada.";
+                    else
+                        ViewBag.Mensaje = "Ya tiene una solicitud aprobada.";
+
+                    return View();
+                }
+
+                solicitud = new BDD.Usuario_Solicitud_Equipo();
+                solicitud.Activo = true;
+                solicitud.FechaCreo = DateTime.Now;
+                solicitud.IdUsuario = usuarioLogin.IdUsuario;
+                solicitud.TipoEstado = Utilidades.TipoEstado.Pendiente;
+                solicitud.Usuario = usuarioLogin;
+                solicitud.IdEquipo = nid;
+
+                _db.Usuario_Solicitud_Equipo.Add(solicitud);
+                _db.SaveChanges();
+
+
+                return View();
             }
-            Usuario_Solicitud_Equipo usuario_Solicitud_Equipo = db.Usuario_Solicitud_Equipo.Find(id);
-            if (usuario_Solicitud_Equipo == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                return MostrarError(e.Message);
             }
-            return View(usuario_Solicitud_Equipo);
         }
 
-        // GET: Usuario_Solicitud_Equipo/Create
-        public ActionResult Create()
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+        public ActionResult Inicio()
         {
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre");
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad");
-            return View();
+            var usuarioLogin = ObtenerUsuario_Juega();
+            try
+            {
+                var solicitudes = _db.Usuario_Solicitud_Equipo.Where(x => x.Activo == true && 
+                                                                     x.TipoEstado == Utilidades.TipoEstado.Pendiente)
+                                                                     .ToList();
+
+                var lista = new List<SolicitudUsuarioEquipo>();
+
+                foreach (var s in solicitudes)
+                {
+                    if (s.Equipo.IdUsuario != usuarioLogin.IdUsuario)
+                        continue;
+
+                    var model = new SolicitudUsuarioEquipo();
+                    model.IdSolicitud = s.IdUsuario_Solicitud_Equipo;
+                    model.Usuario = s.Usuario.Nombre + s.Usuario.Apellido;
+                    model.EquipoNombre = s.Equipo.Nombre;
+
+                    lista.Add(model);
+                }
+
+                return View(lista);
+            }
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+            }
         }
 
-        // POST: Usuario_Solicitud_Equipo/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdUsuario_Solicitud_Equipo,TipoEstado,FechaCreo,FechaElimino,Activo,IdUsuario,IdEquipo")] Usuario_Solicitud_Equipo usuario_Solicitud_Equipo)
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+        public ActionResult Aceptar(string id)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Usuario_Solicitud_Equipo.Add(usuario_Solicitud_Equipo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (string.IsNullOrEmpty(id))
+                    return MostrarAdvertencia("Solicitud es incorrecta.");
 
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre", usuario_Solicitud_Equipo.IdEquipo);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario_Solicitud_Equipo.IdUsuario);
-            return View(usuario_Solicitud_Equipo);
+                var nid = long.Parse(id);
+                var solicitud = _db.Usuario_Solicitud_Equipo.FirstOrDefault(x => x.IdUsuario_Solicitud_Equipo == nid);
+
+                if (solicitud == null)
+                    return Resultado_Advertencia("No se pudo obtener la informacion de la solicitud.");
+
+
+                //Definir usuario como jugador
+                var usuarioSolicito = solicitud.Usuario;
+                var usersContext = new ApplicationDbContext();
+                var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioSolicito.IdUsuarioSeguridad);
+                var rol = usersContext.Roles.FirstOrDefault(x => x.Name == Utilidades.Roles.Jugador);
+
+                var identityRol = usuarioSeg.Roles.FirstOrDefault(x => x.RoleId == rol.Id && x.UserId == usuarioSeg.Id);
+                if (identityRol == null)
+                {
+                    identityRol = new IdentityUserRole();
+                    identityRol.RoleId = rol.Id;
+                    identityRol.UserId = usuarioSeg.Id;
+
+                    usuarioSeg.Roles.Add(identityRol);
+                    usersContext.SaveChanges();
+                }
+
+                usuarioSolicito.EsJugador = true;
+                solicitud.TipoEstado = Utilidades.TipoEstado.Aprobado;
+
+                _db.Entry(usuarioSolicito).State = EntityState.Modified;
+                _db.Entry(solicitud).State = EntityState.Modified;
+
+                var jugadorEquipo = new Equipo_Jugador();
+                jugadorEquipo.Activo = true;
+                jugadorEquipo.FechaCreo = DateTime.Now;
+                jugadorEquipo.FechaDesde = DateTime.Now;
+                jugadorEquipo.IdEquipo = solicitud.IdEquipo;
+                jugadorEquipo.IdUsuario = usuarioSolicito.IdUsuario;
+                jugadorEquipo.TipoEstado = Utilidades.TipoEstado.Disponible;
+
+                _db.Equipo_Jugador.Add(jugadorEquipo);
+               
+                //Enviar correo
+                _db.SaveChanges();
+
+                //return View("Inicio");
+                return RedirectToAction("Inicio");
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
         }
 
-        // GET: Usuario_Solicitud_Equipo/Edit/5
-        public ActionResult Edit(long? id)
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+        public ActionResult Rechazar(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario_Solicitud_Equipo usuario_Solicitud_Equipo = db.Usuario_Solicitud_Equipo.Find(id);
-            if (usuario_Solicitud_Equipo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre", usuario_Solicitud_Equipo.IdEquipo);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario_Solicitud_Equipo.IdUsuario);
-            return View(usuario_Solicitud_Equipo);
-        }
+                if (string.IsNullOrEmpty(id))
+                    return MostrarAdvertencia("Solicitud es incorrecta.");
 
-        // POST: Usuario_Solicitud_Equipo/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdUsuario_Solicitud_Equipo,TipoEstado,FechaCreo,FechaElimino,Activo,IdUsuario,IdEquipo")] Usuario_Solicitud_Equipo usuario_Solicitud_Equipo)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(usuario_Solicitud_Equipo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.IdEquipo = new SelectList(db.Equipo, "IdEquipo", "Nombre", usuario_Solicitud_Equipo.IdEquipo);
-            ViewBag.IdUsuario = new SelectList(db.Usuario, "IdUsuario", "IdUsuarioSeguridad", usuario_Solicitud_Equipo.IdUsuario);
-            return View(usuario_Solicitud_Equipo);
-        }
+                var nid = long.Parse(id);
+                var solicitud = _db.Usuario_Solicitud_AdminCancha.FirstOrDefault(x => x.IdUsuario_Solicitud_AdminCancha == nid);
 
-        // GET: Usuario_Solicitud_Equipo/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario_Solicitud_Equipo usuario_Solicitud_Equipo = db.Usuario_Solicitud_Equipo.Find(id);
-            if (usuario_Solicitud_Equipo == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario_Solicitud_Equipo);
-        }
+                if (solicitud == null)
+                    return Resultado_Advertencia("No se pudo obtener la informacion de la solicitud.");
 
-        // POST: Usuario_Solicitud_Equipo/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Usuario_Solicitud_Equipo usuario_Solicitud_Equipo = db.Usuario_Solicitud_Equipo.Find(id);
-            db.Usuario_Solicitud_Equipo.Remove(usuario_Solicitud_Equipo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+                solicitud.TipoEstado = Utilidades.TipoEstado.Rechazado;
+                _db.Entry(solicitud).State = EntityState.Modified;
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
+                //Enviar correo
+                _db.SaveChanges();
+
+                return View("Inicio");
             }
-            base.Dispose(disposing);
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+            }
         }
     }
 }

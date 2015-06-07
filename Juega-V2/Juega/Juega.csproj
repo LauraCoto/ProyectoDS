@@ -304,16 +304,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
-    <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
-    <Compile Include="Controllers\Juega\PerfilController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
     <Compile Include="Controllers\Juega\SolicitudAdminCanchasController.cs" />
-    <Compile Include="Controllers\Juega\Solicitud_JugadorController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
-    <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
     <Compile Include="Controllers\Juega\Usuario_Solicitud_EquipoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
@@ -333,11 +329,13 @@
     <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\Controladores.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
+    <Compile Include="Models\Juega\EquipoModelSubscripcion.cs" />
     <Compile Include="Models\Juega\EquiposModel.cs" />
     <Compile Include="Models\Juega\JugadorModel.cs" />
     <Compile Include="Models\Juega\MenuPrincipal.cs" />
     <Compile Include="Models\Juega\Rol.cs" />
     <Compile Include="Models\Juega\SolicitudAdminCanchaModel.cs" />
+    <Compile Include="Models\Juega\SolicitudUsuarioEquipo.cs" />
     <Compile Include="Models\Juega\Usuario.cs" />
     <Compile Include="Models\Juega\UsuarioModel.cs" />
     <Compile Include="Models\Juega\Usuario_Rol.cs" />
@@ -780,14 +778,9 @@
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\ComplejoDeportivo\Create.cshtml" />
-    <Content Include="Views\CrearEquipo\Create.cshtml" />
-    <Content Include="Views\CrearEquipo\Delete.cshtml" />
-    <Content Include="Views\CrearEquipo\Details.cshtml" />
-    <Content Include="Views\CrearEquipo\Edit.cshtml" />
-    <Content Include="Views\CrearEquipo\Index.cshtml" />
     <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
     <Content Include="Views\Subscripcion\Index.cshtml" />
-    <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
+    <Content Include="Views\Perfil_Usuario\Index.cshtml" />
     <Content Include="Views\Denuncias\Index.cshtml" />
     <Content Include="Views\Canchas\Inicio.cshtml" />
     <Content Include="Views\Canchas\Crear_ajax.cshtml" />
@@ -795,13 +788,8 @@
     <Content Include="Views\ComplejoDeportivo\Inicio.cshtml" />
     <Content Include="Views\ComplejoDeportivo\EliminarVw.cshtml" />
     <Content Include="Views\Canchas\GuardarVw.cshtml" />
-    <Content Include="Views\Usuario_Solicitud_Equipo\Create.cshtml" />
-    <Content Include="Views\Usuario_Solicitud_Equipo\Delete.cshtml" />
-    <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
-    <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
-    <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
     <Content Include="Views\Canchas\EliminarVw.cshtml" />
-    <Content Include="Views\Perfil\Jugador.cshtml" />
+    <Content Include="Views\Perfil_Usuario\Perfil.cshtml" />
     <Content Include="Views\Espectador\Complejos.cshtml" />
     <Content Include="Views\Espectador\Canchas.cshtml" />
     <Content Include="Views\Espectador\Equipos.cshtml" />
@@ -859,6 +847,13 @@
     <Content Include="Views\Charts\ChartMorris.cshtml" />
     <Content Include="Views\Charts\ChartRadial.cshtml" />
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Create.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Delete.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\CrearSolicitud.cshtml" />
+    <Content Include="Views\Usuario_Solicitud_Equipo\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

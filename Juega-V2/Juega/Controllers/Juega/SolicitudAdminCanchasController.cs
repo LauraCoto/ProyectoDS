@@ -123,7 +123,7 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("Inicio");
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {
@@ -151,7 +151,7 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("Inicio");
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {

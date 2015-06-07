@@ -158,13 +158,7 @@
                                     <span>Equipos</span>
                                 </a>
                             </li>
-
-                            <li class="@Html.isActive("Espectador", "Jugadores")">
-                                <a href="@Url.Action("Jugadores", "Espectador")" title="">
-                                    <em></em>
-                                    <span>Jugadores</span>
-                                </a>
-                            </li>
+                             
 
                             <li class="@Html.isActive("Espectador", "Complejos")">
                                 <a href="@Url.Action("Complejos", "Espectador")" title="">
@@ -173,19 +167,12 @@
                                 </a>
                             </li>
 
-                            <li class="@Html.isActive("Inicio", "Suscripcion")">
-                                <a href="@Url.Action("Suscripcion", "Inicio")" title="">
+                            <li class="@Html.isActive("Subscripcion", "Index")">
+                                <a href="@Url.Action("Index", "Subscripcion")" title="">
                                     <em></em>
                                     <span>Suscripcion</span>
                                 </a>
-                            </li>
-
-                            <li class="@Html.isActive("SolicitudAdminCanchas", "CrearSolicitud")">
-                                <a href="@Url.Action("CrearSolicitud", "SolicitudAdminCanchas")" title="">
-                                    <em></em>
-                                    <span>Solicitar Admin Cancha</span>
-                                </a>
-                            </li>
+                            </li> 
 
                         </ul>
                     </li>
@@ -200,8 +187,8 @@
                         </a>
                         <ul id="jugador" class="nav sidebar-subnav collapse">
 
-                            <li class="@Html.isActive("Jugador", "Index")">
-                                <a href="@Url.Action("Index", "Jugador")" title="">
+                            <li class="@Html.isActive("Usuario_Solicitud_Equipo", "Index")">
+                                <a href="@Url.Action("Index", "Usuario_Solicitud_Equipo")" title="">
                                     <em></em>
                                     <span>Solicitar Ingreso Equipo</span>
                                 </a>

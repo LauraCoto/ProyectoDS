@@ -10,7 +10,8 @@ using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
-    [Authorize(Roles = Utilidades.Roles.AdminSistema)]
+    //[Authorize(Roles = Utilidades.Roles.AdminSistema)]
+    [Authorize()]
     public class RolesController : JuegaController
     {
         public ActionResult Index()
