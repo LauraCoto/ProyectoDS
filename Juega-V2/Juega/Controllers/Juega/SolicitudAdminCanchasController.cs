@@ -43,7 +43,7 @@ namespace Juega.Controllers.Juega
                 solicitud.Usuario = usuarioLogin;
                 _db.Usuario_Solicitud_AdminCancha.Add(solicitud);
                 _db.SaveChanges();
-                 
+
 
                 return View();
             }
@@ -81,8 +81,7 @@ namespace Juega.Controllers.Juega
             }
         }
 
-
-        [HttpPost]
+          
         [Authorize(Roles = Utilidades.Roles.AdminSistema)]
         public ActionResult Aceptar(string id)
         {
@@ -124,15 +123,14 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("AdminCanchas");
+                return View("Inicio");
             }
             catch (Exception e)
             {
                 return Resultado_Exception(e);
             }
         }
-
-        [HttpPost]
+          
         [Authorize(Roles = Utilidades.Roles.AdminSistema)]
         public ActionResult Rechazar(string id)
         {
@@ -153,7 +151,7 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("AdminCanchas");
+                return View("Inicio");
             }
             catch (Exception e)
             {

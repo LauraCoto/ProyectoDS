@@ -187,7 +187,7 @@ namespace Juega.Controllers.Juega
                     var usuario = item.Usuario;
 
                     var j = new JugadorModel();
-                    j.IdJugador = usuario.IdUsuario.ToString();
+                    j.IdJugador = usuario.IdUsuario;
                     j.Apellido = usuario.Apellido;
                     j.Nombre = usuario.Nombre;
                     j.Correo = usuario.Correo;
