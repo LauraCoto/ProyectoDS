@@ -44,7 +44,7 @@ namespace Juega.Controllers.Juega
             }
         }
 
-        public ActionResult Perfil()
+        public ActionResult Perfil( string id)
         {
             try
             {
@@ -52,7 +52,8 @@ namespace Juega.Controllers.Juega
                     return MostrarError("Debe iniciar sesion para poder visualizar este perfil.");
 
                 var model = new UsuarioModel();
-                var usuario = ObtenerUsuario_Juega();
+                var nid = long.Parse(id);
+                var usuario = _db.Usuario.FirstOrDefault(x=> x.IdUsuario == nid);
 
                 model.Apellido = usuario.Apellido;
 

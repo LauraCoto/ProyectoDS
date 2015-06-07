@@ -12,9 +12,55 @@
         <div class="col-md-12">
 
             <div ng-repeat="item in ListaComplejos">
+                
+
+                    <div class="col-lg-4">
+                        <div class="panel widget">
+                            <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
+                                <div class="row row-table">
+                                    <div class="col-xs-12 text-white">
+                                        <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+                                        <h3 class="m0">{{item.Nombre}}</h3>
+                                        <p class="m0">
+                                            <em class="fa fa-twitter fa-fw"></em> {{item.Direccion}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body text-center bg-green">
+                                <div class="row row-table">
+                                    <div class="col-xs-4">
+                                        
+                                        <a href="/Espectador/Canchas/{{item.IdComplejoDeportivo}}" class=" text-white">
+                                            <p>Ver Canchas</p>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
 
 
-            </div>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <span class="label label-primary pull-right">{{item.Telefonos}}</span>
+                                    <em class="fa fa-fw fa-clock-o text-muted"></em>Telefonos
+                                </a>
+                            </div>
+
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <span class="label label-primary pull-right">{{item.CantCanchas}}</span>
+                                    <em class="fa fa-fw fa-clock-o text-muted"></em> Canchas
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+           
         </div>
     </div>
 </div>
