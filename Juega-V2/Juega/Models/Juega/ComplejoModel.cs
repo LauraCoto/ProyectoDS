@@ -26,14 +26,4 @@ namespace Juega.Models.Juega
         public virtual int CantCanchas { get; set; }
     }
 
-    public class EquipoModel
-    {
-        [Required]
-        public virtual long IdEquipo { get; set; }
-
-        [Required]
-        [MaxLength(30)]
-        public virtual string Nombre { get; set; }
-
-    }
 }

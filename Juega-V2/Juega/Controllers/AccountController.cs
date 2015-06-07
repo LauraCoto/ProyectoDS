@@ -173,7 +173,7 @@ namespace Juega
 
                     UserManager.AddToRole(user.Id, Utilidades.Roles.AdminSistema);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.AdminSistema);
-                    //UserManager.AddToRole(user.Id, Utilidades.Roles.Espectador);
+                    UserManager.AddToRole(user.Id, Utilidades.Roles.Espectador);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.Jugador);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.AdminEquipo);
                     //UserManager.AddToRole(user.Id, Utilidades.Roles.Valorar);
