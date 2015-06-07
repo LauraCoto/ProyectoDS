@@ -9,9 +9,9 @@ namespace Juega.Controllers.Juega
 {
     public class PerfilController : JuegaController
     {
-        
 
-        public ActionResult Jugador( string id)
+
+        public ActionResult Jugador(string id)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace Juega.Controllers.Juega
 
                 var model = new UsuarioModel();
                 var nid = long.Parse(id);
-                var usuario = _db.Usuario.FirstOrDefault(x=> x.IdUsuario == nid);
+                var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == nid);
 
                 model.Apellido = usuario.Apellido;
 
@@ -46,6 +46,31 @@ namespace Juega.Controllers.Juega
                 return MostrarError(e.Message);
 
             }
-        } 
+        }
+
+
+        public ActionResult Equipo(string id)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return MostrarError("Debe iniciar sesion para poder visualizar este perfil.");
+
+                var model = new EquiposModel();
+                var nid = long.Parse(id);
+                var usuario = _db.Equipo.FirstOrDefault(x => x.IdEquipo == nid);
+                model.Nombre = usuario.Nombre;
+                model.Valoracion = Convert.ToInt32(usuario.Valoracion.HasValue ? usuario.Valoracion : 0);
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+
+            }
+        }
+
+
     }
 }
