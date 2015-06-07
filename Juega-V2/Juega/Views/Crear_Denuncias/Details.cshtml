@@ -1,0 +1,98 @@
+﻿@model Juega.BDD.Denuncia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Denuncia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEstado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEstado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaElimino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaElimino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cancha.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cancha.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.IdUsuarioSeguridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.IdUsuarioSeguridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario1.IdUsuarioSeguridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario1.IdUsuarioSeguridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario2.IdUsuarioSeguridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario2.IdUsuarioSeguridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipo.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipo.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdDenuncia }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

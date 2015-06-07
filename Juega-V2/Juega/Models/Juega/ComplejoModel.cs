@@ -22,5 +22,7 @@ namespace Juega.Models.Juega
         public virtual string Telefonos { get; set; }
         public virtual string Coodernadas { get; set; }
         public virtual string FotoPrincipal { get; set; }
+
+        public virtual int CantCanchas { get; set; }
     }
 }

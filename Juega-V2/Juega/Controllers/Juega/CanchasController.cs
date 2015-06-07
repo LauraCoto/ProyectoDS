@@ -16,57 +16,7 @@ namespace Juega.Controllers.Juega
         {
             return View();
         }
-
-        public ActionResult GuardarVw(string id)
-        {
-            var viewModel = new CanchaModel();
-
-
-            var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
-            var complejos = _db.ComplejoDeportivo.Where(x => x.Activo == true
-                                                     && x.IdUsuario == IdUsuarioLogin
-                                                    ).OrderBy(z => z.FechaCreo)
-                                                    .ToList();
-
-            ViewBag.ListaComplejos = complejos;
-
-
-            if (string.IsNullOrEmpty(id) || id == "-1")
-            {
-                ViewBag.Accion = "Crear";
-                return View(viewModel);
-            }
-            else
-            {
-              
-                var nid = long.Parse(id);
-                var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
-
-                if (item == null)
-                    return MostrarAdvertencia("No se pudo cargar la informacion del complejo deportivo");
-
-                viewModel.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
-                viewModel.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
-                viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
-                viewModel.IdCancha = item.IdCancha;
-                viewModel.Nombre = item.Nombre;  
-
-                if (item.ComplejoDeportivo != null)
-                {
-                    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
-                    viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
-                }
-
-             
-
-
-                ViewBag.Accion = "Guardar Cambios";
-
-                return View(viewModel);
-
-            }
-        }
-
+         
         public ActionResult Inicio()
         {
             return View();
@@ -78,9 +28,11 @@ namespace Juega.Controllers.Juega
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
+                 
 
-                // _db.Configuration.ProxyCreationEnabled = false;
-                var canchas = _db.Cancha.Where(x => x.Activo == true).OrderBy(c => c.IdComplejoDeportivo).OrderBy(z => z.FechaCreo).ToList();
+                 var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
+
+                 var canchas = _db.Cancha.Where(x => x.Activo == true && x.IdUsuario == IdUsuarioLogin).OrderBy(c => c.IdComplejoDeportivo).OrderBy(z => z.FechaCreo).ToList();
 
                 var lista = new List<CanchaModel>();
                 foreach (var item in canchas)
@@ -108,58 +60,110 @@ namespace Juega.Controllers.Juega
             }
         }
 
-
-        [HttpPost]
-        public JsonResult Create(Cancha cancha)
+        public ActionResult GuardarVw(string id)
         {
+            var viewModel = new CanchaModel();
 
-            try
+
+            var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
+            var complejos = _db.ComplejoDeportivo.Where(x => x.Activo == true
+                                                     && x.IdUsuario == IdUsuarioLogin
+                                                    ).OrderBy(z => z.FechaCreo)
+                                                    .ToList();
+
+            var lista = new List<ComplejoModel>();
+            foreach (var item in complejos)
             {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+                var c = new ComplejoModel();
 
-                if (ExisteRegistro(cancha.Nombre, -1))
-                    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
+                c.IdComplejoDeportivo = item.IdComplejoDeportivo;
+                c.Nombre = item.Nombre;
 
-                cancha.Usuario = ObtenerUsuario_Juega();
-                cancha.Activo = true;
-                cancha.FechaCreo = DateTime.Now;
-                _db.Cancha.Add(cancha);
-                _db.SaveChanges();
+                lista.Add(c);
 
-                return Resultado_Correcto(cancha, "El registro ha sido creado.");
             }
-            catch (Exception e)
+
+            ViewBag.IdComplejo = new SelectList(lista, "IdComplejoDeportivo", "Nombre", viewModel.IdComplejo);
+
+            if (string.IsNullOrEmpty(id) || id == "-1")
             {
-                return Resultado_Exception(e);
+                ViewBag.Accion = "Crear";
+                return View(viewModel);
+            }
+            else
+            {
+
+                var nid = long.Parse(id);
+                var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+                if (item == null)
+                    return MostrarAdvertencia("No se pudo cargar la informacion de la cancha.");
+
+                viewModel.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
+                viewModel.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
+                viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
+                viewModel.IdCancha = item.IdCancha;
+                viewModel.Nombre = item.Nombre;
+
+                if (item.ComplejoDeportivo != null)
+                {
+                    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
+                    viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
+                }
+
+                ViewBag.Accion = "Guardar Cambios";
+
+                return View(viewModel);
+
             }
         }
 
-
         [HttpPost]
-        public ActionResult Crear(CanchaModel model)
+        [ValidateInput(true)]
+        [ValidateAntiForgeryToken]
+        public ActionResult Guardar(CanchaModel model)
         {
 
             try
             {
+                if (!ModelState.IsValid)
+                    return MostrarAdvertencia("Debe completar todos los datos obligatorios.");
+
                 if (ExisteRegistro(model.Nombre, model.IdCancha))
                     return MostrarAdvertencia("Ya existe una cancha con el mismo nombre.");
 
-                var cancha = new Cancha();
+                if (model.IdCancha <= 0)
+                {
+                    var cancha = new Cancha();
 
-                if (model.IdComplejo > 0)
-                    cancha.IdComplejoDeportivo = Convert.ToInt64(model.IdComplejo);
+                    if (model.IdComplejo > 0)
+                        cancha.IdComplejoDeportivo = Convert.ToInt64(model.IdComplejo);
 
-                cancha.Nombre = model.Nombre;
-                cancha.Largo = model.Largo;
-                cancha.Ancho = model.Ancho;
-                cancha.NumEspectadores = model.Espectadores;
-                cancha.Valoracion = 0;
-                cancha.TipoEstado = Utilidades.TipoEstado.Pendiente;
-                cancha.Usuario = ObtenerUsuario_Juega();
-                cancha.Activo = true;
-                cancha.FechaCreo = DateTime.Now;
-                _db.Cancha.Add(cancha);
+                    cancha.Nombre = model.Nombre;
+                    cancha.Largo = model.Largo;
+                    cancha.Ancho = model.Ancho;
+                    cancha.NumEspectadores = model.Espectadores;
+                    cancha.Valoracion = 0;
+                    cancha.TipoEstado = Utilidades.TipoEstado.Pendiente;
+                    cancha.Usuario = ObtenerUsuario_Juega();
+                    cancha.Activo = true;
+                    cancha.FechaCreo = DateTime.Now;
+                    _db.Cancha.Add(cancha);
+                }
+                else
+                {
+                    var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == model.IdCancha);
+                    if (cancha == null)
+                        return MostrarAdvertencia("No se pudo obtener la informacion de la cancha.");
+
+                    cancha.Nombre = model.Nombre;
+                    cancha.Largo = model.Largo;
+                    cancha.Ancho = model.Ancho;
+                    cancha.NumEspectadores = model.Espectadores;
+
+                    _db.Entry(cancha).State = EntityState.Modified;
+                }
+
                 _db.SaveChanges();
 
                 return RedirectToAction("Inicio");
@@ -170,63 +174,79 @@ namespace Juega.Controllers.Juega
             }
         }
 
-        [HttpPost]
-        public JsonResult Update(Cancha cancha)
+       
+
+        [Authorize(Roles = Utilidades.Roles.AdminCancha)]
+        public ActionResult EliminarVw(string id)
         {
-            try
+
+            var viewModel = new CanchaModel();
+
+            if (string.IsNullOrEmpty(id) || id == "-1")
             {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                if (ExisteRegistro(cancha.Nombre, cancha.IdCancha))
-                    return Resultado_Advertencia("Ya existe una cancha con el mismo nombre.");
-
-                _db.Entry(cancha).State = EntityState.Modified;
-                _db.SaveChanges();
-
-                return Resultado_Correcto(cancha, "El registro ha sido actualizado.");
+                return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
             }
-            catch (Exception e)
+            else
             {
-                return Resultado_Exception(e);
+
+                var nid = long.Parse(id);
+                var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+                if (item == null)
+                    return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
+
+                viewModel.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
+                viewModel.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
+                viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
+                viewModel.IdCancha = item.IdCancha;
+                viewModel.Nombre = item.Nombre; 
+
+                if (item.ComplejoDeportivo != null)
+                {
+                    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
+                    viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
+                } 
+
+                return View(viewModel); 
+
             }
         }
 
-        [HttpPost]
-        public JsonResult Delete(Cancha canchaEliminar)
+        public ActionResult Eliminar(CanchaModel model)
         {
             try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+            { 
 
-                if (canchaEliminar == null)
-                    return Resultado_Advertencia("El registro no es valido.");
+                if (model.IdCancha <= 0)
+                    return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
 
-                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == canchaEliminar.IdCancha);
+                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == model.IdCancha);
 
                 if (cancha == null)
-                    return Resultado_Advertencia("No se encontro ningun registro.");
+                    return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
 
-                _db.Cancha.Remove(cancha);
+                cancha.Activo = false;
+                cancha.FechaElimino = DateTime.Now;
+
+                _db.Entry(cancha).State = EntityState.Modified;
+
                 _db.SaveChanges();
 
-                return Resultado_Correcto(cancha, "El registro ha sido eliminado.");
-
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {
-                return Resultado_Exception(e);
+                return MostrarError(e.Message, "Ocurrio un error eliminar la cancha.");
             }
         }
-
-        private bool ExisteRegistro(string nombre, long IdExcluir)
+         
+        private bool ExisteRegistro(string nombre, long idExcluir)
         {
             if (nombre.Trim() == "")
                 return false;
 
             var registro = _db.Cancha.FirstOrDefault(x => x.Nombre == nombre &&
-                                                                x.IdCancha != IdExcluir
+                                                                x.IdCancha != idExcluir
                                                                 );
 
             return registro != null;

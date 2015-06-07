@@ -17,8 +17,8 @@
 @using (Html.BeginForm("Guardar", "ComplejoDeportivo"))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
+    @Html.ValidationSummary(true) 
+    
     <fieldset>
 
         <div class="container">
@@ -33,9 +33,9 @@
 
                 <div id="complejo">
 
-                     
+
                     <div class="editor-field">
-                        @Html.HiddenFor(model => model.IdComplejoDeportivo, new { @class = "form-control required", @hidden = "hidden" }) 
+                        @Html.HiddenFor(model => model.IdComplejoDeportivo, new { @class = "form-control required", @hidden = "hidden" })
                     </div>
 
                     <label for="Nombre">* Nombre del complejo</label>
@@ -98,4 +98,3 @@
 <script type="text/javascript">
     $("#wizard").bwizard();
 </script>
- 
