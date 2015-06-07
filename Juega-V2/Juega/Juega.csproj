@@ -293,9 +293,15 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\DashboardController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\DocumentationController.cs" />
+    <Compile Include="Controllers\ElementsController.cs" />
+    <Compile Include="Controllers\ExtrasController.cs" />
+    <Compile Include="Controllers\FormsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\CrearEquipoController.cs" />
@@ -309,6 +315,12 @@
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
     <Compile Include="Controllers\Juega\UsuarioSolicitudJugadorController.cs" />
     <Compile Include="Controllers\Juega\Usuario_Solicitud_EquipoController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapsController.cs" />
+    <Compile Include="Controllers\MultilevelsController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -797,6 +809,57 @@
     <Content Include="Views\Espectador\Jugadores.cshtml" />
     <Content Include="Views\SolicitudAdminCanchas\Inicio.cshtml" />
     <Content Include="Views\SolicitudAdminCanchas\CrearSolicitud.cshtml" />
+    <Content Include="Views\Documentation\Index.cshtml" />
+    <Content Include="Views\Elements\Animations.cshtml" />
+    <Content Include="Views\Elements\Buttons.cshtml" />
+    <Content Include="Views\Elements\Carousel.cshtml" />
+    <Content Include="Views\Elements\Colors.cshtml" />
+    <Content Include="Views\Elements\DropdownAnimations.cshtml" />
+    <Content Include="Views\Elements\Grid.cshtml" />
+    <Content Include="Views\Elements\GridMasonry.cshtml" />
+    <Content Include="Views\Elements\IconsFont.cshtml" />
+    <Content Include="Views\Elements\IconsWeather.cshtml" />
+    <Content Include="Views\Elements\Nestable.cshtml" />
+    <Content Include="Views\Elements\Notifications.cshtml" />
+    <Content Include="Views\Elements\Panels.cshtml" />
+    <Content Include="Views\Elements\Portlets.cshtml" />
+    <Content Include="Views\Elements\Sortable.cshtml" />
+    <Content Include="Views\Elements\Spinners.cshtml" />
+    <Content Include="Views\Elements\Typo.cshtml" />
+    <Content Include="Views\Extras\Calendar.cshtml" />
+    <Content Include="Views\Extras\Invoice.cshtml" />
+    <Content Include="Views\Extras\Mailbox.cshtml" />
+    <Content Include="Views\Extras\Search.cshtml" />
+    <Content Include="Views\Extras\Timeline.cshtml" />
+    <Content Include="Views\Extras\Todo.cshtml" />
+    <Content Include="Views\Extras\UserProfile.cshtml" />
+    <Content Include="Views\Forms\FormExtended.cshtml" />
+    <Content Include="Views\Forms\FormStandard.cshtml" />
+    <Content Include="Views\Forms\FormUpload.cshtml" />
+    <Content Include="Views\Forms\FormValidation.cshtml" />
+    <Content Include="Views\Forms\FormWizard.cshtml" />
+    <Content Include="Views\Forms\FormXEditable.cshtml" />
+    <Content Include="Views\Maps\MapsGoogle.cshtml" />
+    <Content Include="Views\Maps\MapsVector.cshtml" />
+    <Content Include="Views\Multilevels\Multilevel_1.cshtml" />
+    <Content Include="Views\Multilevels\Multilevel_3.cshtml" />
+    <Content Include="Views\Pages\Error_404.cshtml" />
+    <Content Include="Views\Pages\Lock.cshtml" />
+    <Content Include="Views\Pages\Login.cshtml" />
+    <Content Include="Views\Pages\Recover.cshtml" />
+    <Content Include="Views\Pages\Register.cshtml" />
+    <Content Include="Views\Pages\Template.cshtml" />
+    <Content Include="Views\Widgets\Index.cshtml" />
+    <Content Include="Views\Tables\TableDatatable.cshtml" />
+    <Content Include="Views\Tables\TableExtended.cshtml" />
+    <Content Include="Views\Tables\TableJQGrid.cshtml" />
+    <Content Include="Views\Tables\TableStandard.cshtml" />
+    <Content Include="Views\Charts\ChartChartist.cshtml" />
+    <Content Include="Views\Charts\ChartFlot.cshtml" />
+    <Content Include="Views\Charts\ChartJS.cshtml" />
+    <Content Include="Views\Charts\ChartMorris.cshtml" />
+    <Content Include="Views\Charts\ChartRadial.cshtml" />
+    <Content Include="Views\Charts\ChartRickshaw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
