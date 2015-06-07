@@ -10,9 +10,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Juega.Controllers.Juega
 {
 
-    [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+    [Authorize(Roles = Utilidades.Roles.Espectador)]
     public class EquiposController : JuegaController
-    {  
+    {
+         [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
         public ActionResult Inicio()
         {
             return View();
@@ -92,7 +93,6 @@ namespace Juega.Controllers.Juega
                     MostrarAdvertencia("Debe completar todos los datos obligatorios");
 
                 var usuarioLogin = ObtenerUsuario_Juega();
-
                 usuarioLogin.EsAdminEquipo = true;
 
                 if (ExisteRegistro(model.Nombre, model.IdEquipo))
@@ -106,7 +106,7 @@ namespace Juega.Controllers.Juega
                     equipo.FotoPrincipal = model.FotoPrincipal;
                     equipo.Usuario = usuarioLogin;
                     equipo.Nombre = model.Nombre;
-
+                    equipo.TipoEstado = Utilidades.TipoEstado.Disponible;
                     _db.Equipo.Add(equipo);
 
                 }
@@ -123,6 +123,23 @@ namespace Juega.Controllers.Juega
                 }
 
 
+                //Definir usuario como tecnico
+                var usersContext = new ApplicationDbContext();
+                var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioLogin.IdUsuarioSeguridad);
+                var rol = usersContext.Roles.FirstOrDefault(x => x.Name == Utilidades.Roles.AdminEquipo);
+
+                var identityRol = usuarioSeg.Roles.FirstOrDefault(x => x.RoleId == rol.Id && x.UserId == usuarioSeg.Id);
+                if (identityRol == null)
+                {
+                    identityRol = new IdentityUserRole();
+                    identityRol.RoleId = rol.Id;
+                    identityRol.UserId = usuarioSeg.Id;
+
+                    usuarioSeg.Roles.Add(identityRol);
+                    usersContext.SaveChanges();
+                }
+
+                usuarioLogin.EsAdminEquipo = true;
                 _db.Entry(usuarioLogin).State = EntityState.Modified;
                 _db.SaveChanges();
 
@@ -133,7 +150,8 @@ namespace Juega.Controllers.Juega
                 return MostrarError(ex.Message, "Ocurrio un error guardar el complejo deportivo.");
             }
         }
-         
+
+         [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
         public ActionResult EliminarVw(string id)
         {
 
@@ -161,15 +179,13 @@ namespace Juega.Controllers.Juega
         }
          
         [HttpPost]
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
         public ActionResult Eliminar(EquiposModel model)
         {
             try
             {
-
-
                 if (model.IdEquipo <= 0)
                     return MostrarAdvertencia("No se pudo cargar la informacion del equipo a eliminar");
-
 
                 var equipo = _db.Equipo.FirstOrDefault(x => x.IdEquipo == model.IdEquipo);
 
