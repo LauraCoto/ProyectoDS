@@ -1,4 +1,5 @@
 ﻿angular.module('appComplejo', ['ComplejoDeportivoController']);
+angular.module('appEquipo', ['EquiposController']);
 angular.module('appCanchas', ['CanchasController']);
 angular.module('appRoles', ['RolesController']);
 angular.module('appManageRoles', ['RolesController']);

@@ -54,9 +54,10 @@
                 $scope.MostrarInfo = data.Info;
                 $scope.Mensaje = data.Mensaje;
 
-                // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
+               // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
 
-                if (data.Error == 'N' && data.Alerta == 'N') {
+                if (data.Error == 'N' && data.Alerta == 'N')
+                {
 
                     if ($scope.Accion == 'nuevo')
                         $scope.ListaRegistros.push(data.data);
@@ -75,7 +76,7 @@
 
 
     $scope.EliminarRegistro = function (registroEliminar) {
-        $http.post('/CrearEquipo/Delete', registroEliminar)
+        $http.post('/Equipos/Delete', registroEliminar)
         .success(function (data) {
             $scope.MostrarError = data.Error;
             $scope.MostrarAlerta = data.Alerta;

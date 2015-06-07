@@ -16,8 +16,44 @@ namespace Juega.Controllers.Juega
         public ActionResult Inicio()
         {
             return View();
-        } 
-         
+        }
+
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+        public JuegaJson GetAll()
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+
+                var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
+
+                var equipos = _db.Equipo.Where(x => x.Activo == true
+                                                           && x.IdUsuario == IdUsuarioLogin
+                                                          ).OrderBy(z => z.FechaCreo)
+                                                          .ToList();
+
+                var lista = new List<EquiposModel>();
+                foreach (var item in equipos)
+                {
+                    var c = new EquiposModel();
+
+                    c.FotoPrincipal = item.FotoPrincipal;
+                    c.IdEquipo = item.IdEquipo;
+                    c.Nombre = item.Nombre;
+
+                    lista.Add(c);
+
+                }
+
+                return Resultado_Correcto(lista);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+        }
+
         public ActionResult GuardarVW(string id)
         {
 
@@ -162,7 +198,7 @@ namespace Juega.Controllers.Juega
 
             var equipo = _db.Equipo.FirstOrDefault(x => x.Nombre == nombre &&
                                                                 x.IdEquipo != IdExcluir
-                                                                );
+                                                                && x.Activo == true);
 
             return equipo != null;
         }

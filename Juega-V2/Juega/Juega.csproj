@@ -782,11 +782,6 @@
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\ComplejoDeportivo\Create.cshtml" />
-    <Content Include="Views\CrearEquipo\Create.cshtml" />
-    <Content Include="Views\CrearEquipo\Delete.cshtml" />
-    <Content Include="Views\CrearEquipo\Details.cshtml" />
-    <Content Include="Views\CrearEquipo\Edit.cshtml" />
-    <Content Include="Views\CrearEquipo\Index.cshtml" />
     <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
     <Content Include="Views\Subscripcion\Index.cshtml" />
     <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
@@ -868,6 +863,8 @@
     <Content Include="Views\Crear_Denuncias\Edit.cshtml" />
     <Content Include="Views\Crear_Denuncias\Index.cshtml" />
     <Content Include="Views\Equipos\Inicio.cshtml" />
+    <Content Include="Views\Equipos\GuardarVW.cshtml" />
+    <Content Include="Views\Equipos\EliminarVw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

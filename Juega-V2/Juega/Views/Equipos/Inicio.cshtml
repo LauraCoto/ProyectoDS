@@ -3,15 +3,15 @@
 }
 
 <h3>Equipos</h3>
-<script src="~/app/controller/EquiposCtrl.js"></script>
+<script src="~/app/controller/EquipoCtrl.js"></script>
 
 
 <div class="panel-body">
-    <a href="/ComplejoDeportivo/GuardarVW/" class="mb-sm btn btn-primary">Crear Complejo</a>
+    <a href="/Equipos/GuardarVW/" class="mb-sm btn btn-primary">Crear Equipo</a>
 </div>
 
 
-<div class="container" ng-app="appComplejo" ng-controller="complejoDeportivoCtrl">
+<div class="container" ng-app="appEquipo" ng-controller="EquipoCtrl">
     <div class="row">
         <div class="col-md-12">
 
@@ -24,9 +24,6 @@
                                 <div class="col-xs-12 text-white">
                                     <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
                                     <h3 class="m0">{{item.Nombre}}</h3>
-                                    <p class="m0">
-                                        <em class="fa fa-twitter fa-fw"></em> {{item.Direccion}}
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -34,11 +31,11 @@
                         <div class="panel-body text-center bg-green">
                             <div class="row row-table">
                                 <div class="col-xs-4">
-                                    <a href="/ComplejoDeportivo/GuardarVw/{{item.IdComplejoDeportivo}}" class=" text-white">
+                                    <a href="/Equipos/GuardarVw/{{item.IdEquipo}}" class=" text-white">
                                         <em class="fa fa-folder-open-o fa-2x pull-left"></em>
                                     </a>
 
-                                    <a href="/ComplejoDeportivo/EliminarVw/{{item.IdComplejoDeportivo}}" class=" text-white">
+                                    <a href="/Equipos/EliminarVw/{{item.IdEquipo}}" class=" text-white">
                                         <em class="fa fa-user fa-2x pull-right"></em>
                                     </a>
 
@@ -47,7 +44,7 @@
                         </div>
 
 
-                        <div class="list-group">
+                        @*<div class="list-group">
                             <a href="#" class="list-group-item">
                                 <span class="label label-primary pull-right">{{item.Telefonos}}</span>
                                 <em class="fa fa-fw fa-clock-o text-muted"></em>Telefonos
@@ -59,7 +56,7 @@
                                 <span class="label label-primary pull-right">{{item.CantCanchas}}</span>
                                 <em class="fa fa-fw fa-clock-o text-muted"></em> Canchas
                             </a>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
 
