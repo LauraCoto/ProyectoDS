@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Juega.Models.Juega.SolicitudUsuarioEquipo>
+
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<h3>Solicitudes de Jugador</h3>
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="panel widget">
+            <div class="panel-body">
+                <div class="row row-table">
+                    <div class="col-xs-3 text-center">
+                        <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle img-responsive thumb64" />
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <span>@item.Usuario</span>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <span>@item.EquipoNombre</span>
+                    </div>
+                    <div class="col-xs-4">
+
+                        <a href="/Usuario_Solicitud_Equipo/Aceptar/@item.IdSolicitud" class="btn btn-green">
+                            <span>Aprobar</span>
+                        </a>
+
+                        <a href="/Usuario_Solicitud_Equipo/Rechazar/@item.IdSolicitud" class="btn btn-remove2">
+                            <span>Rechazar</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
