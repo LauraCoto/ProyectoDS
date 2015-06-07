@@ -859,6 +859,7 @@
     <Content Include="Views\Charts\ChartMorris.cshtml" />
     <Content Include="Views\Charts\ChartRadial.cshtml" />
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
+    <Content Include="Views\Perfil\Cancha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
