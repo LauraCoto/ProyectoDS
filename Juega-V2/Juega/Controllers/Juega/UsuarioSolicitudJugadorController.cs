@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
 using System.Data.Entity;
+using Juega.Utilidades;
+using Juega.Models.Juega;
 
 namespace Juega.Controllers.Juega
 {
@@ -41,19 +43,98 @@ namespace Juega.Controllers.Juega
         {
             try
             {
-                _db.Configuration.ProxyCreationEnabled = false;
+                var equipo = _db.Equipo.Where(x => x.Activo == true).OrderBy(z => z.FechaCreo).ToList();
+                
+                //var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
 
-                var lista = _db.Equipo.ToList();
+                var lista = new List<EquipoModel>();
 
-                return Json(lista, JsonRequestBehavior.AllowGet);
+                foreach (var item in equipo)
+                {
+                    var e = new EquipoModel();
+                    
+                    e.IdEquipo = item.IdEquipo;
+                    
+                    e.Nombre = item.Nombre.ToString();
+
+                    lista.Add(e);
+                }
+
+                return Resultado_Correcto(lista);
+
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return Json(e.Message, JsonRequestBehavior.AllowGet);
+                return Resultado_Exception(ex);
             }
         }
 
+        public JuegaJson GetAllUsuarioEquipo()
+        {
+            try
+            {
+                var equipo = _db.Equipo.Where(x => x.Activo == true).OrderBy(z => z.FechaCreo).ToList();
+                var lista = new List<EquipoModel>();
 
+                var UsersContext = new ApplicationDbContext();
+                var users = UsersContext.Users.ToList();
+
+                //var lista = new List<Usuario_Rol>();
+                foreach (var item in equipo)
+                {
+                    foreach (var u in users)
+                    {
+                        //var user = users.Find(x => x.Id == item.Usuario.IdUsuarioSeguridad);
+
+                        //if (user == null)
+                        //    continue;
+
+                        var model = new EquipoModel(item.IdEquipo, item.Nombre, u.Id, u.UserName);
+                        lista.Add(model);
+                    }
+                }
+
+                return Resultado_Correcto(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return Resultado_Exception(ex);
+            }
+        }
+
+        public JuegaJson GetAllUsers()
+        {
+            try
+            {
+                var UsersContext = new ApplicationDbContext();
+                var users = UsersContext.Users.ToList();
+
+                var lista = new List<Usuario_Rol>();
+                foreach (var r in UsersContext.Roles.ToList())
+                {
+                    foreach (var u in r.Users)
+                    {
+                        var user = users.Find(x => x.Id == u.UserId);
+
+                        if (user == null)
+                            continue;
+
+                        var model = new Usuario_Rol(r.Id, r.Name, user.Id, user.UserName);
+                        lista.Add(model);
+                    }
+                }
+
+                return Resultado_Correcto(lista);
+
+            }
+            catch (Exception ex)
+            {
+                return Resultado_Exception(ex);
+            }
+        }
+
+        
 
 
 
@@ -94,7 +175,8 @@ namespace Juega.Controllers.Juega
                 //    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
                 _db.Entry(complejoDeportivo).State = EntityState.Modified;
-                complejoDeportivo.TipoEstado = "Aceptado";
+                //complejoDeportivo.TipoEstado = "Aceptado";
+                complejoDeportivo.TipoEstado = TipoEstado.Aprobado;
                 _db.SaveChanges();
                 
 
@@ -120,7 +202,8 @@ namespace Juega.Controllers.Juega
                 //    return Resultado_Advertencia("Ya existe un complejo con el mismo nombre.");
 
                 _db.Entry(complejoDeportivo).State = EntityState.Modified;
-                complejoDeportivo.TipoEstado = "Rechazado";
+                //complejoDeportivo.TipoEstado = "Rechazado";
+                complejoDeportivo.TipoEstado = TipoEstado.Rechazado;
                 _db.SaveChanges();
 
 

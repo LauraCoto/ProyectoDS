@@ -20,17 +20,14 @@
                     </tr>
 
                     <tr ng-repeat="item in ListaRegistros">
-                        <td> {{item.IdUsuario}}  </td>
-                        <td> {{item.IdEquipo}} </td>
-                        <td ng-repeat="">
-
-                        </td>
+                        <td> {{item.Usuario}} </td>
+                        <td> {{item.Nombre}} </td>
 
                         <td>
                             @*<button type="button" ng-click="EditarRegistro(item)" class="btn-green">Editar</button>
-                            <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>*@
+                <button type="button" ng-click="EliminarRegistro(item)" class="btn-danger">Borrar</button>*@
                             <button type="button" ng-click="Aceptar(item)" class="btn-green">Aceptar</button>
-                            <button type="button" ng-click="Rechazar(item)" class="btn-danger" >Rechazar</button>
+                            <button type="button" ng-click="Rechazar(item)" class="btn-danger">Rechazar</button>
                         </td>
                     </tr>
 

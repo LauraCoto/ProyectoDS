@@ -34,25 +34,55 @@
         $scope.MostrarControles = true;
     }
 
-    $http.get('/UsuarioSolicitudJugador/GetAll').success(function (data) {
+    $http.get('/UsuarioSolicitudJugador/GetAllUsuarioEquipo').success(function (data) {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
         $scope.MostrarInfo = data.Info;
         $scope.MostrarError = data.Error;
 
-        //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
-
-        if (data.Error == 'S')
-            $scope.ListaRegistros = {};
-        else
+        //if (data.Error == 'S')
+        //    $scope.ListaRegistros = {};
+        //else
             $scope.ListaRegistros = data.data;
 
     });
 
+    //$http.get('/UsuarioSolicitudJugador/GetAllEquipos').success(function (data) {
+    //    $scope.Mensaje = data.Mensaje;
+    //    $scope.MostrarAlerta = data.Alerta;
+    //    $scope.MostrarInfo = data.Info;
+    //    $scope.MostrarError = data.Error;
+
+    //    if (data.Error == 'S')
+    //        $scope.ListaRoles = {};
+    //    else
+    //        $scope.ListaRoles = data.data;
+
+    //});
+
+    //$http.get('/UsuarioSolicitudJugador/GetAll').success(function (data) {
+    //    $scope.Mensaje = data.Mensaje;
+    //    $scope.MostrarAlerta = data.Alerta;
+    //    $scope.MostrarInfo = data.Info;
+    //    $scope.MostrarError = data.Error;
+
+    //    //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
+
+    //    if (data.Error == 'S')
+    //        $scope.ListaRegistros = {};
+    //    else
+    //        $scope.ListaRegistros = data.data;
+
+    //});
+
+
+
     //Obtengo la lista de equipos
-    $http.get('/UsuarioSolicitudJugador/GetAllEquipo').success(function (data) {
-        $scope.ListaEquipo = data;
-    });
+    //$http.get('/UsuarioSolicitudJugador/GetAllEquipo').success(function (data) {
+
+    //    $scope.ListaEquipo = data.data;
+
+    //});
 
 
     $scope.Guardar = function () {
