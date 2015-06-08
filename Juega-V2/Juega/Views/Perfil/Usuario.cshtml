@@ -1,0 +1,86 @@
+﻿@model Juega.Models.Juega.EditarModel
+@{
+    ViewBag.Title = "Usuario";
+}
+
+
+<script src="~/app/controller/EditarPerfilCtrl.js"></script>
+
+<style type="Text/CSS">
+    .btn 
+    {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        text-align: center;
+    }
+</style>
+
+
+<section ng-app="appEditarUsuario" ng-controller="PerfilController">
+    <center>
+        <div class="container">
+            <div class="row clearfix" id="content-row">
+                <div class="col-xs-10 column">
+                    <div class="well" id="volume-fees-well">
+                        <br />
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Editar Perfil</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form name="Show_Profile">
+                                    <fieldset>
+                                        <div class="col-md-3">
+                                            <br />
+                                            <img src="~/Content/Images/futbol.png" class="img-responsive img-rounded" />
+                                        </div>
+                                        <br />
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="Firstname">Nombre</label>
+                                                <div class="controls">
+                                                    <input type="text" value="@Model.Nombre" data-ng-model="Firstname" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="Surname">Apellido</label>
+                                                <div class="controls">
+                                                    <input type="text" value="@Model.Apellido" data-ng-model="Surname" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="Age">Edad</label>
+                                                <div class="controls">
+                                                    <input type="text" value="@Model.FechaNacimiento" data-ng-model="Age" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="Fecha_nac">Descripcion</label>
+                                                <div class="controls">
+                                                    <textarea class="form-control" value="@Model.Descripcion" rows="5" cols="10" name="message"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="Email">Imagen Perfil</label>
+                                                <div class="controls">
+                                                    <input type="text" value="@Model.FotoPrincipal" data-ng-model="Imagen" id="Imagen" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success btn-lg" ng-click="EditarPerfilCtrl.Guardar();ok()" ng-disabled="Index.$invalid">Actualizar</button>
+                            <button class="btn btn-warning btn-lg" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+</section>

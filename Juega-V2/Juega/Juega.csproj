@@ -333,6 +333,7 @@
     <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\Controladores.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
+    <Compile Include="Models\Juega\EditarPerfil_Modelo.cs" />
     <Compile Include="Models\Juega\EquiposModel.cs" />
     <Compile Include="Models\Juega\JugadorModel.cs" />
     <Compile Include="Models\Juega\MenuPrincipal.cs" />
@@ -356,6 +357,7 @@
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\DenunciasCtrl.js" />
+    <Content Include="app\controller\EditarPerfilCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\EspectadorCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
@@ -860,12 +862,14 @@
     <Content Include="Views\Charts\ChartRadial.cshtml" />
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
     <Content Include="Views\Perfil\Equipo.cshtml" />
+    <Content Include="Views\Perfil\Usuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\EditarPerfil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

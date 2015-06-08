@@ -71,6 +71,40 @@ namespace Juega.Controllers.Juega
             }
         }
 
+        //View para editar perfil 
+        public ActionResult Usuario()
+        {
+               return View();
+        }
+
+        public JuegaJson Editar_Perfil()
+        {
+            
+            try
+            {
+                if (!TieneAcceso())
+                    return Resultado_No_Acceso();
+                 var UsuarioLogin = ObtenerUsuario_Juega();
+                 var modelo = new EditarModel();
+                 modelo.IdUsuario = UsuarioLogin.IdUsuario;
+                 modelo.Nombre = UsuarioLogin.Nombre;
+                 modelo.Apellido = UsuarioLogin.Apellido;
+                 modelo.Descripcion = UsuarioLogin.Descripcion;
+                 modelo.FechaNacimiento = UsuarioLogin.FechaNacimiento.ToString();
+                 modelo.FotoPrincipal = UsuarioLogin.FotoPrincipal;
+                return Resultado_Correcto(modelo);
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+
+        }
+
+         
+
+
+
 
     }
 }
