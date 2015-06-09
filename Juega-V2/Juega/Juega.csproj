@@ -305,6 +305,7 @@
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
+    <Compile Include="Controllers\Juega\EquiposController.cs" />
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\PerfilController.cs" />
@@ -861,6 +862,9 @@
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
     <Content Include="Views\Perfil\Equipo.cshtml" />
     <Content Include="Views\Perfil\Usuario.cshtml" />
+    <Content Include="Views\Equipos\EliminarVw.cshtml" />
+    <Content Include="Views\Equipos\GuardarVW.cshtml" />
+    <Content Include="Views\Equipos\Inicio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
