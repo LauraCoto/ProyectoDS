@@ -9,3 +9,4 @@ angular.module('appPerfil_Usuario', ['Perfil_UsuarioController']);
 angular.module('appDenuncias', ['DenunciasController']);
 angular.module('appEspectador', ['EspectadorController']);
 angular.module('appSolicitudes', ['SolicitudesController']);
+angular.module('appPerfil', ['PerfilController']);

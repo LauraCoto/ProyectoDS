@@ -16,25 +16,28 @@
                         <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
                             <div class="row row-table">
                                 <div class="col-xs-12 text-white">
-                                    <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />                                    
+                                    <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
                                     <h3 class="m0">{{item.Nombre}}</h3>
                                     <p class="m0">
                                         <em class="glyphicon glyphicon-thumbs-up"></em> {{item.Valoracion}}
-                                    </p>                                  
-                                </div>    
+                                    </p>
+                                </div>
                             </div>
-                        </div> 
-                        <div class="panel-body text-center bg-green">
+                        </div>
+                        <div class="panel-body text-center bg-gray-dark">
                             <div class="row row-table">
+                                <div class="col-xs-4 br">
+                                    <a href="/Perfil/Equipo/{{item.IdEquipo}}" class="text-white">
+                                        <em class="fa fa-user fa-1x pull-right "> Ver Perfil</em>
+                                    </a>
+                                </div>
                                 <div class="col-xs-4">
-
                                     <a href="/Espectador/Jugadores/{{item.IdEquipo}}" class="text-white">
                                         <em class="fa fa-user fa-1x pull-right "> Jugadores</em>
-                                        
                                     </a>
                                 </div>
                             </div>
-                        </div>                   
+                        </div>
                     </div>
                 </div>
             </div>

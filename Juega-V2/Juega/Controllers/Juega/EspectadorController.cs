@@ -149,7 +149,8 @@ namespace Juega.Controllers.Juega
 
                 var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
 
-                var equipos = _db.Equipo.Where(x => x.Activo == true).OrderBy(z => z.FechaCreo).ToList();
+                var equipos = _db.Equipo.Where(x => x.Activo == true && 
+                                               x.TipoEstado == Utilidades.TipoEstado.Disponible).OrderBy(z => z.FechaCreo).ToList();
 
                 var lista = new List<EquiposModel>();
                 foreach (var item in equipos)
@@ -179,7 +180,9 @@ namespace Juega.Controllers.Juega
                     return MostrarAdvertencia("El equipo seleccionado es incorrecto.");
 
                 var nid = long.Parse(id);
-                var jugadores = _db.Equipo_Jugador.Where(x => x.Activo == true && x.IdEquipo == nid).OrderBy(z => z.FechaCreo).ToList();
+                var jugadores = _db.Equipo_Jugador.Where(x => x.Activo == true && 
+                                                         x.IdEquipo == nid && 
+                                                         x.Usuario.EsJugador==true).OrderBy(z => z.FechaCreo).ToList();
 
                 var lista = new List<JugadorModel>();
                 foreach (var item in jugadores)

@@ -304,8 +304,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
-    <Compile Include="Controllers\Juega\EquiposController.cs" />
-    <Compile Include="Controllers\Juega\Crear_DenunciasController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
@@ -332,6 +330,7 @@
     <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\Controladores.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
+    <Compile Include="Models\Juega\EditarPerfil_Modelo.cs" />
     <Compile Include="Models\Juega\EquipoModelSubscripcion.cs" />
     <Compile Include="Models\Juega\EquiposModel.cs" />
     <Compile Include="Models\Juega\JugadorModel.cs" />
@@ -357,12 +356,14 @@
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\DenunciasCtrl.js" />
+    <Content Include="app\controller\EditarPerfilCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\EspectadorCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
     <Content Include="app\controller\PageMenuCtrl.js" />
-    <Content Include="app\controller\Perfil_UsuarioCtrl.js" />
+    <Content Include="app\controller\PerfilCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
+    <Content Include="app\controller\SolicitudesCtrl.js" />
     <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
     <Content Include="Content\app\css\app-rtl.css" />
@@ -779,6 +780,11 @@
     <Content Include="Views\Roles\ManageRole.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\ComplejoDeportivo\Create.cshtml" />
+    <Content Include="Views\CrearEquipo\Create.cshtml" />
+    <Content Include="Views\CrearEquipo\Delete.cshtml" />
+    <Content Include="Views\CrearEquipo\Details.cshtml" />
+    <Content Include="Views\CrearEquipo\Edit.cshtml" />
+    <Content Include="Views\CrearEquipo\Index.cshtml" />
     <Content Include="Views\Solicitud_Jugador\Index.cshtml" />
     <Content Include="Views\Subscripcion\Index.cshtml" />
     <Content Include="Views\UsuarioSolicitudJugador\Index.cshtml" />
@@ -853,24 +859,15 @@
     <Content Include="Views\Charts\ChartMorris.cshtml" />
     <Content Include="Views\Charts\ChartRadial.cshtml" />
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
-    <Content Include="Views\Crear_Denuncias\CrearDenuncia.cshtml" />
-    <Content Include="Views\Crear_Denuncias\Create.cshtml" />
-    <Content Include="Views\Crear_Denuncias\Delete.cshtml" />
-    <Content Include="Views\Crear_Denuncias\Details.cshtml" />
-    <Content Include="Views\Crear_Denuncias\Edit.cshtml" />
-    <Content Include="Views\Crear_Denuncias\Index.cshtml" />
-    <Content Include="Views\Equipos\Inicio.cshtml" />
-    <Content Include="Views\Equipos\GuardarVW.cshtml" />
-    <Content Include="Views\Equipos\EliminarVw.cshtml" />
-    <Content Include="Views\Usuario_Solicitud_Equipo\CrearSolicitud.cshtml">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include="Views\Perfil\Equipo.cshtml" />
+    <Content Include="Views\Perfil\Usuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\EditarPerfil\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
