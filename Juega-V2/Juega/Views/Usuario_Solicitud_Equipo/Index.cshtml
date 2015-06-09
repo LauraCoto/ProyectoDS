@@ -4,60 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<script src="~/app/controller/CargarEquiposController.js"></script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoEstado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaElimino)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Equipo.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.IdUsuarioSeguridad)
-        </th>
-        <th></th>
-    </tr>
+<h3>Elige un Equipo</h3>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaElimino)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Activo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Equipo.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.IdUsuarioSeguridad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario_Solicitud_Equipo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario_Solicitud_Equipo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario_Solicitud_Equipo })
-        </td>
-    </tr>
-}
 
-</table>
+
+<div class="container" ng-app="appSuscripciones" ng-controller="CargarEquiposCtrl">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-repeat="item in ListaRegistros">
+
+                <div class="col-lg-4">
+                    <div class="panel widget">
+                        <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
+                            <div class="row row-table">
+                                <div class="col-xs-12 text-white">
+                                    <img ng-src="{{item.FotoPrincipal}}" alt="Image" class="img-thumbnail img-circle thumb128" />
+                                    <h3 class="m0">{{item.Nombre}}</h3>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body text-center bg-green">
+                            <div class="row row-table">
+                                <div class="col-xs-4">
+                                    <a href="" ng-click="enviarSolicitud(item)" class=" text-white">
+                                        <em class="fa fa-arrow-right fa-2x">Unirse</em>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

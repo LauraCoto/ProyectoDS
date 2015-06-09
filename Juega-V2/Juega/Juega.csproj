@@ -298,6 +298,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DocumentationController.cs" />
     <Compile Include="Controllers\ElementsController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\ExtrasController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -317,7 +318,7 @@
     <Compile Include="Controllers\MultilevelsController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
-    <Compile Include="Controllers\Usuario_Solicitud_EquipoController.cs" />
+    <Compile Include="Controllers\Juega\Usuario_Solicitud_EquipoController.cs" />
     <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,6 +342,7 @@
     <Content Include="app\app.js" />
     <Content Include="app\appCanchas.js" />
     <Content Include="app\controller\CanchasCtrl.js" />
+    <Content Include="app\controller\CargarEquiposController.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\DenunciasCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
@@ -377,6 +379,8 @@
     <Content Include="Content\Images\bg8.jpg" />
     <Content Include="Content\Images\bg9.jpg" />
     <Content Include="Content\Images\dummy.png" />
+    <Content Include="Content\Images\equipos\olimpia.png" />
+    <Content Include="Content\Images\equipos\prueba1.jpg" />
     <Content Include="Content\Images\futbol.png" />
     <Content Include="Content\Images\Jugador.jpg" />
     <Content Include="Content\Images\lock-bg.jpg" />
@@ -1433,7 +1437,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1555,6 +1561,11 @@
     <Content Include="Views\Usuario_Solicitud_Equipo\Details.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Edit.cshtml" />
     <Content Include="Views\Usuario_Solicitud_Equipo\Index.cshtml" />
+    <Content Include="Views\Equipos\Create.cshtml" />
+    <Content Include="Views\Equipos\Delete.cshtml" />
+    <Content Include="Views\Equipos\Details.cshtml" />
+    <Content Include="Views\Equipos\Edit.cshtml" />
+    <Content Include="Views\Equipos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

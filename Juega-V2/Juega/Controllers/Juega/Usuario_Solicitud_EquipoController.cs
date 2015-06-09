@@ -8,17 +8,112 @@ using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
 
-namespace Juega.Controllers
+namespace Juega.Controllers.Juega
 {
-    public class Usuario_Solicitud_EquipoController : Controller
+
+    public class respuesta
+    {
+        public string mensaje;
+    }
+    public class Usuario_Solicitud_EquipoController : JuegaController
     {
         private JuegaEntities db = new JuegaEntities();
 
         // GET: Usuario_Solicitud_Equipo
         public ActionResult Index()
         {
+            
+
             var usuario_Solicitud_Equipo = db.Usuario_Solicitud_Equipo.Include(u => u.Equipo).Include(u => u.Usuario);
             return View(usuario_Solicitud_Equipo.ToList());
+        }
+      
+        
+        [HttpPost]
+        public JuegaJson enviarSolicitud(string id)
+        {
+
+            
+            try{
+               
+            var team = int.Parse(id);
+            var usuarioLogeado = ObtenerUsuario_Juega();
+            if (usuarioLogeado != null)
+            {
+                var solicitud = new Usuario_Solicitud_Equipo();
+                solicitud.Usuario = usuarioLogeado;
+
+                if (seAdmiteSolicitud(usuarioLogeado, team))
+                {
+                    solicitud.IdEquipo = team;
+                    solicitud.TipoEstado = "Pend";
+                    solicitud.Activo = true;
+                    solicitud.FechaCreo = DateTime.Now;
+                    _db.Usuario_Solicitud_Equipo.Add(solicitud);
+                    _db.SaveChanges();
+
+                    return Resultado_Devolver(null, "Solicitud Enviada con exito.", "N", "N", "N");
+                }
+                else
+                {
+                    return Resultado_Devolver(null, "Ya has Enviado Una SOlicitud", "N", "N", "Error:");
+
+                }
+            }
+            else
+            {
+                return Resultado_Devolver(null,"Usuario no registrado","N","N","Error:");
+                
+            }
+
+           
+
+            }catch(Exception e)
+            {
+                return Resultado_Devolver(null,"Error Inesperado","","",e.ToString());
+            }
+            
+
+        }
+        public JuegaJson GetAll()
+        {
+            
+            try
+            {
+                if(!TieneAcceso())
+                {
+                    return Resultado_No_Acceso();
+                }
+                else
+                {
+                    string mensaje;
+                    _db.Configuration.ProxyCreationEnabled = false;
+                    var lista = _db.Equipo.Where(x=> x.Activo==true).ToList();
+                    mensaje = lista.Count.ToString();
+                    if (lista.Count ==0)
+                        mensaje ="0";
+                    return Resultado_Correcto(lista,mensaje);
+                }
+            }
+            catch (Exception e)
+            {
+                return Resultado_Exception(e);
+            }
+
+        }
+
+        // Comprobar si har alguna solicitud del jugador actual para el equipo solicitado.
+        private bool seAdmiteSolicitud(Usuario user, int Equipo)
+        {
+            
+            var admitir = _db.Usuario_Solicitud_Equipo.FirstOrDefault(x => x.IdUsuario == user.IdUsuario &&
+                                                                x.IdEquipo == Equipo
+                                                                );
+            if(admitir == null)
+               return  true;
+
+                return false;
+
         }
 
         // GET: Usuario_Solicitud_Equipo/Details/5
