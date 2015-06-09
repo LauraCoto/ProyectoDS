@@ -225,7 +225,7 @@ namespace Juega.Controllers.Juega
 
 
                 if (string.IsNullOrEmpty(id) || id == "-1")
-                    return Resultado_Advertencia("El equipo seleccionado es incorrecto.");
+                    return Resultado_Advertencia("El Jugador seleccionado es incorrecto.");
 
                 var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
                 var nid = long.Parse(id);
