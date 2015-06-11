@@ -1,4 +1,4 @@
-﻿angular.module('EquipoController', []).controller('EquipoCtrl', ['$scope', '$http', function ($scope, $http) {
+﻿angular.module('EquiposController', []).controller('EquipoCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.ListaRegistros = {};
     $scope.Registro = {};
@@ -31,13 +31,11 @@
         $scope.MostrarControles = true;
     }
 
-    $http.get('/Equipo/GetAll').success(function (data) {
+    $http.get('/Equipos/GetAll').success(function (data) {
         $scope.Mensaje = data.Mensaje;
         $scope.MostrarAlerta = data.Alerta;
         $scope.MostrarInfo = data.Info;
         $scope.MostrarError = data.Error;
-
-        //alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
 
         if (data.Error == 'S')
             $scope.ListaRegistros = {};
@@ -46,9 +44,8 @@
 
     });
 
-
     $scope.Guardar = function () {
-        var url = $scope.Accion == 'nuevo' ? '/Equipo/Create' : '/Equipo/update';
+        var url = $scope.Accion == 'nuevo' ? '/Equipos/Create' : '/Equipos/update';
 
         $http.post(url, $scope.Registro)
             .success(function (data) {
@@ -57,9 +54,10 @@
                 $scope.MostrarInfo = data.Info;
                 $scope.Mensaje = data.Mensaje;
 
-                // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
+               // alert("Error:" + data.Error + " Alerta:" + data.Alerta + " Mensaje:" + data.Mensaje + " Data:" + data.data);
 
-                if (data.Error == 'N' && data.Alerta == 'N') {
+                if (data.Error == 'N' && data.Alerta == 'N')
+                {
 
                     if ($scope.Accion == 'nuevo')
                         $scope.ListaRegistros.push(data.data);
@@ -78,7 +76,7 @@
 
 
     $scope.EliminarRegistro = function (registroEliminar) {
-        $http.post('/Equipo/Delete', registroEliminar)
+        $http.post('/Equipos/Delete', registroEliminar)
         .success(function (data) {
             $scope.MostrarError = data.Error;
             $scope.MostrarAlerta = data.Alerta;

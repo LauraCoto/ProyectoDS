@@ -39,7 +39,7 @@ namespace Juega.Controllers.Juega
                 solicitud.Activo = true;
                 solicitud.FechaCreo = DateTime.Now;
                 solicitud.IdUsuario = usuarioLogin.IdUsuario;
-                solicitud.TipoEstado = Utilidades.TipoEstado.Disponible;
+                solicitud.TipoEstado = Utilidades.TipoEstado.Pendiente;
                 solicitud.Usuario = usuarioLogin;
                 _db.Usuario_Solicitud_AdminCancha.Add(solicitud);
                 _db.SaveChanges();
@@ -123,7 +123,7 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("Inicio");
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {
@@ -151,7 +151,7 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("Inicio");
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {

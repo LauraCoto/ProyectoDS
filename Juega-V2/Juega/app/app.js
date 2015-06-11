@@ -1,4 +1,5 @@
 ﻿angular.module('appComplejo', ['ComplejoDeportivoController']);
+angular.module('appEquipo', ['EquiposController']);
 angular.module('appCanchas', ['CanchasController']);
 angular.module('appRoles', ['RolesController']);
 angular.module('appManageRoles', ['RolesController']);
@@ -8,3 +9,4 @@ angular.module('appPerfil_Usuario', ['Perfil_UsuarioController']);
 angular.module('appDenuncias', ['DenunciasController']);
 angular.module('appEspectador', ['EspectadorController']);
 angular.module('appSolicitudes', ['SolicitudesController']);
+angular.module('appPerfil', ['PerfilController']);
