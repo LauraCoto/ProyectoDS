@@ -28,6 +28,9 @@ namespace Juega.Controllers.Juega
                 model.Descripcion = usuario.Descripcion;
                 model.Edad = "";
 
+                //model.Foto_Principal = usuario.FotoPrincipal;
+
+
                 if (usuario.FechaNacimiento.HasValue)
                     model.Edad = Convert.ToString(DateTime.Now.Year - usuario.FechaNacimiento.Value.Year);
 

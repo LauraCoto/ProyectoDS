@@ -15,5 +15,7 @@ namespace Juega.Models.Juega
         public virtual string Edad { get; set; }
         public virtual int NumEquipos { get; set; }
         public virtual int Valoracion { get; set; }
+
+        //public virtual string Foto_Principal { get; set; }
     }
 }
