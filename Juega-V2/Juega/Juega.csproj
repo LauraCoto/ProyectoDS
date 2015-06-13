@@ -882,6 +882,7 @@
     <Content Include="Views\Equipos\GuardarVW.cshtml" />
     <Content Include="Views\Equipos\Inicio.cshtml" />
     <Content Include="Views\Perfil\Imagen.cshtml" />
+    <Content Include="Views\Perfil\Usuario2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

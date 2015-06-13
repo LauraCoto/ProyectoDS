@@ -25,55 +25,7 @@
         }
         r.readAsBinaryString(f);
     }
-
-    $scope.uploadFile = function (files) {
-        var fd = new FormData();
-        //Take the first selected file
-        fd.append("file", files[0]);
-
-        $scope.Usuario.Foto = fd;
-       // $scope.Usuario.Attachment = fd;
-        alert("Foto preparada");
-        //$http.post(uploadUrl, fd,
-        //{
-        //    withCredentials: true,
-        //    headers: { 'Content-Type': undefined },
-        //    transformRequest: angular.identity
-        //}).success(function (data) {
-        //    alert("Subido");
-        //}
-        //).error(function (data) {
-        //    alert("Error");
-        //});
-
-    };
-
-    $scope.onFileSelect = function ($files)
-    {
-        //$files: an array of files selected, each file has name, size, and type.
-        alert("Foto subida");
-        $scope.Usuario.Foto = $files;
      
-
-        //for (var i = 0; i < $files.length; i++)
-        //{
-        //    var $file = $files[i];
-        //    $scope.Usuario.Attachment = $file;
-
-
-           
-        //    //$upload.upload({
-        //    //    url: '/Perfil/Editar_Perfil',
-        //    //    file: $file,
-        //    //    progress: function (e) { }
-        //    //}).then(function (data, status, headers, config)
-        //    //{
-        //    //    // file is uploaded successfully
-        //    //    console.log(data);
-        //    //});
-        //}
-    }
-
     $scope.Guardar = function () {
         var url = '/Perfil/Editar_Perfil';
 
