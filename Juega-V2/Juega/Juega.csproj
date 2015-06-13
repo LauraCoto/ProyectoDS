@@ -305,6 +305,7 @@
     <Compile Include="Controllers\Juega\BaseController.cs" />
     <Compile Include="Controllers\Juega\CanchasController.cs" />
     <Compile Include="Controllers\Juega\DenunciasController.cs" />
+    <Compile Include="Controllers\Juega\EquipoController.cs" />
     <Compile Include="Controllers\Juega\EquiposController.cs" />
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />

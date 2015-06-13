@@ -1,0 +1,32 @@
+Create procedure sp_Cines
+(
+@Sucursal int
+,@Sala int
+
+)
+
+Select
+CSuc.nombre_sucursal
+,CVen.codigo_sala
+,CVen.espectadores
+,CVen.codigo_pelicula
+,Sum(case when CSal.tipo_sala='REG' then CVen.espectadores*100
+when CSal.tipo_sala='3D' then CVen.espectadores*150 else 0 end) as Ganancias
+,(CVen.espectadores)/(CSal.capacidad)*100
+from
+cine_sucursales CSuc
+inner join
+cine_ventas CVen
+on
+CVen.codigo_sucursal=CSuc.codigo_sucursal
+inner join
+cine_salas CSal
+on
+CSal.codigo_sala=CSal.codigo_sala
+
+group by CSuc.nombre_sucursal,CVen.codigo_sala,CVen.espectadores,CVen.codigo_pelicula
+
+as
+begin
+
+end
