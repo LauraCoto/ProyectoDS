@@ -1,13 +1,10 @@
-﻿@{
+﻿@model Juega.Models.Juega.EditarPerfil_Modelo
+
+@{
     ViewBag.Title = "Index";
 }
 
 <h3>Editar perfil</h3>
-
-<script src="~/app/controller/PerfilCtrl.js"></script>
-<script src="~/Scripts/jquery-2.1.3.min.js"></script>
-<script src="~/Scripts/angular.min.js"></script>
-
 
 <style type="Text/CSS">
     .btn {
@@ -16,20 +13,28 @@
         text-align: center;
     }
 </style>
-
-<div class="container" ng-app="appPerfil" ng-controller="PerfilCtrl">
+@using (Html.BeginForm("Editar_Perfil", "Perfil"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
     <section>
         <center>
             <div class="container">
                 <div class="row clearfix" id="content-row">
+
+
+
                     <div class="col-xs-10 column">
+
                         <div class="well" id="volume-fees-well">
                             <br />
                             <div class="panel panel-primary">
+
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Editar Perfil</h3>
+                                    <h3 class="panel-title">Informacion</h3>
                                 </div>
+
                                 <div class="panel-body">
                                     <form name="Show_Profile">
                                         <fieldset>
@@ -39,48 +44,54 @@
                                             </div>
                                             <br />
 
+
+                                            <div class="editor-field">
+                                                @Html.HiddenFor(model => model.IdUsuario, new { @class = "form-control required", @hidden = "hidden" })
+                                            </div>
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="Nombre">Nombre</label>
                                                     <div class="controls">
-                                                        <input type="text" data-ng-model="Nombre" class="form-control">
+                                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control required" })
+                                                        @*<input type="text" data-ng-model="Usuario.Nombre" maxlength="25" class="form-control">*@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label" for="Apellido">Apellido</label>
                                                     <div class="controls">
-                                                        <input type="text" data-ng-model="Apellido" class="form-control">
+                                                        @Html.TextBoxFor(model => model.Apellido, new { @class = "form-control required" })
+                                                        @*<input type="text" data-ng-model="Usuario.Apellido" maxlength="25" class="form-control">*@
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label" for="FotoPrincipal">Fotografia</label>
-                                                    <div class="controls">
-                                                        <input type="text" data-ng-model="FotoPrincipal" class="form-control">
-                                                    </div>
-                                                </div>
+
+
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                     <div class="controls">
-                                                        <textarea class="form-control" rows="5" cols="10" data-ng-model="FechaNacimiento"></textarea>
+                                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control required"}) 
+                                                        @*<input type="datetime" class="form-control" data-ng-model="Usuario.FechaNacimiento">
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="Descripcion">Descripcion</label>
+                                                        <div class="controls">
+                                                            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control required", @rows = "10" })
+                                                            @*<textarea class="form-control" rows="5" cols="10" maxlength="450" data-ng-model="Usuario.Descripcion"></textarea>*@
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label" for="Descripcion">Descripcion</label>
-                                                    <div class="controls">
-                                                        <textarea class="form-control" rows="5" cols="10" data-ng-model="Descripcion"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </fieldset>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-success btn-lg" ng-click="Guardar()">Actualizar</button>
-                                <button class="btn btn-warning btn-lg" ng-click="Cancelar()">Cancelar</button>
-                                <a href="/Manage/Index/" class="mb-sm btn btn-primary">Administrar clave / Login</a>
+
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-success btn-lg" ng-click="Guardar()">Actualizar</button>
+                                    <a href="/Manage/Index/" class="mb-sm btn btn-primary">Administrar clave / Login</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,4 +99,5 @@
             </div>
         </center>
     </section>
-</div>
+
+}

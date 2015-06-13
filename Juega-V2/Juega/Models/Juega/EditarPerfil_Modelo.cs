@@ -12,7 +12,9 @@ namespace Juega.Models.Juega
           public virtual string Nombre { get; set; }
           public virtual string Apellido { get; set; }
           public virtual string FotoPrincipal { get; set; }
-          public virtual string FechaNacimiento { get; set; }
+          public virtual DateTime FechaNacimiento { get; set; }
           public virtual string Descripcion { get; set; }
+          public virtual HttpPostedFileBase Attachment { get; set; }
+          public virtual object Foto { get; set; }
       }
 }

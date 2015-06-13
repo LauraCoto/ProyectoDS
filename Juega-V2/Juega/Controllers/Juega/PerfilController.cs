@@ -1,6 +1,8 @@
 ﻿using Juega.Models.Juega;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -51,7 +53,6 @@ namespace Juega.Controllers.Juega
             }
         }
 
-
         public ActionResult Equipo(string id)
         {
             try
@@ -74,20 +75,45 @@ namespace Juega.Controllers.Juega
             }
         }
 
-        //View para editar perfil 
-        public ActionResult Usuario()
+
+        public ActionResult Cancha(string id)
         {
-            return View();
+            try
+            {
+                if (!TieneAcceso())
+                    return MostrarError("Debe iniciar sesion para poder visualizar este perfil.");
+
+                var model = new CanchaModel();
+                var nid = long.Parse(id);
+                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+
+                model.Ancho = Convert.ToInt32(cancha.Ancho.HasValue ? cancha.Ancho : 0);
+                model.Largo = Convert.ToInt32(cancha.Largo.HasValue ? cancha.Largo : 0);
+
+
+                model.Nombre = cancha.Nombre;
+                model.Espectadores = Convert.ToInt32(cancha.NumEspectadores.HasValue ? cancha.NumEspectadores : 0);
+
+                model.Valoracion = Convert.ToInt32(cancha.Valoracion.HasValue ? cancha.Valoracion : 0);
+
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+
+            }
         }
 
-
-        public JuegaJson UsuarioLogin()
+        public ActionResult Usuario()
         {
 
             try
             {
                 if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+                    return MostrarAdvertencia("Debe iniciar sesion.");
 
                 var UsuarioLogin = ObtenerUsuario_Juega();
                 var modelo = new EditarPerfil_Modelo();
@@ -95,31 +121,32 @@ namespace Juega.Controllers.Juega
                 modelo.Nombre = UsuarioLogin.Nombre;
                 modelo.Apellido = UsuarioLogin.Apellido;
                 modelo.Descripcion = UsuarioLogin.Descripcion;
-                modelo.FechaNacimiento = UsuarioLogin.FechaNacimiento.ToString();
+
+                if (UsuarioLogin.FechaNacimiento.HasValue)
+                    modelo.FechaNacimiento = (DateTime)UsuarioLogin.FechaNacimiento;
+
                 modelo.FotoPrincipal = UsuarioLogin.FotoPrincipal;
 
-                return Resultado_Correcto(modelo);
+                return View(modelo);
             }
             catch (Exception e)
             {
-                return Resultado_Exception(e);
+                return MostrarError("Ocurrio un error:" + e.Message);
             }
-
         }
 
-
         [HttpPost]
-        public JuegaJson Editar_Perfil(EditarPerfil_Modelo model)
+        public ActionResult Editar_Perfil(EditarPerfil_Modelo model)
         {
             try
             {
                 if (!TieneAcceso())
-                    return Resultado_No_Acceso();
+                    return MostrarError("Debe iniciar sesion.");
 
                 var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == model.IdUsuario);
 
-                if (usuario != null)
-                    return Resultado_Advertencia("No se pudo actualizar la informacion del usuario");
+                if (usuario == null)
+                    return MostrarAdvertencia("No se pudo actualizar la informacion del usuario");
 
                 usuario.Nombre = model.Nombre;
                 usuario.Apellido = model.Apellido;
@@ -127,20 +154,19 @@ namespace Juega.Controllers.Juega
                 usuario.Telefonos = usuario.Telefonos;
                 usuario.Descripcion = model.Descripcion;
 
+                if (model.FechaNacimiento != null && model.FechaNacimiento.Year > 1900)
+                    usuario.FechaNacimiento = model.FechaNacimiento;
+
                 _db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
+                _db.SaveChanges();
 
-
-                return Resultado_Correcto(model);
+                return RedirectToAction("Usuario2");
             }
             catch (Exception e)
             {
-                return Resultado_Exception(e);
+                return MostrarError("Error al actualizar el perfil: " + e.Message);
             }
         }
-
-
-
-
 
     }
 }
