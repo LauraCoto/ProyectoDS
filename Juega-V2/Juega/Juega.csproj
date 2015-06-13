@@ -357,7 +357,6 @@
     <Content Include="app\controller\CanchasCtrl.js" />
     <Content Include="app\controller\complejoDeportivoCtrl.js" />
     <Content Include="app\controller\DenunciasCtrl.js" />
-    <Content Include="app\controller\EditarPerfilCtrl.js" />
     <Content Include="app\controller\EquipoCtrl.js" />
     <Content Include="app\controller\EspectadorCtrl.js" />
     <Content Include="app\controller\MenuCtrl.js" />
@@ -392,6 +391,23 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\SiteUploader.css" />
     <Content Include="Content\SiteUploaderImages.css" />
+    <Content Include="img\css\bootstrap.min.css" />
+    <Content Include="img\css\main.css" />
+    <Content Include="img\css\styles.css" />
+    <Content Include="img\js\analytics.js" />
+    <Content Include="img\js\angular.js" />
+    <Content Include="img\js\app.js" />
+    <Content Include="img\js\flow.js" />
+    <Content Include="img\js\fusty-flow-factory.js" />
+    <Content Include="img\js\fusty-flow.js" />
+    <Content Include="img\js\ng-flow.js" />
+    <Content Include="img\js\scale.fix.js" />
+    <Content Include="Scripts\AngularJs\angular-route.js" />
+    <Content Include="Scripts\AngularJs\angular.js" />
+    <Content Include="Scripts\Application\Controllers\home.js" />
+    <Content Include="Scripts\Application\Modules\application.js" />
+    <Content Include="Scripts\Application\Modules\fileUploader.js" />
+    <Content Include="Scripts\Application\Services\entity.js" />
     <Content Include="Scripts\bootstrap-fileupload.js" />
     <Content Include="Scripts\bootstrap-fileupload.min.js" />
     <Content Include="Scripts\bwizard.js" />
@@ -865,9 +881,11 @@
     <Content Include="Views\Equipos\EliminarVw.cshtml" />
     <Content Include="Views\Equipos\GuardarVW.cshtml" />
     <Content Include="Views\Equipos\Inicio.cshtml" />
+    <Content Include="Views\Perfil\Imagen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Application\Directives\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />

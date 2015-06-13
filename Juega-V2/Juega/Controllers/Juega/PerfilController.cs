@@ -1,6 +1,8 @@
 ﻿using Juega.Models.Juega;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -92,7 +94,10 @@ namespace Juega.Controllers.Juega
                 modelo.Nombre = UsuarioLogin.Nombre;
                 modelo.Apellido = UsuarioLogin.Apellido;
                 modelo.Descripcion = UsuarioLogin.Descripcion;
-                modelo.FechaNacimiento = UsuarioLogin.FechaNacimiento.ToString();
+
+                if (UsuarioLogin.FechaNacimiento.HasValue)
+                    modelo.FechaNacimiento = (DateTime)UsuarioLogin.FechaNacimiento;
+
                 modelo.FotoPrincipal = UsuarioLogin.FotoPrincipal;
 
                 return Resultado_Correcto(modelo);
@@ -104,6 +109,10 @@ namespace Juega.Controllers.Juega
 
         }
 
+        public ActionResult Imagen()
+        {
+            return View();
+        }
 
         [HttpPost]
         public JuegaJson Editar_Perfil(EditarPerfil_Modelo model)
@@ -115,7 +124,7 @@ namespace Juega.Controllers.Juega
 
                 var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == model.IdUsuario);
 
-                if (usuario != null)
+                if (usuario == null)
                     return Resultado_Advertencia("No se pudo actualizar la informacion del usuario");
 
                 usuario.Nombre = model.Nombre;
@@ -124,10 +133,17 @@ namespace Juega.Controllers.Juega
                 usuario.Telefonos = usuario.Telefonos;
                 usuario.Descripcion = model.Descripcion;
 
+
+
+                //usuario.FotoPrincipal = fn;
+
+                if (model.FechaNacimiento != null && model.FechaNacimiento.Year > 1900)
+                    usuario.FechaNacimiento = model.FechaNacimiento;
+
                 _db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
+                _db.SaveChanges();
 
-
-                return Resultado_Correcto(model);
+                return Resultado_Correcto(model, "Informacion actualizada.");
             }
             catch (Exception e)
             {
