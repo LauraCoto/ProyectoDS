@@ -1,10 +1,10 @@
-﻿@{
+﻿@model Juega.Models.Juega.EditarPerfil_Modelo
+
+@{
     ViewBag.Title = "Index";
 }
 
 <h3>Editar perfil</h3>
-
-<script src="~/app/controller/PerfilCtrl.js"></script> 
 
 <style type="Text/CSS">
     .btn {
@@ -12,47 +12,18 @@
         font-size: 16px;
         text-align: center;
     }
-
-
 </style>
-
-<div class="container" ng-app="appPerfil" ng-controller="PerfilCtrl">
-
-
-    <div ng-if="MostrarError=='S'">
-        <br />
-        <br />
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Error</strong> {{Mensaje}}
-        </div>
-    </div>
-
-    <div ng-if="MostrarAlerta=='S'">
-        <br />
-        <br /> 
-        <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-             {{Mensaje}}
-        </div>
-
-    </div>
-
-    <div ng-if="MostrarInfo=='S'">
-        <br />
-        <br />
-        <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Informacion</strong> {{Mensaje}}
-        </div>
-    </div>
+@using (Html.BeginForm("Editar_Perfil", "Perfil"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
 
     <section>
         <center>
             <div class="container">
                 <div class="row clearfix" id="content-row">
 
-                    
+
 
                     <div class="col-xs-10 column">
 
@@ -61,8 +32,8 @@
                             <div class="panel panel-primary">
 
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Informacion</h3> 
-                                </div> 
+                                    <h3 class="panel-title">Informacion</h3>
+                                </div>
 
                                 <div class="panel-body">
                                     <form name="Show_Profile">
@@ -73,36 +44,45 @@
                                             </div>
                                             <br />
 
+
+                                            <div class="editor-field">
+                                                @Html.HiddenFor(model => model.IdUsuario, new { @class = "form-control required", @hidden = "hidden" })
+                                            </div>
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="Nombre">Nombre</label>
                                                     <div class="controls">
-                                                        <input type="text" data-ng-model="Usuario.Nombre" maxlength="25" class="form-control">
+                                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control required" })
+                                                        @*<input type="text" data-ng-model="Usuario.Nombre" maxlength="25" class="form-control">*@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label" for="Apellido">Apellido</label>
                                                     <div class="controls">
-                                                        <input type="text" data-ng-model="Usuario.Apellido" maxlength="25" class="form-control">
+                                                        @Html.TextBoxFor(model => model.Apellido, new { @class = "form-control required" })
+                                                        @*<input type="text" data-ng-model="Usuario.Apellido" maxlength="25" class="form-control">*@
                                                     </div>
-                                                </div> 
-                                               
-                                               
+                                                </div>
+
+
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                     <div class="controls">
-                                                        <input type="date" class="form-control" data-ng-model="Usuario.FechaNacimiento">
+                                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control required"}) 
+                                                        @*<input type="datetime" class="form-control" data-ng-model="Usuario.FechaNacimiento">
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="Descripcion">Descripcion</label>
+                                                        <div class="controls">
+                                                            @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control required", @rows = "10" })
+                                                            @*<textarea class="form-control" rows="5" cols="10" maxlength="450" data-ng-model="Usuario.Descripcion"></textarea>*@
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="control-label" for="Descripcion">Descripcion</label>
-                                                    <div class="controls">
-                                                        <textarea class="form-control" rows="5" cols="10" maxlength="450" data-ng-model="Usuario.Descripcion"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </fieldset>
                                     </form>
                                 </div>
@@ -120,6 +100,4 @@
         </center>
     </section>
 
-   
-
-</div>
+}

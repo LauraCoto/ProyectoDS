@@ -50,7 +50,6 @@ namespace Juega.Controllers.Juega
             }
         }
 
-
         public ActionResult Equipo(string id)
         {
             try
@@ -73,14 +72,39 @@ namespace Juega.Controllers.Juega
             }
         }
 
-        //View para editar perfil 
-        public ActionResult Usuario()
-        {
 
-            return View();
+        public ActionResult Cancha(string id)
+        {
+            try
+            {
+                if (!TieneAcceso())
+                    return MostrarError("Debe iniciar sesion para poder visualizar este perfil.");
+
+                var model = new CanchaModel();
+                var nid = long.Parse(id);
+                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+
+                model.Ancho = Convert.ToInt32(cancha.Ancho.HasValue ? cancha.Ancho : 0);
+                model.Largo = Convert.ToInt32(cancha.Largo.HasValue ? cancha.Largo : 0);
+
+
+                model.Nombre = cancha.Nombre;
+                model.Espectadores = Convert.ToInt32(cancha.NumEspectadores.HasValue ? cancha.NumEspectadores : 0);
+
+                model.Valoracion = Convert.ToInt32(cancha.Valoracion.HasValue ? cancha.Valoracion : 0);
+
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return MostrarError(e.Message);
+
+            }
         }
 
-        public ActionResult Usuario2()
+        public ActionResult Usuario()
         {
 
             try
@@ -108,41 +132,6 @@ namespace Juega.Controllers.Juega
             }
         }
 
-
-        public JuegaJson UsuarioLogin()
-        {
-
-            try
-            {
-                if (!TieneAcceso())
-                    return Resultado_No_Acceso();
-
-                var UsuarioLogin = ObtenerUsuario_Juega();
-                var modelo = new EditarPerfil_Modelo();
-                modelo.IdUsuario = UsuarioLogin.IdUsuario;
-                modelo.Nombre = UsuarioLogin.Nombre;
-                modelo.Apellido = UsuarioLogin.Apellido;
-                modelo.Descripcion = UsuarioLogin.Descripcion;
-
-                if (UsuarioLogin.FechaNacimiento.HasValue)
-                    modelo.FechaNacimiento = (DateTime)UsuarioLogin.FechaNacimiento;
-
-                modelo.FotoPrincipal = UsuarioLogin.FotoPrincipal;
-
-                return Resultado_Correcto(modelo);
-            }
-            catch (Exception e)
-            {
-                return Resultado_Exception(e);
-            }
-
-        }
-
-        public ActionResult Imagen()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Editar_Perfil(EditarPerfil_Modelo model)
         {
@@ -161,7 +150,7 @@ namespace Juega.Controllers.Juega
                 usuario.FotoPrincipal = model.FotoPrincipal;
                 usuario.Telefonos = usuario.Telefonos;
                 usuario.Descripcion = model.Descripcion;
-                 
+
                 if (model.FechaNacimiento != null && model.FechaNacimiento.Year > 1900)
                     usuario.FechaNacimiento = model.FechaNacimiento;
 
@@ -175,10 +164,6 @@ namespace Juega.Controllers.Juega
                 return MostrarError("Error al actualizar el perfil: " + e.Message);
             }
         }
-
-
-
-
 
     }
 }

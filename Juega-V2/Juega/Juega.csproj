@@ -394,14 +394,6 @@
     <Content Include="img\css\bootstrap.min.css" />
     <Content Include="img\css\main.css" />
     <Content Include="img\css\styles.css" />
-    <Content Include="img\js\analytics.js" />
-    <Content Include="img\js\angular.js" />
-    <Content Include="img\js\app.js" />
-    <Content Include="img\js\flow.js" />
-    <Content Include="img\js\fusty-flow-factory.js" />
-    <Content Include="img\js\fusty-flow.js" />
-    <Content Include="img\js\ng-flow.js" />
-    <Content Include="img\js\scale.fix.js" />
     <Content Include="Scripts\AngularJs\angular-route.js" />
     <Content Include="Scripts\AngularJs\angular.js" />
     <Content Include="Scripts\Application\Controllers\home.js" />
@@ -877,12 +869,11 @@
     <Content Include="Views\Charts\ChartRadial.cshtml" />
     <Content Include="Views\Charts\ChartRickshaw.cshtml" />
     <Content Include="Views\Perfil\Equipo.cshtml" />
-    <Content Include="Views\Perfil\Usuario.cshtml" />
     <Content Include="Views\Equipos\EliminarVw.cshtml" />
     <Content Include="Views\Equipos\GuardarVW.cshtml" />
     <Content Include="Views\Equipos\Inicio.cshtml" />
-    <Content Include="Views\Perfil\Imagen.cshtml" />
-    <Content Include="Views\Perfil\Usuario2.cshtml" />
+    <Content Include="Views\Perfil\Usuario.cshtml" />
+    <Content Include="Views\Perfil\Cancha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
