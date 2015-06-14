@@ -35,6 +35,7 @@
 
                     <div class="editor-field">
                         @Html.HiddenFor(model => model.IdEquipo, new { @class = "form-control required", @hidden = "hidden" })
+                        @Html.HiddenFor(model => model.FotoPrincipal, new { @class = "form-control required", @hidden = "hidden" })
                     </div>
 
                     <label for="Nombre">* Nombre del Equipo</label>
@@ -50,7 +51,8 @@
 
                 <div id="fotos">
                     @*@Html.Partial("_uploadImages")*@
-                    <p>Esta opción estara disponible luego de crear la publicación</p>
+                    @*<p>Esta opción estara disponible luego de crear la publicación</p>*@
+                    @Html.FileFor(model => model.Attachment)
                 </div>
 
                 <div id="Finalizar">

@@ -342,6 +342,7 @@
     <Compile Include="Models\Juega\SolicitudAdminCanchaModel.cs" />
     <Compile Include="Models\Juega\SolicitudUsuarioEquipo.cs" />
     <Compile Include="Models\Juega\Usuario.cs" />
+    <Compile Include="Models\Juega\UsuarioLoginModel.cs" />
     <Compile Include="Models\Juega\UsuarioModel.cs" />
     <Compile Include="Models\Juega\Usuario_Rol.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -354,6 +355,7 @@
     <Compile Include="Utilidades\Roles.cs" />
     <Compile Include="Utilidades\SubirImagen.cs" />
     <Compile Include="Utilidades\TipoEstado.cs" />
+    <Compile Include="Utilidades\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
@@ -928,6 +930,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Cancha\" />
+    <Folder Include="Content\Images\Equipo\" />
+    <Folder Include="Content\Images\Usuario\" />
     <Folder Include="Scripts\Application\Directives\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
