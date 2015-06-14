@@ -97,7 +97,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_Advertencia("No se pudo obtener la informacion de la solicitud.");
 
 
-                //Definir usuario como administrador de canchas
+                //Definir jugador como administrador de canchas
                 var usuarioSolicito = solicitud.Usuario;
                 var usersContext = new ApplicationDbContext();
                 var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioSolicito.IdUsuarioSeguridad);

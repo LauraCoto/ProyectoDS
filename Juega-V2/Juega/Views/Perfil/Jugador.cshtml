@@ -3,6 +3,21 @@
 @{
     ViewBag.Title = "Profile";
 }
+
+
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<link href="~/Content/rating.css" rel="stylesheet" />
+<link href="~/Content/SaleStyle.css" rel="stylesheet" />
+
+<script src="/Scripts/jquery-1.9.1.js"></script>
+<script src="/Scripts/jquery-migrate-1.1.1.js"></script>
+<script src="/Scripts/jquery.validate.js"></script>
+<script src="/scripts/jquery.validate.unobtrusive.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+
+
 <div class="unwrap">
     <div style="background-image: url(/Content/Images/profile-bg.jpg)" class="bg-cover">
         <div class="p-xl text-center text-white">
@@ -17,7 +32,7 @@
             <div class="col-xs-4 br">
                 <h3 class="m0">@Model.Valoracion / 5</h3>
                 <p class="m0">
-                    <span class="hidden-xs">Valoracion</span> 
+                    <span class="hidden-xs">Valoracion</span>
                 </p>
             </div>
             <div class="col-xs-4 br">
@@ -25,114 +40,200 @@
                 <p class="m0">Equipos</p>
             </div>
             <div class="col-xs-4">
-                <h3 class="m0">100</h3>
-                <p class="m0">Following</p>
+                <h3 class="m0">@Model.NumComentarios</h3>
+                <p class="m0">Comentarios</p>
             </div>
         </div>
     </div>
-    <div class="p-lg">
-        <div class="row"> 
-            <div class="col-lg-3">
-                 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a href="#" class="pull-right">
-                            <em class="icon-plus text-muted"></em>
-                        </a>Contacts
+
+    <div class="row">
+        <div class="span10">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#0" data-toggle="tab">Valoración</a></li>
+                    <li><a href="#1" data-toggle="tab">Equipos</a></li>
+                    <li><a href="#2" data-toggle="tab">Comentarios</a></li>
+                </ul>
+                <div class="tab-content">
+
+
+
+                    <div class="tab-pane active" id="0">
+                        <div class="panel panel-default">
+                            <div class="list-group">
+                                @Html.Partial("_RateJugador", new Juega.Models.Juega.RatingJugadorModel(Model.InfoValoraciones))
+                            </div>
+                        </div>
                     </div>
-                    <div class="list-group">
-                        <!-- START User status-->
-                       
-                         <a href="#" class="media p mt0 list-group-item">
-                            <span class="pull-right">
-                                <span class="circle circle-success circle-lg"></span>
-                            </span>
-                            <span class="pull-left">
-                                <!-- Contact avatar-->
-                                <img src="~/Content/Images/user/05.jpg" alt="Image" class="media-object img-circle thumb32" />
-                            </span>
-                            <!-- Contact info-->
-                            <span class="media-body">
-                                <span class="media-heading">
-                                    <strong>Juan Sims</strong>
-                                    <br />
-                                    <small class="text-muted">Designeer</small>
-                                </span>
-                            </span>
-                        </a>
-                        <!-- END User status-->
-                        <!-- START User status-->
-                       
-                         <a href="#" class="media p mt0 list-group-item">
-                            <span class="pull-right">
-                                <span class="circle circle-success circle-lg"></span>
-                            </span>
-                            <span class="pull-left">
-                                <!-- Contact avatar-->
-                                <img src="~/Content/Images/user/06.jpg" alt="Image" class="media-object img-circle thumb32" />
-                            </span>
-                            <!-- Contact info-->
-                            <span class="media-body">
-                                <span class="media-heading">
-                                    <strong>Maureen Jenkins</strong>
-                                    <br />
-                                    <small class="text-muted">Designeer</small>
-                                </span>
-                            </span>
-                        </a>
-                        <!-- END User status-->
-                        <!-- START User status-->
-                       
-                         <a href="#" class="media p mt0 list-group-item">
-                            <span class="pull-right">
-                                <span class="circle circle-danger circle-lg"></span>
-                            </span>
-                            <span class="pull-left">
-                                <!-- Contact avatar-->
-                                <img src="~/Content/Images/user/07.jpg" alt="Image" class="media-object img-circle thumb32" />
-                            </span>
-                            <!-- Contact info-->
-                            <span class="media-body">
-                                <span class="media-heading">
-                                    <strong>Billie Dunn</strong>
-                                    <br />
-                                    <small class="text-muted">Designeer</small>
-                                </span>
-                            </span>
-                        </a>
-                        <!-- END User status-->
-                        <!-- START User status-->
-                       
-                         <a href="#" class="media p mt0 list-group-item">
-                            <span class="pull-right">
-                                <span class="circle circle-warning circle-lg"></span>
-                            </span>
-                            <span class="pull-left">
-                                <!-- Contact avatar-->
-                                <img src="~/Content/Images/user/08.jpg" alt="Image" class="media-object img-circle thumb32" />
-                            </span>
-                            <!-- Contact info-->
-                            <span class="media-body">
-                                <span class="media-heading">
-                                    <strong>Tomothy Roberts</strong>
-                                    <br />
-                                    <small class="text-muted">Designer</small>
-                                </span>
-                            </span>
-                        </a>
-                        <!-- END User status--> 
+
+
+                    <div class="tab-pane" id="1">
+
+                        <div class="panel panel-default">
+
+
+                            @foreach (var item in Model.ListaEquipos)
+                            {
+                                <a href="#" class="list-group-item">
+                                    <div class="media-box">
+                                        <div class="pull-left">
+                                            <img src="~/Content/Images/user/02.jpg" alt="Image" class="media-box-object img-circle thumb32" />
+                                        </div>
+                                        <div class="media-box-body clearfix">
+                                            <small class="pull-right">2h</small>
+                                            <strong class="media-box-heading text-primary">
+                                                <span class="circle circle-success circle-lg text-left"></span>@item.Nombre
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+
                     </div>
+
+
+                    <div class="tab-pane" id="2">
+
+                        <div class="panel panel-default">
+
+                            @foreach (var item in Model.ListaComentarios)
+                            {
+                                <a href="#" class="list-group-item">
+                                    <div class="media-box">
+                                        <div class="pull-left">
+                                            <img src="~/Content/Images/user/02.jpg" alt="Image" class="media-box-object img-circle thumb32" />
+                                        </div>
+                                        <div class="media-box-body clearfix">
+                                            <small class="pull-right">@item.Tiempo</small>
+                                            <strong class="media-box-heading text-primary">
+                                                <span class="circle circle-success circle-lg text-left"></span>@item.UsuarioComento
+                                            </strong>
+                                            <p class="mb-sm">
+                                                <small>@item.Comentario</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                                }
+                        </div>
+
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-@section Styles {
 
-}
-@section Scripts {
-    <!-- Include this script for any page that uses Google Maps.-->
-    @Scripts.Render("//maps.google.com/maps/api/js?sensor=false")
-    @Scripts.Render("~/bundles/gmap")
+
+
+@section Scripts
+    {
+    <script src="~/Scripts/jquery.raty.js"></script>
+    <script>
+        $('#starBegin').raty(
+            {
+         
+                cancel: false,
+                cancelOff: '/Content/images/cancel-off.png',
+                cancelOn: '/Content/images/cancel-on.png',
+                half: false,
+                size: 24,
+                starHalf: '/Content/images/star-half.png',
+                starOff: '/Content/images/star-off.png',
+                starOn: '/Content/images/star-on.png',
+                readOnly: true,
+                score: function () {
+                    return $(this).attr('data-score');
+                }
+            });
+
+        $('#starReview').raty(
+           {
+               cancel: false,
+               cancelOff: '/Content/images/cancel-off.png',
+               cancelOn: '/Content/images/cancel-on.png',
+               half: false,
+               size: 24,
+               starHalf: '/Content/images/star-half.png',
+               starOff: '/Content/images/star-off.png',
+               starOn: '/Content/images/star-on.png',
+               readOnly: true,
+               score: function () {
+                   return $(this).attr('data-score');
+               }
+           });
+
+        $('#starToRate').raty(
+            {
+                cancel: false,
+                cancelOff: '/Content/images/cancel-off.png',
+                cancelOn: '/Content/images/cancel-on.png',
+                half: false,
+                size: 24,
+                starHalf: '/Content/images/star-half.png',
+                starOff: '/Content/images/star-off.png',
+                starOn: '/Content/images/star-on.png',
+                readOnly: true,
+                score: function () {
+                    return $(this).attr('data-score');
+                }
+            });
+
+
+        $('#btnRating').click(function ()
+        {
+            var TheRate = $('#ratingValue').val();
+            var IdJugador = $('#IdJugador').val();
+            var theTitle = $('#new_title').val();
+            var theComment = $('#new_message').val()
+
+            if (TheRate <= 0 || IdJugador <= 0 || theTitle == "" || theComment == "") {
+
+                alert("Debe completar todos los campos. Rate: " + TheRate + " IdJugador: " + IdJugador + " Titulo :" + theTitle + " Comentario :" + theComment);
+                return;
+            }
+
+            $.ajax({
+                url: "/Rate/Jugador/",
+                type: "GET",
+                data: { IdJugadorValorando: IdJugador, rate: TheRate, title: theTitle, comment: theComment },
+                success: function (data) {
+                    $("#demo").collapse()
+
+                    if (data.success)
+                        alert("Gracias por tu valoración! (Calidad: " + TheRate + " estrellas)");
+                    else
+                        alert("Ocurrio un problema al guardar tu valoración, Vuelve a intentarlo.");
+                },
+                error: function (err) {
+                    alert("Ocurrio un error, valoración no realizada:" + err);
+                },
+                complete: function () {
+                    // alert('completado');
+                }
+            });
+
+        });
+
+        $('#starToRate').raty(
+        {
+            cancel: false,
+            cancelOff: '/Content/images/cancel-off.png',
+            cancelOn: '/Content/images/cancel-on.png',
+            half: false,
+            size: 24,
+            starHalf: '/Content/images/star-half.png',
+            starOff: '/Content/images/star-off.png',
+            starOn: '/Content/images/star-on.png',
+
+            click: function (score, evt) {
+                $("#ratingValue").val(score)
+            }
+        });
+
+    </script>
 }

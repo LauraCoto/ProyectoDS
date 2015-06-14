@@ -27,7 +27,7 @@ namespace Juega.BDD
     
         public long IdEquipo { get; set; }
         public string Nombre { get; set; }
-        public Nullable<int> Valoracion { get; set; }
+        public Nullable<decimal> Valoracion { get; set; }
         public string TipoEstado { get; set; }
         public string FotoPrincipal { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }

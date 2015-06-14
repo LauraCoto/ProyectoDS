@@ -16,7 +16,7 @@ namespace Juega.BDD
     public partial class JuegaEntities : DbContext
     {
         public JuegaEntities()
-            : base("name=" + Juega.Utilidades.Conexiones.ObtenerCadenaConexion_Sistema())
+            : base("name=" + Utilidades.Conexiones.ObtenerCadenaConexion_Sistema())
         {
         }
 

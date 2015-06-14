@@ -215,7 +215,7 @@ namespace Juega.Controllers.Juega
                 var rol = context.Roles.FirstOrDefault(x => x.Id == model.IdRol);
 
                 if (usuario == null)
-                    return Resultado_Advertencia("El usuario al que intenta configurar no existe.");
+                    return Resultado_Advertencia("El jugador al que intenta configurar no existe.");
 
                 if (rol == null)
                     return Resultado_Advertencia("El rol al que intenta configurar no existe.");
@@ -252,7 +252,7 @@ namespace Juega.Controllers.Juega
                 var usuario = context.Users.FirstOrDefault(x => x.Id == model.IdUsuario); 
                  
                 if (usuario == null)
-                    return Resultado_Advertencia("El usuario al que intenta eliminar no existe.");
+                    return Resultado_Advertencia("El jugador al que intenta eliminar no existe.");
 
                var identityRol = usuario.Roles.FirstOrDefault(x => x.RoleId == model.IdRol && x.UserId == model.IdUsuario);
 

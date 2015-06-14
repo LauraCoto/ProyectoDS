@@ -27,7 +27,7 @@ namespace Juega.BDD
         public Nullable<int> NumEspectadores { get; set; }
         public Nullable<int> Largo { get; set; }
         public Nullable<int> Ancho { get; set; }
-        public Nullable<int> Valoracion { get; set; }
+        public Nullable<decimal> Valoracion { get; set; }
         public string TipoEstado { get; set; }
         public string FotoPrincipal { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }
