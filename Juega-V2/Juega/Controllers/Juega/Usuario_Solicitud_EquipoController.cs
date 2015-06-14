@@ -159,7 +159,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_Advertencia("No se pudo obtener la informacion de la solicitud.");
 
 
-                //Definir usuario como jugador
+                //Definir jugador como jugador
                 var usuarioSolicito = solicitud.Usuario;
                 var usersContext = new ApplicationDbContext();
                 var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioSolicito.IdUsuarioSeguridad);

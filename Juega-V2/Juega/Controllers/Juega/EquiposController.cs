@@ -123,7 +123,7 @@ namespace Juega.Controllers.Juega
                 }
 
 
-                //Definir usuario como tecnico
+                //Definir jugador como tecnico
                 var usersContext = new ApplicationDbContext();
                 var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioLogin.IdUsuarioSeguridad);
                 var rol = usersContext.Roles.FirstOrDefault(x => x.Name == Utilidades.Roles.AdminEquipo);

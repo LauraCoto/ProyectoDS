@@ -309,6 +309,7 @@
     <Compile Include="Controllers\Juega\EspectadorController.cs" />
     <Compile Include="Controllers\Juega\MenuController.cs" />
     <Compile Include="Controllers\Juega\PerfilController.cs" />
+    <Compile Include="Controllers\Juega\RateController.cs" />
     <Compile Include="Controllers\Juega\RolesController.cs" />
     <Compile Include="Controllers\Juega\SolicitudAdminCanchasController.cs" />
     <Compile Include="Controllers\Juega\SubscripcionController.cs" />
@@ -328,6 +329,7 @@
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
     <Compile Include="Models\Juega\Acciones.cs" />
     <Compile Include="Models\Juega\CanchaModel.cs" />
+    <Compile Include="Models\Juega\RatingFormModel.cs" />
     <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\Controladores.cs" />
     <Compile Include="Models\Juega\DenunciasModelo.cs" />
@@ -348,6 +350,7 @@
     <Compile Include="Utilidades\Conexiones.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilidades\Extension.cs" />
     <Compile Include="Utilidades\Roles.cs" />
     <Compile Include="Utilidades\SubirImagen.cs" />
     <Compile Include="Utilidades\TipoEstado.cs" />
@@ -385,6 +388,40 @@
     <Content Include="Content\galleria.classic.css" />
     <Content Include="Content\goMarketStyle.css" />
     <Content Include="Content\ImageArea.css" />
+    <Content Include="Content\Images\bg.jpg" />
+    <Content Include="Content\Images\cancel-off.png" />
+    <Content Include="Content\Images\cancel-on.png" />
+    <Content Include="Content\Images\classic-loader.gif" />
+    <Content Include="Content\Images\classic-map.png" />
+    <Content Include="Content\Images\glyphicons-halflings-white.png" />
+    <Content Include="Content\Images\glyphicons-halflings.png" />
+    <Content Include="Content\Images\pagination.png" />
+    <Content Include="Content\Images\star-half.png" />
+    <Content Include="Content\Images\star-off.png" />
+    <Content Include="Content\Images\star-on.png" />
+    <Content Include="Content\img\cancel-off.png" />
+    <Content Include="Content\img\cancel-on.png" />
+    <Content Include="Content\img\star-half.png" />
+    <Content Include="Content\img\star-off.png" />
+    <Content Include="Content\img\star-on.png" />
+    <Content Include="Content\img\upload\ANd9GcRaFBPBYc8BSgoYs9zs0SfcnUJ4_I2ArjXle3jjz5KVzXCipeJI.png" />
+    <Content Include="Content\img\upload\blue screen.png" />
+    <Content Include="Content\img\upload\Capture.png" />
+    <Content Include="Content\img\upload\Chrysanthemum.png" />
+    <Content Include="Content\img\upload\comohacerlo.png" />
+    <Content Include="Content\img\upload\cookie.png" />
+    <Content Include="Content\img\upload\Desert.png" />
+    <Content Include="Content\img\upload\error molesto.png" />
+    <Content Include="Content\img\upload\help_panel.png" />
+    <Content Include="Content\img\upload\Hydrangeas.png" />
+    <Content Include="Content\img\upload\image.png" />
+    <Content Include="Content\img\upload\Jellyfish.png" />
+    <Content Include="Content\img\upload\Koala.png" />
+    <Content Include="Content\img\upload\Lighthouse.png" />
+    <Content Include="Content\img\upload\logo.png" />
+    <Content Include="Content\img\upload\Penguins.png" />
+    <Content Include="Content\img\upload\push appharbor bitbucked.png" />
+    <Content Include="Content\img\upload\Tulips.png" />
     <Content Include="Content\Modal.css" />
     <Content Include="Content\rating.css" />
     <Content Include="Content\SaleStyle.css" />
@@ -405,6 +442,11 @@
     <Content Include="Scripts\bwizard.js" />
     <Content Include="Scripts\bwizard.min.js" />
     <Content Include="Scripts\GMap.js" />
+    <Content Include="Scripts\jquery.rating.js" />
+    <Content Include="Scripts\jquery.rating.pack.js" />
+    <Content Include="Scripts\jquery.raty.js" />
+    <Content Include="Scripts\jquery.raty.min.js" />
+    <Content Include="Scripts\rating.js" />
     <Content Include="Scripts\Selectable.js" />
     <Content Include="Content\app\css\SimplePerfil.css" />
     <Content Include="Content\app\css\theme-a.css" />
@@ -874,6 +916,7 @@
     <Content Include="Views\Equipos\Inicio.cshtml" />
     <Content Include="Views\Perfil\Usuario.cshtml" />
     <Content Include="Views\Perfil\Cancha.cshtml" />
+    <Content Include="Views\Perfil\_RateJugador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -882,6 +925,7 @@
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\EditarPerfil\" />
+    <Folder Include="Views\Rate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
