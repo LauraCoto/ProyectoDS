@@ -64,14 +64,27 @@
                                                         @*<input type="text" data-ng-model="Usuario.Apellido" maxlength="25" class="form-control">*@
                                                     </div>
                                                 </div>
+                                                
+                                                @*@using (Html.BeginForm("Action", "Controller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @Html.TextBoxFor(m => m.FotoPrincipal, new { type = "file" })
+                                                    @Html.ValidationMessageFor(m => m.FotoPrincipal)
+                                                }*@
 
+
+                                                <div class="jumbotron">
+                                                    <div class="fallback">
+                                                        <input name="file" type="file" enctype="multipart/form-data" class="dropzone" id="file" />
+                                                        <input type="submit" value="Upload" />
+                                                    </div>
+                                                </div>
 
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                     <div class="controls">
-                                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control required"}) 
+                                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control required" })
                                                         @*<input type="datetime" class="form-control" data-ng-model="Usuario.FechaNacimiento">
                                                             </div>*@
                                                     </div>
@@ -100,4 +113,50 @@
         </center>
     </section>
 
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        //File Upload response from the server
+        Dropzone.options.dropzoneForm = {
+            maxFiles: 2,
+            init: function () {
+                this.on("maxfilesexceeded", function (data) {
+                    var res = eval('(' + data.xhr.responseText + ')');
+
+                });
+                this.on("addedfile", function (file) {
+
+                    // Create the remove button
+                    var removeButton = Dropzone.createElement("<button>Remove file</button>");
+
+
+                    // Capture the Dropzone instance as closure.
+                    var _this = this;
+
+                    // Listen to the click event
+                    removeButton.addEventListener("click", function (e) {
+                        // Make sure the button click doesn't submit the form:
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Remove the file preview.
+                        _this.removeFile(file);
+                        // If you want to the delete the file on the server as well,
+                        // you can do the AJAX request here.
+                    });
+
+                    // Add the button to the file preview element.
+                    file.previewElement.appendChild(removeButton);
+                });
+            }
+        };
+
+
+
+
+
+
+    </script>
 }

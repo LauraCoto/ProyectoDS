@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace Juega.Controllers.Juega
 {
@@ -148,6 +149,37 @@ namespace Juega.Controllers.Juega
                 if (usuario == null)
                     return MostrarAdvertencia("No se pudo actualizar la informacion del usuario");
 
+                bool isSavedSuccessfully = true;
+                string fName = "";
+                
+                //foreach (string fileName in Request.Files)
+                //{
+                    //HttpPostedFileBase file = Request.Files[model.FotoPrincipal];
+                    HttpPostedFileBase file = Request.Files["file"];
+                    //Save file content goes here
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Images", Server.MapPath(@"\")));
+
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
+
+                        var fileName1 = Path.GetFileName(file.FileName);
+
+
+                        bool isExists = System.IO.Directory.Exists(pathString);
+
+                        if (!isExists)
+                            System.IO.Directory.CreateDirectory(pathString);
+
+                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                        file.SaveAs(path);
+
+                        usuario.FotoPrincipal = path;
+                    }
+
+                //}
                 usuario.Nombre = model.Nombre;
                 usuario.Apellido = model.Apellido;
                 usuario.FotoPrincipal = model.FotoPrincipal;
@@ -160,11 +192,78 @@ namespace Juega.Controllers.Juega
                 _db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
                 _db.SaveChanges();
 
-                return RedirectToAction("Usuario2");
+                return RedirectToAction("Usuario");
+
+                if (isSavedSuccessfully)
+                {
+                    return Json(new { Message = fName });
+                }
+                else
+                {
+                    return Json(new { Message = "Error in saving file" });
+                }
+
+
+
+
+                //usuario.Nombre = model.Nombre;
+                //usuario.Apellido = model.Apellido;
+                //usuario.FotoPrincipal = model.FotoPrincipal;
+                //usuario.Telefonos = usuario.Telefonos;
+                //usuario.Descripcion = model.Descripcion;
+
+                //if (model.FechaNacimiento != null && model.FechaNacimiento.Year > 1900)
+                //    usuario.FechaNacimiento = model.FechaNacimiento;
+
+                //_db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
+                //_db.SaveChanges();
+
+                //return RedirectToAction("Usuario");
             }
             catch (Exception e)
             {
                 return MostrarError("Error al actualizar el perfil: " + e.Message);
+            }
+        }
+
+        public ActionResult SaveUploadedFile()
+        {
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            foreach (string fileName in Request.Files)
+            {
+                HttpPostedFileBase file = Request.Files[fileName];
+                //Save file content goes here
+                fName = file.FileName;
+                if (file != null && file.ContentLength > 0)
+                {
+
+                    var originalDirectory = new DirectoryInfo(string.Format("{0}Images", Server.MapPath(@"\")));
+
+                    string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
+
+                    var fileName1 = Path.GetFileName(file.FileName);
+
+
+                    bool isExists = System.IO.Directory.Exists(pathString);
+
+                    if (!isExists)
+                        System.IO.Directory.CreateDirectory(pathString);
+
+                    var path = string.Format("{0}\\{1}", pathString, file.FileName);
+                    file.SaveAs(path);
+
+                }
+
+            }
+
+            if (isSavedSuccessfully)
+            {
+                return Json(new { Message = fName });
+            }
+            else
+            {
+                return Json(new { Message = "Error in saving file" });
             }
         }
 
