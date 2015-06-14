@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Juega.Models.Juega
 {
-    public class RatingJugadorModel
+    public class RatingEquipoModel
     {
 
         //Valoracion que hizo el jugador
@@ -17,7 +14,7 @@ namespace Juega.Models.Juega
 
 
         //Informacion estadistica
-        public virtual long IdJugador { get; set; } 
+        public virtual long IdEquipo { get; set; }
 
         public virtual int Start5Count { get; set; }
         public virtual int Start4Count { get; set; }
@@ -34,22 +31,22 @@ namespace Juega.Models.Juega
         public virtual decimal CantidadValoraciones { get; set; }
         public virtual decimal PromedioValoraciones { get; set; }
 
-        public RatingJugadorModel()
+        public RatingEquipoModel()
         {
- 
+
         }
 
-        public RatingJugadorModel(RatingJugadorModel r)
+        public RatingEquipoModel(RatingEquipoModel r)
         {
-            
+
             this.IdValoracion = r.IdValoracion;
             this.FechaValoro = r.FechaValoro;
             this.Valor = r.Valor;
             this.Comentario = r.Comentario;
             this.Titulo = r.Titulo;
 
-            this.IdJugador = r.IdJugador; 
-            
+            this.IdEquipo = r.IdEquipo;
+
             this.Start5Count = r.Start5Count;
             this.Start4Count = r.Start4Count;
             this.Start3Count = r.Start3Count;
@@ -63,7 +60,7 @@ namespace Juega.Models.Juega
             this.Start1Avg = r.Start1Avg;
 
             this.CantidadValoraciones = r.CantidadValoraciones;
-            this.PromedioValoraciones = r.PromedioValoraciones; 
+            this.PromedioValoraciones = r.PromedioValoraciones;
         }
 
     }

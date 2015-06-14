@@ -15,7 +15,7 @@ namespace Juega.Models.Juega
         public virtual string Edad { get; set; }
         public virtual int NumEquipos { get; set; }
         public virtual int NumComentarios { get; set; }
-        public virtual int Valoracion { get; set; }
+        public virtual decimal Valoracion { get; set; }
         public virtual RatingJugadorModel InfoValoraciones { get; set; }
         public virtual List<EquiposUsuarioModel> ListaEquipos { get; set; }
         public virtual List<ComentariosUsuarioModel> ListaComentarios { get; set; }
@@ -29,6 +29,13 @@ namespace Juega.Models.Juega
         public virtual bool Activo { get; set; }
     }
 
+    public class EquiposJugadoresModel
+    {
+        public virtual long IdJugador { get; set; }
+        public virtual string Nombre { get; set; }
+        public virtual string FotoPrincipal { get; set; }
+        public virtual bool Activo { get; set; }
+    }
 
     public class ComentariosUsuarioModel
     {

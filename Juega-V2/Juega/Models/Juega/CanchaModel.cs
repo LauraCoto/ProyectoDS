@@ -30,6 +30,10 @@ namespace Juega.Models.Juega
         [Range(10, 1000, ErrorMessage = "Escribir un rango correcto")]
         public virtual int Espectadores { get; set; }
 
-        public virtual int Valoracion { get; set; }
+        public virtual decimal Valoracion { get; set; }
+
+
+        public virtual RatingCanchaModel InfoValoraciones { get; set; }
+        public virtual List<ComentariosUsuarioModel> ListaComentarios { get; set; }
     }
 }
