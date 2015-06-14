@@ -919,6 +919,7 @@
     <Content Include="Views\Perfil\Usuario.cshtml" />
     <Content Include="Views\Perfil\Cancha.cshtml" />
     <Content Include="Views\Perfil\_RateJugador.cshtml" />
+    <Content Include="Views\Perfil\_RateEquipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
