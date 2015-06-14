@@ -20,7 +20,7 @@
         </button>
         <div id="demo" class="collapse off">
 
-            <h5 class="text-success">Tu valoracion <small>@Model.Jugador</small></h5>
+            <h5 class="text-success">Tu valoracion <small></small></h5>
 
             <input id="new_title" name="name" placeholder="Titulo" value="@Model.Titulo" type="text" maxlength="20">
 
@@ -32,7 +32,7 @@
 
             <button class="btn btn-info" id="btnRating" type="submit">Publicar</button>
         </div>
-        <h5 class="text-success">Valoraciones de usuarios <small>@Model.Jugador</small></h5>
+        <h5 class="text-success">Valoraciones de usuarios <small></small></h5>
 
         @Html.HiddenFor(x => x.IdJugador)
 

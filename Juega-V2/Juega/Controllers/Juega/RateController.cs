@@ -51,17 +51,17 @@ namespace Juega.Controllers.Juega
 
 
                     //Actualizar el campo de promedio de la tabla
-                    var QueryValoraciones = _db.Usuario_Valoracion.Where(x => x.IdUsuarioValorado == IdJugadorValorando && x.Activo == true);
+                    var queryValoraciones = _db.Usuario_Valoracion.Where(x => x.IdUsuarioValorado == IdJugadorValorando && x.Activo == true);
                     var listaValoraciones = new List<BDD.Usuario_Valoracion>();
 
-                    if (QueryValoraciones._IsValid())
-                        listaValoraciones = QueryValoraciones.ToList();
+                    if (queryValoraciones._IsValid())
+                        listaValoraciones = queryValoraciones.ToList();
 
-                    var TotalValoraciones = listaValoraciones.Sum(x => x.Valoracion)._ToDecimal(); //que valor han dado
-                    var div = Convert.ToDecimal((TotalValoraciones <= 0 ? 1 : TotalValoraciones));
-                    var PromedioValoraciones = Decimal.Round(TotalValoraciones / div, 2, MidpointRounding.AwayFromZero);
+                    var totalValoraciones = listaValoraciones.Sum(x => x.Valoracion)._ToDecimal(); //que valor han dado
+                    var div = Convert.ToDecimal((totalValoraciones <= 0 ? 1 : totalValoraciones));
+                    var promedioValoraciones = decimal.Round(totalValoraciones / div, 2, MidpointRounding.AwayFromZero);
 
-                    jugador.Valoracion = PromedioValoraciones;
+                    jugador.Valoracion = promedioValoraciones;
 
 
                     _db.Entry(valoracion).State = System.Data.Entity.EntityState.Modified;

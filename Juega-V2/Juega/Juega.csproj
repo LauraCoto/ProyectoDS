@@ -329,6 +329,8 @@
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
     <Compile Include="Models\Juega\Acciones.cs" />
     <Compile Include="Models\Juega\CanchaModel.cs" />
+    <Compile Include="Models\Juega\RatingCanchaModel.cs" />
+    <Compile Include="Models\Juega\RatingEquipoModel.cs" />
     <Compile Include="Models\Juega\RatingFormModel.cs" />
     <Compile Include="Models\Juega\ComplejoModel.cs" />
     <Compile Include="Models\Juega\Controladores.cs" />
