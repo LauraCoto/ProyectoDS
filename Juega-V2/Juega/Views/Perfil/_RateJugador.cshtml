@@ -24,9 +24,9 @@
                 <input id="new_title" name="name" placeholder="Titulo" value="@Model.Titulo" type="text" maxlength="20">
                 <br />
                 <br />
-                <textarea class="form-control" id="new_message" name="new_message" maxlength="140" aria-valuetext="@Model.Comentario" placeholder="Escribe tu comentarario" rows="3" cols="50"></textarea>
+                <textarea class="form-control" id="new_message" name="new_message" maxlength="140" placeholder="@Model.Comentario" rows="3" cols="50"></textarea>
                 <br />
-                <h5 class="text-success">Tu valoracion <small>@Model.IdJugador</small></h5>
+                <h5 class="text-success">Tu valoracion <small></small></h5>
                 <div id="starToRate" data-score="@Model.Valor"></div>
 
                 <input id="ratingValue" type="text" placeholder="Text input" hidden="hidden" value="@Model.Valor">
