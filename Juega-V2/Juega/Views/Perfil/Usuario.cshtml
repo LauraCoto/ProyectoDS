@@ -13,7 +13,7 @@
         text-align: center;
     }
 </style>
-@using (Html.BeginForm("Editar_Perfil", "Perfil"))
+@using (Html.BeginForm("Editar_Perfil", "Perfil", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -40,13 +40,14 @@
                                         <fieldset>
                                             <div class="col-md-3">
                                                 <br />
-                                                <img src="~/Content/Images/futbol.png" class="img-responsive img-rounded" />
+                                                <img src="@Model.FotoPrincipal" class="img-responsive img-rounded" />
                                             </div>
                                             <br />
 
 
                                             <div class="editor-field">
                                                 @Html.HiddenFor(model => model.IdUsuario, new { @class = "form-control required", @hidden = "hidden" })
+                                                @Html.HiddenFor(model => model.FotoPrincipal, new { @class = "form-control required", @hidden = "hidden" })
                                             </div>
 
                                             <div class="col-md-4">
@@ -63,15 +64,17 @@
                                                         @Html.TextBoxFor(model => model.Apellido, new { @class = "form-control required" })
                                                         @*<input type="text" data-ng-model="Usuario.Apellido" maxlength="25" class="form-control">*@
                                                     </div>
-                                                </div>
-
+                                                </div>                                                
+                                                
+                                                @Html.FileFor(x => x.Attachment)
 
                                             </div>
+
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                     <div class="controls">
-                                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control required"}) 
+                                                        @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control required" })
                                                         @*<input type="datetime" class="form-control" data-ng-model="Usuario.FechaNacimiento">
                                                             </div>*@
                                                     </div>
@@ -101,3 +104,4 @@
     </section>
 
 }
+

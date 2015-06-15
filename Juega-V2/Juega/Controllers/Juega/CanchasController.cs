@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Juega.BDD;
 using Juega.Models.Juega;
+using Juega.Utilidades;
+using System.IO;
+using System.Drawing;
 
 namespace Juega.Controllers.Juega
 {
@@ -16,7 +19,7 @@ namespace Juega.Controllers.Juega
         {
             return View();
         }
-         
+
         public ActionResult Inicio()
         {
             return View();
@@ -28,11 +31,11 @@ namespace Juega.Controllers.Juega
             {
                 if (!TieneAcceso())
                     return Resultado_No_Acceso();
-                 
 
-                 var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
 
-                 var canchas = _db.Cancha.Where(x => x.Activo == true && x.IdUsuario == IdUsuarioLogin).OrderBy(c => c.IdComplejoDeportivo).OrderBy(z => z.FechaCreo).ToList();
+                var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
+
+                var canchas = _db.Cancha.Where(x => x.Activo == true && x.IdUsuario == IdUsuarioLogin).OrderBy(c => c.IdComplejoDeportivo).OrderBy(z => z.FechaCreo).ToList();
 
                 var lista = new List<CanchaModel>();
                 foreach (var item in canchas)
@@ -41,7 +44,7 @@ namespace Juega.Controllers.Juega
                     c.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
                     c.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
                     c.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
-
+                    c.FotoPrincipal = item.FotoPrincipal;
                     c.IdCancha = item.IdCancha;
                     c.Nombre = item.Nombre.ToString();
 
@@ -104,6 +107,7 @@ namespace Juega.Controllers.Juega
                 viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
                 viewModel.IdCancha = item.IdCancha;
                 viewModel.Nombre = item.Nombre;
+                viewModel.FotoPrincipal = item.FotoPrincipal;
 
                 if (item.ComplejoDeportivo != null)
                 {
@@ -129,8 +133,26 @@ namespace Juega.Controllers.Juega
                 if (!ModelState.IsValid)
                     return MostrarAdvertencia("Debe completar todos los datos obligatorios.");
 
-                if (ExisteRegistro(model.Nombre, model.IdCancha))
+                if (model.IdComplejo._ToLong() <= 0)
+                    return MostrarAdvertencia("Debe seleccionar un complejo deportivo.");
+
+                if (ExisteRegistro(model.Nombre, model.IdComplejo, model.IdCancha))
                     return MostrarAdvertencia("Ya existe una cancha con el mismo nombre.");
+
+                var urlbdd = model.FotoPrincipal;
+                if (model.Attachment != null)
+                {
+                    string extension = Path.GetExtension(model.Attachment.FileName);
+
+                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
+                    urlbdd = "/Content/Images/Upload/Canchas/" + myUniqueFileName;
+                    string urlServidor = Server.MapPath(urlbdd);
+
+                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                    if (foto != null)
+                        foto.Save(urlServidor);
+                }
 
                 if (model.IdCancha <= 0)
                 {
@@ -148,6 +170,7 @@ namespace Juega.Controllers.Juega
                     cancha.Usuario = ObtenerUsuario_Juega();
                     cancha.Activo = true;
                     cancha.FechaCreo = DateTime.Now;
+                    cancha.FotoPrincipal = urlbdd;
                     _db.Cancha.Add(cancha);
                 }
                 else
@@ -160,6 +183,7 @@ namespace Juega.Controllers.Juega
                     cancha.Largo = model.Largo;
                     cancha.Ancho = model.Ancho;
                     cancha.NumEspectadores = model.Espectadores;
+                    cancha.FotoPrincipal = urlbdd;
 
                     _db.Entry(cancha).State = EntityState.Modified;
                 }
@@ -174,9 +198,7 @@ namespace Juega.Controllers.Juega
             }
         }
 
-       
 
-        [Authorize(Roles = Utilidades.Roles.AdminCancha)]
         public ActionResult EliminarVw(string id)
         {
 
@@ -186,36 +208,32 @@ namespace Juega.Controllers.Juega
             {
                 return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
             }
-            else
+
+            var nid = long.Parse(id);
+            var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+            if (item == null)
+                return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
+
+            viewModel.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
+            viewModel.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
+            viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
+            viewModel.IdCancha = item.IdCancha;
+            viewModel.Nombre = item.Nombre;
+
+            if (item.ComplejoDeportivo != null)
             {
-
-                var nid = long.Parse(id);
-                var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
-
-                if (item == null)
-                    return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
-
-                viewModel.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
-                viewModel.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
-                viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
-                viewModel.IdCancha = item.IdCancha;
-                viewModel.Nombre = item.Nombre; 
-
-                if (item.ComplejoDeportivo != null)
-                {
-                    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
-                    viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
-                } 
-
-                return View(viewModel); 
-
+                viewModel.Complejo = item.ComplejoDeportivo.Nombre;
+                viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
             }
+
+            return View(viewModel);
         }
 
         public ActionResult Eliminar(CanchaModel model)
         {
             try
-            { 
+            {
 
                 if (model.IdCancha <= 0)
                     return MostrarAdvertencia("No se pudo cargar la informacion de la cancha que desea eliminar.");
@@ -239,15 +257,49 @@ namespace Juega.Controllers.Juega
                 return MostrarError(e.Message, "Ocurrio un error eliminar la cancha.");
             }
         }
-         
-        private bool ExisteRegistro(string nombre, long idExcluir)
+
+        public ActionResult HorarioVw(string id)
+        {
+            var viewModel = new CanchaModel();
+
+            if (id._ToLong() <= 0)
+                return MostrarAdvertencia("No se pudo cargar la informacion de la cancha.");
+
+            var nid = id._ToLong();
+            var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+            if (item == null)
+                return MostrarAdvertencia("No se pudo cargar la informacion de la cancha.");
+
+            viewModel.Ancho = item.Ancho._ToInt();
+            viewModel.Largo = item.Largo._ToInt();
+            viewModel.Espectadores = item.NumEspectadores._ToInt();
+            viewModel.IdCancha = item.IdCancha;
+            viewModel.Nombre = item.Nombre;
+
+            if (item.ComplejoDeportivo != null)
+            {
+                viewModel.Complejo = item.ComplejoDeportivo.Nombre;
+                viewModel.IdComplejo = item.IdComplejoDeportivo != null ? Convert.ToInt64(item.IdComplejoDeportivo) : 0;
+            }
+
+            return View(viewModel);
+        }
+
+        public ActionResult Horario(CanchaModel model)
+        {
+            return RedirectToAction("Inicio");
+        }
+
+        private bool ExisteRegistro(string nombre, long idComplejo, long idExcluir)
         {
             if (nombre.Trim() == "")
                 return false;
 
             var registro = _db.Cancha.FirstOrDefault(x => x.Nombre == nombre &&
-                                                                x.IdCancha != idExcluir
-                                                                );
+                                                          x.IdCancha != idExcluir &&
+                                                          x.IdComplejoDeportivo == idComplejo
+                                                    );
 
             return registro != null;
         }

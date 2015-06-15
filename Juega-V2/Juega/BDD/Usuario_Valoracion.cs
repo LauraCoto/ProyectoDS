@@ -15,13 +15,16 @@ namespace Juega.BDD
     public partial class Usuario_Valoracion
     {
         public long IdUsuario_Valoracion { get; set; }
-        public Nullable<int> Valoracion { get; set; }
-        public Nullable<int> TipoValoracion { get; set; }
+        public string Titulo { get; set; }
+        public string Comentario { get; set; }
+        public Nullable<decimal> Valoracion { get; set; }
+        public Nullable<long> IdUsuarioValora { get; set; }
+        public Nullable<long> IdUsuarioValorado { get; set; }
         public Nullable<System.DateTime> FechaCreo { get; set; }
         public Nullable<System.DateTime> FechaElimino { get; set; }
         public Nullable<bool> Activo { get; set; }
-        public Nullable<long> IdUsuario { get; set; }
     
         public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

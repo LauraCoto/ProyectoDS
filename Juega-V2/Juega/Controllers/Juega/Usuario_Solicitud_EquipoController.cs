@@ -159,7 +159,7 @@ namespace Juega.Controllers.Juega
                     return Resultado_Advertencia("No se pudo obtener la informacion de la solicitud.");
 
 
-                //Definir usuario como jugador
+                //Definir jugador como jugador
                 var usuarioSolicito = solicitud.Usuario;
                 var usersContext = new ApplicationDbContext();
                 var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioSolicito.IdUsuarioSeguridad);
@@ -213,7 +213,7 @@ namespace Juega.Controllers.Juega
                     return MostrarAdvertencia("Solicitud es incorrecta.");
 
                 var nid = long.Parse(id);
-                var solicitud = _db.Usuario_Solicitud_AdminCancha.FirstOrDefault(x => x.IdUsuario_Solicitud_AdminCancha == nid);
+                var solicitud = _db.Usuario_Solicitud_Equipo.FirstOrDefault(x => x.IdUsuario_Solicitud_Equipo == nid);
 
                 if (solicitud == null)
                     return Resultado_Advertencia("No se pudo obtener la informacion de la solicitud.");
@@ -224,7 +224,7 @@ namespace Juega.Controllers.Juega
                 //Enviar correo
                 _db.SaveChanges();
 
-                return View("Inicio");
+                return RedirectToAction("Inicio");
             }
             catch (Exception e)
             {

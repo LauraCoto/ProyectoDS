@@ -1,0 +1,41 @@
+﻿@model Juega.Models.Juega.RatingJugadorModel
+
+
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<link href="~/Content/rating.css" rel="stylesheet" />
+<link href="~/Content/SaleStyle.css" rel="stylesheet" />
+
+<script src="/Scripts/jquery-1.9.1.js"></script>
+<script src="/Scripts/jquery-migrate-1.1.1.js"></script>
+<script src="/Scripts/jquery.validate.js"></script>
+<script src="/scripts/jquery.validate.unobtrusive.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+
+<div class="container" style="width: auto;">
+    <div class="well span6" id="DivRate">
+
+        <button type="button" class="btn btn-inverse" data-toggle="collapse" data-target="#demo">
+            Escribir un comentario<br />
+        </button>
+        <div id="demo" class="collapse off">
+            <br />
+            <div class="row-sm-4">
+                <input id="new_title" name="name" placeholder="Titulo" value="@Model.Titulo" type="text" maxlength="20">
+                <br />
+                <br />
+                <textarea class="form-control" id="new_message" name="new_message" maxlength="140" placeholder="@Model.Comentario" rows="3" cols="50"></textarea>
+                <br />
+                <h5 class="text-success">Tu valoracion <small></small></h5>
+                <div id="starToRate" data-score="@Model.Valor"></div>
+
+                <input id="ratingValue" type="text" placeholder="Text input" hidden="hidden" value="@Model.Valor">
+                <br />
+                <button class="btn btn-info" id="btnRating" type="submit">Publicar</button>
+            </div>
+
+            @Html.HiddenFor(x => x.IdJugador)
+
+        </div>
+    </div>
+</div>

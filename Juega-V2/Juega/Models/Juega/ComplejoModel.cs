@@ -24,6 +24,7 @@ namespace Juega.Models.Juega
         public virtual string FotoPrincipal { get; set; }
 
         public virtual int CantCanchas { get; set; }
+        public virtual HttpPostedFileBase Attachment { get; set; }
     }
 
 }

@@ -6,6 +6,8 @@ using Juega.BDD;
 using Juega.Models.Juega;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.IO;
+using System.Drawing;
 
 namespace Juega.Controllers.Juega
 {
@@ -72,7 +74,7 @@ namespace Juega.Controllers.Juega
 
                 if (item == null)
                     return MostrarAdvertencia("No se pudo cargar la informacion del equipo");
-
+                 
                 viewModel.Nombre = item.Nombre;
                 viewModel.IdEquipo = item.IdEquipo;
                 viewModel.FotoPrincipal = item.FotoPrincipal;
@@ -98,12 +100,28 @@ namespace Juega.Controllers.Juega
                 if (ExisteRegistro(model.Nombre, model.IdEquipo))
                     return MostrarAdvertencia("Ya existe un equipo con el mismo nombre.");
 
+                var urlbdd = model.FotoPrincipal;
+                if(model.Attachment != null)
+                {
+                    string extension = Path.GetExtension(model.Attachment.FileName);
+
+                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
+                    urlbdd = "/Content/Images/Upload/Equipos/" + myUniqueFileName;
+                    string urlServidor = Server.MapPath(urlbdd);
+
+                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                    if (foto != null)
+                        foto.Save(urlServidor);
+                }
+
                 if (model.IdEquipo <= 0)
                 {
-                    var equipo = new Equipo();
+                    var equipo = new Equipo(); 
+
                     equipo.Activo = true;
                     equipo.FechaCreo = DateTime.Now;
-                    equipo.FotoPrincipal = model.FotoPrincipal;
+                    equipo.FotoPrincipal = urlbdd;
                     equipo.Usuario = usuarioLogin;
                     equipo.Nombre = model.Nombre;
                     equipo.TipoEstado = Utilidades.TipoEstado.Disponible;
@@ -116,14 +134,14 @@ namespace Juega.Controllers.Juega
                     if (equipo == null)
                         return MostrarAdvertencia("No se pudo obtener la informacion del equipo");
 
-                    equipo.FotoPrincipal = model.FotoPrincipal;
+                    equipo.FotoPrincipal = urlbdd;
                     equipo.Nombre = model.Nombre;
 
                     _db.Entry(equipo).State = EntityState.Modified;
                 }
 
 
-                //Definir usuario como tecnico
+                //Definir jugador como tecnico
                 var usersContext = new ApplicationDbContext();
                 var usuarioSeg = usersContext.Users.FirstOrDefault(x => x.Id == usuarioLogin.IdUsuarioSeguridad);
                 var rol = usersContext.Roles.FirstOrDefault(x => x.Name == Utilidades.Roles.AdminEquipo);

@@ -1,11 +1,5 @@
 ﻿@model Juega.Models.Juega.CanchaModel
-
-<style>
-    body {
-        padding-top: 60px;
-    }
-</style>
-
+ 
 
 <h3>Informacion de la cancha</h3>
 
@@ -13,7 +7,7 @@
 <link href="~/Content/bwizard.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
 
-@using (Html.BeginForm("Guardar", "Canchas"))
+@using (Html.BeginForm("Guardar", "Canchas", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -34,6 +28,7 @@
 
                     <div class="editor-field">
                         @Html.HiddenFor(model => model.IdCancha, new { @class = "form-control required", @hidden = "hidden" })
+                        @Html.HiddenFor(model => model.FotoPrincipal, new { @class = "form-control required", @hidden = "hidden" })
                     </div>
 
                     <label for="Nombre">Complejo al que pertenecera</label>
@@ -88,8 +83,15 @@
 
 
                 <div id="fotos">
-                    @*@Html.Partial("_uploadImages")*@
-                    <p>Esta opción estara disponible luego de crear la publicación</p>
+
+                    @Html.FileFor(model => model.Attachment)
+                    <div class="container">
+                        <div class="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
+                            <img src="@Model.FotoPrincipal" class="img-responsive">
+                        </div>
+                    </div>
+                   
+                    
                 </div>
 
                 <div id="Finalizar">
