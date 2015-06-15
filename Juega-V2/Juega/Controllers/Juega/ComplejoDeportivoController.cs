@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.IO;
 using System.Drawing;
+using com.mosso.cloudfiles.domain;
+using System.Configuration;
 
 namespace Juega.Controllers.Juega
 {
@@ -111,16 +113,39 @@ namespace Juega.Controllers.Juega
                 var urlbdd = model.FotoPrincipal;
                 if (model.Attachment != null)
                 {
-                    string extension = Path.GetExtension(model.Attachment.FileName);
 
-                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                    urlbdd = "/Content/Images/Upload/Complejos/" + myUniqueFileName;
-                    string urlServidor = Server.MapPath(urlbdd);
+                    var rackIsOnline = ConfigurationManager.AppSettings["RACK_ONLINE"].ToString();
 
-                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+                    if (rackIsOnline == "1")
+                    {
+                        var username = ConfigurationManager.AppSettings["RACK_USER"].ToString();
+                        var api_key = ConfigurationManager.AppSettings["RACK_API_KEY"].ToString();
+                        var chosenContainer = ConfigurationManager.AppSettings["RACK_CONTAINER_Complejos"].ToString();
+                        var chosenContainer_Server = ConfigurationManager.AppSettings["RACK_CONTAINER_Complejos_SVR"].ToString();
+                        var UrlStorage = ConfigurationManager.AppSettings["RACK_URL_STORAGE"].ToString();
+                        var UrlAuth = ConfigurationManager.AppSettings["RACK_URL_AUTH"].ToString();
 
-                    if (foto != null)
-                        foto.Save(urlServidor);
+                        var userCreds = new UserCredentials(new Uri(UrlAuth), username, api_key, null, null);
+                        var connection = new com.mosso.cloudfiles.Connection(userCreds);
+
+                        var imgPath = model.Attachment.FileName;
+                        var extension = System.IO.Path.GetExtension(imgPath);
+                        var name = System.IO.Path.GetFileNameWithoutExtension(imgPath);
+                        var tempName = System.IO.Path.GetRandomFileName() + extension;
+
+                        connection.PutStorageItem(chosenContainer, model.Attachment.InputStream, tempName);
+                        urlbdd = chosenContainer_Server + tempName;
+                    }
+                    else
+                    {
+                        var extension = Path.GetExtension(model.Attachment.FileName);
+                        urlbdd = "/Content/Images/Upload/Complejos/" + Guid.NewGuid().ToString();
+                        var urlServidor = Server.MapPath(urlbdd);
+                        var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                        if (foto != null)
+                            foto.Save(urlServidor);
+                    }
                 }
 
                 if (model.IdComplejoDeportivo <= 0)

@@ -10,6 +10,7 @@ namespace Juega.Models.Juega
         public virtual string Descripcion { get; set; }
         public virtual string Edad { get; set; }
         public virtual int NumEquipos { get; set; }
-        public virtual int Valoracion { get; set; }
+        public virtual decimal Valoracion { get; set; }
+        public virtual string FotoPrincipal { get; set; }
     }
 }
