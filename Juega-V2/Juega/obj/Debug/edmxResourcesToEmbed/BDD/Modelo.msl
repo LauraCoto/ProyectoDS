@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="JuegaModelStoreContainer" CdmEntityContainer="JuegaEntities">
+  <EntityContainerMapping StorageEntityContainer="JuegaModelStoreContainer" CdmEntityContainer="JuegaEntities1">
     <EntitySetMapping Name="Cancha">
       <EntityTypeMapping TypeName="JuegaModel.Cancha">
         <MappingFragment StoreEntitySet="Cancha">
@@ -81,13 +81,14 @@
       <EntityTypeMapping TypeName="JuegaModel.Cancha_Valoracion">
         <MappingFragment StoreEntitySet="Cancha_Valoracion">
           <ScalarProperty Name="IdCancha_Valoracion" ColumnName="IdCancha_Valoracion" />
-          <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
+          <ScalarProperty Name="IdUsuarioValoro" ColumnName="IdUsuarioValoro" />
+          <ScalarProperty Name="IdCanchaValorado" ColumnName="IdCanchaValorado" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdCancha" ColumnName="IdCancha" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -187,13 +188,14 @@
       <EntityTypeMapping TypeName="JuegaModel.Equipo_Valoracion">
         <MappingFragment StoreEntitySet="Equipo_Valoracion">
           <ScalarProperty Name="IdEquipo_Valoracion" ColumnName="IdEquipo_Valoracion" />
-          <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
           <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+          <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
+          <ScalarProperty Name="IdEquipoValorado" ColumnName="IdEquipoValorado" />
+          <ScalarProperty Name="IdUsuarioValoro" ColumnName="IdUsuarioValoro" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -321,12 +323,14 @@
       <EntityTypeMapping TypeName="JuegaModel.Usuario_Valoracion">
         <MappingFragment StoreEntitySet="Usuario_Valoracion">
           <ScalarProperty Name="IdUsuario_Valoracion" ColumnName="IdUsuario_Valoracion" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Comentario" ColumnName="Comentario" />
           <ScalarProperty Name="Valoracion" ColumnName="Valoracion" />
-          <ScalarProperty Name="TipoValoracion" ColumnName="TipoValoracion" />
+          <ScalarProperty Name="IdUsuarioValora" ColumnName="IdUsuarioValora" />
+          <ScalarProperty Name="IdUsuarioValorado" ColumnName="IdUsuarioValorado" />
           <ScalarProperty Name="FechaCreo" ColumnName="FechaCreo" />
           <ScalarProperty Name="FechaElimino" ColumnName="FechaElimino" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

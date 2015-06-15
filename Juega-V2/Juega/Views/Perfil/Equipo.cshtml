@@ -1,0 +1,218 @@
+﻿@model Juega.Models.Juega.EquiposModel
+
+@{
+    ViewBag.Title = "Equipo";
+}
+<div class="unwrap">
+    <div style="background-image: url(/Content/Images/profile-bg.jpg)" class="bg-cover">
+        <div class="p-xl text-center text-white">
+            <img src="@Model.FotoPrincipal" alt="Image" class="img-thumbnail img-circle thumb128" />
+            <h3 class="m0"> @Model.Nombre </h3>
+        </div>
+    </div>
+    <div class="text-center bg-gray-dark p-lg mb-xl">
+        <div class="row row-table">
+            <div class="col-xs-4 br">
+                <h3 class="m0">@Model.Valoracion / 5</h3>
+                <p class="m0">
+                    <span class="hidden-xs">Valoracion</span>
+                </p>
+            </div>
+            @*<div class="col-xs-4 br">
+                    <h3 class="m0">" "</h3>
+                    <p class="m0">Equipos</p>
+                </div>*@
+            <div class="col-xs-4">
+                <h3 class="m0">100</h3>
+                <p class="m0">Following</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span10">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#0" data-toggle="tab">Valoración</a></li>
+                    <li><a href="#1" data-toggle="tab">Jugadores</a></li>
+                    <li><a href="#2" data-toggle="tab">Comentarios</a></li>
+                </ul>
+                <div class="tab-content">
+
+
+
+                    <div class="tab-pane active" id="0">
+                        <div class="panel panel-default">
+                            <div class="list-group">
+                                @Html.Partial("_RateEquipo", new Juega.Models.Juega.RatingEquipoModel(Model.InfoValoraciones))
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="1">
+
+                        <div class="panel panel-default">
+
+
+                            @foreach (var item in Model.ListaJugadores)
+                            {
+                                <a href="#" class="list-group-item">
+                                    <div class="media-box">
+                                        <div class="pull-left">
+                                            <img src="@item.FotoPrincipal" alt="Image" class="media-box-object img-circle thumb32" />
+                                        </div>
+                                        <div class="media-box-body clearfix">
+                                            <small class="pull-right">2h</small>
+                                            <strong class="media-box-heading text-primary">
+                                                <span class="circle circle-success circle-lg text-left"></span>@item.Nombre
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+
+
+                    <div class="tab-pane" id="2">
+
+                        <div class="panel panel-default">
+
+                            @foreach (var item in Model.ListaComentarios)
+                            {
+                                <a href="#" class="list-group-item">
+                                    <div class="media-box">
+                                        <div class="pull-left">
+                                            <img src="@item.FotoPrincipal" alt="Image" class="media-box-object img-circle thumb32" />
+                                        </div>
+                                        <div class="media-box-body clearfix">
+                                            <small class="pull-right">@item.Tiempo</small>
+                                            <strong class="media-box-heading text-primary">
+                                                <span class="circle circle-success circle-lg text-left"></span>@item.UsuarioComento
+                                            </strong>
+                                            <p class="mb-sm">
+                                                <small>@item.Comentario</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script src="~/Scripts/jquery.raty.js"></script>
+    <script>
+        $('#starBegin').raty(
+            {
+
+                cancel: false,
+                cancelOff: '/Content/images/cancel-off.png',
+                cancelOn: '/Content/images/cancel-on.png',
+                half: false,
+                size: 24,
+                starHalf: '/Content/images/star-half.png',
+                starOff: '/Content/images/star-off.png',
+                starOn: '/Content/images/star-on.png',
+                readOnly: true,
+                score: function () {
+                    return $(this).attr('data-score');
+                }
+            });
+
+        $('#starReview').raty(
+           {
+               cancel: false,
+               cancelOff: '/Content/images/cancel-off.png',
+               cancelOn: '/Content/images/cancel-on.png',
+               half: false,
+               size: 24,
+               starHalf: '/Content/images/star-half.png',
+               starOff: '/Content/images/star-off.png',
+               starOn: '/Content/images/star-on.png',
+               readOnly: true,
+               score: function () {
+                   return $(this).attr('data-score');
+               }
+           });
+
+        $('#starToRate').raty(
+            {
+                cancel: false,
+                cancelOff: '/Content/images/cancel-off.png',
+                cancelOn: '/Content/images/cancel-on.png',
+                half: false,
+                size: 24,
+                starHalf: '/Content/images/star-half.png',
+                starOff: '/Content/images/star-off.png',
+                starOn: '/Content/images/star-on.png',
+                readOnly: true,
+                score: function () {
+                    return $(this).attr('data-score');
+                }
+            });
+
+
+        $('#btnRating').click(function ()
+        {
+            var TheRate = $('#ratingValue').val();
+            var IdEquipo = $('#IdEquipo').val();
+            var theTitle = $('#new_title').val();
+            var theComment = $('#new_message').val()
+
+            if (TheRate <= 0 || IdEquipo <= 0 || theTitle == "" || theComment == "") {
+
+                alert("Debe completar todos los campos. Rate: " + TheRate + " IdEquipo: " + IdEquipo + " Titulo :" + theTitle + " Comentario :" + theComment);
+                return;
+            }
+
+            $.ajax({
+                url: "/Rate/Equipo/",
+                type: "GET",
+                data: { IdEquipoValorando: IdEquipo, rate: TheRate, title: theTitle, comment: theComment },
+                success: function (data) {
+                    $("#demo").collapse()
+
+                    if (data.success)
+                        alert("Gracias por tu valoración! (Calidad: " + TheRate + " estrellas)");
+                    else
+                        alert("Ocurrio un problema al guardar tu valoración, Vuelve a intentarlo.");
+                },
+                error: function (err) {
+                    alert("Ocurrio un error, valoración no realizada:" + err);
+                },
+                complete: function () {
+                    // alert('completado');
+                }
+            });
+
+        });
+
+        $('#starToRate').raty(
+        {
+            cancel: false,
+            cancelOff: '/Content/images/cancel-off.png',
+            cancelOn: '/Content/images/cancel-on.png',
+            half: false,
+            size: 24,
+            starHalf: '/Content/images/star-half.png',
+            starOff: '/Content/images/star-off.png',
+            starOn: '/Content/images/star-on.png',
+
+            click: function (score, evt) {
+                $("#ratingValue").val(score)
+            }
+        });
+
+    </script>
+}

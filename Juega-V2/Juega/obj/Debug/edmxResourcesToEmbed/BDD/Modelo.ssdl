@@ -9,7 +9,7 @@
     <Property Name="NumEspectadores" Type="int" />
     <Property Name="Largo" Type="int" />
     <Property Name="Ancho" Type="int" />
-    <Property Name="Valoracion" Type="int" />
+    <Property Name="Valoracion" Type="decimal" Precision="12" Scale="4" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
     <Property Name="FotoPrincipal" Type="varchar" MaxLength="1200" />
     <Property Name="FechaCreo" Type="datetime" />
@@ -76,13 +76,14 @@
       <PropertyRef Name="IdCancha_Valoracion" />
     </Key>
     <Property Name="IdCancha_Valoracion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Valoracion" Type="int" />
-    <Property Name="Comentario" Type="nvarchar" MaxLength="100" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="300" />
+    <Property Name="Valoracion" Type="decimal" Precision="12" Scale="4" />
+    <Property Name="IdUsuarioValoro" Type="bigint" />
+    <Property Name="IdCanchaValorado" Type="bigint" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
-    <Property Name="IdCancha" Type="bigint" />
-    <Property Name="IdUsuario" Type="bigint" />
   </EntityType>
   <EntityType Name="ComplejoDeportivo">
     <Key>
@@ -121,7 +122,7 @@
     </Key>
     <Property Name="IdEquipo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
-    <Property Name="Valoracion" Type="int" />
+    <Property Name="Valoracion" Type="decimal" Precision="12" Scale="4" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
     <Property Name="FotoPrincipal" Type="varchar" MaxLength="1200" />
     <Property Name="FechaCreo" Type="datetime" />
@@ -175,13 +176,14 @@
       <PropertyRef Name="IdEquipo_Valoracion" />
     </Key>
     <Property Name="IdEquipo_Valoracion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Valoracion" Type="int" />
-    <Property Name="Comentario" Type="nvarchar" MaxLength="100" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="300" />
+    <Property Name="Valoracion" Type="decimal" Precision="12" Scale="4" />
+    <Property Name="IdEquipoValorado" Type="bigint" />
+    <Property Name="IdUsuarioValoro" Type="bigint" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
-    <Property Name="IdEquipo" Type="bigint" />
-    <Property Name="IdUsuario" Type="bigint" />
   </EntityType>
   <EntityType Name="Menu">
     <Key>
@@ -239,7 +241,7 @@
     <Property Name="Correo" Type="varchar" MaxLength="100" />
     <Property Name="Telefonos" Type="nvarchar" MaxLength="100" />
     <Property Name="TipoEstado" Type="nvarchar" MaxLength="100" />
-    <Property Name="Valoracion" Type="int" />
+    <Property Name="Valoracion" Type="decimal" Precision="12" Scale="4" />
     <Property Name="EsEspectador" Type="bit" />
     <Property Name="EsAdminCancha" Type="bit" />
     <Property Name="EsAdminEquipo" Type="bit" />
@@ -300,12 +302,14 @@
       <PropertyRef Name="IdUsuario_Valoracion" />
     </Key>
     <Property Name="IdUsuario_Valoracion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Valoracion" Type="int" />
-    <Property Name="TipoValoracion" Type="int" />
+    <Property Name="Titulo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="300" />
+    <Property Name="Valoracion" Type="decimal" Precision="12" Scale="4" />
+    <Property Name="IdUsuarioValora" Type="bigint" />
+    <Property Name="IdUsuarioValorado" Type="bigint" />
     <Property Name="FechaCreo" Type="datetime" />
     <Property Name="FechaElimino" Type="datetime" />
     <Property Name="Activo" Type="bit" />
-    <Property Name="IdUsuario" Type="bigint" />
   </EntityType>
   <Association Name="FK_Denuncia_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -328,6 +332,18 @@
       </Principal>
       <Dependent Role="Denuncia">
         <PropertyRef Name="IdUsuarioDenunciado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Valoracion_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Valoracion" Type="Self.Usuario_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Valoracion">
+        <PropertyRef Name="IdUsuarioValorado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -459,7 +475,7 @@
         <PropertyRef Name="IdUsuario" />
       </Principal>
       <Dependent Role="Equipo_Valoracion">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioValoro" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -471,7 +487,7 @@
         <PropertyRef Name="IdEquipo" />
       </Principal>
       <Dependent Role="Equipo_Valoracion">
-        <PropertyRef Name="IdEquipo" />
+        <PropertyRef Name="IdEquipoValorado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -483,7 +499,7 @@
         <PropertyRef Name="IdUsuario" />
       </Principal>
       <Dependent Role="Cancha_Valoracion">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioValoro" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -495,7 +511,7 @@
         <PropertyRef Name="IdCancha" />
       </Principal>
       <Dependent Role="Cancha_Valoracion">
-        <PropertyRef Name="IdCancha" />
+        <PropertyRef Name="IdCanchaValorado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -531,7 +547,7 @@
         <PropertyRef Name="IdUsuario" />
       </Principal>
       <Dependent Role="Usuario_Valoracion">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioValora" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -805,6 +821,10 @@
     <AssociationSet Name="FK_Denuncia_Usuario1" Association="Self.FK_Denuncia_Usuario1">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Denuncia" EntitySet="Denuncia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Valoracion_Usuario" Association="Self.FK_Usuario_Valoracion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Valoracion" EntitySet="Usuario_Valoracion" />
     </AssociationSet>
     <AssociationSet Name="FK1E2394DD1862B0F6" Association="Self.FK1E2394DD1862B0F6">
       <End Role="Usuario" EntitySet="Usuario" />

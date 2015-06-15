@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8f47bbc8d40640cb81424578bf69a281" Name="Diagram1">
-        <EntityTypeShape EntityType="JuegaModel.Cancha" Width="1.5" PointX="5.25" PointY="23" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Cancha_Foto" Width="1.5" PointX="10.5" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia" Width="1.5" PointX="10.5" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia_Hora" Width="1.5" PointX="15.75" PointY="23.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Cancha_Reservacion" Width="1.5" PointX="18" PointY="24.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Cancha_Valoracion" Width="1.5" PointX="10.5" PointY="28.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.ComplejoDeportivo" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Denuncia" Width="1.5" PointX="13.5" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Equipo" Width="1.5" PointX="3" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Equipo_Foto" Width="1.5" PointX="5.25" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Equipo_Jugador" Width="1.5" PointX="13.5" PointY="29.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Equipo_Tecnico" Width="1.5" PointX="8.25" PointY="24.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Equipo_Valoracion" Width="1.5" PointX="8.25" PointY="20.875" IsExpanded="true" />
+      <Diagram DiagramId="710b4fc7801246358d2d485e72dcaad0" Name="Diagram1">
+        <EntityTypeShape EntityType="JuegaModel.Cancha" Width="1.5" PointX="5.25" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Foto" Width="1.5" PointX="10.5" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia" Width="1.5" PointX="10.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Horario_Dia_Hora" Width="1.5" PointX="15.75" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Reservacion" Width="1.5" PointX="18" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Cancha_Valoracion" Width="1.5" PointX="10.5" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.ComplejoDeportivo" Width="1.5" PointX="3" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Denuncia" Width="1.5" PointX="13.5" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo" Width="1.5" PointX="3" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Foto" Width="1.5" PointX="5.25" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Jugador" Width="1.5" PointX="13.5" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Tecnico" Width="1.5" PointX="8.25" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Equipo_Valoracion" Width="1.5" PointX="8.25" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="JuegaModel.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Reto" Width="1.5" PointX="20.25" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Token" Width="1.5" PointX="3" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Usuario" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Usuario_Foto" Width="1.5" PointX="3" PointY="31.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Usuario_Registro_Acceso" Width="1.5" PointX="3" PointY="34.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Usuario_Solicitud_AdminCancha" Width="1.5" PointX="3" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Usuario_Solicitud_Equipo" Width="1.5" PointX="8.25" PointY="28.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="JuegaModel.Usuario_Valoracion" Width="1.5" PointX="3" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Reto" Width="1.5" PointX="20.25" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Token" Width="1.5" PointX="3" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario" Width="1.5" PointX="0.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Foto" Width="1.5" PointX="3" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Registro_Acceso" Width="1.5" PointX="3" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Solicitud_AdminCancha" Width="1.5" PointX="3" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Solicitud_Equipo" Width="1.5" PointX="8.25" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JuegaModel.Usuario_Valoracion" Width="1.5" PointX="3" PointY="39.875" IsExpanded="true" />
         <AssociationConnector Association="JuegaModel.FK1E2394DDF771FF35" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK3BBAF225F771FF35" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK3FBA4BEBF771FF35" ManuallyRouted="false" />
@@ -60,6 +60,7 @@
         <AssociationConnector Association="JuegaModel.FK3F406CE31862B0F6" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK903403341862B0F6" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK7786F1A31862B0F6" ManuallyRouted="false" />
+        <AssociationConnector Association="JuegaModel.FK_Usuario_Valoracion_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK312DCDED1862B0F6" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK550739B71862B0F6" ManuallyRouted="false" />
         <AssociationConnector Association="JuegaModel.FK66723AB21862B0F6" ManuallyRouted="false" />
