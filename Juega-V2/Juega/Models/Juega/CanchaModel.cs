@@ -35,5 +35,24 @@ namespace Juega.Models.Juega
 
         public virtual RatingCanchaModel InfoValoraciones { get; set; }
         public virtual List<ComentariosUsuarioModel> ListaComentarios { get; set; }
+
+        public virtual List<Horario_Dia_Model> ListaHorarios { get; set; }
+    }
+
+    public class Horario_Dia_Model
+    {
+        public virtual long IdCancha { get; set; }
+        public virtual long IdHorario_Dia { get; set; }
+        public virtual DateTime Fecha { get; set; }
+
+        public virtual List<Horario_Dia_Hora_Model> ListaHoras { get; set; }
+    }
+
+    public class Horario_Dia_Hora_Model
+    {
+        public virtual long IdHorario_Dia { get; set; }
+        public virtual long IdHorario_Hora { get; set; }
+        public virtual DateTime FechaDesde { get; set; }
+        public virtual DateTime FechaHasta { get; set; }
     }
 }
