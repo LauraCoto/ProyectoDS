@@ -202,7 +202,7 @@ namespace Juega.Controllers.Juega
                             var eu = new EquiposJugadoresModel();
                             eu.Activo = e.Equipo.Activo._ToBoolean();
                             eu.IdJugador = e.Usuario.IdUsuario;
-                            eu.Nombre = e.Equipo.Nombre;
+                            eu.Nombre = e.Usuario.Nombre + " " +  e.Usuario.Apellido;
                             eu.FotoPrincipal = e.Equipo.FotoPrincipal;
                             model.ListaJugadores.Add(eu);
                         }
