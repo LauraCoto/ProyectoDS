@@ -1,6 +1,6 @@
 <!-- START Sidebar (left)-->
 @using Microsoft.AspNet.Identity
-
+    @*@model Juega.Models.Juega.UsuarioModel*@
 
 
 
@@ -14,13 +14,14 @@
                         <div class="user-block-picture">
                             <div class="user-block-status">
                                 <img src="~/Content/Images/user/02.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+                                @*<img src=@Model.Foto_Principal.ToString() alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />*@
                                 <div class="circle circle-success circle-lg"></div>
                             </div>
                         </div>
 
                         <!-- Name and Job-->
                         <div class="user-block-info">
-
+                           
                             @if (Request.IsAuthenticated)
                             {
                                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

@@ -420,13 +420,28 @@ namespace Juega.Controllers.Juega
                     return MostrarError("Debe iniciar sesion.");
 
                 var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == model.IdUsuario);
-
+              
                 if (usuario == null)
                     return MostrarAdvertencia("No se pudo actualizar la informacion del jugador");
 
+                var urlbdd = model.FotoPrincipal;
+                if(model.Attachment != null)
+                {
+                    string extension = Path.GetExtension(model.Attachment.FileName);
+
+                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
+                    urlbdd = "/Content/Images/Usuario/" + myUniqueFileName;
+                    string urlServidor = Server.MapPath(urlbdd);
+
+                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                    if (foto != null)
+                        foto.Save(urlServidor);
+                }
+                
                 usuario.Nombre = model.Nombre;
                 usuario.Apellido = model.Apellido;
-                usuario.FotoPrincipal = model.FotoPrincipal;
+                usuario.FotoPrincipal = urlbdd;
                 usuario.Telefonos = usuario.Telefonos;
                 usuario.Descripcion = model.Descripcion;
 
