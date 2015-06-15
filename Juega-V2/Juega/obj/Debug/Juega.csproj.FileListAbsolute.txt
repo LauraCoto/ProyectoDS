@@ -62,7 +62,6 @@ C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.Razor.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.WebPages.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.WebPages.Deployment.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\System.Web.WebPages.Razor.xml
-C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.pdb
 C:\ProyectoDS\Juega-V2\Juega\bin\Twilio.Api.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.AspNet.Identity.Core.xml
 C:\ProyectoDS\Juega-V2\Juega\bin\Microsoft.AspNet.Identity.Owin.xml

@@ -16,6 +16,7 @@ namespace Juega.Models.Juega
         public virtual int NumEquipos { get; set; }
         public virtual int NumComentarios { get; set; }
         public virtual decimal Valoracion { get; set; }
+        public virtual string FotoPrincipal { get; set; }
         public virtual RatingJugadorModel InfoValoraciones { get; set; }
         public virtual List<EquiposUsuarioModel> ListaEquipos { get; set; }
         public virtual List<ComentariosUsuarioModel> ListaComentarios { get; set; }

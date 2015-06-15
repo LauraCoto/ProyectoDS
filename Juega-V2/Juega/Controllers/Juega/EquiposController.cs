@@ -74,23 +74,7 @@ namespace Juega.Controllers.Juega
 
                 if (item == null)
                     return MostrarAdvertencia("No se pudo cargar la informacion del equipo");
-
-
-                var urlbdd = viewModel.FotoPrincipal;
-                if (viewModel.Attachment != null)
-                {
-                    string extension = Path.GetExtension(viewModel.Attachment.FileName);
-
-                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                    urlbdd = "/Content/Images/Equipo/" + myUniqueFileName;
-                    string urlServidor = Server.MapPath(urlbdd);
-
-                    var foto = Bitmap.FromStream(viewModel.Attachment.InputStream) as Bitmap;
-
-                    if (foto != null)
-                        foto.Save(urlServidor);
-                }
-
+                 
                 viewModel.Nombre = item.Nombre;
                 viewModel.IdEquipo = item.IdEquipo;
                 viewModel.FotoPrincipal = item.FotoPrincipal;
@@ -122,7 +106,7 @@ namespace Juega.Controllers.Juega
                     string extension = Path.GetExtension(model.Attachment.FileName);
 
                     var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                     urlbdd = "/Content/Images/Equipo/" + myUniqueFileName;
+                    urlbdd = "/Content/Images/Upload/Equipos/" + myUniqueFileName;
                     string urlServidor = Server.MapPath(urlbdd);
 
                     var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
@@ -133,20 +117,7 @@ namespace Juega.Controllers.Juega
 
                 if (model.IdEquipo <= 0)
                 {
-                    var equipo = new Equipo();
-
-                    //Viene nullo el model.FotoPrincipal, pero porque si lo asigno en la vista model => model.Attachment
-                    string extension = Path.GetExtension(model.Attachment.FileName);
-
-                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                    urlbdd = "/Content/Images/Equipo/" + myUniqueFileName;
-                    string urlServidor = Server.MapPath(urlbdd);
-
-                    //Truena aca! D:
-                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
-
-                    if (foto != null)
-                        foto.Save(urlServidor);
+                    var equipo = new Equipo(); 
 
                     equipo.Activo = true;
                     equipo.FechaCreo = DateTime.Now;

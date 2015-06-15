@@ -15,5 +15,7 @@ namespace Juega.Models.Juega
         public virtual RatingEquipoModel InfoValoraciones { get; set; }
         public virtual List<EquiposJugadoresModel> ListaJugadores { get; set; }
         public virtual List<ComentariosUsuarioModel> ListaComentarios { get; set; }
+
+        public virtual HttpPostedFileBase Attachment { get; set; }
     }
 }

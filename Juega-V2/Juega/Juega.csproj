@@ -931,17 +931,18 @@
     <Content Include="Views\Perfil\_RateJugador.cshtml" />
     <Content Include="Views\Perfil\_RateEquipo.cshtml" />
     <Content Include="Views\Perfil\_RateCancha.cshtml" />
+    <Content Include="Views\Canchas\HorarioVw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Cancha\" />
-    <Folder Include="Content\Images\Equipo\" />
-    <Folder Include="Content\Images\Usuario\" />
+    <Folder Include="Content\Images\Upload\Canchas\" />
+    <Folder Include="Content\Images\Upload\Complejos\" />
+    <Folder Include="Content\Images\Upload\Equipos\" />
+    <Folder Include="Content\Images\Upload\Usuarios\" />
     <Folder Include="Scripts\Application\Directives\" />
     <Folder Include="Vendor\blueimp-file-upload\js\cors\" />
     <Folder Include="Vendor\blueimp-file-upload\js\vendor\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\EditarPerfil\" />
     <Folder Include="Views\Rate\" />
   </ItemGroup>
   <ItemGroup>

@@ -39,6 +39,7 @@ namespace Juega.Controllers.Juega
                 model.InfoValoraciones = ObtenerValoracionJugador(nid);
                 model.ListaComentarios = new List<ComentariosUsuarioModel>();
                 model.ListaEquipos = new List<EquiposUsuarioModel>();
+                model.FotoPrincipal = jugador.FotoPrincipal;
 
                 //Comentarios realizados al jugador
                 var comentariosXJugador = jugador.Usuario_Valoracion;
@@ -53,7 +54,7 @@ namespace Juega.Controllers.Juega
                             var cu = new ComentariosUsuarioModel();
                             cu.Comentario = c.Comentario;
                             cu.FotoPrincipal = c.Usuario1.FotoPrincipal;
-                            cu.Tiempo = "dia";
+                            cu.Tiempo = c.FechaCreo._ToDateTime().ToShortDateString();
                             cu.Titulo = c.Titulo;
                             cu.UsuarioComento = c.Usuario.Nombre + " " + c.Usuario.Apellido;
                             cu.Valoracion = c.Valoracion._ToDecimal();
@@ -99,7 +100,7 @@ namespace Juega.Controllers.Juega
             valoracion.IdJugador = idJugador;
 
             var usuarioLogueado = ObtenerUsuario_Juega();
-           
+
             var valoracionUsuarioLogueado = _db.Usuario_Valoracion.FirstOrDefault(x => x.IdUsuarioValora == usuarioLogueado.IdUsuario);
             var queryValoraciones = _db.Usuario_Valoracion.Where(x => x.IdUsuarioValorado == idJugador && x.Activo == true);
             var listaValoraciones = new List<BDD.Usuario_Valoracion>();
@@ -162,10 +163,11 @@ namespace Juega.Controllers.Juega
                 var nid = id._ToLong();
                 var equipo = _db.Equipo.FirstOrDefault(x => x.IdEquipo == nid);
                 model.Nombre = equipo.Nombre;
-                model.Valoracion = equipo.Valoracion._ToDecimal(); 
+                model.Valoracion = equipo.Valoracion._ToDecimal();
                 model.InfoValoraciones = ObtenerValoracionEquipo(nid);
                 model.ListaComentarios = new List<ComentariosUsuarioModel>();
                 model.ListaJugadores = new List<EquiposJugadoresModel>();
+                model.FotoPrincipal = equipo.FotoPrincipal;
 
                 //Comentarios realizados  al equipo
                 var comentariosXEquipos = equipo.Equipo_Valoracion;
@@ -173,12 +175,13 @@ namespace Juega.Controllers.Juega
                 {
                     var listaComentarios = comentariosXEquipos.ToList();
                     if (listaComentarios != null)
-                    {   foreach (var c in comentariosXEquipos)
+                    {
+                        foreach (var c in comentariosXEquipos)
                         {
                             var cu = new ComentariosUsuarioModel();
                             cu.Comentario = c.Comentario;
                             cu.FotoPrincipal = c.Usuario.FotoPrincipal;
-                            cu.Tiempo = "dia";
+                            cu.Tiempo = c.FechaCreo._ToDateTime().ToShortDateString();
                             cu.Titulo = c.Titulo;
                             cu.UsuarioComento = c.Usuario.Nombre + " " + c.Usuario.Apellido;
                             cu.Valoracion = c.Valoracion._ToDecimal();
@@ -202,7 +205,7 @@ namespace Juega.Controllers.Juega
                             var eu = new EquiposJugadoresModel();
                             eu.Activo = e.Equipo.Activo._ToBoolean();
                             eu.IdJugador = e.Usuario.IdUsuario;
-                            eu.Nombre = e.Usuario.Nombre + " " +  e.Usuario.Apellido;
+                            eu.Nombre = e.Usuario.Nombre + " " + e.Usuario.Apellido;
                             eu.FotoPrincipal = e.Equipo.FotoPrincipal;
                             model.ListaJugadores.Add(eu);
                         }
@@ -239,7 +242,7 @@ namespace Juega.Controllers.Juega
                 valoracion.Valor = valoracionUsuarioLogueado.Valoracion._ToInt();
                 valoracion.Comentario = valoracionUsuarioLogueado.Comentario;
                 valoracion.FechaValoro = valoracionUsuarioLogueado.FechaCreo._ToDateTime();
-               
+
                 valoracion.IdValoracion = valoracionUsuarioLogueado.IdEquipo_Valoracion;
             }
 
@@ -295,6 +298,7 @@ namespace Juega.Controllers.Juega
                 model.Valoracion = cancha.Valoracion._ToInt();
                 model.InfoValoraciones = ObtenerValoracionCancha(nid);
                 model.ListaComentarios = new List<ComentariosUsuarioModel>();
+                model.FotoPrincipal = cancha.FotoPrincipal;
 
                 //Comentarios realizados a la cancha
                 var comentariosXCancha = cancha.Cancha_Valoracion;
@@ -308,7 +312,7 @@ namespace Juega.Controllers.Juega
                             var cu = new ComentariosUsuarioModel();
                             cu.Comentario = c.Comentario;
                             cu.FotoPrincipal = c.Usuario.FotoPrincipal;
-                            cu.Tiempo = "dia";
+                            cu.Tiempo = c.FechaCreo._ToDateTime().ToShortDateString();
                             cu.Titulo = c.Titulo;
                             cu.UsuarioComento = c.Usuario.Nombre + " " + c.Usuario.Apellido;
                             cu.Valoracion = c.Valoracion._ToDecimal();
@@ -397,11 +401,12 @@ namespace Juega.Controllers.Juega
                 modelo.Nombre = usuarioLogin.Nombre;
                 modelo.Apellido = usuarioLogin.Apellido;
                 modelo.Descripcion = usuarioLogin.Descripcion;
+                modelo.FotoPrincipal = usuarioLogin.FotoPrincipal;
 
                 if (usuarioLogin.FechaNacimiento.HasValue)
                     modelo.FechaNacimiento = (DateTime)usuarioLogin.FechaNacimiento;
 
-                modelo.FotoPrincipal = usuarioLogin.FotoPrincipal;
+
 
                 return View(modelo);
             }
@@ -420,17 +425,17 @@ namespace Juega.Controllers.Juega
                     return MostrarError("Debe iniciar sesion.");
 
                 var usuario = _db.Usuario.FirstOrDefault(x => x.IdUsuario == model.IdUsuario);
-              
+
                 if (usuario == null)
                     return MostrarAdvertencia("No se pudo actualizar la informacion del jugador");
 
                 var urlbdd = model.FotoPrincipal;
-                if(model.Attachment != null)
+                if (model.Attachment != null)
                 {
                     string extension = Path.GetExtension(model.Attachment.FileName);
 
                     var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                    urlbdd = "/Content/Images/Usuario/" + myUniqueFileName;
+                    urlbdd = "/Content/Images/Upload/Usuarios/" + myUniqueFileName;
                     string urlServidor = Server.MapPath(urlbdd);
 
                     var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
@@ -438,7 +443,7 @@ namespace Juega.Controllers.Juega
                     if (foto != null)
                         foto.Save(urlServidor);
                 }
-                
+
                 usuario.Nombre = model.Nombre;
                 usuario.Apellido = model.Apellido;
                 usuario.FotoPrincipal = urlbdd;

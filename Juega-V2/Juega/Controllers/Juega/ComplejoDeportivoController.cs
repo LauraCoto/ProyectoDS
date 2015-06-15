@@ -6,6 +6,8 @@ using Juega.BDD;
 using Juega.Models.Juega;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.IO;
+using System.Drawing;
 
 namespace Juega.Controllers.Juega
 {
@@ -106,6 +108,21 @@ namespace Juega.Controllers.Juega
                 if (ExisteRegistro(model.Nombre, model.IdComplejoDeportivo))
                     return MostrarAdvertencia("Ya tiene agregado un complejo con el mismo nombre.");
 
+                var urlbdd = model.FotoPrincipal;
+                if (model.Attachment != null)
+                {
+                    string extension = Path.GetExtension(model.Attachment.FileName);
+
+                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
+                    urlbdd = "/Content/Images/Upload/Complejos/" + myUniqueFileName;
+                    string urlServidor = Server.MapPath(urlbdd);
+
+                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                    if (foto != null)
+                        foto.Save(urlServidor);
+                }
+
                 if (model.IdComplejoDeportivo <= 0)
                 {
                     var complejo = new ComplejoDeportivo();
@@ -113,7 +130,7 @@ namespace Juega.Controllers.Juega
                     complejo.Coodernadas = model.Coodernadas;
                     complejo.Direccion = model.Direccion;
                     complejo.FechaCreo = DateTime.Now;
-                    complejo.FotoPrincipal = model.FotoPrincipal;
+                    complejo.FotoPrincipal = urlbdd;
                     complejo.Usuario = usuarioLogin;
                     complejo.Nombre = model.Nombre;
                     complejo.Telefonos = model.Telefonos;
@@ -129,7 +146,7 @@ namespace Juega.Controllers.Juega
 
                     complejo.Coodernadas = model.Coodernadas;
                     complejo.Direccion = model.Direccion;
-                    complejo.FotoPrincipal = model.FotoPrincipal;
+                    complejo.FotoPrincipal = urlbdd;
                     complejo.Nombre = model.Nombre;
                     complejo.Telefonos = model.Telefonos;
 

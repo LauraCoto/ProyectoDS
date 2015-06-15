@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Juega.BDD;
 using Juega.Models.Juega;
 using Juega.Utilidades;
+using System.IO;
+using System.Drawing;
 
 namespace Juega.Controllers.Juega
 {
@@ -42,7 +44,7 @@ namespace Juega.Controllers.Juega
                     c.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
                     c.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
                     c.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
-
+                    c.FotoPrincipal = item.FotoPrincipal;
                     c.IdCancha = item.IdCancha;
                     c.Nombre = item.Nombre.ToString();
 
@@ -105,6 +107,7 @@ namespace Juega.Controllers.Juega
                 viewModel.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
                 viewModel.IdCancha = item.IdCancha;
                 viewModel.Nombre = item.Nombre;
+                viewModel.FotoPrincipal = item.FotoPrincipal;
 
                 if (item.ComplejoDeportivo != null)
                 {
@@ -136,6 +139,21 @@ namespace Juega.Controllers.Juega
                 if (ExisteRegistro(model.Nombre, model.IdComplejo, model.IdCancha))
                     return MostrarAdvertencia("Ya existe una cancha con el mismo nombre.");
 
+                var urlbdd = model.FotoPrincipal;
+                if (model.Attachment != null)
+                {
+                    string extension = Path.GetExtension(model.Attachment.FileName);
+
+                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
+                    urlbdd = "/Content/Images/Upload/Canchas/" + myUniqueFileName;
+                    string urlServidor = Server.MapPath(urlbdd);
+
+                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                    if (foto != null)
+                        foto.Save(urlServidor);
+                }
+
                 if (model.IdCancha <= 0)
                 {
                     var cancha = new Cancha();
@@ -152,6 +170,7 @@ namespace Juega.Controllers.Juega
                     cancha.Usuario = ObtenerUsuario_Juega();
                     cancha.Activo = true;
                     cancha.FechaCreo = DateTime.Now;
+                    cancha.FotoPrincipal = urlbdd;
                     _db.Cancha.Add(cancha);
                 }
                 else
@@ -164,6 +183,7 @@ namespace Juega.Controllers.Juega
                     cancha.Largo = model.Largo;
                     cancha.Ancho = model.Ancho;
                     cancha.NumEspectadores = model.Espectadores;
+                    cancha.FotoPrincipal = urlbdd;
 
                     _db.Entry(cancha).State = EntityState.Modified;
                 }

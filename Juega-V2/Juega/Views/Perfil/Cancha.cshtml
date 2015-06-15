@@ -6,7 +6,7 @@
 <div class="unwrap">
     <div style="background-image: url(/Content/Images/profile-bg.jpg)" class="bg-cover">
         <div class="p-xl text-center text-white">
-            <img src="~/Content/Images/user/09.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+            <img src="@Model.FotoPrincipal" alt="Image" class="img-thumbnail img-circle thumb128" />
             <h3 class="m0"> @Model.Nombre </h3>
         </div>
     </div>
@@ -59,7 +59,7 @@
                             <a href="#" class="list-group-item">
                                 <div class="media-box">
                                     <div class="pull-left">
-                                        <img src="~/Content/Images/user/02.jpg" alt="Image" class="media-box-object img-circle thumb32" />
+                                        <img src="@item.FotoPrincipal" alt="Image" class="media-box-object img-circle thumb32" />
                                     </div>
                                     <div class="media-box-body clearfix">
                                         <small class="pull-right">@item.Tiempo</small>
