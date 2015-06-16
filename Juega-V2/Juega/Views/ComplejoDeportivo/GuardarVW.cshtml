@@ -1,5 +1,5 @@
 ﻿@model Juega.Models.Juega.ComplejoModel
- 
+
 
 <h3>Informacion del complejo</h3>
 
@@ -61,8 +61,8 @@
                 </div>
 
                 <div id="fotos">
-
-                    @Html.FileFor(model => model.Attachment) 
+                    <p>Ruta: <small>@Html.ValueFor(model => model.FotoPrincipal)</small></p>
+                    @Html.FileFor(model => model.Attachment)
                     <div class="container">
                         <div class="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
                             <img src="@Model.FotoPrincipal" class="img-responsive">
