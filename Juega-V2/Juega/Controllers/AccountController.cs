@@ -57,6 +57,7 @@ namespace Juega
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
+            //mmandar el url de la imagen que quiero retornar el view.
             return View();
         }
          
