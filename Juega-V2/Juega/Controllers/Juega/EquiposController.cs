@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.IO;
 using System.Drawing;
+using System.Configuration;
+using com.mosso.cloudfiles.domain;
 
 namespace Juega.Controllers.Juega
 {
@@ -15,7 +17,7 @@ namespace Juega.Controllers.Juega
     [Authorize(Roles = Utilidades.Roles.Espectador)]
     public class EquiposController : JuegaController
     {
-         [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
         public ActionResult Inicio()
         {
             return View();
@@ -75,22 +77,6 @@ namespace Juega.Controllers.Juega
                 if (item == null)
                     return MostrarAdvertencia("No se pudo cargar la informacion del equipo");
 
-
-                var urlbdd = viewModel.FotoPrincipal;
-                if (viewModel.Attachment != null)
-                {
-                    string extension = Path.GetExtension(viewModel.Attachment.FileName);
-
-                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                    urlbdd = "/Content/Images/Equipo/" + myUniqueFileName;
-                    string urlServidor = Server.MapPath(urlbdd);
-
-                    var foto = Bitmap.FromStream(viewModel.Attachment.InputStream) as Bitmap;
-
-                    if (foto != null)
-                        foto.Save(urlServidor);
-                }
-
                 viewModel.Nombre = item.Nombre;
                 viewModel.IdEquipo = item.IdEquipo;
                 viewModel.FotoPrincipal = item.FotoPrincipal;
@@ -100,7 +86,7 @@ namespace Juega.Controllers.Juega
 
             }
         }
-         
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Guardar(EquiposModel model)
@@ -117,36 +103,46 @@ namespace Juega.Controllers.Juega
                     return MostrarAdvertencia("Ya existe un equipo con el mismo nombre.");
 
                 var urlbdd = model.FotoPrincipal;
-                if(model.Attachment != null)
+                if (model.Attachment != null)
                 {
-                    string extension = Path.GetExtension(model.Attachment.FileName);
 
-                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                     urlbdd = "/Content/Images/Equipo/" + myUniqueFileName;
-                    string urlServidor = Server.MapPath(urlbdd);
+                    var rackIsOnline = ConfigurationManager.AppSettings["RACK_ONLINE"].ToString();
 
-                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+                    if (rackIsOnline == "1")
+                    {
+                        var username = ConfigurationManager.AppSettings["RACK_USER"].ToString();
+                        var api_key = ConfigurationManager.AppSettings["RACK_API_KEY"].ToString();
+                        var chosenContainer = ConfigurationManager.AppSettings["RACK_CONTAINER_Equipos"].ToString();
+                        var chosenContainer_Server = ConfigurationManager.AppSettings["RACK_CONTAINER_Equipos_SVR"].ToString();
+                        var UrlStorage = ConfigurationManager.AppSettings["RACK_URL_STORAGE"].ToString();
+                        var UrlAuth = ConfigurationManager.AppSettings["RACK_URL_AUTH"].ToString();
 
-                    if (foto != null)
-                        foto.Save(urlServidor);
+                        var userCreds = new UserCredentials(new Uri(UrlAuth), username, api_key, null, null);
+                        var connection = new com.mosso.cloudfiles.Connection(userCreds);
+
+                        var imgPath = model.Attachment.FileName;
+                        var extension = System.IO.Path.GetExtension(imgPath);
+                        var name = System.IO.Path.GetFileNameWithoutExtension(imgPath);
+                        var tempName = System.IO.Path.GetRandomFileName() + extension;
+
+                        connection.PutStorageItem(chosenContainer, model.Attachment.InputStream, tempName);
+                        urlbdd = chosenContainer_Server + tempName;
+                    }
+                    else
+                    {
+                        var extension = Path.GetExtension(model.Attachment.FileName);
+                        urlbdd = "/Content/Images/Upload/Equipos/" + Guid.NewGuid().ToString();
+                        var urlServidor = Server.MapPath(urlbdd);
+                        var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
+
+                        if (foto != null)
+                            foto.Save(urlServidor);
+                    }
                 }
 
                 if (model.IdEquipo <= 0)
                 {
                     var equipo = new Equipo();
-
-                    //Viene nullo el model.FotoPrincipal, pero porque si lo asigno en la vista model => model.Attachment
-                    string extension = Path.GetExtension(model.Attachment.FileName);
-
-                    var myUniqueFileName = string.Format(@"{0}" + extension, Guid.NewGuid());
-                    urlbdd = "/Content/Images/Equipo/" + myUniqueFileName;
-                    string urlServidor = Server.MapPath(urlbdd);
-
-                    //Truena aca! D:
-                    var foto = Bitmap.FromStream(model.Attachment.InputStream) as Bitmap;
-
-                    if (foto != null)
-                        foto.Save(urlServidor);
 
                     equipo.Activo = true;
                     equipo.FechaCreo = DateTime.Now;
@@ -198,7 +194,7 @@ namespace Juega.Controllers.Juega
             }
         }
 
-         [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
+        [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
         public ActionResult EliminarVw(string id)
         {
 
@@ -224,7 +220,7 @@ namespace Juega.Controllers.Juega
 
             }
         }
-         
+
         [HttpPost]
         [Authorize(Roles = Utilidades.Roles.AdminEquipo)]
         public ActionResult Eliminar(EquiposModel model)

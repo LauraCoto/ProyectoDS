@@ -21,7 +21,7 @@
 <div class="unwrap">
     <div style="background-image: url(/Content/Images/profile-bg.jpg)" class="bg-cover">
         <div class="p-xl text-center text-white">
-            <img src="~/Content/Images/user/09.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+            <img src="@Model.FotoPrincipal" alt="Image" class="img-thumbnail img-circle thumb128" />
             <h3 class="m0"> @Model.Nombre @Model.Apellido </h3>
             <p>@Model.Edad anios</p>
             <p> @Model.Descripcion </p>
@@ -30,7 +30,7 @@
     <div class="text-center bg-gray-dark p-lg mb-xl">
         <div class="row row-table">
             <div class="col-xs-4 br">
-                <h3 class="m0">@Model.Valoracion / 5</h3>
+                <h3 class="m0">@Model.InfoValoraciones.PromedioValoraciones / @Model.InfoValoraciones.CantidadValoraciones</h3>
                 <p class="m0">
                     <span class="hidden-xs">Valoracion</span>
                 </p>
@@ -77,7 +77,7 @@
                                 <a href="#" class="list-group-item">
                                     <div class="media-box">
                                         <div class="pull-left">
-                                            <img src="~/Content/Images/user/02.jpg" alt="Image" class="media-box-object img-circle thumb32" />
+                                            <img src="@item.FotoPrincipal" alt="Image" class="media-box-object img-circle thumb32" />
                                         </div>
                                         <div class="media-box-body clearfix">
                                             <small class="pull-right">2h</small>
@@ -102,7 +102,7 @@
                                 <a href="#" class="list-group-item">
                                     <div class="media-box">
                                         <div class="pull-left">
-                                            <img src="~/Content/Images/user/02.jpg" alt="Image" class="media-box-object img-circle thumb32" />
+                                            <img src="@item.FotoPrincipal" alt="Image" class="media-box-object img-circle thumb32" />
                                         </div>
                                         <div class="media-box-body clearfix">
                                             <small class="pull-right">@item.Tiempo</small>
@@ -125,6 +125,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 
 

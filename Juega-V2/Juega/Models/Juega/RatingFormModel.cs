@@ -17,8 +17,7 @@ namespace Juega.Models.Juega
 
 
         //Informacion estadistica
-        public virtual long IdJugador { get; set; }
-        public virtual string Jugador { get; set; }
+        public virtual long IdJugador { get; set; } 
 
         public virtual int Start5Count { get; set; }
         public virtual int Start4Count { get; set; }
@@ -49,8 +48,7 @@ namespace Juega.Models.Juega
             this.Comentario = r.Comentario;
             this.Titulo = r.Titulo;
 
-            this.IdJugador = r.IdJugador;
-            this.Jugador = r.Jugador;
+            this.IdJugador = r.IdJugador; 
             
             this.Start5Count = r.Start5Count;
             this.Start4Count = r.Start4Count;

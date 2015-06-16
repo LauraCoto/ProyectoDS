@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Juega.Utilidades;
 
 namespace Juega.Controllers.Juega
 {
@@ -71,7 +72,7 @@ namespace Juega.Controllers.Juega
                     c.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
                     c.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
                     c.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
-
+                    c.FotoPrincipal = item.FotoPrincipal;
                     c.IdCancha = item.IdCancha;
                     c.Nombre = item.Nombre.ToString();
 
@@ -113,7 +114,7 @@ namespace Juega.Controllers.Juega
                     c.Ancho = item.Ancho != null ? Convert.ToInt32(item.Ancho) : 0;
                     c.Largo = item.Largo != null ? Convert.ToInt32(item.Largo) : 0;
                     c.Espectadores = item.NumEspectadores != null ? Convert.ToInt32(item.NumEspectadores) : 0;
-
+                    c.FotoPrincipal = item.FotoPrincipal;
                     c.IdCancha = item.IdCancha;
                     c.Nombre = item.Nombre.ToString();
 
@@ -149,7 +150,7 @@ namespace Juega.Controllers.Juega
 
                 var IdUsuarioLogin = Obtener_ID_Usuario_Juega();
 
-                var equipos = _db.Equipo.Where(x => x.Activo == true && 
+                var equipos = _db.Equipo.Where(x => x.Activo == true &&
                                                x.TipoEstado == Utilidades.TipoEstado.Disponible).OrderBy(z => z.FechaCreo).ToList();
 
                 var lista = new List<EquiposModel>();
@@ -159,6 +160,7 @@ namespace Juega.Controllers.Juega
                     c.FotoPrincipal = item.FotoPrincipal;
                     c.IdEquipo = item.IdEquipo;
                     c.Nombre = item.Nombre;
+                    c.FotoPrincipal = item.FotoPrincipal;
                     c.Valoracion = Convert.ToInt32(item.Valoracion.HasValue ? item.Valoracion : 0);
 
                     lista.Add(c);
@@ -180,32 +182,36 @@ namespace Juega.Controllers.Juega
                     return MostrarAdvertencia("El equipo seleccionado es incorrecto.");
 
                 var nid = long.Parse(id);
-                var jugadores = _db.Equipo_Jugador.Where(x => x.Activo == true && 
-                                                         x.IdEquipo == nid && 
-                                                         x.Usuario.EsJugador==true).OrderBy(z => z.FechaCreo).ToList();
+                var jugadores = _db.Equipo_Jugador.Where(x => x.Activo == true &&
+                                                         x.IdEquipo == nid &&
+                                                         x.Usuario.EsJugador == true).OrderBy(z => z.FechaCreo).ToList();
 
                 var lista = new List<JugadorModel>();
                 foreach (var item in jugadores)
                 {
-                    var usuario = item.Usuario;
+                    var jugador = item.Usuario;
 
                     var j = new JugadorModel();
-                    j.IdJugador = usuario.IdUsuario;
-                    j.Apellido = usuario.Apellido;
-                    j.Nombre = usuario.Nombre;
-                    j.Correo = usuario.Correo;
-                    j.Descripcion = usuario.Descripcion;
+                    j.IdJugador = jugador.IdUsuario;
+                    j.Apellido = jugador.Apellido;
+                    j.Nombre = jugador.Nombre;
+                    j.Correo = jugador.Correo;
+                    j.Descripcion = jugador.Descripcion;
+                    j.Valoracion = jugador.Valoracion._ToDecimal();
+                    j.FotoPrincipal = jugador.FotoPrincipal;
                     j.Edad = "0";
-                    j.Valoracion = Convert.ToInt32(usuario.Valoracion.HasValue ? usuario.Valoracion : 0);
 
-                    if (usuario.FechaNacimiento.HasValue)
-                        j.Edad = Convert.ToString(DateTime.Now.Year - usuario.FechaNacimiento.Value.Year);
+                    if (jugador.FechaNacimiento.HasValue)
+                        j.Edad = Convert.ToString(DateTime.Now.Year - jugador.FechaNacimiento.Value.Year);
+                   
 
-                    var equipos = usuario.Equipo_Jugador.Where(u => u.Activo == true);
+                     
+
+                    var equipos = jugador.Equipo_Jugador.Where(u => u.Activo == true);
                     if (equipos != null)
                         j.NumEquipos = equipos.Count();
 
-                   
+
                     lista.Add(j);
                 }
 
@@ -237,20 +243,22 @@ namespace Juega.Controllers.Juega
                 var lista = new List<JugadorModel>();
                 foreach (var item in jugadores)
                 {
-                    var usuario = item.Usuario;
+                    var jugador = item.Usuario;
 
                     var j = new JugadorModel();
-                    j.Apellido = usuario.Apellido;
-                    j.Nombre = usuario.Nombre;
-                    j.Correo = usuario.Correo;
-                    j.Descripcion = usuario.Descripcion;
+                    j.Apellido = jugador.Apellido;
+                    j.Nombre = jugador.Nombre;
+                    j.Correo = jugador.Correo;
+                    j.Descripcion = jugador.Descripcion;
+                    j.Valoracion = jugador.Valoracion._ToDecimal();
+                    j.FotoPrincipal = jugador.FotoPrincipal;
                     j.Edad = "0";
-                    j.Valoracion = Convert.ToInt32(usuario.Valoracion.HasValue ? usuario.Valoracion : 0);
 
-                    if (usuario.FechaNacimiento.HasValue)
-                        j.Edad = Convert.ToString(DateTime.Now.Year - usuario.FechaNacimiento.Value.Year);
 
-                    var equipos = usuario.Equipo_Jugador.Where(u => u.Activo == true);
+                    if (jugador.FechaNacimiento.HasValue)
+                        j.Edad = Convert.ToString(DateTime.Now.Year - jugador.FechaNacimiento.Value.Year);
+
+                    var equipos = jugador.Equipo_Jugador.Where(u => u.Activo == true);
                     if (equipos != null)
                         j.NumEquipos = equipos.Count();
 
