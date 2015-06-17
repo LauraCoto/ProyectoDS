@@ -10,3 +10,4 @@ angular.module('appDenuncias', ['DenunciasController']);
 angular.module('appEspectador', ['EspectadorController']);
 angular.module('appSolicitudes', ['SolicitudesController']);
 angular.module('appPerfil', ['PerfilController']);
+angular.module('appHorario', ['CanchasController']);
