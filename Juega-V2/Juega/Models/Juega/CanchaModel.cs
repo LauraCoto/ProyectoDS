@@ -29,6 +29,18 @@ namespace Juega.Models.Juega
         public virtual List<ComentariosUsuarioModel> ListaComentarios { get; set; }
 
         public virtual List<Horario_Dia_Model> ListaHorarios { get; set; }
+
+        public virtual string FechaDesde { get; set; }
+        public virtual string FechaHasta { get; set; }
+        public virtual string FechaClonar { get; set; }
+
+        public CanchaModel()
+        {
+            InfoValoraciones = new RatingCanchaModel();
+            ListaComentarios = new List<ComentariosUsuarioModel>();
+            ListaHorarios = new List<Horario_Dia_Model>();
+            //FechaClonar = FechaDesde = FechaHasta = DateTime.Now;
+        }
     }
 
     public class Horario_Dia_Model
@@ -38,13 +50,19 @@ namespace Juega.Models.Juega
         public virtual DateTime Fecha { get; set; }
 
         public virtual List<Horario_Dia_Hora_Model> ListaHoras { get; set; }
+
+        public Horario_Dia_Model()
+        {
+            ListaHoras = new List<Horario_Dia_Hora_Model>();
+        }
     }
 
     public class Horario_Dia_Hora_Model
     {
         public virtual long IdHorario_Dia { get; set; }
         public virtual long IdHorario_Hora { get; set; }
-        public virtual DateTime FechaDesde { get; set; }
-        public virtual DateTime FechaHasta { get; set; }
+        public virtual DateTime HoraDesde { get; set; }
+        public virtual DateTime HoraHasta { get; set; }
+        public virtual string Estado { get; set; }
     }
 }

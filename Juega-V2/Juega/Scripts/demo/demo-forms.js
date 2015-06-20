@@ -1,62 +1,69 @@
-// Forms Demo
-// ----------------------------------- 
+//// Forms Demo
+//// ----------------------------------- 
 
 
-(function(window, document, $, undefined){
+//(function(window, document, $, undefined){
 
-  $(function(){
+//  $(function(){
 
-    // BOOTSTRAP SLIDER CTRL
-    // ----------------------------------- 
+//    // BOOTSTRAP SLIDER CTRL
+//    // ----------------------------------- 
 
-    $('[data-ui-slider]').slider();
+//    $('[data-ui-slider]').slider();
 
-    // CHOSEN
-    // ----------------------------------- 
+//    // CHOSEN
+//    // ----------------------------------- 
 
-    $('.chosen-select').chosen();
+//    $('.chosen-select').chosen();
 
-    // MASKED
-    // ----------------------------------- 
+//    // MASKED
+//    // ----------------------------------- 
 
-    $('[data-masked]').inputmask();
+//    $('[data-masked]').inputmask();
 
-    // FILESTYLE
-    // ----------------------------------- 
+//    // FILESTYLE
+//    // ----------------------------------- 
 
-    $('.filestyle').filestyle();
+//    $('.filestyle').filestyle();
 
-    // WYSIWYG
-    // ----------------------------------- 
+//    // WYSIWYG
+//    // ----------------------------------- 
 
-    $('.wysiwyg').wysiwyg();
+//    $('.wysiwyg').wysiwyg();
 
 
-    // DATETIMEPICKER
-    // ----------------------------------- 
+//    // DATETIMEPICKER
+//    // ----------------------------------- 
 
-    $('#datetimepicker1').datetimepicker({
-      icons: {
-          time: 'fa fa-clock-o',
-          date: 'fa fa-calendar',
-          up: 'fa fa-chevron-up',
-          down: 'fa fa-chevron-down',
-          previous: 'fa fa-chevron-left',
-          next: 'fa fa-chevron-right',
-          today: 'fa fa-crosshairs',
-          clear: 'fa fa-trash'
-        }
-    });
-    // only time
-    $('#datetimepicker2').datetimepicker({
-        format: 'LT'
-    });
-    // View mode
-    $('#datetimepicker3').datetimepicker({
-        viewMode: 'years',
-       format: 'MM/YYYY'
-    });
+//    $('#datetimepicker1').datetimepicker({
+//      icons: {
+//          time: 'fa fa-clock-o',
+//          date: 'fa fa-calendar',
+//          up: 'fa fa-chevron-up',
+//          down: 'fa fa-chevron-down',
+//          previous: 'fa fa-chevron-left',
+//          next: 'fa fa-chevron-right',
+//          today: 'fa fa-crosshairs',
+//          clear: 'fa fa-trash'
+//        }
+//    });
+//    // only time
+//    $('#datetimepicker2').datetimepicker({
+//        format: 'LT'
+//    });
 
-  });
+//    $('#HoraDesde').datetimepicker({
+//        format: 'LT'
+//    });
+//    $('#HoraHasta').datetimepicker({
+//        format: 'LT'
+//    });
+//    // View mode
+//    $('#datetimepicker3').datetimepicker({
+//        viewMode: 'years',
+//       format: 'MM/YYYY'
+//    });
 
-})(window, document, window.jQuery);
+//  });
+
+//})(window, document, window.jQuery);
