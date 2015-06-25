@@ -1,0 +1,109 @@
+﻿@model Juega.Models.Juega.CanchaModel
+
+  
+
+<h3>Horario</h3>
+
+
+@using (Html.BeginForm("Horario", "Canchas"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="editor-field">
+        @Html.HiddenFor(model => model.IdCancha, new { @class = "form-control required", @hidden = "hidden" })
+    </div>
+
+    <h3><small>Definir horario de la cancha :  @Model.Nombre </small></h3>
+
+    <div class="row">
+        <div class="span10">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#0" data-toggle="tab">Horario</a></li>
+                    <li><a href="#1" data-toggle="tab">Clonar Horario</a></li>
+                </ul>
+                <div class="tab-content">
+
+
+
+                    <div class="tab-pane active" id="0">
+                        <div class="panel panel-default">
+
+                            <div class="container">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div id="datetimepicker12"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="1">
+
+                        <div class="panel panel-default">
+                            <div class="container">
+                                <div class='col-md-5'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker6'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-md-5'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker7'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    $(function() {
+
+        $('#datetimepicker6').datetimepicker();
+
+        $('#datetimepicker7').datetimepicker();
+
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+
+        $('#datetimepicker12').datetimepicker({
+            inline: true,
+            sideBySide: true
+        });
+
+    });
+</script>
+
+ 

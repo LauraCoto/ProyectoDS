@@ -33,9 +33,10 @@ namespace Juega.BDD
             this.Equipo_Valoracion = new HashSet<Equipo_Valoracion>();
             this.Reto = new HashSet<Reto>();
             this.Token = new HashSet<Token>();
+            this.Usuario_Valoracion = new HashSet<Usuario_Valoracion>();
             this.Usuario_Solicitud_Equipo = new HashSet<Usuario_Solicitud_Equipo>();
             this.Usuario_Solicitud_AdminCancha = new HashSet<Usuario_Solicitud_AdminCancha>();
-            this.Usuario_Valoracion = new HashSet<Usuario_Valoracion>();
+            this.Usuario_Valoracion1 = new HashSet<Usuario_Valoracion>();
             this.Usuario_Foto = new HashSet<Usuario_Foto>();
             this.Usuario_Registro_Acceso = new HashSet<Usuario_Registro_Acceso>();
         }
@@ -47,7 +48,7 @@ namespace Juega.BDD
         public string Correo { get; set; }
         public string Telefonos { get; set; }
         public string TipoEstado { get; set; }
-        public Nullable<int> Valoracion { get; set; }
+        public Nullable<decimal> Valoracion { get; set; }
         public Nullable<bool> EsEspectador { get; set; }
         public Nullable<bool> EsAdminCancha { get; set; }
         public Nullable<bool> EsAdminEquipo { get; set; }
@@ -76,9 +77,10 @@ namespace Juega.BDD
         public virtual ICollection<Equipo_Valoracion> Equipo_Valoracion { get; set; }
         public virtual ICollection<Reto> Reto { get; set; }
         public virtual ICollection<Token> Token { get; set; }
+        public virtual ICollection<Usuario_Valoracion> Usuario_Valoracion { get; set; }
         public virtual ICollection<Usuario_Solicitud_Equipo> Usuario_Solicitud_Equipo { get; set; }
         public virtual ICollection<Usuario_Solicitud_AdminCancha> Usuario_Solicitud_AdminCancha { get; set; }
-        public virtual ICollection<Usuario_Valoracion> Usuario_Valoracion { get; set; }
+        public virtual ICollection<Usuario_Valoracion> Usuario_Valoracion1 { get; set; }
         public virtual ICollection<Usuario_Foto> Usuario_Foto { get; set; }
         public virtual Usuario Usuario1 { get; set; }
         public virtual Usuario Usuario2 { get; set; }

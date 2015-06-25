@@ -14,7 +14,7 @@
                 <h3 class="m0">Jugador</h3>
             </div>
             <div class="col-xs-4">
-                <a href="~/Usuario_Solicitud_Equipo/Index", class="btn btn-purple">
+                <a href="@Url.Action("Index", "Usuario_Solicitud_Equipo")" class="btn btn-purple">
                     <em class="fa fa-hand-o-right"></em>
                     <span>Solicitar</span>
                 </a>
@@ -35,7 +35,7 @@
                 <h3 class="m0">Tecnico</h3>
             </div>
             <div class="col-xs-4">
-                <a href="@Url.Action("Create", "CrearEquipo")" class="btn btn-purple">
+                <a href="@Url.Action("GuardarVw", "Equipos")" class="btn btn-purple">
                     <em class="fa fa-hand-o-right"></em>
                     <span>Solicitar</span>
                 </a>
@@ -56,7 +56,7 @@
                 <h3 class="m0">Administrador de Cancha</h3>
             </div>
             <div class="col-xs-4">
-                <a href="@Url.Action("Index", "ComplejoDeportivo")" class="btn btn-purple">
+                <a href="@Url.Action("CrearSolicitud", "SolicitudAdminCanchas")" class="btn btn-purple">
                     <em class="fa fa-hand-o-right"></em>
                     <span>Solicitar</span>
                 </a>

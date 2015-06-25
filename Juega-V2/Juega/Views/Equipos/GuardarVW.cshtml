@@ -1,0 +1,75 @@
+﻿@model Juega.Models.Juega.EquiposModel
+ 
+<h3>Informacion del Equipo</h3>
+
+
+<link href="~/Content/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="~/Content/bwizard.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-fileupload.min.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Guardar", "Equipos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        <div class="container">
+            <div id="wizard">
+                <ol>
+                    <li>Información del Equipo</li>
+                    <li>Fotografias</li>
+                    <li>Finalizar</li>
+                </ol>
+
+
+                <div id="equipo">
+
+
+                    <div class="editor-field">
+                        @Html.HiddenFor(model => model.IdEquipo, new { @class = "form-control required", @hidden = "hidden" })
+                        @Html.HiddenFor(model => model.FotoPrincipal, new { @class = "form-control required", @hidden = "hidden" })
+                    </div>
+
+                    <label for="Nombre">* Nombre del Equipo</label>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control required" })
+                        @Html.ValidationMessageFor(model => model.Nombre)
+                    </div>
+
+                    <fieldset>
+                        <p>(*) Obligatorio</p>
+                    </fieldset>
+                </div>
+
+                <div id="fotos">
+                    <p>Ruta: <small>@Html.ValueFor(model => model.FotoPrincipal)</small></p>
+                    @Html.FileFor(model => model.Attachment)
+                    <div class="container">
+                        <div class="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
+                            <img src="@Model.FotoPrincipal" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Finalizar">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">@ViewBag.Accion</button>
+                        @Html.ActionLink("Cancelar", "Inicio", "Equipos", new { @class = "btn " })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<script src="~/Scripts/bwizard.min.js"></script>
+<script src="~/Scripts/bootstrap-fileupload.js"></script>
+
+
+<script type="text/javascript">
+    $("#wizard").bwizard();
+</script>

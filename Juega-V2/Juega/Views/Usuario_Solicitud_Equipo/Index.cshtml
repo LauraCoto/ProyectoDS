@@ -1,47 +1,50 @@
-﻿@model IEnumerable<Juega.BDD.Usuario_Solicitud_Equipo>
-
+﻿@model IEnumerable<Juega.Models.Juega.EquipoModelSubscripcion>
 @{
     ViewBag.Title = "Index";
 }
 
-<script src="~/app/controller/CargarEquiposController.js"></script>
-
-<h3>Elige un Equipo</h3>
+<h3>Seleccione el Equipo al que desea subscribir</h3>
 
 
 
-<div class="container" ng-app="appSuscripciones" ng-controller="CargarEquiposCtrl">
+@foreach (var item in Model)
+{
 
-    <div class="row">
-        <div class="col-md-12">
-            <div ng-repeat="item in ListaRegistros">
-
-                <div class="col-lg-4">
-                    <div class="panel widget">
-                        <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
-                            <div class="row row-table">
-                                <div class="col-xs-12 text-white">
-                                    <img ng-src="{{item.FotoPrincipal}}" alt="Image" class="img-thumbnail img-circle thumb128" />
-                                    <h3 class="m0">{{item.Nombre}}</h3>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body text-center bg-green">
-                            <div class="row row-table">
-                                <div class="col-xs-4">
-                                    <a href="" ng-click="enviarSolicitud(item)" class=" text-white">
-                                        <em class="fa fa-arrow-right fa-2x">Unirse</em>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+    <div class="col-lg-4">
+        <div class="panel widget">
+            <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
+                <div class="row row-table">
+                    <div class="col-xs-12 text-white">
+                        <img src="~/Content/Images/user/06.jpg" alt="Image" class="img-thumbnail img-circle thumb128" />
+                        <h3 class="m0">@item.Nombre</h3>
+                        <p class="m0">
+                            <em class="glyphicon glyphicon-thumbs-up"></em>@item.Valoracion
+                        </p>
                     </div>
                 </div>
-
             </div>
+            <div class="panel-body text-center bg-gray-dark">
+                <div class="row row-table">
+                    <div class="col-xs-4">
 
+                        @if (item.Estado == "")
+                          { 
+                            <a href="/Usuario_Solicitud_Equipo/CrearSolicitud/@item.IdEquipo" class="text-white">
+                              <span>Seleccionar</span>
+                            </a>
+                        }
+
+                        @if (item.Estado != "")
+                        {
+                            <span>@item.Estado</span>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-</div>
+
+
+
+
+}

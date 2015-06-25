@@ -44,7 +44,7 @@ namespace Juega.Utilidades
                 var imagesList = images.Split(';');
                 var lista = new List<string>();
 
-                //var cmd = new CreateOrUpdateSaleCommand(sale, false);
+                //var cmd = new CreateOrUpdateSaleCommand(r, false);
 
                 foreach (string imgPath in imagesList)
                 {

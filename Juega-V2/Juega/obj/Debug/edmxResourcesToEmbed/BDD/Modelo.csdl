@@ -9,7 +9,7 @@
     <Property Name="NumEspectadores" Type="Int32" />
     <Property Name="Largo" Type="Int32" />
     <Property Name="Ancho" Type="Int32" />
-    <Property Name="Valoracion" Type="Int32" />
+    <Property Name="Valoracion" Type="Decimal" Precision="12" Scale="4" />
     <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="FotoPrincipal" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
@@ -93,13 +93,14 @@
       <PropertyRef Name="IdCancha_Valoracion" />
     </Key>
     <Property Name="IdCancha_Valoracion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Valoracion" Type="Int32" />
-    <Property Name="Comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Valoracion" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="IdUsuarioValoro" Type="Int64" />
+    <Property Name="IdCanchaValorado" Type="Int64" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdCancha" Type="Int64" />
-    <Property Name="IdUsuario" Type="Int64" />
     <NavigationProperty Name="Cancha" Relationship="Self.FK3FBA4BEBF771FF35" FromRole="Cancha_Valoracion" ToRole="Cancha" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK3FBA4BEB1862B0F6" FromRole="Cancha_Valoracion" ToRole="Usuario" />
   </EntityType>
@@ -147,7 +148,7 @@
     </Key>
     <Property Name="IdEquipo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Valoracion" Type="Int32" />
+    <Property Name="Valoracion" Type="Decimal" Precision="12" Scale="4" />
     <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="FotoPrincipal" Type="String" MaxLength="1200" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
@@ -216,13 +217,14 @@
       <PropertyRef Name="IdEquipo_Valoracion" />
     </Key>
     <Property Name="IdEquipo_Valoracion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Valoracion" Type="Int32" />
-    <Property Name="Comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Valoracion" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="IdEquipoValorado" Type="Int64" />
+    <Property Name="IdUsuarioValoro" Type="Int64" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdEquipo" Type="Int64" />
-    <Property Name="IdUsuario" Type="Int64" />
     <NavigationProperty Name="Equipo" Relationship="Self.FK3F406CE3A62E925C" FromRole="Equipo_Valoracion" ToRole="Equipo" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK3F406CE31862B0F6" FromRole="Equipo_Valoracion" ToRole="Usuario" />
   </EntityType>
@@ -286,7 +288,7 @@
     <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="TipoEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Valoracion" Type="Int32" />
+    <Property Name="Valoracion" Type="Decimal" Precision="12" Scale="4" />
     <Property Name="EsEspectador" Type="Boolean" />
     <Property Name="EsAdminCancha" Type="Boolean" />
     <Property Name="EsAdminEquipo" Type="Boolean" />
@@ -314,9 +316,10 @@
     <NavigationProperty Name="Equipo_Valoracion" Relationship="Self.FK3F406CE31862B0F6" FromRole="Usuario" ToRole="Equipo_Valoracion" />
     <NavigationProperty Name="Reto" Relationship="Self.FK903403341862B0F6" FromRole="Usuario" ToRole="Reto" />
     <NavigationProperty Name="Token" Relationship="Self.FK7786F1A31862B0F6" FromRole="Usuario" ToRole="Token" />
+    <NavigationProperty Name="Usuario_Valoracion" Relationship="Self.FK_Usuario_Valoracion_Usuario" FromRole="Usuario" ToRole="Usuario_Valoracion" />
     <NavigationProperty Name="Usuario_Solicitud_Equipo" Relationship="Self.FK312DCDED1862B0F6" FromRole="Usuario" ToRole="Usuario_Solicitud_Equipo" />
     <NavigationProperty Name="Usuario_Solicitud_AdminCancha" Relationship="Self.FK550739B71862B0F6" FromRole="Usuario" ToRole="Usuario_Solicitud_AdminCancha" />
-    <NavigationProperty Name="Usuario_Valoracion" Relationship="Self.FK66723AB21862B0F6" FromRole="Usuario" ToRole="Usuario_Valoracion" />
+    <NavigationProperty Name="Usuario_Valoracion1" Relationship="Self.FK66723AB21862B0F6" FromRole="Usuario" ToRole="Usuario_Valoracion" />
     <NavigationProperty Name="Usuario_Foto" Relationship="Self.FK817CBD8E1862B0F6" FromRole="Usuario" ToRole="Usuario_Foto" />
     <NavigationProperty Name="Usuario1" Relationship="Self.FK9E8FB9FD1862B0F6" FromRole="Usuario" ToRole="Usuario1" />
     <NavigationProperty Name="Usuario2" Relationship="Self.FK9E8FB9FD1862B0F6" FromRole="Usuario1" ToRole="Usuario" />
@@ -377,13 +380,16 @@
       <PropertyRef Name="IdUsuario_Valoracion" />
     </Key>
     <Property Name="IdUsuario_Valoracion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Valoracion" Type="Int32" />
-    <Property Name="TipoValoracion" Type="Int32" />
+    <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Comentario" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Valoracion" Type="Decimal" Precision="12" Scale="4" />
+    <Property Name="IdUsuarioValora" Type="Int64" />
+    <Property Name="IdUsuarioValorado" Type="Int64" />
     <Property Name="FechaCreo" Type="DateTime" Precision="3" />
     <Property Name="FechaElimino" Type="DateTime" Precision="3" />
     <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int64" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK66723AB21862B0F6" FromRole="Usuario_Valoracion" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Valoracion_Usuario" FromRole="Usuario_Valoracion" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario1" Relationship="Self.FK66723AB21862B0F6" FromRole="Usuario_Valoracion" ToRole="Usuario" />
   </EntityType>
   <Association Name="FK1E2394DDF771FF35">
     <End Role="Cancha" Type="Self.Cancha" Multiplicity="0..1" />
@@ -417,7 +423,7 @@
         <PropertyRef Name="IdCancha" />
       </Principal>
       <Dependent Role="Cancha_Valoracion">
-        <PropertyRef Name="IdCancha" />
+        <PropertyRef Name="IdCanchaValorado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -549,7 +555,7 @@
         <PropertyRef Name="IdUsuario" />
       </Principal>
       <Dependent Role="Cancha_Valoracion">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioValoro" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -657,7 +663,7 @@
         <PropertyRef Name="IdEquipo" />
       </Principal>
       <Dependent Role="Equipo_Valoracion">
-        <PropertyRef Name="IdEquipo" />
+        <PropertyRef Name="IdEquipoValorado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -753,7 +759,7 @@
         <PropertyRef Name="IdUsuario" />
       </Principal>
       <Dependent Role="Equipo_Valoracion">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioValoro" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -778,6 +784,18 @@
       </Principal>
       <Dependent Role="Token">
         <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Valoracion_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Usuario_Valoracion" Type="Self.Usuario_Valoracion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Usuario_Valoracion">
+        <PropertyRef Name="IdUsuarioValorado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -813,7 +831,7 @@
         <PropertyRef Name="IdUsuario" />
       </Principal>
       <Dependent Role="Usuario_Valoracion">
-        <PropertyRef Name="IdUsuario" />
+        <PropertyRef Name="IdUsuarioValora" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -853,7 +871,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="JuegaEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="JuegaEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cancha" EntityType="Self.Cancha" />
     <EntitySet Name="Cancha_Foto" EntityType="Self.Cancha_Foto" />
     <EntitySet Name="Cancha_Horario_Dia" EntityType="Self.Cancha_Horario_Dia" />
@@ -1007,6 +1025,10 @@
     <AssociationSet Name="FK7786F1A31862B0F6" Association="Self.FK7786F1A31862B0F6">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Token" EntitySet="Token" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Valoracion_Usuario" Association="Self.FK_Usuario_Valoracion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Usuario_Valoracion" EntitySet="Usuario_Valoracion" />
     </AssociationSet>
     <AssociationSet Name="FK312DCDED1862B0F6" Association="Self.FK312DCDED1862B0F6">
       <End Role="Usuario" EntitySet="Usuario" />

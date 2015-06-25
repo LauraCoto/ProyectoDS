@@ -1,0 +1,95 @@
+﻿@model Juega.Models.Juega.CanchaModel
+
+<style>
+    body {
+        padding-top: 60px;
+    }
+</style>
+
+
+
+
+<h3>
+    <div class="row" id="pwd-container">
+        <div class="col-md-5"></div>
+        <div class="col-md-5">
+            <b> ¿Eliminar la cancha? </b>
+        </div>
+    </div>
+
+</h3>
+
+
+@using (Html.BeginForm("Eliminar", "Canchas"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <div class="container">
+
+        <div class="row" id="pwd-container">
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+
+                <fieldset>
+
+                    <div class="container">
+
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="panel widget">
+                                    <div class="row row-table row-flush">
+
+
+                                        <div class="editor-field">
+                                            @Html.HiddenFor(model => model.IdCancha, new { @class = "form-control required", @hidden = "hidden" })
+                                        </div>
+
+                                        <div class="col-xs-5">
+                                            <picture class="lateral-picture">
+                                                <img src="~/Content/Images/bg2.jpg" alt="" />
+                                            </picture>
+                                        </div>
+
+                                        <div class="col-xs-7 align-middle p-lg">
+
+                                            <div class="pull-right">
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </div>
+
+                                            <div class="pull-right">
+                                                <a href="/Canchas/Inicio" class="btn btn-success btn-sm">Regresar</a>
+                                            </div>
+
+                                            <br />
+                                            <br />
+
+                                            <p> <strong> @Model.Nombre </strong> </p>
+                                            <p> Complejo: @Model.Complejo </p>
+                                            <p> @Model.Espectadores Espectadores</p>
+                                            <p> @Model.Ancho Mts. Ancho</p>
+                                            <p> @Model.Largo Mts. Alto</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+}
+
+@section Styles {
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/sparklines")
+}
+
+

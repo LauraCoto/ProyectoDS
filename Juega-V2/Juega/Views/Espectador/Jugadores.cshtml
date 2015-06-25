@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Juega.Models.Juega.JugadorModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Jugadores</h3>
+
+
+
+@foreach (var item in Model)
+{
+
+    <div class="col-lg-4">
+        <div class="panel widget">
+            <div style="background-image: url('../../Content/Images/cancha2.jpg'); " class="panel-body text-center bg-center">
+                <div class="row row-table">
+                    <div class="col-xs-12 text-white">
+                        <img src="@item.FotoPrincipal" alt="Image" class="img-thumbnail img-circle thumb128" />
+                        <h3 class="m0">@item.Nombre @item.Apellido</h3>
+                        <p class="m0">
+                            <em class="fa fa-twitter fa-fw"></em> @item.Correo
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body text-center bg-gray-dark">
+                <div class="row row-table">
+                    <div class="col-xs-4">
+                        <a href="/Perfil/Jugador/@item.IdJugador" class="text-white">
+                            <em class="fa fa-user fa-1x pull-right "> Ver Perfil</em>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    <span class="label label-primary pull-right">@item.NumEquipos</span>
+                    <em class="fa fa-fw fa-clock-o text-muted"></em>Equipos
+                </a>
+                <a href="#" class="list-group-item">
+                    <span class="label label-primary pull-right">@item.Valoracion</span>
+                    <em class="fa fa-fw fa-user text-muted"></em>Valoracion
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+}

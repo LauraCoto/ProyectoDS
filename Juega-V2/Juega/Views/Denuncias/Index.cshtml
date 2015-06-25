@@ -7,95 +7,101 @@
 
 
 <div class="container" ng-app="appDenuncias" ng-controller="DenunciasCtrl">
-    <div class="row">
-        <div class="col-md-12">
+<div class="row">
+    <div class="col-md-12">
 
 
 
-            <div ng-if="MostrarError=='N'">
+        <div ng-if="MostrarError=='N'">
 
-                <table class="table table-striped">
-                    <tr>
-                        <th>Descripcion</th>
-                        <th>UsuarioDenuncia</th>
-                        <th>UsuarioDenunciado</th>
-                        <th>CanchaDenunciada</th>
-                        <th>EquipoDenunciado</th>
-                      
-                    </tr>
+            <table class="table table-striped">
+                <tr>
+                    <th>Descripcion</th>
+                    <th>UsuarioDenuncia</th>
+                    <th>UsuarioDenunciado</th>
+                    <th>CanchaDenunciada</th>
+                    <th>EquipoDenunciado</th>
 
-                    <tr ng-repeat="item in ListaRegistros">
-                        <td> {{item.Descripcion}}  </td>
-                        <td> {{item.UsuarioDenuncia}}  </td>
-                        <td> {{item.UsuarioDenunciado}}</td>
-                        <td> {{item.Cancha}} </td>
-                        <td> {{item.Equipo}} </td>
+                </tr>
 
-                        <td>
-                           <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Revisar</button>
-                          
-                        </td>
-                    </tr>
+                <tr ng-repeat="item in ListaRegistros">
+                    <td> {{item.Descripcion}} </td>
+                    <td> {{item.UsuarioDenuncia}} </td>
+                    <td> {{item.UsuarioDenunciado}}</td>
+                    <td> {{item.Cancha}} </td>
+                    <td> {{item.Equipo}} </td>
 
-                    
-                </table>
+                    <td>
+                        <button type="button" ng-click="EditarRegistro(item)" class="btn-green">Revisar</button>
 
-               
-
-            </div>
-            <div ng-if="MostrarControles">
-                <br />
-                <section>
-                    <div class="container">
+                    </td>
+                </tr>
 
 
-
-                        <div><input type="text" class="form-control" placeholder="Descripcion" readonly="readonly" maxlength="10" name="txtNombre" ng-model="Registro.Descripcion" /></div>
-                        <div><input type="text" class="form-control" placeholder="CanchaDenuncia" readonly="readonly" ng-model="Registro.UsuarioDenuncia" /></div>
-                        <div><input type="text" class="form-control" placeholder="EquipoDenunciado" readonly="readonly" ng-model="Registro.UsuarioDenunciado" /></div>
-                        <div><input type="text" class="form-control" placeholder="CanchaDenuncia" readonly="readonly" ng-model="Registro.Cancha" /></div>
-                        <div><input type="text" class="form-control" placeholder="EquipoDenunciado" readonly="readonly" ng-model="Registro.Equipo" /></div>
-                        
-
-                        <div>
-                            <button type="button" class="btn btn-primary" ng-click="BloquearUsuario()">Bloquear Usuario</button>
-                            <button type="button" class="btn btn-primary" ng-click="BloquearCancha()">Bloquear Cancha</button>
-                            <button type="button" class="btn btn-primary" ng-click="BloquearEquipo()">Bloquear Equipo</button>
-                            <button type="button" class="btn btn-default" ng-click="Ignorar()">Ignorar</button>
-                        </div>
-                    </div>
-                </section>
-            </div>
+            </table>
 
 
-
-
-
-
-
-            <div ng-if="MostrarError=='S'">
-                <br />
-                <br />
-                <div class="alert alert-danger" role="alert">
-                    {{Mensaje}}
-                </div>
-            </div>
-
-            <div ng-if="MostrarAlerta=='S'">
-                <br />
-                <br />
-                <div class="alert alert-warning" role="alert">
-                    {{Mensaje}}
-                </div>
-            </div>
-
-            <div ng-if="MostrarInfo=='S'">
-                <br />
-                <br />
-                <div class="alert alert-green" role="alert">
-                    {{Mensaje}}
-                </div>
-            </div>
 
         </div>
+        <div ng-if="MostrarControles">
+            <br/>
+            <section>
+                <div class="container">
+
+
+
+                    <div><input type="text" class="form-control" placeholder="Descripcion" readonly="readonly" maxlength="10" name="txtNombre" ng-model="Registro.Descripcion"/>
+                    </div>
+                    <div><input type="text" class="form-control" placeholder="CanchaDenuncia" readonly="readonly" ng-model="Registro.UsuarioDenuncia"/>
+                    </div>
+                    <div><input type="text" class="form-control" placeholder="EquipoDenunciado" readonly="readonly" ng-model="Registro.UsuarioDenunciado"/>
+                    </div>
+                    <div><input type="text" class="form-control" placeholder="CanchaDenuncia" readonly="readonly" ng-model="Registro.Cancha"/>
+                    </div>
+                    <div><input type="text" class="form-control" placeholder="EquipoDenunciado" readonly="readonly" ng-model="Registro.Equipo"/>
+                    </div>
+
+
+                    <div>
+                        <button type="button" class="btn btn-primary" ng-click="BloquearUsuario()">Bloquear Usuario</button>
+                        <button type="button" class="btn btn-primary" ng-click="BloquearCancha()">Bloquear Cancha</button>
+                        <button type="button" class="btn btn-primary" ng-click="BloquearEquipo()">Bloquear Equipo</button>
+                        <button type="button" class="btn btn-default" ng-click="Ignorar()">Ignorar</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+
+
+
+
+        <div ng-if="MostrarError=='S'">
+            <br/>
+            <br/>
+            <div class="alert alert-danger" role="alert">
+                {{Mensaje}}
+            </div>
+        </div>
+
+        <div ng-if="MostrarAlerta=='S'">
+            <br/>
+            <br/>
+            <div class="alert alert-warning" role="alert">
+                {{Mensaje}}
+            </div>
+        </div>
+
+        <div ng-if="MostrarInfo=='S'">
+            <br/>
+            <br/>
+            <div class="alert alert-green" role="alert">
+                {{Mensaje}}
+            </div>
+        </div>
+
     </div>
+</div>
+    

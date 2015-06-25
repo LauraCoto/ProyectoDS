@@ -1,0 +1,73 @@
+﻿@model Juega.BDD.Denuncia;
+
+ 
+
+<section data-ng-controller="DenunciasController">
+
+    <div class="container vertical-center">
+        @*<div class="row clearfix" id="content-row">*@
+        <div class="col-xs-8">
+            <div class="well" id="volume-fees-well">
+                <br />
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Denunciar a Usuario</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" name="contactForm">
+                            <fieldset>
+                                <br />
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="control-label" for="Firstname">Nombre Denunciado</label>
+                                        <div class="controls">
+                                            <input type="text" readonly="readonly" value=@Nombre class="form-control">>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <label class="control-label" for="surname">Apellido Denunciado</label>
+                                        <div class="controls">
+                                            <input type="text" readonly="readonly" value=@model.Apellido class="form-control">></div>></div>>
+                                        </div>
+
+                                        @*<div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Detalle Denuncia</label>
+                                                    <textarea class="form-control" rows="5" cols="10" name="message" required="required" placeholder="Detalla tu denuncia aqui..."></textarea>
+
+                                                     <span class="help-inline">*Requerido</span>
+                                                </div>
+                                                <button class="btn btn-primary btn-sm" ng-click="send()" ng-disabled="contactForm.$invalid">Enviar</button>
+                                            </div>*@
+                                        @using (Html.BeginForm())
+{
+                                            @Html.AntiForgeryToken()
+
+                                            <div class="form-horizontal">
+                                                <h4>Denuncia</h4>
+                                                <hr />
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <input type="submit" value="Create" class="btn btn-default" />
+                                                    </div>
+                                                </div>
+                                            </div>
+}
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*</div>*@
+</section>
