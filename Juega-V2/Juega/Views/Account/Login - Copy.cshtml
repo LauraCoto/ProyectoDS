@@ -2,38 +2,25 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Iniciar sesion";
-    //Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
-@*<head>
-        <link href="~/Content/app/css/login.css" rel="stylesheet" />
-        <script src="~/Scripts/PassWordStrong.js"></script>
-    </head>*@
+<head>
+    <link href="~/Content/app/css/login.css" rel="stylesheet" />
+    <script src="~/Scripts/PassWordStrong.js"></script>
+</head>
 
 <div class="container">
-    <div class="col-md-4"></div>
 
-    <div class="col-md-4">
-        <div class="panel widget">
-            <div style="background-image: url('~/../../Content/Images/bg4.jpg')" class="panel-body text-center bg-center">
-                <div class="row row-table">
-                    <div class="col-xs-12 text-white">
-                        <img src="~/Content/Images/futbol.png" alt="Image" class="img-thumbnail img-circle thumb128" />
-                        <h3 class="m0">Hola</h3>
-                        <p class="m0">
-                            <em class="fa fa-user fa"></em>Iniciar sesion
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4"></div>
+    <div class="row" id="pwd-container">
+        <div class="col-md-4"></div>
 
-
+        <div class="col-md-4">
 
             <section class="login-form">
-                <form method="post" action="#">
-                    <br />
-                    <br />
+                <form method="post" action="#" role="login">
+
+                    <img src="~/Content/Images/futbol.png" class="img-responsive" alt="" />
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
@@ -52,21 +39,21 @@
                                 <input type="checkbox" />
                                 <span class="fa fa-check"></span>Recordarme
                             </label>
-                        </div>
+                        </div> 
                         <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Iniciar sesion</button>
                         <div>
-                            <a>@Html.ActionLink("Registrarme", "Register")</a> <br />
-                            <a>@Html.ActionLink("Olvide mi clave?", "ForgotPassword") </a> <br />
+                            <a>@Html.ActionLink("Registrarme", "Register")</a>
+                            <a>@Html.ActionLink("Olvide mi clave?", "ForgotPassword") </a>
                         </div>
                     }
 
                 </form>
             </section>
-            <div class="col-md-4"></div>
         </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
-
+ 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

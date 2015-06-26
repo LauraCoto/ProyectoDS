@@ -283,70 +283,52 @@ namespace Juega.Controllers.Juega
             }
         }
 
-        public ActionResult HorarioVw(string id)
-        {
-            var viewModel = new CanchaModel();
 
-            if (id._ToLong() <= 0)
-                return MostrarAdvertencia("No se pudo cargar la informacion de la cancha.");
+        public ActionResult HorarioVW(string id)
+        {
+            if (id._IsNullOrEmpty())
+                return Resultado_Advertencia("Debe seleccionar una cancha valida");
 
             var nid = id._ToLong();
             var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
 
             if (item == null)
-                return MostrarAdvertencia("No se pudo cargar la informacion de la cancha.");
+                return Resultado_Advertencia("No se pudo cargar la informacion de la cancha.");
 
-            viewModel.Ancho = item.Ancho._ToInt();
-            viewModel.Largo = item.Largo._ToInt();
-            viewModel.Espectadores = item.NumEspectadores._ToInt();
-            viewModel.IdCancha = item.IdCancha;
-            viewModel.Nombre = item.Nombre;
-
-            if (item.ComplejoDeportivo != null)
-            {
-                viewModel.Complejo = item.ComplejoDeportivo.Nombre;
-                viewModel.IdComplejo = item.IdComplejoDeportivo._ToLong();
-            }
-
-            return View(viewModel);
-        }
-
-        public ActionResult Test()
-        {
-            return View();
-        }
-
-        public ActionResult HorarioCancha(string id)
-        {
-            if (id._IsNullOrEmpty())
-                return Resultado_Advertencia("Debe seleccionar una cancha valida");
-
-            //var nid = id._ToLong();
-            //var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
-
-            //if (item == null)
-            //    return Resultado_Advertencia("No se pudo cargar la informacion de la cancha.");
-
-            //var viewModel = new CanchaModel();
-
-            //viewModel.Ancho = item.Ancho._ToInt();
-            //viewModel.Largo = item.Largo._ToInt();
-            //viewModel.Espectadores = item.NumEspectadores._ToInt();
-            //viewModel.IdCancha = item.IdCancha;
-            //viewModel.Nombre = item.Nombre;
-            //if (item.ComplejoDeportivo != null)
-            //{
-            //    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
-            //    viewModel.IdComplejo = item.IdComplejoDeportivo._ToLong();
-            //}
-
-            //ViewBag.Cancha = viewModel;
-
+            ViewBag.NombreCancha = item.Nombre;
             ViewBag.IdCancha = id;
             return View();
         }
 
-        public JuegaJson HorarioFecha(string id)
+        public ActionResult ClonarFechas(string id)
+        {
+            if (id._IsNullOrEmpty())
+                return Resultado_Advertencia("Debe seleccionar una cancha valida");
+
+            var nid = id._ToLong();
+            var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+
+            if (item == null)
+                return Resultado_Advertencia("No se pudo cargar la informacion de la cancha.");
+
+            ViewBag.NombreCancha = item.Nombre;
+            ViewBag.IdCancha = id;
+            return View();
+        }
+
+        public JuegaJson ObtenerEstados()
+        {
+            var estados = new List<EstadosModel>();
+
+            var e1 = new EstadosModel(TipoEstado.Reservado);
+            var e2 = new EstadosModel(TipoEstado.Mantimiento);
+            estados.Add(e1);
+            estados.Add(e2);
+
+            return Resultado_Correcto(estados);
+        }
+
+        public JuegaJson ObtenerHorarioXFecha(string id)
         {
             try
             {
@@ -376,36 +358,14 @@ namespace Juega.Controllers.Juega
                     return Resultado_Advertencia("Debe seleccionar una cancha valida.");
 
                 var nid = IdCancha._ToLong();
-                var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
-
-                if (cancha == null)
-                    return Resultado_Advertencia("No se pudo cargar la informacion de la cancha.");
 
 
-                var horario = cancha.Cancha_Horario_Dia.FirstOrDefault(x => x.Fecha == dtFecha);
-                if (horario == null || horario.Activo == false)
+                var viewModel = _ObtenerHorariosXFecha(nid, dtFecha);
+
+                if (viewModel._IsNullOrEmpty())
                     return Resultado_Advertencia("No hay horarios definidos para el " + dtFecha.GetDateTimeFormats()[8]);
 
-                var viewModel = new Horario_Dia_Model();
-                viewModel.Fecha = horario.Fecha._ToDateTime();
-                viewModel.IdCancha = horario.IdCancha._ToLong();
-                viewModel.IdHorario_Dia = horario.IdCancha_Horario_Dia;
-                viewModel.ListaHoras = new List<Horario_Dia_Hora_Model>();
-
-                foreach (var hora in horario.Cancha_Horario_Dia_Hora)
-                {
-                    if (!hora.Activo._ToBoolean())
-                        continue;
-
-                    var h = new Horario_Dia_Hora_Model();
-                    h.HoraDesde = hora.HoraDesde._ToDateTime();
-                    h.HoraHasta = hora.HoraHasta._ToDateTime();
-                    h.IdHorario_Dia = hora.IdCancha_Horario_Dia._ToLong();
-                    h.IdHorario_Hora = hora.IdCancha_Horario_Dia_Hora._ToLong();
-                    h.Estado = hora.TipoEstado;
-                }
-
-                return Resultado_Correcto(viewModel, "Horarios");
+                return Resultado_Correcto(viewModel, "");
             }
             catch (Exception ex)
             {
@@ -413,37 +373,266 @@ namespace Juega.Controllers.Juega
             }
         }
 
-        public JuegaJson ObtenerHorarios(string id)
+        public JuegaJson ObtenerHorarioXId(string id)
+        {
+            try
+            {
+                if (!id._IsNumber())
+                    return Resultado_Advertencia("Informacion insuficiente para obtener horarios.");
+
+                var viewModel = _ObtenerHorariosXId(id._ToLong());
+
+                if (viewModel._IsNullOrEmpty())
+                    return Resultado_Advertencia("No se pudoc cargar la informacion para el horario seleccionado.");
+
+                return Resultado_Correcto(viewModel, "");
+            }
+            catch (Exception ex)
+            {
+                return Resultado_Error(ex.Message);
+            }
+        }
+
+        public JuegaJson ObtenerHorariosXCancha(string id)
         {
             try
             {
                 if (id._IsNullOrEmpty())
                     return Resultado_Advertencia("Debe seleccionar una cancha valida");
 
-                var nid = id._ToLong();
-                var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == nid);
+                var viewModelLista = __ObtenerTodosLosHorarios(id._ToLong());
 
-                if (item == null)
-                    return Resultado_Advertencia("No se pudo cargar la informacion de la cancha.");
+                if (viewModelLista._IsNullOrEmpty())
+                    Resultado_Advertencia("No se pudo cargar la informacion de la cancha.");
 
-                var viewModel = new CanchaModel();
-
-                viewModel.Ancho = item.Ancho._ToInt();
-                viewModel.Largo = item.Largo._ToInt();
-                viewModel.Espectadores = item.NumEspectadores._ToInt();
-                viewModel.IdCancha = item.IdCancha;
-                viewModel.Nombre = item.Nombre;
-                if (item.ComplejoDeportivo != null)
-                {
-                    viewModel.Complejo = item.ComplejoDeportivo.Nombre;
-                    viewModel.IdComplejo = item.IdComplejoDeportivo._ToLong();
-                }
-
-                return Resultado_Correcto(viewModel, "Horarios");
+                return Resultado_Correcto(viewModelLista, "");
             }
             catch (Exception ex)
             {
                 return Resultado_Error(ex.Message);
+            }
+        }
+
+
+        private Horario_Dia_Model _ObtenerHorariosXFecha(long IdCancha, DateTime dtFecha)
+        {
+            var cancha = _db.Cancha.FirstOrDefault(x => x.IdCancha == IdCancha);
+
+            if (cancha._IsNullOrEmpty())
+                return null;
+
+            var horario = cancha.Cancha_Horario_Dia.FirstOrDefault(x => x.Fecha == dtFecha && x.Activo == true);
+            if (horario == null || horario.Activo == false)
+                return null;
+
+            var viewModel = new Horario_Dia_Model();
+            viewModel.EstablecerFecha(horario.Fecha._ToDateTime());
+            viewModel.IdCancha = horario.IdCancha._ToLong();
+            viewModel.IdHorario_Dia = horario.IdCancha_Horario_Dia;
+            viewModel.ListaHoras = new List<Horario_Dia_Hora_Model>();
+
+            foreach (var hora in horario.Cancha_Horario_Dia_Hora)
+            {
+                if (!hora.Activo._ToBoolean())
+                    continue;
+
+                var h = new Horario_Dia_Hora_Model();
+
+                h.HoraDesde = hora.HoraDesde._ToDateTime().ToString("hh:mm tt");
+                h.dtHoraDesde = hora.HoraDesde._ToDateTime();
+
+                h.HoraHasta = hora.HoraHasta._ToDateTime().ToString("hh:mm tt");
+                h.dtHoraHasta = hora.HoraHasta._ToDateTime();
+
+                h.Precio = Util.FormatoDinero(hora.Precio._ToDecimal());
+                h.nPrecio = hora.Precio._ToDecimal();
+
+                h.IdHorario_Dia = hora.IdCancha_Horario_Dia._ToLong();
+                h.IdHorario_Hora = hora.IdCancha_Horario_Dia_Hora._ToLong();
+                h.IdEstado = hora.TipoEstado;
+                h.Estado = TipoEstado.ObtenerDescripcion(hora.TipoEstado);
+
+                viewModel.ListaHoras.Add(h);
+            }
+
+            return viewModel;
+        }
+
+
+        private Horario_Dia_Model _ObtenerHorariosXId(long IdHorarioDia)
+        {
+            var horario = _db.Cancha_Horario_Dia.FirstOrDefault(x => x.IdCancha_Horario_Dia == IdHorarioDia && x.Activo == true);
+            if (horario == null || horario.Activo == false)
+                return null;
+
+            var viewModel = new Horario_Dia_Model();
+            viewModel.EstablecerFecha(horario.Fecha._ToDateTime());
+            viewModel.IdCancha = horario.IdCancha._ToLong();
+            viewModel.IdHorario_Dia = horario.IdCancha_Horario_Dia;
+            viewModel.ListaHoras = new List<Horario_Dia_Hora_Model>();
+
+            foreach (var hora in horario.Cancha_Horario_Dia_Hora.Where(x => x.Activo == true))
+            {
+                if (!hora.Activo._ToBoolean())
+                    continue;
+
+                var h = new Horario_Dia_Hora_Model();
+
+                h.HoraDesde = hora.HoraDesde._ToDateTime().ToString("hh:mm:ss") + "0";
+                h.dtHoraDesde = hora.HoraDesde._ToDateTime();
+
+                h.HoraHasta = hora.HoraHasta._ToDateTime().ToString("hh:mm:ss") + "0"; ;
+                h.dtHoraHasta = hora.HoraHasta._ToDateTime();
+
+                h.Precio = Util.FormatoDinero(hora.Precio._ToDecimal());
+                h.nPrecio = hora.Precio._ToDecimal();
+
+                h.IdHorario_Dia = hora.IdCancha_Horario_Dia._ToLong();
+                h.IdHorario_Hora = hora.IdCancha_Horario_Dia_Hora._ToLong();
+                h.IdEstado = hora.TipoEstado;
+                h.Estado = TipoEstado.ObtenerDescripcion(hora.TipoEstado);
+
+                viewModel.ListaHoras.Add(h);
+            }
+
+            return viewModel;
+        }
+
+        private List<Horario_Dia_Model> __ObtenerTodosLosHorarios(long IdCancha)
+        {
+            var item = _db.Cancha.FirstOrDefault(x => x.IdCancha == IdCancha);
+
+            if (item == null)
+                return null;
+
+
+            var horarios = item.Cancha_Horario_Dia.Where(x => x.Activo == true).OrderBy(x => x.Fecha);
+
+            var viewModelLista = new List<Horario_Dia_Model>();
+            foreach (var horario in horarios)
+            {
+                var horarioXDia = new Horario_Dia_Model();
+                horarioXDia.EstablecerFecha(horario.Fecha._ToDateTime());
+                horarioXDia.CantHorarios = horario.Cancha_Horario_Dia_Hora.Count();
+                horarioXDia.IdCancha = horario.IdCancha._ToLong();
+                horarioXDia.IdHorario_Dia = horario.IdCancha_Horario_Dia;
+                horarioXDia.ListaHoras = new List<Horario_Dia_Hora_Model>();
+
+                //Se cambio evitar obtener informacion innecesaria
+                //foreach (var hora in horario.Cancha_Horario_Dia_Hora.Where(x => x.Activo == true))
+                //{
+                //    if (!hora.Activo._ToBoolean())
+                //        continue;
+
+                //    var h = new Horario_Dia_Hora_Model();
+                //    h.HoraDesde = hora.HoraDesde._ToDateTime().ToString("hh:mm tt");
+                //    h.HoraHasta = hora.HoraHasta._ToDateTime().ToString("hh:mm tt");
+                //    h.Precio = Util.FormatoDinero(hora.Precio._ToDecimal());
+                //    h.IdHorario_Dia = hora.IdCancha_Horario_Dia._ToLong();
+                //    h.IdHorario_Hora = hora.IdCancha_Horario_Dia_Hora._ToLong();
+                //    h.Estado = TipoEstado.ObtenerDescripcion(hora.TipoEstado);
+
+                //    horarioXDia.ListaHoras.Add(h);
+                //}
+
+                viewModelLista.Add(horarioXDia);
+            }
+
+            return viewModelLista;
+        }
+
+        public JuegaJson ClonarFecha(string id)
+        {
+            try
+            {
+                if (id._IsNullOrEmpty())
+                    return Resultado_Advertencia("Informacion insuficiente para clonar horarios.");
+
+                var FechaClonar = "";
+                var FechaDesde = "";
+                var FechaHasta = "";
+                var IdCancha = "";
+
+                var datos = id.Split(',');
+                if (datos.Length < 3)
+                    return Resultado_Advertencia("Informacion insuficiente para clonar horarios.");
+
+
+                IdCancha = datos[0];
+                FechaClonar = datos[1];
+                FechaDesde = datos[2];
+                FechaHasta = datos[3];
+
+                if (IdCancha._IsNullOrEmpty())
+                    return Resultado_Advertencia("La cancha especificada es incorrecta.");
+
+
+                if (FechaClonar._IsNullOrEmpty())
+                    return Resultado_Advertencia("La fecha especificada es incorrecta.");
+
+
+                if (FechaDesde._IsNullOrEmpty())
+                    return Resultado_Advertencia("La fecha inicial especificada es incorrecta.");
+
+                if (FechaHasta._IsNullOrEmpty())
+                    return Resultado_Advertencia("La fecha final especificada es incorrecta.");
+
+                var dtFechaClonar = Util.ObtenerFecha(FechaClonar);
+                var dtFechaDesde = Util.ObtenerFecha(FechaDesde);
+                var dtFechaHasta = Util.ObtenerFecha(FechaHasta);
+
+                var nIdCancha = IdCancha._ToLong();
+                var horarioXDia = _db.Cancha_Horario_Dia.FirstOrDefault(x => x.Fecha == dtFechaClonar && x.Activo == true);
+                if (horarioXDia._IsNullOrEmpty())
+                    return Resultado_Advertencia("No se pudo cargar la informacion del horario.");
+
+                var horas = horarioXDia.Cancha_Horario_Dia_Hora.Where(x => x.Activo == true);
+                if (horas._IsNullOrEmpty())
+                    return Resultado_Advertencia("No se pudo cargar la informacion de las horas/ La fecha no tiene detalle de horas.");
+
+
+                var usuarioLogin = ObtenerUsuario_Juega();
+                var dias = dtFechaHasta.Day - dtFechaDesde.Day;
+                var fechaInicial = dtFechaDesde;
+
+                while (fechaInicial <= dtFechaHasta)
+                {
+                    var nuevoHorarioXDia = new Cancha_Horario_Dia();
+                    nuevoHorarioXDia.Activo = true;
+                    nuevoHorarioXDia.Fecha = fechaInicial;
+                    nuevoHorarioXDia.FechaCreo = DateTime.Now;
+                    nuevoHorarioXDia.IdCancha = nIdCancha;
+                    nuevoHorarioXDia.IdUsuario = usuarioLogin.IdUsuario;
+                    nuevoHorarioXDia.TipoEstado = Utilidades.TipoEstado.Disponible;
+
+                    foreach (var h in horas)
+                    {
+                        var hora = new Cancha_Horario_Dia_Hora();
+                        hora.Activo = true;
+                        hora.FechaCreo = DateTime.Now;
+                        hora.HoraDesde = h.HoraDesde;
+                        hora.HoraHasta = h.HoraHasta;
+                        hora.Precio = h.Precio;
+                        hora.TipoEstado = TipoEstado.Disponible;
+                        hora.Usuario = usuarioLogin;
+
+                        nuevoHorarioXDia.Cancha_Horario_Dia_Hora.Add(hora);
+                    }
+
+                    _db.Cancha_Horario_Dia.Add(nuevoHorarioXDia);
+                    fechaInicial = fechaInicial.AddDays(1);
+                }
+                _db.SaveChanges();
+
+                //var viewModelDetalleHorarios = __ObtenerTodosLosHorarios(nIdCancha);
+
+                return Resultado_Correcto(null, "La fecha ha sido clonada.");
+
+            }
+            catch (Exception ex)
+            {
+                return Resultado_Error(ex.Message);
+
             }
         }
 

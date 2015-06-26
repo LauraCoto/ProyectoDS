@@ -1,0 +1,12 @@
+﻿.dateformatter{
+    padding:10px;
+}
+.dateformatter span{
+    color:#000 ;
+    display:block;
+    margin:5px 0px;
+}
+strong{
+    width:200px;
+    display:inline-block;
+}

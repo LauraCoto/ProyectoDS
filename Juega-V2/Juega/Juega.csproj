@@ -332,6 +332,7 @@
     <Compile Include="Controllers\Juega\ComplejoDeportivoController.cs" />
     <Compile Include="Models\Juega\Acciones.cs" />
     <Compile Include="Models\Juega\CanchaModel.cs" />
+    <Compile Include="Models\Juega\EstadosModel.cs" />
     <Compile Include="Models\Juega\RatingCanchaModel.cs" />
     <Compile Include="Models\Juega\RatingEquipoModel.cs" />
     <Compile Include="Models\Juega\RatingFormModel.cs" />
@@ -374,6 +375,7 @@
     <Content Include="app\controller\PageMenuCtrl.js" />
     <Content Include="app\controller\PerfilCtrl.js" />
     <Content Include="app\controller\RolesCtrl.js" />
+    <Content Include="app\controller\samplecontoller.js" />
     <Content Include="app\controller\SolicitudesCtrl.js" />
     <Content Include="app\controller\UsuarioSolicitudJugadorCtrl.js" />
     <Content Include="app\controller\UsuariosXRolCtrl.js" />
@@ -389,6 +391,8 @@
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-fileupload.css" />
     <Content Include="Content\bootstrap-fileupload.min.css" />
+    <Content Include="Content\bootstrap-formhelpers.css" />
+    <Content Include="Content\bootstrap-formhelpers.min.css" />
     <Content Include="Content\bootstrap-mvc-validation.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
@@ -434,8 +438,11 @@
     <Content Include="Content\img\upload\push appharbor bitbucked.png" />
     <Content Include="Content\img\upload\Tulips.png" />
     <Content Include="Content\Modal.css" />
+    <Content Include="Content\ng-grid.css" />
+    <Content Include="Content\ng-grid.min.css" />
     <Content Include="Content\rating.css" />
     <Content Include="Content\SaleStyle.css" />
+    <Content Include="Content\SampleTime.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\SiteUploader.css" />
     <Content Include="Content\SiteUploaderImages.css" />
@@ -495,10 +502,12 @@
     <Content Include="Scripts\Application\Modules\application.js" />
     <Content Include="Scripts\Application\Modules\fileUploader.js" />
     <Content Include="Scripts\Application\Services\entity.js" />
+    <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-fileupload.js" />
     <Content Include="Scripts\bootstrap-fileupload.min.js" />
+    <Content Include="Scripts\bootstrap-formhelpers.js" />
     <Content Include="Scripts\bwizard.js" />
     <Content Include="Scripts\bwizard.min.js" />
     <Content Include="Scripts\datetime\css\bootstrap-datepicker.css" />
@@ -587,6 +596,15 @@
     <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
     <Content Include="Scripts\dropzone\dropzone.js" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
+    <Content Include="Scripts\dt\bootstrap-responsive.css" />
+    <Content Include="Scripts\dt\bootstrap-timepicker.js" />
+    <Content Include="Scripts\dt\bootstrap-timepicker.min.css" />
+    <Content Include="Scripts\dt\bootstrap.min.css" />
+    <Content Include="Scripts\dt\bootstrap.min.js" />
+    <Content Include="Scripts\dt\jquery.min.js" />
+    <Content Include="Scripts\dt\prettify.css" />
+    <Content Include="Scripts\dt\prettify.js" />
+    <Content Include="Scripts\dt\pygments.css" />
     <Content Include="Scripts\fuelux.min.js" />
     <Content Include="Scripts\GMap.js" />
     <Content Include="Scripts\jquery.rating.js" />
@@ -597,6 +615,8 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ng-grid-2.0.14.debug.js" />
+    <Content Include="Scripts\ng-grid-2.0.14.min.js" />
     <Content Include="Scripts\rating.js" />
     <Content Include="Scripts\Selectable.js" />
     <Content Include="Content\app\css\SimplePerfil.css" />
@@ -1088,11 +1108,11 @@
     <Content Include="Views\Perfil\_RateEquipo.cshtml" />
     <Content Include="Views\Perfil\_RateCancha.cshtml" />
     <Content Include="Views\Canchas\HorarioVw.cshtml" />
-    <Content Include="Views\Canchas\HorarioCancha.cshtml" />
-    <Content Include="Views\Canchas\Test.cshtml" />
     <Content Include="Vendor\test\styles\mixins.less" />
     <Content Include="Vendor\test\styles\style.less" />
     <Content Include="Vendor\test\styles\variables.less" />
+    <Content Include="Views\Account\Login - Copy.cshtml" />
+    <Content Include="Views\Canchas\ClonarFechas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
