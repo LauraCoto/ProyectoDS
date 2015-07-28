@@ -213,7 +213,6 @@ namespace Juega.Controllers.Juega
             var ID = _db.Usuario.FirstOrDefault(x => x.IdUsuarioSeguridad == user.Id).IdUsuario;
 
             return ID;
-
         }
 
     }
