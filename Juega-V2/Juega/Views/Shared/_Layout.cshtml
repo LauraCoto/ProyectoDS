@@ -18,10 +18,11 @@
     <link href="@Styles.Url("~/Content/app/css/bootstrap.css")" rel="stylesheet" type="text/css" id="bscss" />
     <!-- =============== APP STYLES ===============-->
     <link href="@Styles.Url("~/Content/app/css/app.css")" rel="stylesheet" type="text/css" id="maincss" />
+ 
     <script src="~/Scripts/angular.min.js"></script>
      <script src="~/app/app.js"></script>
-    <script src="~/app/controller/PageMenuCtrl.js"></script>
-    <script src="~/app/controller/CargarEquiposController.js"></script>
+    @*<script src="~/app/controller/PageMenuCtrl.js"></script>*@
+
 
 </head>
 <body>
@@ -67,7 +68,6 @@
     @RenderSection("scripts", required: false)
     <!-- =============== APP SCRIPTS ===============-->
     @Scripts.Render("~/bundles/Angle")
-    @Scripts.Render("~/bundles/Juega")
 </body>
 
 
